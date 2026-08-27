@@ -1,0 +1,250 @@
+.orders-topbar {
+  margin-bottom: 16px;
+}
+
+.orders-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.orders-toolbar .tabs {
+  min-width: 0;
+  margin-top: 0;
+  overflow-x: hidden;
+  padding-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.orders-toolbar .tools-line {
+  flex: 0 0 auto;
+}
+
+.orders-board-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
+  gap: 20px;
+  align-items: start;
+  min-width: 0;
+}
+
+.orders-kanban {
+  min-width: 0;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  overflow: visible;
+  padding: 2px;
+}
+
+.orders-kanban::-webkit-scrollbar {
+  display: none;
+}
+
+.orders-kanban::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.kanban-column,
+.order-detail-panel {
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.kanban-column {
+  min-width: 0;
+  max-height: calc(100vh - 214px);
+  overflow: hidden;
+  padding: 14px;
+}
+
+.kanban-list {
+  max-height: calc(100vh - 304px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 2px;
+  scrollbar-width: none;
+}
+
+.kanban-list::-webkit-scrollbar {
+  display: none;
+}
+
+.kanban-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.kanban-head h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.kanban-head p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.kanban-head > span {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--mist);
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.kanban-list { display: grid; gap: 10px; }
+
+.kanban-card {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--ice);
+  padding: 12px;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.kanban-card:hover {
+  border-color: rgba(48, 71, 255, 0.2);
+  box-shadow: 0 14px 30px rgba(31, 43, 89, 0.08);
+  transform: translateY(-1px);
+}
+
+.kanban-card.highlight {
+  border-color: rgba(25, 184, 133, 0.24);
+  background: rgba(25, 184, 133, 0.08);
+}
+
+.kanban-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kanban-card-top > div {
+  min-width: 0;
+}
+
+.kanban-card-top strong,
+.kanban-card-top small {
+  display: block;
+}
+
+.kanban-card-top strong {
+  font-size: 15px;
+  line-height: 1.1;
+}
+
+.kanban-card-top small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.kanban-card-top small,
+.kanban-items span {
+  overflow-wrap: anywhere;
+}
+
+.kanban-meta,
+.kanban-card-bottom,
+.kanban-items p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kanban-meta span {
+  border-radius: 999px;
+  background: white;
+  color: var(--blue);
+  padding: 6px 9px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.kanban-meta b {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kanban-items {
+  display: grid;
+  gap: 7px;
+}
+
+.kanban-items p,
+.kanban-items em {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.kanban-items b {
+  color: var(--navy);
+}
+
+.kanban-card-bottom {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.kanban-card-bottom button {
+  height: 36px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--blue);
+  color: white;
+  padding: 0 13px;
+  font-weight: 900;
+}
+
+.order-detail-panel {
+  align-self: start;
+  position: sticky;
+  top: 30px;
+  max-height: none;
+  overflow: visible;
+  padding: 20px;
+  min-width: 0;
+}
+
+.order-source-box {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+  border-radius: 18px;
+  background: var(--ice);
+  padding: 14px;
+}
+
+.order-source-box span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.order-source-box p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+  font-size: 13px;
+}
+

@@ -1,0 +1,457 @@
+.waiters-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
+  gap: 18px;
+  align-items: start;
+  min-width: 0;
+}
+
+.waiters-main {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  min-width: 0;
+}
+
+.waiters-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.waiters-stat,
+.waiters-panel,
+.service-queue {
+  border: 1px solid rgba(229, 233, 243, 0.86);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 42px rgba(31, 43, 89, 0.08);
+}
+
+.waiters-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 98px;
+  padding: 16px;
+}
+
+.waiters-stat-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--mist);
+  color: var(--blue);
+}
+
+.waiters-stat-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.waiters-stat span,
+.waiters-stat strong,
+.waiters-stat small {
+  display: block;
+}
+
+.waiters-stat span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.waiters-stat strong {
+  margin-top: 8px;
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.waiters-stat small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.waiters-stat.ready .waiters-stat-icon {
+  background: rgba(25, 184, 133, 0.12);
+  color: #0f8d66;
+}
+
+.waiters-stat.call .waiters-stat-icon {
+  background: rgba(238, 82, 104, 0.12);
+  color: var(--danger);
+}
+
+.waiters-panel,
+.service-queue {
+  padding: 18px;
+}
+
+.service-queue {
+  position: sticky;
+  top: 30px;
+}
+
+.waiters-zone-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  border-radius: 16px;
+  background: var(--ice);
+  padding: 6px;
+  scrollbar-width: none;
+}
+
+.waiters-zone-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.waiters-zone-tabs button {
+  height: 34px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.waiters-zone-tabs button.active {
+  background: var(--navy);
+  color: white;
+  box-shadow: 0 10px 22px rgba(20, 26, 51, 0.16);
+}
+
+.table-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 12px;
+}
+
+.table-status-card {
+  min-height: 146px;
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 14px;
+  text-align: left;
+  box-shadow: 0 10px 24px rgba(31, 43, 89, 0.04);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.table-status-card:hover {
+  border-color: rgba(48, 71, 255, 0.22);
+  box-shadow: 0 18px 32px rgba(31, 43, 89, 0.08);
+  transform: translateY(-1px);
+}
+
+.table-card-head,
+.table-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.table-code {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--navy);
+  color: white;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.table-state {
+  border-radius: 999px;
+  background: var(--mist);
+  color: var(--blue);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.table-card-body {
+  display: grid;
+  gap: 6px;
+}
+
+.table-card-body strong {
+  color: var(--navy);
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.table-card-body small,
+.table-card-foot span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.table-card-body svg,
+.table-card-foot svg {
+  width: 14px;
+  height: 14px;
+}
+
+.table-card-foot {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.table-card-foot em {
+  color: var(--blue);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.table-status-card.ready {
+  border-color: rgba(25, 184, 133, 0.24);
+  background: rgba(25, 184, 133, 0.07);
+}
+
+.table-status-card.ready .table-state {
+  background: rgba(25, 184, 133, 0.12);
+  color: #0f8d66;
+}
+
+.table-status-card.preparing,
+.table-status-card.payment {
+  border-color: rgba(244, 183, 64, 0.25);
+  background: rgba(244, 183, 64, 0.09);
+}
+
+.table-status-card.preparing .table-state,
+.table-status-card.payment .table-state {
+  background: rgba(244, 183, 64, 0.16);
+  color: #8f6209;
+}
+
+.table-status-card.call {
+  border-color: rgba(238, 82, 104, 0.24);
+  background: rgba(238, 82, 104, 0.08);
+}
+
+.table-status-card.call .table-state {
+  background: rgba(238, 82, 104, 0.12);
+  color: var(--danger);
+}
+
+.table-status-card.takeaway {
+  border-color: rgba(48, 71, 255, 0.22);
+  background: var(--mist);
+}
+
+.waiter-request-list {
+  display: grid;
+  gap: 10px;
+}
+
+.waiter-request {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 12px;
+}
+
+.request-table {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: white;
+  font-weight: 900;
+}
+
+.waiter-request.ready .request-table {
+  background: var(--success);
+}
+
+.waiter-request.payment .request-table {
+  background: var(--warning);
+  color: var(--navy);
+}
+
+.waiter-request strong,
+.waiter-request small {
+  display: block;
+}
+
+.waiter-request strong {
+  color: var(--navy);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.waiter-request small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.waiter-request em {
+  border-radius: 999px;
+  background: var(--ice);
+  color: var(--muted);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.waiter-request button {
+  height: 38px;
+  border: 0;
+  border-radius: 13px;
+  background: var(--mist);
+  color: var(--blue);
+  padding: 0 14px;
+  font-weight: 900;
+}
+
+.service-queue-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.service-queue-strip span {
+  min-width: 0;
+  border-radius: 14px;
+  background: var(--ice);
+  color: var(--muted);
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 850;
+  text-align: center;
+}
+
+.service-queue-strip b {
+  display: block;
+  color: var(--navy);
+  font-size: 16px;
+}
+
+.service-list {
+  display: grid;
+  gap: 12px;
+}
+
+.service-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(31, 43, 89, 0.04);
+}
+
+.service-card.urgent {
+  border-color: rgba(48, 71, 255, 0.22);
+  background: rgba(238, 242, 255, 0.68);
+}
+
+.service-card > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.service-card strong,
+.service-card small {
+  display: block;
+}
+
+.service-card strong {
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.service-card small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.service-card p {
+  margin: 14px 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: var(--ice);
+  padding: 9px 11px;
+}
+
+.service-meta span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.service-meta b {
+  color: var(--navy);
+  font-size: 12px;
+}
+
+.service-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.service-actions button {
+  height: 40px;
+  border: 0;
+  border-radius: 13px;
+  font-weight: 900;
+}
+
+.service-actions button:first-child {
+  background: var(--blue);
+  color: white;
+}
+
+.service-actions button:last-child {
+  background: var(--mist);
+  color: var(--blue);
+}

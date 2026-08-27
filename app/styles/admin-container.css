@@ -1,0 +1,592 @@
+.cashier-summary,
+.waiters-summary,
+.owner-menu-summary,
+.tables-summary,
+.staff-summary,
+.settings-summary {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+}
+
+.menu-editor-meta,
+.cashier-note-grid,
+.payment-methods div,
+.editor-switches {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+}
+
+.menu-grid,
+.qr-table-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+.settings-grid,
+.settings-grid.compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+}
+
+@container admin-main (max-width: 1120px) {
+  .dashboard-layout,
+  .report-layout,
+  .cashier-layout,
+  .waiters-layout,
+  .owner-menu-layout,
+  .tables-layout,
+  .staff-layout,
+  .settings-layout,
+  .orders-board-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-detail-panel,
+  .cashier-detail,
+  .service-queue,
+  .qr-editor-panel,
+  .menu-editor-panel,
+  .staff-editor-panel,
+  .settings-side {
+    position: static;
+    max-height: none;
+  }
+
+  .cashier-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container admin-main (max-width: 920px) {
+  .pos-command-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .order-type-tabs {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+  }
+
+  .pos-counter-stats {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .menu-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .category-rail {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .category-rail h2 {
+    display: none;
+  }
+
+  .category-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
+    gap: 10px;
+    overflow: visible;
+    padding: 2px;
+    scrollbar-width: none;
+  }
+
+  .category-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-list button {
+    min-height: 62px;
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+
+  .category-list strong {
+    font-size: 15px;
+  }
+
+  .category-list span {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+
+  .receipt-panel {
+    max-height: none;
+  }
+
+  .orders-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+}
+
+@container admin-main (max-width: 560px) {
+  .app-view {
+    gap: 12px;
+  }
+
+  .topbar,
+  .topbar.compact {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .topbar h1 {
+    font-size: clamp(23px, 9cqw, 30px);
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .admin-title p {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .date-label {
+    font-size: 15px;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .dashboard-layout {
+    gap: 12px;
+  }
+
+  .dashboard-stats-grid,
+  .dashboard-ops-grid {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .dashboard-metric {
+    min-height: 122px;
+    gap: 7px;
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .dashboard-metric.primary {
+    min-height: 136px;
+  }
+
+  .metric-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+  }
+
+  .dashboard-metric span {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+
+  .dashboard-metric strong {
+    font-size: clamp(26px, 11cqw, 34px);
+  }
+
+  .dashboard-metric small {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .ops-card,
+  .quick-actions-card {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .compact-head {
+    margin-bottom: 14px;
+  }
+
+  .compact-head h2,
+  .quick-actions-card h2,
+  .section-head h2 {
+    font-size: 19px;
+    line-height: 1.15;
+  }
+
+  .compact-head p {
+    font-size: 12px;
+  }
+
+  .status-breakdown {
+    gap: 12px;
+  }
+
+  .floor-mini-grid,
+  .quick-actions-grid {
+    gap: 10px;
+  }
+
+  .floor-mini-grid span,
+  .quick-actions-grid button {
+    min-height: 76px;
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .dashboard-side {
+    gap: 12px;
+  }
+
+  .report-layout,
+  .report-main,
+  .report-side {
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .report-topbar {
+    align-items: start;
+  }
+
+  .report-actions {
+    gap: 8px;
+  }
+
+  .report-actions button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .report-actions img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .report-stat,
+  .habits-card,
+  .product-stat-card,
+  .growth-card {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .report-stat {
+    min-height: 116px;
+  }
+
+  .report-stat strong {
+    margin-top: 14px;
+    font-size: 26px;
+  }
+
+  .report-stat small {
+    max-width: none;
+    font-size: 12px;
+  }
+
+  .report-card-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .report-card-head h2 {
+    font-size: 19px;
+    line-height: 1.15;
+  }
+
+  .report-card-head p {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .report-card-head button {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .bar-chart {
+    height: 188px;
+    gap: 9px;
+    margin-top: 18px;
+    overflow: hidden;
+  }
+
+  .bars {
+    height: 144px;
+    gap: 4px;
+  }
+
+  .bars span,
+  .bars b {
+    width: 10px;
+  }
+
+  .donut-wrap {
+    margin: 14px 0;
+  }
+
+  .donut-ring {
+    width: min(184px, 72cqw);
+    aspect-ratio: 1 / 1;
+  }
+
+  .donut-ring strong {
+    font-size: 24px;
+  }
+
+  .product-list p,
+  .country-list p {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .bubble-row {
+    height: 132px;
+    margin: 16px 0;
+    overflow: hidden;
+  }
+
+  .bubble-row strong {
+    left: 34%;
+    top: 10px;
+    width: 84px;
+    height: 84px;
+  }
+
+  .bubble-row em {
+    left: 12%;
+    width: 72px;
+    height: 72px;
+  }
+
+  .bubble-row b {
+    right: 12%;
+    width: 58px;
+    height: 58px;
+  }
+
+  .bubble-row span {
+    left: 8%;
+    top: 26px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .menu-search {
+    width: 100%;
+  }
+
+  .pos-command-bar {
+    gap: 10px;
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 22px;
+  }
+
+  .pos-live-ticket .pos-table-chip {
+    min-height: 34px;
+    border-radius: 999px;
+    font-size: 12px;
+  }
+
+  .pos-live-ticket strong {
+    font-size: 15px;
+  }
+
+  .pos-live-ticket em {
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .order-type-tabs {
+    padding: 5px;
+  }
+
+  .order-type-tabs button {
+    flex: 1;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .pos-counter-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pos-counter-stats article {
+    min-height: 48px;
+    padding: 9px 10px;
+    border-radius: 15px;
+  }
+
+  .pos-counter-stats strong {
+    font-size: 13px;
+  }
+
+  .menu-layout {
+    gap: 12px;
+  }
+
+  .category-rail {
+    border-radius: 22px;
+  }
+
+  .category-list button {
+    min-width: 120px;
+    min-height: 56px;
+    padding: 12px 14px;
+  }
+
+  .menu-grid {
+    gap: 12px;
+  }
+
+  .menu-board-head {
+    align-items: flex-start;
+    display: grid;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .menu-board-head strong {
+    font-size: 14px;
+  }
+
+  .kitchen-status-pill {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .pos-lane-pills {
+    justify-content: flex-start;
+  }
+
+  .pos-shortcuts {
+    display: none;
+  }
+
+  .dish-card {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: 10px;
+    padding: 12px;
+    border-radius: 22px;
+  }
+
+  .dish-card img {
+    grid-row: 1 / 5;
+    width: 86px;
+    height: 112px;
+    aspect-ratio: auto;
+    border-radius: 16px;
+  }
+
+  .dish-card .badge {
+    left: 18px;
+    right: auto;
+    top: 48px;
+    max-width: 78px;
+    padding: 6px 8px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .dish-card .prep-chip {
+    left: 18px;
+    top: 18px;
+    max-width: 78px;
+    padding: 6px 8px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .dish-card h3 {
+    min-width: 0;
+    margin-top: 2px;
+    font-size: 16px;
+    line-height: 1.18;
+    overflow-wrap: anywhere;
+  }
+
+  .dish-card p {
+    min-height: 0;
+    margin: 6px 0 10px;
+    font-size: 12px;
+    line-height: 1.35;
+    -webkit-line-clamp: 2;
+  }
+
+  .dish-meta-line {
+    margin-bottom: 10px;
+    font-size: 11px;
+  }
+
+  .dish-action-line {
+    min-width: 0;
+    align-self: end;
+    gap: 6px;
+  }
+
+  .dish-action-line > strong {
+    font-size: 16px;
+  }
+
+  .old-price {
+    display: none;
+  }
+
+  .qty {
+    gap: 6px;
+  }
+
+  .qty button,
+  .counter-box button {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    font-size: 16px;
+  }
+
+  .receipt-panel {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .receipt-top h3 {
+    font-size: 18px;
+  }
+
+  .receipt-date {
+    margin: 16px 0;
+    padding-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .receipt-item {
+    grid-template-columns: minmax(0, 1fr) 26px 64px;
+    gap: 8px;
+    padding: 13px 0;
+    font-size: 13px;
+  }
+
+  .receipt-item button {
+    margin-top: 8px;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .receipt-total {
+    margin-top: 14px;
+    font-size: 15px;
+  }
+
+  .proceed-btn {
+    height: 54px;
+    margin-top: 18px;
+    padding: 0 16px;
+    border-radius: 17px;
+    font-size: 14px;
+  }
+
+  .proceed-btn strong {
+    font-size: 19px;
+  }
+}

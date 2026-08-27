@@ -1,0 +1,65 @@
+:root {
+  --canvas: #d9deea;
+  --surface: #f3f5fb;
+  --card: #ffffff;
+  --ink: #101426;
+  --muted: #7d8498;
+  --line: #e5e9f3;
+  --blue: #3047ff;
+  --blue-dark: #1829c9;
+  --violet: #5b4bff;
+  --navy: #141a33;
+  --secondary: #20263a;
+  --secondary-foreground: #ffffff;
+  --mist: #eef2ff;
+  --ice: #f8faff;
+  --teal: var(--blue);
+  --teal-dark: var(--blue-dark);
+  --yellow: var(--blue);
+  --yellow-dark: var(--blue);
+  --pale: #f5f6ff;
+  --success: #19b885;
+  --danger: #ee5268;
+  --warning: #f4b740;
+  --shadow: 0 20px 50px rgba(31, 43, 89, 0.1);
+  --pos-radius: 22px;
+  --pos-radius-sm: 16px;
+  --pos-touch: 42px;
+  --pos-card-min: 220px;
+  --pos-card-max: 280px;
+  --pos-image-h: 132px;
+  --pos-gap: 14px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  min-height: 100vh;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 14% 8%, rgba(48, 71, 255, 0.08), transparent 30%),
+    radial-gradient(circle at 88% 18%, rgba(91, 75, 255, 0.08), transparent 28%),
+    var(--canvas);
+}
+
+@media (min-width: 861px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+

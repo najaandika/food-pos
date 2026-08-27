@@ -1,0 +1,33 @@
+:root {
+  --space-1: clamp(4px, 0.5vw, 6px);
+  --space-2: clamp(8px, 0.9vw, 10px);
+  --space-3: clamp(10px, 1.2vw, 14px);
+  --space-4: clamp(14px, 1.6vw, 18px);
+  --space-5: clamp(18px, 2vw, 24px);
+  --space-6: clamp(24px, 3vw, 36px);
+
+  --radius-xs: 12px;
+  --radius-sm: 16px;
+  --radius-md: 20px;
+  --radius-lg: 26px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --content-sm: 520px;
+  --content-md: 760px;
+  --content-lg: 1040px;
+  --touch-sm: 36px;
+  --touch-md: 42px;
+  --touch-lg: 48px;
+
+  --font-xs: clamp(11px, 1.8vw, 12px);
+  --font-sm: clamp(12px, 2vw, 14px);
+  --font-md: clamp(14px, 2.4vw, 16px);
+  --font-lg: clamp(18px, 3.4vw, 22px);
+  --font-xl: clamp(28px, 6vw, 44px);
+
+  --control-bg: var(--mist);
+  --control-fg: var(--blue);
+  --control-active-bg: var(--blue);
+  --control-active-fg: #ffffff;
+}
