@@ -1,5 +1,7 @@
 'use client';
 
+import './OrdersView.css';
+
 import type { CSSProperties } from 'react';
 import { useMemo, useState } from 'react';
 import { ListFilter, Search } from 'lucide-react';

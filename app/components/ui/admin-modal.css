@@ -8,7 +8,6 @@
   background: rgba(13, 16, 17, 0.45);
   backdrop-filter: blur(2px);
 }
-.hidden { display: none; }
 .modal-box {
   width: min(500px, 100%);
   padding: 30px;
@@ -23,7 +22,7 @@
   height: 38px;
   border: 0;
   border-radius: var(--radius-sm);
-  background: #f7f7f6;
+  background: var(--ice);
   color: #777b80;
   font-size: 22px;
 }
@@ -34,7 +33,7 @@
   margin-bottom: 26px;
   padding: 8px;
   border-radius: var(--radius-md);
-  background: #f8f8f7;
+  background: var(--ice);
 }
 .segment {
   height: 52px;
@@ -70,4 +69,14 @@
   background: var(--blue);
   font-size: 18px;
   font-weight: 800;
+}
+
+.close-btn:focus-visible,
+.segment:focus-visible,
+.text-field:focus-visible,
+.counter-box:focus-within,
+.table-box:focus-visible,
+.submit-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }

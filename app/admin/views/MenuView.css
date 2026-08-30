@@ -1,3 +1,4 @@
+/* colocated menu - pos-command + category-rail + dish-card */
 .menu-layout {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr) 320px;

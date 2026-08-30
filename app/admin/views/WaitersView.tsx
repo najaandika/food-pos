@@ -1,5 +1,7 @@
 'use client';
 
+import './WaitersView.css';
+
 import { Bell, CheckCircle2, Clock3, MapPin, Plus, RefreshCw, UsersRound } from 'lucide-react';
 
 import { AdminTitle, orders as fallbackOrders } from '..';

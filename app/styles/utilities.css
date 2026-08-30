@@ -22,7 +22,7 @@
 }
 
 .u-surface {
-  border: 1px solid rgba(229, 233, 243, 0.74);
+  border: 1px solid var(--border-soft);
   border-radius: var(--surface-radius, var(--radius-lg));
   background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
@@ -129,7 +129,7 @@
   color: var(--ink);
   padding: 0 calc(var(--touch-lg) + 12px) 0 var(--space-4);
   font-weight: 600;
-  outline: 1px solid rgba(229, 233, 243, 0.88);
+  outline: 1px solid var(--border-soft-strong);
 }
 
 .ui-search-field input:focus {

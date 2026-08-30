@@ -1,3 +1,4 @@
+/* colocated - merged from waiters-1.css + waiters-2.css */
 .waiters-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);

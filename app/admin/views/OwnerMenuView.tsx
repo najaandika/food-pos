@@ -1,10 +1,13 @@
 'use client';
 
-import { Copy, Pencil, Search, Trash2 } from 'lucide-react';
+import './OwnerMenuView.css';
+
 import { useEffect, useMemo, useState } from 'react';
 
-import { AdminTitle, dishes as fallbackDishes, MockSelect } from '..';
+import { AdminTitle, dishes as fallbackDishes } from '..';
 import type { AdminDish } from '../runtime-data';
+import { OwnerMenuForm, type MenuDraft } from './owner-menu/OwnerMenuForm';
+import { OwnerMenuList } from './owner-menu/OwnerMenuList';
 
 const DEFAULT_CATEGORIES = ['Coffee', 'Non Coffee', 'Food', 'Snack', 'Signature', 'Breakfast', 'Promo'];
 const FALLBACK_IMAGE =
@@ -20,18 +23,6 @@ type MenuFormPayload = {
   isAvailable: boolean;
   isBestSeller: boolean;
   badge: string | null;
-};
-
-type MenuDraft = {
-  name: string;
-  category: string;
-  description: string;
-  price: string;
-  oldPrice: string;
-  imageUrl: string;
-  isAvailable: boolean;
-  isBestSeller: boolean;
-  badge: string;
 };
 
 const emptyDraft: MenuDraft = {
@@ -50,7 +41,6 @@ const currencyToNumber = (value?: string) => Number(String(value ?? '').replace(
 
 function draftFromDish(dish?: AdminDish): MenuDraft {
   if (!dish) return emptyDraft;
-
   return {
     name: dish.name,
     category: dish.category ?? 'Coffee',
@@ -98,10 +88,7 @@ export function OwnerMenuView({
   const [draft, setDraft] = useState<MenuDraft>(() => draftFromDish(dishes[0]));
   const [isSaving, setIsSaving] = useState(false);
 
-  const selectedDish = useMemo(
-    () => dishes.find((dish) => dish.id === selectedId) ?? dishes[0],
-    [dishes, selectedId],
-  );
+  const selectedDish = useMemo(() => dishes.find((dish) => dish.id === selectedId) ?? dishes[0], [dishes, selectedId]);
 
   useEffect(() => {
     if (isCreating) return;
@@ -119,7 +106,6 @@ export function OwnerMenuView({
 
   const visibleDishes = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-
     return dishes.filter((dish) => {
       const matchesCategory = activeCategory === 'All' || dish.category === activeCategory;
       const matchesQuery =
@@ -127,7 +113,6 @@ export function OwnerMenuView({
         dish.name.toLowerCase().includes(normalizedQuery) ||
         dish.desc.toLowerCase().includes(normalizedQuery) ||
         dish.category?.toLowerCase().includes(normalizedQuery);
-
       return matchesCategory && matchesQuery;
     });
   }, [activeCategory, dishes, query]);
@@ -173,7 +158,6 @@ export function OwnerMenuView({
   const saveMenu = async () => {
     const payload = payloadFromDraft(draft);
     if (!payload.name || !payload.category || !Number.isFinite(payload.price) || payload.price <= 0) return;
-
     setIsSaving(true);
     try {
       if (isCreating) {
@@ -198,123 +182,39 @@ export function OwnerMenuView({
     <section className="app-view active">
       <header className="topbar">
         <AdminTitle title="Menu Management" subtitle="Manage menu availability, pricing, badges, and categories." />
-        <button className="owner-primary-btn" type="button" onClick={startCreate}>Add New Menu</button>
+        <button className="owner-primary-btn" type="button" onClick={startCreate}>
+          Add New Menu
+        </button>
       </header>
 
       <div className="owner-menu-layout">
-        <section className="owner-menu-main">
-          <div className="owner-menu-summary">
-            {menuStats.map((stat) => (
-              <article key={stat.label}>
-                <span>{stat.label}</span>
-                <strong>{stat.value}</strong>
-                <small>{stat.hint}</small>
-              </article>
-            ))}
-          </div>
-
-          <div className="owner-menu-toolbar">
-            <label className="search-wrap">
-              <input type="search" placeholder="Search menu item" value={query} onChange={(event) => setQuery(event.target.value)} />
-              <Search aria-hidden="true" />
-            </label>
-            <div className="owner-filter-tabs">
-              {filterTabs.map((category) => (
-                <button
-                  className={activeCategory === category ? 'active' : ''}
-                  type="button"
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="owner-menu-table">
-            <div className="owner-menu-table-head">
-              <span>Menu</span>
-              <span>Category</span>
-              <span>Price</span>
-              <span>Status</span>
-              <span>Flag</span>
-              <span />
-            </div>
-            {visibleDishes.map((dish) => (
-              <article className={`owner-menu-row ${dish.id === selectedDish?.id && !isCreating ? 'selected' : ''}`} key={dish.id ?? dish.name}>
-                <button className="owner-menu-product" type="button" onClick={() => startEdit(dish)}>
-                  <img src={dish.image || FALLBACK_IMAGE} alt={dish.name} />
-                  <div><strong>{dish.name}</strong><small>{dish.desc}</small><em>{dish.soldToday ?? 0} sold today</em></div>
-                </button>
-                <span>{dish.category ?? 'Coffee'}</span>
-                <strong>{dish.price}</strong>
-                <button className={`availability-toggle ${dish.isAvailable === false ? 'off' : ''}`} type="button" onClick={() => onToggleAvailability?.(dish.id, dish.isAvailable)}>
-                  <i />{dish.isAvailable === false ? 'Hidden' : 'Available'}
-                </button>
-                <span className={`owner-flag ${dish.badge ? 'active' : ''}`}>{dish.badge ?? 'Regular'}</span>
-                <div className="owner-menu-actions">
-                  <button type="button" aria-label={`Edit ${dish.name}`} onClick={() => startEdit(dish)}><Pencil aria-hidden="true" /></button>
-                  <button type="button" aria-label={`Duplicate ${dish.name}`} onClick={() => void duplicateDish(dish)}><Copy aria-hidden="true" /></button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <aside className="menu-editor-panel">
-          <div className="menu-editor-head">
-            <span className="mini-status ready">{isCreating ? 'New Item' : 'Editing Item'}</span>
-            {!isCreating && (
-              <button className="editor-delete-btn" type="button" aria-label="Delete menu item" onClick={deleteMenu}>
-                <Trash2 aria-hidden="true" />
-              </button>
-            )}
-          </div>
-          <div className="editor-preview">
-            <img src={draft.imageUrl || FALLBACK_IMAGE} alt={draft.name || 'Menu preview'} />
-            <span>{draft.badge || (draft.isBestSeller ? 'Best Seller' : 'Live Preview')}</span>
-          </div>
-          <div className="menu-editor-meta">
-            <article><span>Visibility</span><strong>{draft.isAvailable ? 'Customer QR' : 'Hidden'}</strong></article>
-            <article><span>Sold Today</span><strong>{selectedDish?.soldToday ?? 0}</strong></article>
-          </div>
-          <div className="editor-fields">
-            <label>
-              <span>Menu Name</span>
-              <input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} />
-            </label>
-            <div className="editor-field">
-              <span>Category</span>
-              <MockSelect value={draft.category} options={categoryOptions} onChange={(category) => setDraft((current) => ({ ...current, category }))} />
-            </div>
-            <label>
-              <span>Price</span>
-              <input inputMode="numeric" value={draft.price} onChange={(event) => setDraft((current) => ({ ...current, price: event.target.value }))} />
-            </label>
-            <label>
-              <span>Old Price</span>
-              <input inputMode="numeric" placeholder="Optional" value={draft.oldPrice} onChange={(event) => setDraft((current) => ({ ...current, oldPrice: event.target.value }))} />
-            </label>
-            <label>
-              <span>Image URL</span>
-              <input value={draft.imageUrl} onChange={(event) => setDraft((current) => ({ ...current, imageUrl: event.target.value }))} />
-            </label>
-            <label>
-              <span>Description</span>
-              <textarea value={draft.description} rows={4} onChange={(event) => setDraft((current) => ({ ...current, description: event.target.value }))} />
-            </label>
-          </div>
-          <div className="editor-switches">
-            <button className={draft.isAvailable ? 'active' : ''} type="button" onClick={() => setDraft((current) => ({ ...current, isAvailable: !current.isAvailable }))}>Available</button>
-            <button className={draft.isBestSeller ? 'active' : ''} type="button" onClick={() => setDraft((current) => ({ ...current, isBestSeller: !current.isBestSeller, badge: !current.isBestSeller ? 'Best Seller' : '' }))}>Best Seller</button>
-            <button className={draft.badge.toLowerCase().includes('promo') ? 'active' : ''} type="button" onClick={() => setDraft((current) => ({ ...current, badge: current.badge.toLowerCase().includes('promo') ? '' : 'Promo' }))}>Promo</button>
-          </div>
-          <div className="editor-actions">
-            <button type="button" onClick={() => (isCreating ? setDraft(emptyDraft) : setDraft(draftFromDish(selectedDish)))}>Discard</button>
-            <button type="button" disabled={isSaving} onClick={() => void saveMenu()}>{isSaving ? 'Saving...' : 'Save Menu'}</button>
-          </div>
-        </aside>
+        <OwnerMenuList
+          dishes={dishes}
+          visibleDishes={visibleDishes}
+          menuStats={menuStats}
+          filterTabs={filterTabs}
+          activeCategory={activeCategory}
+          query={query}
+          selectedId={selectedId}
+          isCreating={isCreating}
+          selectedDish={selectedDish}
+          onChangeCategory={setActiveCategory}
+          onChangeQuery={setQuery}
+          onStartEdit={startEdit}
+          onDuplicate={duplicateDish}
+          onToggleAvailability={onToggleAvailability}
+        />
+        <OwnerMenuForm
+          draft={draft}
+          onChangeDraft={setDraft}
+          categoryOptions={categoryOptions}
+          isCreating={isCreating}
+          selectedDish={selectedDish}
+          isSaving={isSaving}
+          onSave={saveMenu}
+          onDelete={deleteMenu}
+          onDiscard={() => (isCreating ? setDraft(emptyDraft) : setDraft(draftFromDish(selectedDish)))}
+        />
       </div>
     </section>
   );

@@ -1,5 +1,7 @@
 'use client';
 
+import './DashboardView.css';
+
 import {
   Bell,
   CreditCard,
@@ -77,12 +79,12 @@ export function DashboardView({
                 <small>{stat.note}</small>
                 {index === 0 && (
                   <div className="metric-spark" aria-hidden="true">
-                    <i style={{ height: '42%' }} />
-                    <i style={{ height: '66%' }} />
-                    <i style={{ height: '52%' }} />
-                    <i style={{ height: '78%' }} />
-                    <i style={{ height: '70%' }} />
-                    <i style={{ height: '88%' }} />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
                   </div>
                 )}
               </article>

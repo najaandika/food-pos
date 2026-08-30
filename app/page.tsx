@@ -1,6 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import './styles/admin-bundle.css';
+
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Menu } from 'lucide-react';
@@ -21,38 +23,11 @@ import {
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { getAdminRuntimeData } from './admin/runtime-data';
 import { canAccessView, getRoleHome, isAuthUser } from './admin/auth';
+import { useAdminActions } from './hooks/useAdminActions';
+import { useSnapshot } from './hooks/useSnapshot';
 
 import type { View } from './admin';
 import type { AuthUser } from './admin/auth';
-import type { PosOrderStatus, PosSnapshot } from '@/lib/pos-types';
-
-type MenuFormPayload = {
-  name: string;
-  category: string;
-  description: string;
-  price: number;
-  oldPrice: number | null;
-  imageUrl: string;
-  isAvailable: boolean;
-  isBestSeller: boolean;
-  badge: string | null;
-};
-
-type TableFormPayload = {
-  code: string;
-  name: string;
-  area: string;
-  seats: number;
-  status: 'available' | 'occupied' | 'preparing' | 'ready' | 'waiting_payment' | 'need_waiter' | 'inactive';
-};
-
-type StaffFormPayload = {
-  name: string;
-  email: string;
-  role: 'owner' | 'kasir' | 'waiters';
-  password?: string;
-  isActive: boolean;
-};
 
 type ActionNotice = {
   tone: 'success' | 'error';
@@ -66,10 +41,30 @@ export default function Home() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
-  const [snapshot, setSnapshot] = useState<PosSnapshot | null>(null);
   const [actionNotice, setActionNotice] = useState<ActionNotice | null>(null);
-  const refreshInFlightRef = useRef(false);
-  const snapshotSignatureRef = useRef('');
+
+  const { snapshot, refreshSnapshot } = useSnapshot(isAuthorized);
+
+  const showNotice = useCallback((notice: ActionNotice) => {
+    setActionNotice(notice);
+    window.setTimeout(() => setActionNotice(null), 2800);
+  }, []);
+
+  const {
+    handleOrderStatus,
+    handlePayment,
+    handleCreateManualOrder,
+    handleAvailability,
+    handleCreateMenu,
+    handleUpdateMenu,
+    handleDeleteMenu,
+    handleCreateTable,
+    handleUpdateTable,
+    handleDeleteTable,
+    handleCreateStaff,
+    handleUpdateStaff,
+    handleDisableStaff,
+  } = useAdminActions(refreshSnapshot, showNotice);
 
   useEffect(() => {
     let isMounted = true;
@@ -82,7 +77,7 @@ export default function Home() {
     }
 
     try {
-      const user = JSON.parse(storedUser);
+      const user = JSON.parse(storedUser) as unknown;
       if (!isAuthUser(user)) {
         router.replace('/login');
         return;
@@ -100,7 +95,7 @@ export default function Home() {
         const response = await fetch('/api/auth/me', { cache: 'no-store' });
         if (!response.ok) throw new Error('Unauthorized');
 
-        const { user } = await response.json();
+        const { user } = (await response.json()) as { user: unknown };
         if (!isAuthUser(user)) throw new Error('Invalid session');
 
         if (!isMounted) return;
@@ -123,85 +118,21 @@ export default function Home() {
     };
   }, [router]);
 
-  const refreshSnapshot = useCallback(async () => {
-    if (refreshInFlightRef.current) return;
-    refreshInFlightRef.current = true;
-
-    try {
-      const response = await fetch('/api/pos', { cache: 'no-store' });
-      if (!response.ok) return;
-      const nextSnapshot = await response.json();
-      const nextSignature = JSON.stringify(nextSnapshot);
-      if (nextSignature !== snapshotSignatureRef.current) {
-        snapshotSignatureRef.current = nextSignature;
-        setSnapshot(nextSnapshot);
+  const goToView = useCallback(
+    (nextView: View) => {
+      if (!currentUser) return;
+      if (!canAccessView(currentUser.role, nextView)) {
+        const homeView = getRoleHome(currentUser.role);
+        setView(homeView);
+        setMobileSidebarOpen(false);
+        showNotice({ tone: 'error', message: 'Your role cannot access that page.' });
+        return;
       }
-    } catch (error) {
-      console.warn('Using fallback POS data because API data is unavailable.', error);
-    } finally {
-      refreshInFlightRef.current = false;
-    }
-  }, []);
-
-  const showNotice = (notice: ActionNotice) => {
-    setActionNotice(notice);
-    window.setTimeout(() => setActionNotice(null), 2800);
-  };
-
-  const requestJson = async <T,>(url: string, init?: RequestInit): Promise<T> => {
-    const response = await fetch(url, init);
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: 'Request failed' }));
-      throw new Error(error.error ?? 'Request failed');
-    }
-    return response.json() as Promise<T>;
-  };
-
-  const requestOk = async (url: string, init?: RequestInit) => {
-    const response = await fetch(url, init);
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: 'Request failed' }));
-      throw new Error(error.error ?? 'Request failed');
-    }
-  };
-
-  useEffect(() => {
-    if (!isAuthorized) return;
-    void refreshSnapshot();
-  }, [isAuthorized, refreshSnapshot]);
-
-  useEffect(() => {
-    if (!isAuthorized) return;
-
-    const syncWhenVisible = () => {
-      if (document.visibilityState === 'visible') {
-        void refreshSnapshot();
-      }
-    };
-
-    const intervalId = window.setInterval(syncWhenVisible, 5000);
-    document.addEventListener('visibilitychange', syncWhenVisible);
-    window.addEventListener('focus', syncWhenVisible);
-
-    return () => {
-      window.clearInterval(intervalId);
-      document.removeEventListener('visibilitychange', syncWhenVisible);
-      window.removeEventListener('focus', syncWhenVisible);
-    };
-  }, [isAuthorized, refreshSnapshot]);
-
-  const goToView = (nextView: View) => {
-    if (!currentUser) return;
-    if (!canAccessView(currentUser.role, nextView)) {
-      const homeView = getRoleHome(currentUser.role);
-      setView(homeView);
+      setView(nextView);
       setMobileSidebarOpen(false);
-      showNotice({ tone: 'error', message: 'Your role cannot access that page.' });
-      return;
-    }
-    setView(nextView);
-    setMobileSidebarOpen(false);
-  };
+    },
+    [currentUser, showNotice],
+  );
 
   useEffect(() => {
     if (!currentUser || canAccessView(currentUser.role, view)) return;
@@ -209,195 +140,12 @@ export default function Home() {
     setMobileSidebarOpen(false);
   }, [currentUser, view]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     void fetch('/api/auth/logout', { method: 'POST' });
     window.localStorage.removeItem('bloc-pos-authenticated');
     window.localStorage.removeItem('bloc-pos-user');
     router.replace('/login');
-  };
-
-  const handleOrderStatus = async (orderId: number | undefined, status: PosOrderStatus) => {
-    if (!orderId) return;
-    try {
-      await requestOk(`/api/orders/${orderId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status }),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Order status updated.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to update order.' });
-    }
-  };
-
-  const handlePayment = async (orderId: number | undefined, method: 'cash' | 'qris' | 'transfer' = 'cash') => {
-    if (!orderId) return;
-    try {
-      await requestOk('/api/payments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId, method }),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Payment closed.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to close payment.' });
-    }
-  };
-
-  const handleCreateManualOrder = async (payload: {
-    tableCode?: string;
-    customerName: string;
-    type: 'dine_in' | 'takeaway';
-    guests: number;
-    notes?: string;
-    items: Array<{ menuItemId: number; quantity: number; notes?: string }>;
-  }) => {
-    const order = await requestJson<{ id: number; orderNumber: string }>('/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...payload, source: 'manual' }),
-    });
-    await refreshSnapshot();
-    showNotice({ tone: 'success', message: 'Order sent to kitchen.' });
-    return order;
-  };
-
-  const handleAvailability = async (dishId: number | undefined, isAvailable: boolean | undefined) => {
-    if (!dishId) return;
-    try {
-      await requestOk(`/api/menu-items/${dishId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ isAvailable: !isAvailable }),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Menu availability updated.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to update menu.' });
-    }
-  };
-
-  const handleCreateMenu = async (payload: MenuFormPayload) => {
-    try {
-      await requestOk('/api/menu-items', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Menu item created.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to create menu.' });
-    }
-  };
-
-  const handleUpdateMenu = async (dishId: number | undefined, payload: MenuFormPayload) => {
-    if (!dishId) return;
-    try {
-      await requestOk(`/api/menu-items/${dishId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Menu item saved.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to save menu.' });
-    }
-  };
-
-  const handleDeleteMenu = async (dishId: number | undefined) => {
-    if (!dishId) return;
-    try {
-      await requestOk(`/api/menu-items/${dishId}`, { method: 'DELETE' });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Menu item removed.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to remove menu.' });
-    }
-  };
-
-  const handleCreateTable = async (payload: TableFormPayload) => {
-    try {
-      await requestOk('/api/tables', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Table created.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to create table.' });
-    }
-  };
-
-  const handleUpdateTable = async (tableId: number | undefined, payload: TableFormPayload) => {
-    if (!tableId) return;
-    try {
-      await requestOk(`/api/tables/${tableId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Table saved.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to save table.' });
-    }
-  };
-
-  const handleDeleteTable = async (tableId: number | undefined) => {
-    if (!tableId) return;
-    try {
-      await requestOk(`/api/tables/${tableId}`, { method: 'DELETE' });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Table archived.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to archive table.' });
-    }
-  };
-
-  const handleCreateStaff = async (payload: StaffFormPayload) => {
-    try {
-      await requestOk('/api/staff', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Staff created.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to create staff.' });
-    }
-  };
-
-  const handleUpdateStaff = async (staffId: number | undefined, payload: StaffFormPayload) => {
-    if (!staffId) return;
-    try {
-      await requestOk(`/api/staff/${staffId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Staff saved.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to save staff.' });
-    }
-  };
-
-  const handleDisableStaff = async (staffId: number | undefined) => {
-    if (!staffId) return;
-    try {
-      await requestOk(`/api/staff/${staffId}`, { method: 'DELETE' });
-      await refreshSnapshot();
-      showNotice({ tone: 'success', message: 'Staff disabled.' });
-    } catch (error) {
-      showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to disable staff.' });
-    }
-  };
+  }, [router]);
 
   if (!isAuthorized || !currentUser) {
     return null;
@@ -409,20 +157,10 @@ export default function Home() {
   return (
     <>
       <div className={`page-shell ${sidebarCollapsed ? 'sidebar-collapsed' : ''} ${mobileSidebarOpen ? 'mobile-sidebar-open' : ''}`}>
-        <button
-          aria-label="Open sidebar menu"
-          className="mobile-nav-toggle"
-          type="button"
-          onClick={() => setMobileSidebarOpen(true)}
-        >
+        <button aria-label="Open sidebar menu" className="mobile-nav-toggle" type="button" onClick={() => setMobileSidebarOpen(true)}>
           <Menu aria-hidden="true" />
         </button>
-        <button
-          aria-label="Close sidebar menu"
-          className="mobile-sidebar-overlay"
-          type="button"
-          onClick={() => setMobileSidebarOpen(false)}
-        />
+        <button aria-label="Close sidebar menu" className="mobile-sidebar-overlay" type="button" onClick={() => setMobileSidebarOpen(false)} />
         <AdminSidebar
           activeView={activeView}
           collapsed={sidebarCollapsed}
@@ -483,4 +221,3 @@ export default function Home() {
     </>
   );
 }
-

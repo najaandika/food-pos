@@ -1,5 +1,7 @@
 'use client';
 
+import './CashierView.css';
+
 import { useEffect, useMemo, useState } from 'react';
 import { Banknote, CreditCard, ListFilter, QrCode, Search } from 'lucide-react';
 

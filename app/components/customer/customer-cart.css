@@ -1,0 +1,344 @@
+/* customer-ordering part 3/3 - lines 695-1037 */
+
+.cart-head h2 {
+  margin: 0;
+  font-size: clamp(25px, 8vw, 34px);
+  line-height: 1.1;
+}
+
+.cart-head p {
+  max-width: 30rem;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+}
+
+.cart-ticket-note {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-radius: var(--pos-radius);
+  background: var(--secondary);
+  color: #ffffff;
+  padding: 16px;
+}
+
+.cart-ticket-note span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: var(--font-size-xs);
+  font-weight: 650;
+}
+
+.cart-ticket-note strong {
+  font-size: 19px;
+  line-height: 1.15;
+}
+
+.cart-ticket-note p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+.cart-list {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border-radius: var(--pos-radius);
+  background: var(--card-bg);
+  outline: 1px solid var(--border-soft-strong);
+}
+
+.cart-row {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: var(--space-fixed-3);
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-row:last-child {
+  border-bottom: 0;
+}
+
+.cart-row img {
+  width: 76px;
+  height: 76px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.cart-row h3 {
+  margin: 0 0 4px;
+  font-size: var(--font-size-base);
+}
+
+.cart-row span {
+  color: var(--blue);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.cart-row input,
+.customer-field input,
+.customer-field textarea {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--ice);
+  color: var(--ink);
+  outline: 1px solid transparent;
+}
+
+.cart-row input {
+  height: 36px;
+  margin-top: 8px;
+  padding: 0 12px;
+  font-size: var(--font-size-xs);
+}
+
+.cart-qty {
+  grid-column: 2;
+  --stepper-size: 34px;
+  --stepper-count: 34px;
+  justify-self: start;
+  margin-top: 8px;
+}
+
+.customer-form-panel {
+  display: grid;
+  gap: var(--space-fixed-3);
+  margin-top: 16px;
+  border-radius: var(--pos-radius);
+  background: rgba(248, 250, 255, 0.78);
+  padding: 14px;
+}
+
+.customer-field {
+  display: grid;
+  gap: var(--space-fixed-2);
+  font-weight: 650;
+}
+
+.customer-field input,
+.customer-field textarea {
+  padding: 14px;
+  font-weight: 600;
+}
+
+.customer-summary {
+  display: grid;
+  gap: var(--space-3);
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: var(--ice);
+}
+
+.customer-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.customer-summary p:last-child {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+}
+
+.customer-primary {
+  width: 100%;
+  height: 52px;
+  font-size: 16px;
+}
+
+.customer-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.customer-checkout-error {
+  margin: -4px 0 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 79, 108, 0.1);
+  color: #e03157;
+  padding: 10px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.empty-cart {
+  padding: 28px 6px;
+  text-align: center;
+}
+
+.empty-cart p {
+  color: var(--muted);
+}
+
+.customer-status {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.customer-status-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: var(--radius-md);
+  background: rgba(25, 184, 133, 0.12);
+  color: #087856;
+}
+
+.customer-status-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.status-card {
+  margin: 20px 0;
+  padding: 18px;
+  border-radius: var(--pos-radius);
+  background: var(--secondary);
+  color: white;
+}
+
+.status-card span,
+.status-card strong,
+.status-card small {
+  display: block;
+}
+
+.status-card span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: var(--font-size-xs);
+}
+
+.status-card strong {
+  margin-top: 6px;
+  font-size: 26px;
+}
+
+.status-card small {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.status-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-fixed-2);
+  margin-bottom: 20px;
+}
+
+.status-steps div {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-fixed-2);
+  color: var(--muted);
+  font-size: var(--font-size-xs);
+  font-weight: 650;
+}
+
+.status-steps b {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--mist);
+  color: var(--blue);
+}
+
+.status-steps .active {
+  color: var(--blue);
+}
+
+.status-steps .active b {
+  background: var(--blue);
+  color: white;
+}
+
+@media (min-width: 720px) {
+  .customer-page {
+    padding: 34px 24px 120px;
+  }
+
+  .customer-quick-panel {
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+    align-items: stretch;
+  }
+
+  .customer-promo {
+    align-content: center;
+  }
+
+  .customer-menu-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .customer-menu-item {
+    grid-template-columns: 132px minmax(0, 1fr);
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .customer-menu-image,
+  .customer-menu-image img {
+    height: 156px;
+    min-height: 0;
+  }
+
+  .customer-menu-item > div {
+    min-height: 156px;
+    padding: 2px 4px 4px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .customer-hero,
+  .customer-quick-panel,
+  .customer-section-head,
+  .customer-status,
+  .customer-categories,
+  .customer-menu-list,
+  .customer-cart {
+    width: min(1040px, 100%);
+  }
+
+  .customer-bottom-cart {
+    width: min(1040px, calc(100% - 48px));
+    left: 24px;
+    right: 24px;
+  }
+
+  .customer-menu-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .customer-menu-item {
+    min-height: 186px;
+  }
+
+  .customer-menu-image,
+  .customer-menu-image img,
+  .customer-menu-item > div {
+    height: 160px;
+    min-height: 160px;
+  }
+}

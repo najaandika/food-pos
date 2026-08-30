@@ -1,10 +1,13 @@
 'use client';
 
-import { Pencil, Search, ShieldCheck, UserX } from 'lucide-react';
+import './OwnerStaffView.css';
+
 import { useEffect, useMemo, useState } from 'react';
 
-import { AdminTitle, MockSelect } from '..';
+import { AdminTitle } from '..';
 import type { AdminStaff } from '../runtime-data';
+import { OwnerStaffForm, type StaffDraft } from './owner-staff/OwnerStaffForm';
+import { OwnerStaffList } from './owner-staff/OwnerStaffList';
 
 type StaffRole = 'owner' | 'kasir' | 'waiters';
 
@@ -13,14 +16,6 @@ type StaffFormPayload = {
   email: string;
   role: StaffRole;
   password?: string;
-  isActive: boolean;
-};
-
-type StaffDraft = {
-  name: string;
-  email: string;
-  role: StaffRole;
-  password: string;
   isActive: boolean;
 };
 
@@ -51,31 +46,11 @@ const fallbackStaff: AdminStaff[] = [
   },
 ];
 
-const roleOptions = ['owner', 'kasir', 'waiters'];
-const roleLabels: Record<StaffRole, string> = {
-  owner: 'Owner',
-  kasir: 'Kasir',
-  waiters: 'Waiters',
-};
-
-const emptyDraft: StaffDraft = {
-  name: '',
-  email: '',
-  role: 'waiters',
-  password: '',
-  isActive: true,
-};
+const emptyDraft: StaffDraft = { name: '', email: '', role: 'waiters', password: '', isActive: true };
 
 function draftFromStaff(person?: AdminStaff): StaffDraft {
   if (!person) return emptyDraft;
-
-  return {
-    name: person.name,
-    email: person.email,
-    role: person.role,
-    password: '',
-    isActive: person.isActive,
-  };
+  return { name: person.name, email: person.email, role: person.role, password: '', isActive: person.isActive };
 }
 
 function payloadFromDraft(draft: StaffDraft): StaffFormPayload {
@@ -107,10 +82,7 @@ export function OwnerStaffView({
   const [draft, setDraft] = useState<StaffDraft>(() => draftFromStaff(cafeStaff[0]));
   const [isSaving, setIsSaving] = useState(false);
 
-  const selectedStaff = useMemo(
-    () => cafeStaff.find((person) => person.id === selectedId) ?? cafeStaff[0],
-    [cafeStaff, selectedId],
-  );
+  const selectedStaff = useMemo(() => cafeStaff.find((person) => person.id === selectedId) ?? cafeStaff[0], [cafeStaff, selectedId]);
 
   useEffect(() => {
     if (isCreating) return;
@@ -121,7 +93,6 @@ export function OwnerStaffView({
 
   const filteredStaff = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-
     return cafeStaff.filter((person) => {
       const matchesFilter = activeFilter === 'All' || person.roleLabel === activeFilter;
       const matchesQuery =
@@ -129,7 +100,6 @@ export function OwnerStaffView({
         person.name.toLowerCase().includes(normalizedQuery) ||
         person.email.toLowerCase().includes(normalizedQuery) ||
         person.roleLabel.toLowerCase().includes(normalizedQuery);
-
       return matchesFilter && matchesQuery;
     });
   }, [activeFilter, cafeStaff, query]);
@@ -164,7 +134,6 @@ export function OwnerStaffView({
   const saveStaff = async () => {
     const payload = payloadFromDraft(draft);
     if (!payload.name || !payload.email.includes('@')) return;
-
     setIsSaving(true);
     try {
       if (isCreating) {
@@ -189,106 +158,37 @@ export function OwnerStaffView({
     <section className="app-view active">
       <header className="topbar">
         <AdminTitle title="Staff Management" subtitle="Control staff access, role permissions, and shift status." />
-        <button className="owner-primary-btn" type="button" onClick={startCreate}>Invite Staff</button>
+        <button className="owner-primary-btn" type="button" onClick={startCreate}>
+          Invite Staff
+        </button>
       </header>
 
       <div className="staff-layout">
-        <section className="staff-main">
-          <div className="staff-summary">
-            {staffStats.map((stat) => (
-              <article key={stat.label}>
-                <span>{stat.label}</span>
-                <strong>{stat.value}</strong>
-                <small>{stat.hint}</small>
-              </article>
-            ))}
-          </div>
-
-          <div className="staff-panel">
-            <div className="table-tools">
-              <label className="search-wrap">
-                <input type="search" placeholder="Search staff name or role" value={query} onChange={(event) => setQuery(event.target.value)} />
-                <Search aria-hidden="true" />
-              </label>
-              <div className="owner-filter-tabs">
-                {['All', 'Owner', 'Kasir', 'Waiters'].map((filter) => (
-                  <button className={activeFilter === filter ? 'active' : ''} type="button" key={filter} onClick={() => setActiveFilter(filter)}>
-                    {filter}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="staff-list">
-              {filteredStaff.map((person) => (
-                <article className={`staff-row ${person.id === selectedStaff?.id && !isCreating ? 'selected' : ''}`} key={person.id ?? person.email}>
-                  <button className="staff-person" type="button" onClick={() => startEdit(person)}>
-                    <span><img src={person.avatar} alt={person.name} /></span>
-                    <div><strong>{person.name}</strong><small>{person.email}</small><em>{person.activity}</em></div>
-                  </button>
-                  <span className={`staff-role ${person.role}`}>{person.roleLabel}</span>
-                  <span className="staff-shift"><strong>{person.shift}</strong><small>{person.area}</small></span>
-                  <b className={person.isActive ? 'active' : 'inactive'}>{person.status}</b>
-                  <div className="staff-actions">
-                    <button type="button" aria-label={`Edit ${person.name}`} onClick={() => startEdit(person)}><Pencil aria-hidden="true" /></button>
-                    <button type="button" aria-label={`Disable ${person.name}`} onClick={() => void disableStaff(person)}><UserX aria-hidden="true" /></button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <aside className="staff-editor-panel">
-          <div className="staff-panel-top">
-            <span className="mini-status ready">{isCreating ? 'New Access' : 'Editing Access'}</span>
-            <button type="button" onClick={() => setDraft((current) => ({ ...current, isActive: !current.isActive }))}>
-              {draft.isActive ? 'Active' : 'Inactive'}
-            </button>
-          </div>
-          <div className="staff-editor-head">
-            <span className="staff-avatar-large">
-              {selectedStaff?.avatar && !isCreating ? <img src={selectedStaff.avatar} alt={selectedStaff.name} /> : <ShieldCheck aria-hidden="true" />}
-            </span>
-            <h2>{isCreating ? 'Add Staff' : draft.name || 'Edit Staff'}</h2>
-            <p>{isCreating ? 'Create internal account access for the team.' : 'Update role, login access, and profile details.'}</p>
-          </div>
-          <div className="editor-fields">
-            <label>
-              <span>Full Name</span>
-              <input value={draft.name} onChange={(event) => setDraft((current) => ({ ...current, name: event.target.value }))} />
-            </label>
-            <label>
-              <span>Email</span>
-              <input value={draft.email} onChange={(event) => setDraft((current) => ({ ...current, email: event.target.value }))} />
-            </label>
-            <div className="editor-field">
-              <span>Role</span>
-              <MockSelect value={draft.role} options={roleOptions} onChange={(role) => setDraft((current) => ({ ...current, role: role as StaffRole }))} />
-            </div>
-            <label>
-              <span>{isCreating ? 'Password' : 'New Password'}</span>
-              <input
-                type="password"
-                placeholder={isCreating ? 'Minimum 6 characters' : 'Leave empty to keep current'}
-                value={draft.password}
-                onChange={(event) => setDraft((current) => ({ ...current, password: event.target.value }))}
-              />
-            </label>
-          </div>
-          <div className="permission-card">
-            <h3>Permission Preview</h3>
-            <div className="permission-list">
-              {permissionPreview.map((permission) => (
-                <p key={permission}><span />{permission}</p>
-              ))}
-            </div>
-          </div>
-          <div className="editor-actions">
-            <button type="button" onClick={() => (isCreating ? setDraft(emptyDraft) : setDraft(draftFromStaff(selectedStaff)))}>Cancel</button>
-            <button type="button" disabled={isSaving} onClick={() => void saveStaff()}>{isSaving ? 'Saving...' : 'Save Staff'}</button>
-          </div>
-        </aside>
+        <OwnerStaffList
+          staff={cafeStaff}
+          filteredStaff={filteredStaff}
+          staffStats={staffStats}
+          activeFilter={activeFilter}
+          query={query}
+          selectedId={selectedId}
+          isCreating={isCreating}
+          selectedStaff={selectedStaff}
+          onChangeFilter={setActiveFilter}
+          onChangeQuery={setQuery}
+          onStartEdit={startEdit}
+          onDisable={disableStaff}
+        />
+        <OwnerStaffForm
+          draft={draft}
+          onChangeDraft={setDraft}
+          isCreating={isCreating}
+          selectedStaff={selectedStaff}
+          isSaving={isSaving}
+          permissionPreview={permissionPreview}
+          onSave={saveStaff}
+          onDiscard={() => (isCreating ? setDraft(emptyDraft) : setDraft(draftFromStaff(selectedStaff)))}
+          onToggleActive={() => setDraft((current) => ({ ...current, isActive: !current.isActive }))}
+        />
       </div>
     </section>
   );

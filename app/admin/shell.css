@@ -69,9 +69,30 @@
   background: #c9cfdf;
 }
 
-.brand-wrap, .nav-item, .profile-box, .logout-btn, .stat-head,
-.section-head, .side-head, .feed-row, .tools-line, .order-card-top,
-.order-meta, .total-line, .card-actions, .receipt-top, .receipt-total,
+/* Flex utilities: prefer .u-flex-start / .u-flex-between in markup, keep split groups for legacy */
+.brand-wrap,
+.nav-item,
+.profile-box,
+.logout-btn {
+  display: flex;
+  align-items: center;
+}
+
+.stat-head,
+.section-head,
+.side-head,
+.feed-row {
+  display: flex;
+  align-items: center;
+}
+
+.tools-line,
+.order-card-top,
+.order-meta,
+.total-line,
+.card-actions,
+.receipt-top,
+.receipt-total,
 .proceed-btn {
   display: flex;
   align-items: center;
@@ -435,3 +456,17 @@
 }
 .topbar.compact { align-items: flex-start; }
 .date-label { font-size: 18px; font-weight: 700; white-space: nowrap; }
+
+/* Focus states for accessibility - audit 1.11 */
+.nav-item:focus-visible,
+.sidebar-toggle:focus-visible,
+.logout-btn:focus-visible,
+.mobile-nav-toggle:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(48, 71, 255, 0.12);
+}
+
+.profile-box:focus-within {
+  outline: 1px solid var(--border-soft-strong);
+}

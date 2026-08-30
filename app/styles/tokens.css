@@ -151,4 +151,17 @@
   /* Toast */
   --toast-max-width: min(360px, calc(100vw - 32px));
   --toast-padding: 14px 18px;
+
+  /* Breakpoints - use as values in @media/@container, var() not supported in media query */
+  --bp-xs: 360px;
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+  /* Container breakpoints */
+  --container-sm: 560px;
+  --container-md: 768px;
+  --container-lg: 1120px;
+  --container-xl: 1240px;
 }

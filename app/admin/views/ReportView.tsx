@@ -1,5 +1,7 @@
 'use client';
 
+import './ReportView.css';
+
 import type { CSSProperties } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { CalendarDays, RefreshCcw } from 'lucide-react';
