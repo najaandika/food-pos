@@ -12,17 +12,21 @@ import {
 
 import { AdminTitle, dishes as fallbackDishes, orders as fallbackOrders } from '..';
 import { getDashboardStats, type AdminDish, type AdminOrder } from '../runtime-data';
+import type { UserRole } from '../../../lib/pos-types';
+import type { View } from '../types';
 
 export function DashboardView({
+  role,
   dashboard,
   dishes = fallbackDishes,
   orders = fallbackOrders,
-  onOpenModal,
+  onChangeView,
 }: {
+  role: UserRole;
   dashboard?: Parameters<typeof getDashboardStats>[0];
   dishes?: AdminDish[];
   orders?: AdminOrder[];
-  onOpenModal: () => void;
+  onChangeView: (view: View) => void;
 }) {
   const stats = getDashboardStats(dashboard);
   const operationStats: Array<{
@@ -37,6 +41,24 @@ export function DashboardView({
     { label: 'QR Orders', value: String(stats.qrOrders), note: 'Table scan orders', tone: '', icon: QrCode },
     { label: 'Need Action', value: String(stats.needAction), note: 'ready/call waiter', tone: 'alert', icon: Bell },
   ];
+  const quickActions = role === 'owner'
+    ? [
+        { label: 'Create Order', icon: Plus, action: () => onChangeView('menu'), primary: true },
+        { label: 'Open Cashier', icon: CreditCard, action: () => onChangeView('cashier') },
+        { label: 'Manage Menu', icon: List, action: () => onChangeView('owner-menu') },
+        { label: 'Generate QR', icon: QrCode, action: () => onChangeView('owner-tables') },
+      ]
+    : role === 'kasir'
+      ? [
+          { label: 'Create Order', icon: Plus, action: () => onChangeView('menu'), primary: true },
+          { label: 'POS Counter', icon: List, action: () => onChangeView('menu') },
+          { label: 'Payment Queue', icon: CreditCard, action: () => onChangeView('cashier') },
+          { label: 'Order Board', icon: ReceiptText, action: () => onChangeView('orders') },
+        ]
+      : [
+          { label: 'Order Board', icon: ReceiptText, action: () => onChangeView('orders'), primary: true },
+          { label: 'Waiters Station', icon: Bell, action: () => onChangeView('waiters') },
+        ];
 
   return (
     <section className="app-view active">
@@ -99,8 +121,8 @@ export function DashboardView({
               <button type="button">View All</button>
             </div>
             <div className="order-feed">
-              {orders.slice(0, 5).map((order) => (
-                <article className="feed-row" key={order.name}>
+              {orders.slice(0, 5).map((order, index) => (
+                <article className="feed-row" key={order.id ?? order.orderNumber ?? `${order.table}-${order.name}-${index}`}>
                   <span className={`table-pill ${order.tone}`}>{order.table}</span>
                   <div><strong>{order.name}</strong><small>{order.items.length} Items</small></div>
                   <span className={`mini-status ${order.statusTone}`}>{order.status}</span>
@@ -112,20 +134,21 @@ export function DashboardView({
           </section>
         </div>
         <aside className="dashboard-side">
-          <section className="quick-actions-card">
+          <section className={`quick-actions-card quick-actions-${role}`}>
             <h2>Quick Actions</h2>
             <div className="quick-actions-grid">
-              <button type="button" onClick={onOpenModal}><Plus aria-hidden="true" />Create Order</button>
-              <button type="button"><CreditCard aria-hidden="true" />Open Cashier</button>
-              <button type="button"><List aria-hidden="true" />Manage Menu</button>
-              <button type="button"><QrCode aria-hidden="true" />Generate QR</button>
+              {quickActions.map((action) => (
+                <button className={action.primary ? 'primary' : ''} type="button" key={action.label} onClick={action.action}>
+                  <action.icon aria-hidden="true" />{action.label}
+                </button>
+              ))}
             </div>
           </section>
           <section className="side-panel">
             <div className="side-head"><h3>Popular Menu</h3><a href="#">View All</a></div>
             <ol className="rank-list">
               {dishes.slice(0, 4).map((dish, index) => (
-                <li key={dish.name}><span>{String(index + 1).padStart(2, '0')}</span><img src={dish.image} alt="" /><strong>{dish.name}</strong><small>{23 - index * 4} sold - Rp {(1.2 - index * 0.18).toFixed(1)}M</small></li>
+                <li key={dish.id ?? `${dish.name}-${index}`}><span>{String(index + 1).padStart(2, '0')}</span><img src={dish.image} alt="" /><strong>{dish.name}</strong><small>{23 - index * 4} sold - Rp {(1.2 - index * 0.18).toFixed(1)}M</small></li>
               ))}
             </ol>
           </section>

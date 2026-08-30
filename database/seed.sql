@@ -16,6 +16,37 @@ INSERT INTO categories (name, sort_order, is_active) VALUES
   ('Promo', 7, TRUE)
 ON DUPLICATE KEY UPDATE sort_order = VALUES(sort_order), is_active = VALUES(is_active);
 
+INSERT INTO app_settings (`key`, value, created_at, updated_at) VALUES
+  ('cafe', JSON_OBJECT(
+    'profile', JSON_OBJECT(
+      'cafeName', 'Cafe Bloc Barat',
+      'phone', '+62 812-0000-0000',
+      'address', 'Krui, Pesisir Barat, Lampung'
+    ),
+    'tax', JSON_OBJECT(
+      'taxRate', 5,
+      'serviceRate', 0,
+      'currency', 'IDR'
+    ),
+    'payments', JSON_OBJECT(
+      'cash', true,
+      'qris', true,
+      'transfer', false
+    ),
+    'qrOptions', JSON_OBJECT(
+      'guestOrdering', true,
+      'customerName', true,
+      'callWaiter', true,
+      'autoAcceptQr', false
+    ),
+    'hours', JSON_ARRAY(
+      JSON_OBJECT('label', 'Monday - Thursday', 'open', '09:00', 'close', '22:00', 'isOpen', true),
+      JSON_OBJECT('label', 'Friday', 'open', '08:00', 'close', '23:00', 'isOpen', true),
+      JSON_OBJECT('label', 'Saturday - Sunday', 'open', '08:00', 'close', '23:00', 'isOpen', true)
+    )
+  ), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE value = VALUES(value);
+
 INSERT INTO tables (code, name, area, seats, status, qr_token, scans_today) VALUES
   ('A1', 'Indoor Window', 'Indoor', 2, 'available', 'table-a1-token', 18),
   ('A4', 'Indoor Center', 'Indoor', 4, 'ready', 'table-a4-token', 42),

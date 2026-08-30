@@ -10,7 +10,11 @@ type CartReviewPanelProps = {
   customerName: string;
   orderNote: string;
   subtotal: string;
+  tax: string;
+  taxLabel: string;
   service: string;
+  serviceLabel: string;
+  showService: boolean;
   total: string;
   formatPrice: (value: number) => string;
   onChooseMenu: () => void;
@@ -21,6 +25,8 @@ type CartReviewPanelProps = {
   onItemIncrement: (id: number) => void;
   onCheckout: () => void;
   submitting?: boolean;
+  error?: string;
+  requireCustomerName?: boolean;
 };
 
 export function CartReviewPanel({
@@ -30,7 +36,11 @@ export function CartReviewPanel({
   customerName,
   orderNote,
   subtotal,
+  tax,
+  taxLabel,
   service,
+  serviceLabel,
+  showService,
   total,
   formatPrice,
   onChooseMenu,
@@ -41,7 +51,11 @@ export function CartReviewPanel({
   onItemIncrement,
   onCheckout,
   submitting = false,
+  error = '',
+  requireCustomerName = true,
 }: CartReviewPanelProps) {
+  const checkoutDisabled = (requireCustomerName && !customerName.trim()) || submitting;
+
   return (
     <section className="customer-cart">
       <div className="cart-head">
@@ -80,7 +94,7 @@ export function CartReviewPanel({
 
           <div className="customer-form-panel">
             <label className="customer-field">
-              <span>Your name</span>
+              <span>Your name{requireCustomerName ? '' : ' (optional)'}</span>
               <input value={customerName} onChange={(event) => onCustomerNameChange(event.target.value)} placeholder="Input your name" />
             </label>
             <label className="customer-field">
@@ -89,9 +103,11 @@ export function CartReviewPanel({
             </label>
           </div>
 
-          <OrderSummary subtotal={subtotal} service={service} total={total} />
+          <OrderSummary subtotal={subtotal} tax={tax} taxLabel={taxLabel} service={service} serviceLabel={serviceLabel} showService={showService} total={total} />
 
-          <Button className="customer-primary" disabled={!customerName.trim() || submitting} onClick={onCheckout}>{submitting ? 'Sending Order...' : 'Checkout Order'}</Button>
+          {error && <p className="customer-checkout-error" role="alert">{error}</p>}
+
+          <Button className="customer-primary" disabled={checkoutDisabled} onClick={onCheckout}>{submitting ? 'Sending Order...' : 'Checkout Order'}</Button>
         </>
       )}
     </section>

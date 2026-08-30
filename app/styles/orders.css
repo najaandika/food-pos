@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: var(--pos-gap);
   margin-bottom: 18px;
 }
 
@@ -25,7 +25,7 @@
 .orders-board-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
-  gap: 20px;
+  gap: var(--dashboard-gap);
   align-items: start;
   min-width: 0;
 }
@@ -34,10 +34,15 @@
   min-width: 0;
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: var(--pos-gap);
   overflow: visible;
   padding: 2px;
+}
+
+.orders-board-waiters .orders-kanban,
+.orders-board-kasir .orders-kanban {
+  align-items: stretch;
 }
 
 .orders-kanban::-webkit-scrollbar {
@@ -78,7 +83,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-fixed-3);
   margin-bottom: 12px;
 }
 
@@ -90,7 +95,7 @@
 .kanban-head p {
   margin: 4px 0 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
 }
 
@@ -105,16 +110,16 @@
   font-weight: 900;
 }
 
-.kanban-list { display: grid; gap: 10px; }
+.kanban-list { display: grid; gap: var(--space-3); }
 
 .kanban-card {
   display: grid;
-  gap: 12px;
+  gap: var(--space-fixed-3);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   background: var(--ice);
   padding: 12px;
-  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: border-color var(--transition-hover), background var(--transition-hover), box-shadow var(--transition-hover), transform var(--transition-hover);
 }
 
 .kanban-card:hover {
@@ -128,10 +133,47 @@
   background: rgba(25, 184, 133, 0.08);
 }
 
+.workflow-chip {
+  justify-self: start;
+  border-radius: var(--radius-pill);
+  background: var(--mist);
+  color: var(--blue);
+  padding: 6px 9px;
+  font-size: var(--font-size-xs);
+  font-weight: 900;
+}
+
+.workflow-chip.new {
+  background: rgba(244, 183, 64, 0.16);
+  color: #8f6209;
+}
+
+.workflow-chip.kitchen {
+  background: rgba(48, 71, 255, 0.1);
+  color: var(--blue);
+}
+
+.workflow-chip.ready,
+.workflow-chip.paid {
+  background: rgba(25, 184, 133, 0.12);
+  color: #087856;
+}
+
+.workflow-chip.served,
+.workflow-chip.billing {
+  background: rgba(20, 26, 51, 0.08);
+  color: var(--navy);
+}
+
+.workflow-chip.cancelled {
+  background: rgba(238, 82, 104, 0.12);
+  color: var(--danger);
+}
+
 .kanban-card-top {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .kanban-card-top > div {
@@ -144,14 +186,14 @@
 }
 
 .kanban-card-top strong {
-  font-size: 15px;
+  font-size: var(--font-size-base);
   line-height: 1.1;
 }
 
 .kanban-card-top small {
   margin-top: 3px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 750;
 }
 
@@ -166,21 +208,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-fixed-3);
 }
 
 .kanban-meta span {
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: white;
   color: var(--blue);
   padding: 6px 9px;
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 900;
 }
 
 .kanban-meta b {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
 }
 
 .kanban-items {
@@ -192,7 +234,7 @@
 .kanban-items em {
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-style: normal;
   font-weight: 800;
 }
@@ -209,11 +251,41 @@
 .kanban-card-bottom button {
   height: 36px;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-xs);
   background: var(--blue);
   color: white;
   padding: 0 13px;
   font-weight: 900;
+}
+
+.kanban-card-bottom button:disabled,
+.order-detail-panel .cashier-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.kanban-empty {
+  display: grid;
+  gap: 4px;
+  min-height: 118px;
+  place-content: center;
+  border: 1px dashed rgba(129, 139, 164, 0.28);
+  border-radius: var(--radius-md);
+  background: rgba(248, 250, 255, 0.62);
+  padding: 18px;
+  text-align: center;
+}
+
+.kanban-empty strong {
+  color: var(--navy);
+  font-size: var(--font-size-xs);
+}
+
+.kanban-empty span {
+  color: var(--muted);
+  font-size: var(--font-size-xs);
+  font-weight: 750;
+  line-height: 1.4;
 }
 
 .order-detail-panel {
@@ -228,16 +300,16 @@
 
 .order-source-box {
   display: grid;
-  gap: 6px;
+  gap: var(--space-1);
   margin-top: 16px;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   background: var(--ice);
   padding: 14px;
 }
 
 .order-source-box span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 900;
 }
 
@@ -245,6 +317,50 @@
   margin: 6px 0 0;
   color: var(--muted);
   line-height: 1.45;
-  font-size: 13px;
+  font-size: var(--font-size-xs);
+}
+
+.workflow-progress {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin-top: 16px;
+  border-radius: var(--radius-md);
+  background: var(--ice);
+  padding: 8px;
+}
+
+.workflow-progress span {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  border-radius: 13px;
+  color: var(--muted);
+  padding: 8px 4px;
+  font-size: 10px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.workflow-progress b {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-pill);
+  background: var(--card-bg);
+  color: inherit;
+  font-size: var(--font-size-xs);
+}
+
+.workflow-progress span.active {
+  background: rgba(48, 71, 255, 0.1);
+  color: var(--blue);
+}
+
+.workflow-progress span.active b {
+  background: var(--blue);
+  color: #ffffff;
 }
 

@@ -1,7 +1,7 @@
 .owner-primary-btn {
   height: 48px;
   border: 0;
-  border-radius: 16px;
+  border-radius: var(--radius-sm);
   background: var(--blue);
   color: white;
   padding: 0 18px;
@@ -16,10 +16,10 @@
 .owner-filter-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--space-1);
   max-width: 100%;
   overflow-x: hidden;
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   background: var(--ice);
   padding: 6px;
   scrollbar-width: none;
@@ -52,12 +52,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-fixed-2);
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(25, 184, 133, 0.12);
   color: #0f8d66;
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 900;
 }
 
@@ -75,16 +75,16 @@
 
 .editor-fields {
   display: grid;
-  gap: 14px;
+  gap: var(--pos-gap);
 }
 
 .editor-fields label,
 .editor-field {
   position: relative;
   display: grid;
-  gap: 8px;
+  gap: var(--space-fixed-2);
   color: var(--navy);
-  font-size: 13px;
+  font-size: var(--font-size-xs);
   font-weight: 900;
 }
 
@@ -93,14 +93,14 @@
 .editor-fields textarea {
   width: 100%;
   border: 1px solid transparent;
-  border-radius: 16px;
-  background: #ffffff;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
   color: var(--ink);
   padding: 14px;
   font-weight: 700;
   box-shadow: inset 0 0 0 1px rgba(229, 233, 243, 0.82);
   outline: 0;
-  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  transition: border-color var(--transition-hover), box-shadow var(--transition-hover), background-color var(--transition-hover);
 }
 
 .editor-fields input,
@@ -117,7 +117,7 @@
 .editor-fields select:focus,
 .editor-fields textarea:focus {
   border-color: rgba(48, 71, 255, 0.34);
-  background: #ffffff;
+  background: var(--card-bg);
   box-shadow: 0 0 0 4px rgba(48, 71, 255, 0.09), inset 0 0 0 1px rgba(48, 71, 255, 0.2);
 }
 
@@ -142,7 +142,7 @@
 
 .editor-fields option {
   color: var(--ink);
-  background: #ffffff;
+  background: var(--card-bg);
   font-weight: 700;
 }
 
@@ -161,10 +161,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-fixed-3);
   border: 1px solid transparent;
-  border-radius: 16px;
-  background: #ffffff;
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
   color: var(--ink);
   padding: 0 14px;
   box-shadow: inset 0 0 0 1px rgba(229, 233, 243, 0.82);
@@ -192,7 +192,7 @@
   width: 18px;
   height: 18px;
   color: var(--navy);
-  transition: transform 160ms ease;
+  transition: transform var(--transition-hover);
 }
 
 .custom-select[open] summary svg {
@@ -207,8 +207,8 @@
   display: grid;
   gap: 4px;
   border: 1px solid rgba(229, 233, 243, 0.92);
-  border-radius: 18px;
-  background: #ffffff;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
   padding: 6px;
   box-shadow: 0 20px 48px rgba(31, 43, 89, 0.16);
 }
@@ -238,17 +238,17 @@
 .editor-switches {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: var(--space-fixed-2);
   margin-top: 16px;
 }
 
 .editor-switches button {
   min-height: 42px;
   border: 0;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   background: var(--ice);
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 900;
 }
 
@@ -260,14 +260,14 @@
 .editor-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: var(--space-fixed-3);
   margin-top: 18px;
 }
 
 .editor-actions button {
   height: 50px;
   border: 0;
-  border-radius: 16px;
+  border-radius: var(--radius-sm);
   font-weight: 900;
 }
 
@@ -279,6 +279,11 @@
 .editor-actions button:last-child {
   background: var(--blue);
   color: white;
+}
+
+.editor-actions button:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 .table-tools .owner-filter-tabs {

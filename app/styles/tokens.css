@@ -1,33 +1,154 @@
 :root {
+  /* Canvas & Surface */
+  --canvas: #d9deea;
+  --surface: #f3f5fb;
+  --card: #ffffff;
+  --card-bg: #ffffff;
+  --surface-muted: rgba(255, 255, 255, 0.28);
+  --border: #f0f0f0;
+  --border-soft: rgba(229, 233, 243, 0.74);
+  --border-soft-strong: rgba(229, 233, 243, 0.88);
+  --overlay-navy: rgba(20, 26, 51, 0.96);
+
+  /* Text */
+  --ink: #101426;
+  --text-primary: #1f2b59;
+  --text-secondary: #8b8e98;
+  --muted: #7d8498;
+  --line: #e5e9f3;
+
+  /* Brand */
+  --blue: #3047ff;
+  --primary: #3047ff;
+  --blue-dark: #1829c9;
+  --primary-dark: #1829c9;
+  --violet: #5b4bff;
+  --navy: #141a33;
+  --secondary: #20263a;
+  --secondary-foreground: #ffffff;
+  --mist: #eef2ff;
+  --ice: #f8faff;
+  --teal: var(--blue);
+  --teal-dark: var(--blue-dark);
+  --yellow: var(--blue);
+  --yellow-dark: var(--blue);
+  --pale: #f5f6ff;
+
+  /* Feedback */
+  --success: #19b885;
+  --danger: #ee5268;
+  --warning: #f4b740;
+
+  /* Spacing Scale - responsive clamp */
   --space-1: clamp(4px, 0.5vw, 6px);
   --space-2: clamp(8px, 0.9vw, 10px);
   --space-3: clamp(10px, 1.2vw, 14px);
   --space-4: clamp(14px, 1.6vw, 18px);
   --space-5: clamp(18px, 2vw, 24px);
   --space-6: clamp(24px, 3vw, 36px);
+  --space-7: clamp(36px, 4vw, 48px);
 
+  /* Fixed spacing for precise admin layout (migration target) */
+  --space-fixed-1: 4px;
+  --space-fixed-2: 8px;
+  --space-fixed-3: 12px;
+  --space-fixed-4: 16px;
+  --space-fixed-5: 24px;
+  --space-fixed-6: 32px;
+  --space-fixed-7: 48px;
+
+  /* Layout */
+  --sidebar-width: 232px;
+  --sidebar-collapsed-width: 76px;
+  --sidebar-padding: 26px 14px;
+  --sidebar-collapsed-padding: 18px 8px;
+  --main-max-width: 1920px;
+  --main-panel-padding: 30px;
+  --main-panel-gap: 24px;
+  --content-sm: 520px;
+  --content-md: 760px;
+  --content-lg: 1040px;
+
+  /* Touch / Control sizes */
+  --touch-sm: 36px;
+  --touch-md: 42px;
+  --touch-lg: 48px;
+  --control-bg: var(--mist);
+  --control-fg: var(--blue);
+  --control-active-bg: var(--blue);
+  --control-active-fg: #ffffff;
+
+  /* POS specific */
+  --pos-radius: 22px;
+  --pos-radius-sm: 16px;
+  --pos-touch: 42px;
+  --pos-card-min: 220px;
+  --pos-card-max: 280px;
+  --pos-image-h: 132px;
+  --pos-gap: 14px;
+
+  /* Dashboard */
+  --dashboard-gap: 20px;
+  --dashboard-side-min: 300px;
+  --dashboard-side-max: 340px;
+  --dashboard-metric-min: 132px;
+  --dashboard-metric-featured-min: 278px;
+
+  /* Login */
+  --login-panel-max: 456px;
+  --login-copy-max: 460px;
+  --login-preview-max: 520px;
+  --login-field-height: 56px;
+  --login-field-radius: 20px;
+
+  /* Shadows */
+  --shadow: 0 20px 50px rgba(31, 43, 89, 0.1);
+  --shadow-sm: 0 4px 12px rgba(31, 43, 89, 0.08);
+  --shadow-md: 0 10px 30px rgba(31, 43, 89, 0.12);
+  --shadow-lg: 0 20px 60px rgba(31, 43, 89, 0.16);
+  --shadow-blue: 0 14px 30px rgba(48, 71, 255, 0.24);
+  --shadow-blue-lg: 0 18px 34px rgba(48, 71, 255, 0.24);
+  --shadow-navy: 0 20px 48px rgba(20, 26, 51, 0.22);
+  --shadow-inset-line: inset 0 0 0 1px rgba(229, 233, 243, 0.9);
+  --shadow-card: 0 14px 32px rgba(31, 43, 89, 0.07);
+  --shadow-toast: 0 20px 48px rgba(20, 26, 51, 0.22);
+
+  /* Radius */
   --radius-xs: 12px;
   --radius-sm: 16px;
   --radius-md: 20px;
   --radius-lg: 26px;
   --radius-xl: 32px;
   --radius-pill: 999px;
+  --radius-full: 999px;
 
-  --content-sm: 520px;
-  --content-md: 760px;
-  --content-lg: 1040px;
-  --touch-sm: 36px;
-  --touch-md: 42px;
-  --touch-lg: 48px;
-
+  /* Typography */
+  --font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-xs: clamp(11px, 1.8vw, 12px);
   --font-sm: clamp(12px, 2vw, 14px);
   --font-md: clamp(14px, 2.4vw, 16px);
   --font-lg: clamp(18px, 3.4vw, 22px);
   --font-xl: clamp(28px, 6vw, 44px);
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
 
-  --control-bg: var(--mist);
-  --control-fg: var(--blue);
-  --control-active-bg: var(--blue);
-  --control-active-fg: #ffffff;
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 250ms ease-out;
+  --transition-slow: 350ms ease-out;
+  --transition-sidebar: 180ms ease;
+  --transition-hover: 160ms ease;
+  --transition-tooltip: 140ms ease;
+
+  /* Z-index */
+  --z-toast: 80;
+  --z-tooltip: 90;
+  --z-overlay: 90;
+
+  /* Toast */
+  --toast-max-width: min(360px, calc(100vw - 32px));
+  --toast-padding: 14px 18px;
 }

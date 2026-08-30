@@ -13,7 +13,7 @@ import { Button } from '../../components/ui/Button';
 import { PillTabs } from '../../components/ui/PillTabs';
 import { SearchField } from '../../components/ui/SearchField';
 import { formatRupiah } from '../../lib/format';
-import type { PosSnapshot } from '../../../lib/pos-types';
+import type { PosSettings, PosSnapshot } from '../../../lib/pos-types';
 
 export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   const [activeCategory, setActiveCategory] = useState('Coffee');
@@ -23,7 +23,10 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   const [step, setStep] = useState<'menu' | 'cart' | 'status'>('menu');
   const [menuItems, setMenuItems] = useState<CustomerMenuItem[]>(customerMenuItems);
   const [orderNumber, setOrderNumber] = useState(`BB-${tableCode.toUpperCase()}-1024`);
+  const [orderId, setOrderId] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
+  const [settings, setSettings] = useState<PosSettings | null>(null);
 
   useEffect(() => {
     const loadMenu = async () => {
@@ -31,6 +34,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
         const response = await fetch('/api/pos', { cache: 'no-store' });
         if (!response.ok) return;
         const snapshot: PosSnapshot = await response.json();
+        setSettings(snapshot.settings);
         const activeItems = snapshot.menuItems
           .filter((item) => item.isAvailable)
           .map((item) => ({
@@ -46,7 +50,8 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
 
         if (activeItems.length) {
           setMenuItems(activeItems);
-          setActiveCategory(activeItems[0].category);
+          const first = activeItems[0];
+          if (first) setActiveCategory(first.category);
         }
       } catch (error) {
         console.warn('Using fallback customer menu.', error);
@@ -63,8 +68,13 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   const filteredMenu = useMemo(() => menuItems.filter((item) => item.category === activeCategory), [activeCategory, menuItems]);
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  const service = Math.round(subtotal * 0.05);
-  const total = subtotal + service;
+  const taxRate = settings?.tax.taxRate ?? 5;
+  const serviceRate = settings?.tax.serviceRate ?? 0;
+  const tax = Math.round(subtotal * (taxRate / 100));
+  const service = Math.round(subtotal * (serviceRate / 100));
+  const total = subtotal + tax + service;
+  const qrOrderingOpen = settings?.qrOptions.guestOrdering !== false;
+  const requireCustomerName = settings?.qrOptions.customerName !== false;
   const getCartQuantity = (id: number) => cart.find((item) => item.id === id)?.quantity ?? 0;
 
   const addToCart = (item: CustomerMenuItem) => {
@@ -90,7 +100,9 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
 
   const checkout = async () => {
     if (!cart.length || submitting) return;
+    if (requireCustomerName && !customerName.trim()) return;
     setSubmitting(true);
+    setCheckoutError('');
 
     try {
       const response = await fetch('/api/orders', {
@@ -106,9 +118,16 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
 
       if (response.ok) {
         const order = await response.json();
+        setOrderId(order.id);
         setOrderNumber(order.orderNumber);
         setStep('status');
+        return;
       }
+
+      const error = await response.json().catch(() => ({ error: 'Failed to send order' }));
+      setCheckoutError(error.error ?? 'Failed to send order');
+    } catch {
+      setCheckoutError('Connection problem. Please ask staff for help.');
     } finally {
       setSubmitting(false);
     }
@@ -118,6 +137,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
     return (
       <CustomerStatus
         tableCode={tableCode}
+        orderId={orderId}
         orderNumber={orderNumber}
         icon={<Check />}
         onAddMore={() => setStep('menu')}
@@ -127,9 +147,24 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
 
   return (
     <main className="customer-page">
-      <CustomerHero tableCode={tableCode} itemCount={itemCount} orderIcon={<ReceiptText />} onOpenOrder={() => setStep('cart')} />
+      <CustomerHero
+        tableCode={tableCode}
+        itemCount={itemCount}
+        orderIcon={<ReceiptText />}
+        onOpenOrder={() => setStep('cart')}
+        cafeName={settings?.profile.cafeName}
+        isOrderingOpen={qrOrderingOpen}
+      />
 
-      {step === 'menu' ? (
+      {!qrOrderingOpen ? (
+        <section className="customer-cart customer-paused">
+          <div className="cart-ticket-note">
+            <span>Ordering paused</span>
+            <strong>QR menu is temporarily closed</strong>
+            <p>Please ask our staff to help create your order from the POS counter.</p>
+          </div>
+        </section>
+      ) : step === 'menu' ? (
         <>
           <section className="customer-quick-panel">
             <SearchField className="customer-search" placeholder="Search coffee, food, or snack" icon={<Search />} />
@@ -181,7 +216,11 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
           customerName={customerName}
           orderNote={orderNote}
           subtotal={formatRupiah(subtotal)}
+          tax={formatRupiah(tax)}
+          taxLabel={`Tax (${taxRate}%)`}
           service={formatRupiah(service)}
+          serviceLabel={`Service (${serviceRate}%)`}
+          showService={serviceRate > 0}
           total={formatRupiah(total)}
           formatPrice={formatRupiah}
           onChooseMenu={() => setStep('menu')}
@@ -192,6 +231,8 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
           onItemIncrement={(id) => updateQuantity(id, 1)}
           onCheckout={checkout}
           submitting={submitting}
+          error={checkoutError}
+          requireCustomerName={requireCustomerName}
         />
       )}
     </main>

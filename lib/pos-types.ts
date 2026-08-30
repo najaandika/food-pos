@@ -1,5 +1,15 @@
 export type UserRole = 'owner' | 'kasir' | 'waiters';
 
+export type PosStaff = {
+  id: number;
+  name: string;
+  email: string;
+  role: UserRole;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type PosCategory = {
   id: number;
   name: string;
@@ -86,10 +96,81 @@ export type PosDashboard = {
   waitingPayment: number;
 };
 
+export type PosSettings = {
+  profile: {
+    cafeName: string;
+    phone: string;
+    address: string;
+  };
+  tax: {
+    taxRate: number;
+    serviceRate: number;
+    currency: 'IDR' | 'USD';
+  };
+  payments: {
+    cash: boolean;
+    qris: boolean;
+    transfer: boolean;
+  };
+  qrOptions: {
+    guestOrdering: boolean;
+    customerName: boolean;
+    callWaiter: boolean;
+    autoAcceptQr: boolean;
+  };
+  hours: Array<{
+    label: string;
+    open: string;
+    close: string;
+    isOpen: boolean;
+  }>;
+};
+
+export type PosReport = {
+  range: {
+    from: string;
+    to: string;
+  };
+  summary: {
+    revenue: number;
+    totalOrders: number;
+    qrOrders: number;
+    menuSold: number;
+    waitingPayment: number;
+  };
+  traffic: Array<{
+    label: string;
+    qr: number;
+    dineIn: number;
+  }>;
+  categorySales: Array<{
+    name: string;
+    quantity: number;
+    growth: number;
+  }>;
+  serviceChannels: {
+    qr: number;
+    manual: number;
+    dineIn: number;
+    takeaway: number;
+  };
+  recentOrders: Array<{
+    id: number;
+    orderNumber: string;
+    customerName: string;
+    tableCode: string | null;
+    total: number;
+    status: PosOrderStatus;
+    createdAt: string;
+  }>;
+};
+
 export type PosSnapshot = {
   categories: PosCategory[];
   menuItems: PosMenuItem[];
   orders: PosOrder[];
   tables: PosTable[];
+  staff: PosStaff[];
   dashboard: PosDashboard;
+  settings: PosSettings;
 };

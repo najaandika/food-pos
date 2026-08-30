@@ -1,8 +1,9 @@
 'use client';
 
-import { Eye, LockKeyhole, Mail, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, LockKeyhole, Mail, ShieldCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { isAuthUser } from '../admin/auth';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -10,6 +11,21 @@ export default function LoginPage() {
   const [password, setPassword] = useState('blocbarat');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    const authenticated = window.localStorage.getItem('bloc-pos-authenticated') === 'true';
+    const storedUser = window.localStorage.getItem('bloc-pos-user');
+    if (!authenticated || !storedUser) return;
+
+    try {
+      const user = JSON.parse(storedUser);
+      if (isAuthUser(user)) router.replace('/');
+    } catch {
+      window.localStorage.removeItem('bloc-pos-authenticated');
+      window.localStorage.removeItem('bloc-pos-user');
+    }
+  }, [router]);
 
   const handleLogin = async () => {
     setSubmitting(true);
@@ -68,8 +84,10 @@ export default function LoginPage() {
                 <span>Password</span>
                 <div>
                   <LockKeyhole aria-hidden="true" />
-                  <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" />
-                  <button type="button" aria-label="Show password"><Eye aria-hidden="true" /></button>
+                  <input type={showPassword ? 'text' : 'password'} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" />
+                  <button type="button" aria-label={showPassword ? 'Hide password' : 'Show password'} onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
+                  </button>
                 </div>
               </label>
 

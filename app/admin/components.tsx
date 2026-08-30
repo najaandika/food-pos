@@ -9,7 +9,7 @@ export function AdminTitle({ title, subtitle }: { title: string; subtitle: strin
   );
 }
 
-export function MockSelect({ value, options }: { value: string; options: string[] }) {
+export function MockSelect({ value, options, onChange }: { value: string; options: string[]; onChange?: (value: string) => void }) {
   return (
     <details className="custom-select">
       <summary>
@@ -18,7 +18,15 @@ export function MockSelect({ value, options }: { value: string; options: string[
       </summary>
       <div className="custom-select-options">
         {options.map((option) => (
-          <button className={option === value ? 'active' : ''} type="button" key={option}>
+          <button
+            className={option === value ? 'active' : ''}
+            type="button"
+            key={option}
+            onClick={(event) => {
+              onChange?.(option);
+              event.currentTarget.closest('details')?.removeAttribute('open');
+            }}
+          >
             {option}
           </button>
         ))}

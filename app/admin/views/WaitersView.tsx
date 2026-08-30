@@ -3,26 +3,68 @@
 import { Bell, CheckCircle2, Clock3, MapPin, Plus, RefreshCw, UsersRound } from 'lucide-react';
 
 import { AdminTitle, orders as fallbackOrders } from '..';
-import type { AdminOrder } from '../runtime-data';
+import type { PosOrderStatus, PosTableStatus } from '../../../lib/pos-types';
+import type { AdminOrder, AdminTable } from '../runtime-data';
 
-export function WaitersView({ orders = fallbackOrders }: { orders?: AdminOrder[] }) {
-  const tables = [
-    { code: 'A1', area: 'Window', status: 'Available', tone: 'available', guests: 0, eta: 'Open' },
-    { code: 'A4', area: 'Indoor', status: 'Ready', tone: 'ready', guests: 4, eta: 'Serve now' },
-    { code: 'B2', area: 'Bar', status: 'Preparing', tone: 'preparing', guests: 2, eta: '8 min' },
-    { code: 'B7', area: 'Outdoor', status: 'Need Waiter', tone: 'call', guests: 3, eta: '2 min' },
-    { code: 'C2', area: 'Terrace', status: 'Waiting Payment', tone: 'payment', guests: 2, eta: 'Bill ready' },
-    { code: 'TA', area: 'Counter', status: 'Takeaway', tone: 'takeaway', guests: 1, eta: 'Pickup' },
-  ];
+type ServiceTone = 'available' | 'ready' | 'preparing' | 'call' | 'payment' | 'takeaway';
+
+const tableStatusCopy: Record<PosTableStatus, { label: string; tone: ServiceTone; eta: string }> = {
+  available: { label: 'Available', tone: 'available', eta: 'Open' },
+  occupied: { label: 'Occupied', tone: 'preparing', eta: 'Active' },
+  preparing: { label: 'Preparing', tone: 'preparing', eta: '8 min' },
+  ready: { label: 'Ready', tone: 'ready', eta: 'Serve now' },
+  waiting_payment: { label: 'Waiting Payment', tone: 'payment', eta: 'Bill ready' },
+  need_waiter: { label: 'Need Waiter', tone: 'call', eta: '2 min' },
+  inactive: { label: 'Inactive', tone: 'available', eta: 'Paused' },
+};
+
+const nextWaiterAction: Partial<Record<PosOrderStatus, { label: string; status: PosOrderStatus }>> = {
+  pending: { label: 'Accept', status: 'accepted' },
+  accepted: { label: 'Kitchen', status: 'preparing' },
+  preparing: { label: 'Ready', status: 'ready' },
+  ready: { label: 'Serve', status: 'served' },
+  served: { label: 'Send Bill', status: 'waiting_payment' },
+};
+
+const waiterStatusHint: Record<PosOrderStatus, string> = {
+  pending: 'New table order. Accept it before kitchen starts.',
+  accepted: 'Accepted by staff. Send it to kitchen or bar.',
+  preparing: 'Kitchen is preparing this ticket.',
+  ready: 'Ready on the pass. Serve this first.',
+  served: 'Served to guest. Send bill when requested.',
+  waiting_payment: 'Bill sent to cashier.',
+  paid: 'Closed by cashier.',
+  cancelled: 'Cancelled ticket.',
+};
+
+const fallbackTables: AdminTable[] = [
+  { id: 1, code: 'A1', name: 'Window', area: 'Indoor', seats: 2, status: 'Available', rawStatus: 'available', scans: 18, lastOrder: 'No active order', currentOrderId: null, tone: 'available' },
+  { id: 2, code: 'A4', name: 'Indoor Center', area: 'Indoor', seats: 4, status: 'Ready', rawStatus: 'ready', scans: 42, lastOrder: 'Order ready', currentOrderId: null, tone: 'occupied' },
+  { id: 3, code: 'B2', name: 'Bar Area', area: 'Bar', seats: 2, status: 'Preparing', rawStatus: 'preparing', scans: 31, lastOrder: 'Preparing', currentOrderId: null, tone: 'occupied' },
+];
+
+export function WaitersView({
+  orders = fallbackOrders,
+  tables = fallbackTables,
+  onUpdateStatus,
+}: {
+  orders?: AdminOrder[];
+  tables?: AdminTable[];
+  onUpdateStatus?: (orderId: number | undefined, status: PosOrderStatus) => void;
+}) {
+  const activeTables = tables.filter((table) => table.rawStatus !== 'inactive');
+  const readyOrders = orders.filter((order) => order.rawStatus === 'ready');
+  const customerCalls = tables.filter((table) => table.rawStatus === 'need_waiter');
   const waitersStats = [
-    { label: 'Active Tables', value: '12', hint: '7 occupied now', tone: 'active', icon: UsersRound },
-    { label: 'Ready to Serve', value: '5', hint: 'Avg wait 3 min', tone: 'ready', icon: CheckCircle2 },
-    { label: 'Customer Calls', value: '2', hint: 'Needs response', tone: 'call', icon: Bell },
+    { label: 'Active Tables', value: String(activeTables.length), hint: `${activeTables.filter((table) => table.rawStatus !== 'available').length} occupied now`, tone: 'active', icon: UsersRound },
+    { label: 'Ready to Serve', value: String(readyOrders.length), hint: 'Live kitchen pass', tone: 'ready', icon: CheckCircle2 },
+    { label: 'Customer Calls', value: String(customerCalls.length), hint: 'Needs response', tone: 'call', icon: Bell },
   ];
+  const serviceOrders = orders.filter((order) => order.rawStatus && ['pending', 'accepted', 'preparing', 'ready', 'served', 'waiting_payment'].includes(order.rawStatus));
   const requests = [
-    { table: 'B7', text: 'Need extra napkins', time: '1 min ago', tone: 'call', priority: 'High' },
-    { table: 'A4', text: 'Ask for less ice', time: '3 min ago', tone: 'ready', priority: 'Serve' },
-    { table: 'C2', text: 'Ready for payment', time: '5 min ago', tone: 'payment', priority: 'Bill' },
+    ...customerCalls.map((table) => ({ table: table.code, text: `${table.name} requested waiter`, time: 'Now', tone: 'call' as ServiceTone, priority: 'High' })),
+    ...readyOrders.slice(0, 3).map((order) => ({ table: order.table, text: `${order.name} ready to serve`, time: order.time, tone: 'ready' as ServiceTone, priority: 'Serve' })),
+    ...orders.filter((order) => order.rawStatus === 'waiting_payment').slice(0, 2).map((order) => ({ table: order.table, text: `${order.name} requested bill`, time: order.time, tone: 'payment' as ServiceTone, priority: 'Bill' })),
   ];
 
   return (
@@ -59,22 +101,26 @@ export function WaitersView({ orders = fallbackOrders }: { orders?: AdminOrder[]
               <button type="button">Counter</button>
             </div>
             <div className="table-status-grid">
-              {tables.map((table) => (
-                <button className={`table-status-card ${table.tone}`} type="button" key={table.code}>
-                  <div className="table-card-head">
-                    <span className="table-code">{table.code}</span>
-                    <span className="table-state">{table.status}</span>
-                  </div>
-                  <div className="table-card-body">
-                    <strong>{table.area}</strong>
-                    <small><MapPin aria-hidden="true" />{table.guests ? `${table.guests} guests` : 'Empty table'}</small>
-                  </div>
-                  <div className="table-card-foot">
-                    <span><Clock3 aria-hidden="true" />{table.eta}</span>
-                    <em>{table.tone === 'ready' ? 'Serve' : table.tone === 'call' ? 'Handle' : 'View'}</em>
-                  </div>
-                </button>
-              ))}
+              {tables.map((table) => {
+                const status = tableStatusCopy[table.rawStatus ?? 'available'];
+                const linkedOrder = orders.find((order) => order.id === table.currentOrderId || order.table === table.code);
+                return (
+                  <button className={`table-status-card ${status.tone}`} type="button" key={table.id ?? table.code}>
+                    <div className="table-card-head">
+                      <span className="table-code">{table.code}</span>
+                      <span className="table-state">{status.label}</span>
+                    </div>
+                    <div className="table-card-body">
+                      <strong>{table.name}</strong>
+                      <small><MapPin aria-hidden="true" />{table.seats} seats - {table.area}</small>
+                    </div>
+                    <div className="table-card-foot">
+                      <span><Clock3 aria-hidden="true" />{linkedOrder?.name ?? status.eta}</span>
+                      <em>{status.tone === 'ready' ? 'Serve' : status.tone === 'call' ? 'Handle' : 'View'}</em>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </section>
 
@@ -84,14 +130,14 @@ export function WaitersView({ orders = fallbackOrders }: { orders?: AdminOrder[]
               <button type="button"><Plus aria-hidden="true" />Add Note</button>
             </div>
             <div className="waiter-request-list">
-              {requests.map((request) => (
+              {requests.length ? requests.map((request) => (
                 <article className={`waiter-request ${request.tone}`} key={`${request.table}-${request.text}`}>
                   <span className="request-table">{request.table}</span>
                   <div><strong>{request.text}</strong><small>{request.time}</small></div>
                   <em>{request.priority}</em>
                   <button type="button">Handle</button>
                 </article>
-              ))}
+              )) : <p className="empty-state">No customer requests right now.</p>}
             </div>
           </section>
         </section>
@@ -101,33 +147,36 @@ export function WaitersView({ orders = fallbackOrders }: { orders?: AdminOrder[]
             <div><h2>Service Queue</h2><p>Orders that need waiter action</p></div>
           </div>
           <div className="service-queue-strip">
-            <span><b>5</b> ready</span>
-            <span><b>2</b> calls</span>
-            <span><b>8m</b> avg</span>
+            <span><b>{readyOrders.length}</b> ready</span>
+            <span><b>{customerCalls.length}</b> calls</span>
+            <span><b>{serviceOrders.length}</b> active</span>
           </div>
 
           <div className="service-list">
-            {orders.slice(0, 4).map((order, index) => (
-              <article className={`service-card ${index === 0 ? 'urgent' : ''}`} key={`${order.name}-${order.table}`}>
-                <div>
-                  <span className={`table-pill ${order.tone}`}>{order.table}</span>
-                  <div><strong>{order.name}</strong><small>{order.meta}</small></div>
-                </div>
-                <p>{index === 0 ? 'Ready to serve from kitchen pass.' : index === 1 ? 'Preparing in kitchen, check again soon.' : 'Waiting confirmation from cashier/order desk.'}</p>
-                <div className="service-meta">
-                  <span>{index === 0 ? 'Priority' : 'Normal'}</span>
-                  <b>{index === 0 ? 'Now' : order.time}</b>
-                </div>
-                <div className="service-actions">
-                  <button type="button">{index === 0 ? 'Serve Order' : 'Accept'}</button>
-                  <button type="button">Details</button>
-                </div>
-              </article>
-            ))}
+            {serviceOrders.map((order) => {
+              const action = order.rawStatus ? nextWaiterAction[order.rawStatus] : undefined;
+              return (
+                <article className={`service-card ${order.rawStatus === 'ready' ? 'urgent' : ''}`} key={order.id ?? `${order.name}-${order.table}`}>
+                  <div>
+                    <span className={`table-pill ${order.tone}`}>{order.table}</span>
+                    <div><strong>{order.name}</strong><small>{order.meta}</small></div>
+                  </div>
+                  <p>{order.rawStatus ? waiterStatusHint[order.rawStatus] : 'Needs waiter/order desk action.'}</p>
+                  <div className="service-meta">
+                    <span>{order.rawStatus === 'ready' ? 'Priority' : order.status}</span>
+                    <b>{order.time}</b>
+                  </div>
+                  <div className="service-actions">
+                    <button type="button" disabled={!action} onClick={() => action && onUpdateStatus?.(order.id, action.status)}>{action?.label ?? 'Details'}</button>
+                    <button type="button">Details</button>
+                  </div>
+                </article>
+              );
+            })}
+            {serviceOrders.length === 0 && <p className="empty-state">No waiter actions right now.</p>}
           </div>
         </aside>
       </div>
     </section>
   );
 }
-

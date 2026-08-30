@@ -1,125 +1,185 @@
 'use client';
 
-import { Plus, Search, Settings2, Trash2, Utensils } from 'lucide-react';
+import { useMemo, useState } from 'react';
+
+import { Search } from 'lucide-react';
 
 import { AdminTitle, dishes as fallbackDishes, orders as fallbackOrders } from '..';
-import type { AdminDish, AdminOrder } from '../runtime-data';
+import { CartPanel } from './menu/CartPanel';
+import { CommandBar } from './menu/CommandBar';
+import { MenuFilterPanel } from './menu/MenuFilterPanel';
+import { MenuGrid } from './menu/MenuGrid';
 
-export function MenuView({ dishes = fallbackDishes, orders = fallbackOrders }: { dishes?: AdminDish[]; orders?: AdminOrder[] }) {
-  const categoryStats = ['All Menu', 'Breakfast', 'Coffee', 'Food', 'Snack', 'Promo'];
+import type { AdminDish, AdminOrder, AdminTable } from '../runtime-data';
+import type { PosSettings } from '@/lib/pos-types';
+
+type CartLine = AdminDish & { cartQty: number };
+
+export function MenuView({
+  dishes = fallbackDishes,
+  orders = fallbackOrders,
+  tables = [],
+  settings,
+  onCreateManualOrder,
+  onGoToCashier,
+  onGoToOrders,
+}: {
+  dishes?: AdminDish[];
+  orders?: AdminOrder[];
+  tables?: AdminTable[];
+  settings?: PosSettings;
+  onCreateManualOrder?: (payload: {
+    tableCode?: string;
+    customerName: string;
+    type: 'dine_in' | 'takeaway';
+    guests: number;
+    notes?: string;
+    items: Array<{ menuItemId: number; quantity: number; notes?: string }>;
+  }) => Promise<{ id: number; orderNumber: string } | void> | { id: number; orderNumber: string } | void;
+  onGoToCashier?: () => void;
+  onGoToOrders?: () => void;
+}) {
+  const categories = useMemo(() => ['All Menu', ...Array.from(new Set(dishes.map((dish) => dish.category ?? 'Coffee')))], [dishes]);
+  const firstTable = tables.find((table) => table.rawStatus === 'available') ?? tables[0];
+  const [activeCategory, setActiveCategory] = useState(categories[0] ?? 'All Menu');
+  const [query, setQuery] = useState('');
+  const [orderType, setOrderType] = useState<'dine_in' | 'takeaway'>('dine_in');
+  const [tableCode, setTableCode] = useState(firstTable?.code ?? 'A4');
+  const [customerName, setCustomerName] = useState('Walk-in Guest');
+  const [guests, setGuests] = useState(2);
+  const [cart, setCart] = useState<Record<string, CartLine>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [sendError, setSendError] = useState('');
+  const [sentOrder, setSentOrder] = useState<{ id: number; orderNumber: string; customerName: string; table: string; itemCount: number; total: number } | null>(null);
+
+  const filteredDishes = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    return dishes.filter((dish) => {
+      const matchesCategory = activeCategory === 'All Menu' || dish.category === activeCategory;
+      const matchesQuery = !normalizedQuery || dish.name.toLowerCase().includes(normalizedQuery) || dish.desc.toLowerCase().includes(normalizedQuery);
+      return matchesCategory && matchesQuery && dish.isAvailable !== false;
+    });
+  }, [activeCategory, dishes, query]);
+
+  const cartLines = Object.values(cart);
+  const itemCount = cartLines.reduce((total, line) => total + line.cartQty, 0);
+  const subtotal = cartLines.reduce((total, line) => total + (line.rawPrice ?? 0) * line.cartQty, 0);
+  const taxRate = settings?.tax.taxRate ?? 5;
+  const serviceRate = settings?.tax.serviceRate ?? 0;
+  const tax = Math.round(subtotal * (taxRate / 100));
+  const serviceCharge = Math.round(subtotal * (serviceRate / 100));
+  const total = subtotal + tax + serviceCharge;
+
+  const updateCart = (dish: AdminDish, change: number) => {
+    if (!dish.id) return;
+    setSentOrder(null);
+    setSendError('');
+    setCart((current) => {
+      const key = String(dish.id);
+      const nextQty = (current[key]?.cartQty ?? 0) + change;
+      if (nextQty <= 0) {
+        const next = { ...current };
+        delete next[key];
+        return next;
+      }
+      return { ...current, [key]: { ...dish, cartQty: nextQty } };
+    });
+  };
+
+  const sendOrder = async () => {
+    if (!cartLines.length || submitting) return;
+    setSubmitting(true);
+    setSendError('');
+    try {
+      const order = await onCreateManualOrder?.({
+        tableCode: orderType === 'dine_in' ? tableCode : undefined,
+        customerName,
+        type: orderType,
+        guests,
+        items: cartLines.map((line) => ({ menuItemId: line.id ?? 0, quantity: line.cartQty })),
+      });
+      if (order) {
+        setSentOrder({
+          ...order,
+          customerName,
+          table: orderType === 'dine_in' ? tableCode : 'Takeaway',
+          itemCount,
+          total,
+        });
+      }
+      setCart({});
+    } catch (error) {
+      setSendError(error instanceof Error ? error.message : 'Failed to send order');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const startNewTicket = () => {
+    setSentOrder(null);
+    setSendError('');
+    setCustomerName('Walk-in Guest');
+    setGuests(2);
+  };
 
   return (
     <section className="app-view active">
       <header className="topbar pos-menu-topbar">
         <AdminTitle title="POS Counter" subtitle="Fast order entry for table service, QR orders, and cashier tickets." />
-        <label className="search-wrap menu-search"><input type="search" placeholder="Search menu item" /><Search aria-hidden="true" /></label>
+        <label className="search-wrap menu-search">
+          <input type="search" placeholder="Search menu item" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <Search aria-hidden="true" />
+        </label>
       </header>
-      <div className="pos-command-bar">
-        <div className="pos-live-ticket">
-          <span className="pos-table-chip">Table A4</span>
-          <div>
-            <small>Active Ticket</small>
-            <strong>Ariel Hikmat</strong>
-            <em>Dine In / 4 guests / Order #925</em>
-          </div>
-        </div>
-        <div className="order-type-tabs" aria-label="Order type">
-          <button className="active" type="button">Dine In</button>
-          <button type="button">Takeaway</button>
-          <button type="button">QR</button>
-        </div>
-        <div className="pos-counter-stats">
-          <article><span>Queue</span><strong>7</strong></article>
-          <article><span>Kitchen</span><strong>Open</strong></article>
-          <article><span>Last sent</span><strong>2m</strong></article>
-        </div>
-      </div>
+      <CommandBar
+        orderType={orderType}
+        tableCode={tableCode}
+        customerName={customerName}
+        guests={guests}
+        itemCount={itemCount}
+        orders={orders}
+        onChangeOrderType={setOrderType}
+      />
       <div className="menu-layout">
-        <aside className="category-rail">
-          <div className="category-head">
-            <span>Menu Mode</span>
-            <strong>Breakfast rush</strong>
-          </div>
-          <div className="category-list">
-            {categoryStats.map((category, index) => (
-              <button className={index === 1 ? 'active' : ''} type="button" key={category}>
-                <strong>{category}</strong>
-                <span>{index === 0 ? 124 : 8 + index} Items</span>
-                <b>{index === 1 ? '9' : index === 4 ? '3' : '0'}</b>
-              </button>
-            ))}
-          </div>
-          <div className="pos-shortcuts">
-            <button type="button"><Plus aria-hidden="true" /> Custom item</button>
-            <button type="button"><Trash2 aria-hidden="true" /> Void ticket</button>
-          </div>
-        </aside>
-        <section className="menu-board">
-          <div className="menu-board-head pos-board-head">
-            <div>
-              <span>Service Lane</span>
-              <strong>Popular items first</strong>
-            </div>
-            <div className="pos-lane-pills">
-              <span><Utensils aria-hidden="true" /> Kitchen open</span>
-              <span><Settings2 aria-hidden="true" /> 3 modifiers</span>
-            </div>
-          </div>
-          <div className="menu-grid">
-            {dishes.map((dish, index) => (
-              <article className="dish-card" key={dish.name}>
-                <img src={dish.image} alt={dish.name} />
-                {dish.badge && <span className={`badge ${dish.badgeTone}`}>{dish.badge}</span>}
-                <span className="prep-chip">{index % 2 === 0 ? 'Kitchen / 8m' : 'Bar / 3m'}</span>
-                <h3>{dish.name}</h3>
-                <p>{dish.desc}</p>
-                <div className="dish-meta-line">
-                  <span>{index % 3 === 0 ? 'Best with notes' : 'Ready stock'}</span>
-                  <b>{index + 6} sold</b>
-                </div>
-                <div className="dish-action-line"><strong>{dish.price}</strong>{dish.oldPrice && <span className="old-price">{dish.oldPrice}</span>}<span className="qty"><button type="button">-</button><b>{dish.qty}</b><button type="button">+</button></span></div>
-              </article>
-            ))}
-          </div>
-        </section>
-        <aside className="receipt-panel">
-          <div className="receipt-top">
-            <div className="receipt-customer">
-              <div>
-                <span>Current Ticket</span>
-                <h3>Ariel Hikmat</h3>
-                <small>Dine In / 4 guests</small>
-              </div>
-            </div>
-            <div className="receipt-meta-chips">
-              <span>Table A4</span>
-              <span>Order #925</span>
-            </div>
-          </div>
-          <p className="receipt-date">Sun, Aug 23, 2026 - 06:12 PM</p>
-          <div className="ticket-readiness">
-            <span><b></b> Kitchen queue 08m</span>
-            <span><b></b> Pay after serve</span>
-          </div>
-          <div className="ticket-actions">
-            <button type="button">Hold</button>
-            <button type="button">Kitchen</button>
-            <button type="button">Split</button>
-          </div>
-          <div className="receipt-order-scroll">
-            <h3>Order Detail</h3>
-            <div className="receipt-items">
-              {(orders[0]?.items ?? []).map(([name, qty, price]) => <div className="receipt-item" key={name}><div><strong>{name}</strong><button>Notes</button></div><b>x{qty}</b><strong>{price}</strong></div>)}
-            </div>
-          </div>
-          <div className="receipt-footer">
-            <div className="receipt-total"><span>Items (5)</span><strong>$73.79</strong></div>
-            <div className="receipt-total"><span>Tax (5%)</span><strong>$3.65</strong></div>
-            <button className="proceed-btn" type="button"><strong>$87.34</strong><span>Send Order -&gt;</span></button>
-          </div>
-        </aside>
+        <MenuFilterPanel
+          categories={categories}
+          activeCategory={activeCategory}
+          onSelectCategory={setActiveCategory}
+          dishes={dishes}
+          cartLines={cartLines}
+          itemCount={itemCount}
+          customerName={customerName}
+          onChangeCustomerName={setCustomerName}
+          orderType={orderType}
+          tableCode={tableCode}
+          onChangeTableCode={setTableCode}
+          guests={guests}
+          onAddGuest={() => setGuests((value) => value + 1)}
+          onVoidTicket={() => setCart({})}
+        />
+        <MenuGrid dishes={filteredDishes} cart={cart} onUpdateCart={updateCart} />
+        <CartPanel
+          cartLines={cartLines}
+          itemCount={itemCount}
+          subtotal={subtotal}
+          tax={tax}
+          serviceCharge={serviceCharge}
+          total={total}
+          taxRate={taxRate}
+          serviceRate={serviceRate}
+          customerName={customerName}
+          guests={guests}
+          orderType={orderType}
+          tableCode={tableCode}
+          submitting={submitting}
+          sendError={sendError}
+          sentOrder={sentOrder}
+          onSendOrder={sendOrder}
+          onStartNewTicket={startNewTicket}
+          onGoToOrders={onGoToOrders}
+          onGoToCashier={onGoToCashier}
+        />
       </div>
     </section>
   );
 }
-

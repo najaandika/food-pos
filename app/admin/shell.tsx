@@ -17,10 +17,12 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { navGroups, type View } from '.';
+import { canAccessView, roleLabel, type AuthUser } from './auth';
 
 type AdminSidebarProps = {
   activeView: View;
   collapsed: boolean;
+  user: AuthUser;
   onToggleCollapsed: () => void;
   onChangeView: (view: View) => void;
   onLogout: () => void;
@@ -39,16 +41,18 @@ const navIcons: Record<View, LucideIcon> = {
   settings: Settings,
 };
 
-export function AdminSidebar({ activeView, collapsed, onToggleCollapsed, onChangeView, onLogout }: AdminSidebarProps) {
+export function AdminSidebar({ activeView, collapsed, user, onToggleCollapsed, onChangeView, onLogout }: AdminSidebarProps) {
   const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose;
   const SettingsIcon = navIcons.settings;
+  const canOpenSettings = canAccessView(user.role, 'settings');
 
   const handleChangeView = (view: View) => {
+    if (!canAccessView(user.role, view)) return;
     onChangeView(view);
   };
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar sidebar-role-${user.role}`}>
       <div className="brand-wrap">
         <div className="brand-lockup">
           <div className="brand-mark" aria-hidden="true"><span /><span /><span /></div>
@@ -60,32 +64,39 @@ export function AdminSidebar({ activeView, collapsed, onToggleCollapsed, onChang
       </div>
 
       <nav className="nav" aria-label="Sidebar navigation">
-        {navGroups.map((group) => (
-          <div className={`nav-group nav-group-${group.label.toLowerCase()}`} key={group.label}>
-            <div className="nav-label">{group.label}</div>
-            {group.items.map((item) => (
-              <NavButton
-                active={activeView === item.view}
-                icon={navIcons[item.view]}
-                label={item.label}
-                key={item.view}
-                onClick={() => handleChangeView(item.view)}
-              />
-            ))}
+        {navGroups.map((group) => {
+          const allowedItems = group.items.filter((item) => canAccessView(user.role, item.view));
+          if (allowedItems.length === 0) return null;
+
+          return (
+            <div className={`nav-group nav-group-${group.label.toLowerCase()}`} key={group.label}>
+              <div className="nav-label">{group.label}</div>
+              {allowedItems.map((item) => (
+                <NavButton
+                  active={activeView === item.view}
+                  icon={navIcons[item.view]}
+                  label={item.label}
+                  key={item.view}
+                  onClick={() => handleChangeView(item.view)}
+                />
+              ))}
+            </div>
+          );
+        })}
+        {canOpenSettings && (
+          <div className="nav-group nav-group-system">
+            <div className="nav-label">System</div>
+            <NavButton active={activeView === 'settings'} icon={SettingsIcon} label="Settings" onClick={() => handleChangeView('settings')} />
           </div>
-        ))}
-        <div className="nav-group nav-group-system">
-          <div className="nav-label">System</div>
-          <NavButton active={activeView === 'settings'} icon={SettingsIcon} label="Settings" onClick={() => handleChangeView('settings')} />
-        </div>
+        )}
       </nav>
 
       <div className="profile-box">
         <div className="profile-avatar">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt="Gladina Samantha" />
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt={user.name} />
           <span aria-hidden="true" />
         </div>
-        <div className="profile-meta"><strong>Gladina Samantha</strong><span>Waiters</span></div>
+        <div className="profile-meta"><strong>{user.name}</strong><span>{roleLabel(user.role)}</span></div>
       </div>
       <button className="logout-btn" type="button" onClick={onLogout}><LogOut /><span>Logout</span></button>
     </aside>
