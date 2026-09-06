@@ -1,21 +1,21 @@
 :root {
   /* Canvas & Surface */
-  --canvas: #d9deea;
-  --surface: #f3f5fb;
+  --canvas: #f1eee8;
+  --surface: #fbfaf7;
   --card: #ffffff;
   --card-bg: #ffffff;
   --surface-muted: rgba(255, 255, 255, 0.28);
-  --border: #f0f0f0;
-  --border-soft: rgba(229, 233, 243, 0.74);
-  --border-soft-strong: rgba(229, 233, 243, 0.88);
+  --border: #ece7df;
+  --border-soft: rgba(225, 219, 209, 0.82);
+  --border-soft-strong: rgba(214, 207, 196, 0.94);
   --overlay-navy: rgba(20, 26, 51, 0.96);
 
   /* Text */
-  --ink: #101426;
-  --text-primary: #1f2b59;
-  --text-secondary: #8b8e98;
-  --muted: #7d8498;
-  --line: #e5e9f3;
+  --ink: #171923;
+  --text-primary: #252b3d;
+  --text-secondary: #687083;
+  --muted: #687083;
+  --line: #e8e2d9;
 
   /* Brand */
   --blue: #3047ff;
@@ -24,9 +24,12 @@
   --navy: #141a33;
   --secondary: #20263a;
   --secondary-foreground: #ffffff;
-  --mist: #eef2ff;
-  --ice: #f8faff;
-  --pale: #f5f6ff;
+  --mist: #eef1ff;
+  --ice: #fcfbf8;
+  --pale: #f7f4ee;
+  --coffee: #8b5e3c;
+  --coffee-dark: #5b3926;
+  --cream: #f4e7d3;
 
   /* Feedback */
   --success: #19b885;
@@ -96,15 +99,15 @@
   --login-field-radius: 20px;
 
   /* Shadows */
-  --shadow: 0 20px 50px rgba(31, 43, 89, 0.1);
-  --shadow-sm: 0 4px 12px rgba(31, 43, 89, 0.08);
-  --shadow-md: 0 10px 30px rgba(31, 43, 89, 0.12);
-  --shadow-lg: 0 20px 60px rgba(31, 43, 89, 0.16);
+  --shadow: 0 16px 38px rgba(31, 34, 48, 0.07);
+  --shadow-sm: 0 4px 12px rgba(31, 34, 48, 0.06);
+  --shadow-md: 0 10px 26px rgba(31, 34, 48, 0.1);
+  --shadow-lg: 0 20px 54px rgba(31, 34, 48, 0.13);
   --shadow-blue: 0 14px 30px rgba(48, 71, 255, 0.24);
   --shadow-blue-lg: 0 18px 34px rgba(48, 71, 255, 0.24);
   --shadow-navy: 0 20px 48px rgba(20, 26, 51, 0.22);
   --shadow-inset-line: inset 0 0 0 1px rgba(229, 233, 243, 0.9);
-  --shadow-card: 0 14px 32px rgba(31, 43, 89, 0.07);
+  --shadow-card: 0 12px 28px rgba(31, 34, 48, 0.06);
   --shadow-toast: 0 20px 48px rgba(20, 26, 51, 0.22);
 
   /* Radius */
