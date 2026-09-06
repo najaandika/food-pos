@@ -1,3 +1,5 @@
+import styles from './Stepper.module.css';
+
 type StepperProps = {
   value: number;
   label: string;
@@ -7,13 +9,13 @@ type StepperProps = {
 };
 
 export function Stepper({ value, label, onDecrement, onIncrement, className }: StepperProps) {
-  const classes = className ? `ui-stepper ${className}` : 'ui-stepper';
+  const classes = [styles.stepper, className].filter(Boolean).join(' ');
 
   return (
     <div className={classes} aria-label={`${label} quantity`}>
-      <button className="ui-stepper__button" type="button" aria-label={`Remove ${label}`} onClick={onDecrement}>-</button>
-      <b className="ui-stepper__value">{value}</b>
-      <button className="ui-stepper__button" type="button" aria-label={`Add ${label}`} onClick={onIncrement}>+</button>
+      <button className={styles.button} type="button" aria-label={`Remove ${label}`} onClick={onDecrement}>-</button>
+      <b className={styles.value}>{value}</b>
+      <button className={styles.button} type="button" aria-label={`Add ${label}`} onClick={onIncrement}>+</button>
     </div>
   );
 }

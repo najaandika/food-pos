@@ -1,0 +1,40 @@
+.field {
+  position: relative;
+  display: block;
+}
+
+.field input {
+  width: 100%;
+  min-height: var(--touch-lg);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--ink);
+  padding: 0 calc(var(--touch-lg) + 12px) 0 var(--space-4);
+  font-weight: 600;
+  outline: 1px solid var(--border-soft-strong);
+}
+
+.field input:focus {
+  outline-color: rgba(48, 71, 255, 0.28);
+  box-shadow: 0 0 0 4px rgba(48, 71, 255, 0.08);
+}
+
+.icon {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  transform: translateY(-50%);
+}
+
+.icon svg {
+  width: 17px;
+  height: 17px;
+}
