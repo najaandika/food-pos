@@ -4,6 +4,7 @@
 }
 
 .field input {
+  display: block;
   width: 100%;
   min-height: var(--touch-lg);
   border: 0;
