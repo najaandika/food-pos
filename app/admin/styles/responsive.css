@@ -78,8 +78,9 @@
 
   .category-rail {
     display: grid;
-    gap: var(--pos-gap);
-    padding: 16px;
+    position: static;
+    gap: 12px;
+    padding: 12px;
   }
 
   .category-rail h2 {
@@ -87,22 +88,23 @@
   }
 
   .category-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
-    gap: var(--space-3);
-    overflow: visible;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 2px;
-    scrollbar-width: none;
+    scrollbar-width: thin;
   }
 
   .category-list::-webkit-scrollbar {
-    display: none;
+    height: 5px;
   }
 
   .category-list button {
-    min-height: 62px;
-    padding: 14px 16px;
-    border-radius: var(--radius-md);
+    flex: 0 0 136px;
+    min-height: 54px;
+    padding: 11px 38px 11px 13px;
+    border-radius: var(--radius-sm);
   }
 
   .category-list strong {
@@ -110,8 +112,25 @@
   }
 
   .category-list span {
-    margin-top: 7px;
+    margin-top: 4px;
     font-size: var(--font-size-xs);
+  }
+
+  .category-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+
+  .category-head strong {
+    font-size: var(--font-size-base);
+  }
+
+  .receipt-panel {
+    position: static;
+    max-height: none;
   }
 
   .receipt-panel {
@@ -2102,4 +2121,3 @@
     max-width: 100%;
   }
 }
-
