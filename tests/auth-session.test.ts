@@ -50,4 +50,39 @@ describe('session authorization', () => {
       response: { status: 401 },
     });
   });
+
+  it('applies the expected API access matrix for every role', async () => {
+    const cases: Array<{ role: SessionUser['role']; allowed: string[]; denied: string[] }> = [
+      { role: 'owner', allowed: ['owner', 'cashier', 'staff'], denied: [] },
+      { role: 'kasir', allowed: ['cashier', 'staff'], denied: ['owner'] },
+      { role: 'waiters', allowed: ['staff'], denied: ['owner', 'cashier'] },
+    ];
+
+    for (const testCase of cases) {
+      cookieValue.value = createSessionToken({ ...user, role: testCase.role });
+
+      for (const access of testCase.allowed) {
+        await expect(requireApiRole(apiRoles[access as keyof typeof apiRoles])).resolves.toHaveProperty('user.role', testCase.role);
+      }
+
+      for (const access of testCase.denied) {
+        await expect(requireApiRole(apiRoles[access as keyof typeof apiRoles])).resolves.toMatchObject({
+          response: { status: 403 },
+        });
+      }
+    }
+  });
+
+  it('rejects expired session tokens', () => {
+    vi.useFakeTimers();
+    try {
+      const token = createSessionToken(user);
+
+      vi.advanceTimersByTime(12 * 60 * 60 * 1000 + 1);
+
+      expect(readSessionToken(token)).toBeNull();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
