@@ -48,6 +48,7 @@
   color: #ffffff;
   font-size: 15px;
   font-weight: 800;
+  cursor: pointer;
   text-transform: uppercase;
 }
 
@@ -81,11 +82,14 @@
   font-size: 22px;
 }
 
-.side-head a {
+.side-head button {
+  border: 0;
+  padding: 4px 0;
+  background: transparent;
   color: var(--blue);
   font-size: 13px;
   font-weight: 800;
-  text-decoration: none;
+  cursor: pointer;
 }
 
 .admin-search-wrap {
@@ -121,9 +125,9 @@
 }
 
 .feed-row {
-  min-height: 76px;
-  gap: 16px;
-  padding-bottom: 14px;
+  min-height: 72px;
+  gap: 14px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -193,7 +197,7 @@
 .quick-actions-card {
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--shadow);
+  box-shadow: 0 12px 28px rgba(31, 34, 48, 0.055);
 }
 
 .dashboard-metric {
@@ -202,7 +206,7 @@
   display: grid;
   align-content: start;
   gap: var(--space-fixed-2);
-  padding: var(--space-4);
+  padding: 20px;
   overflow: hidden;
 }
 
@@ -310,7 +314,8 @@
 .compact-head h2,
 .quick-actions-card h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
+  letter-spacing: -0.02em;
 }
 
 .compact-head p {
@@ -322,12 +327,12 @@
 
 .status-breakdown {
   display: grid;
-  gap: var(--pos-gap);
+  gap: 12px;
 }
 
 .status-breakdown p {
   display: grid;
-  grid-template-columns: 128px minmax(90px, 1fr) 30px;
+  grid-template-columns: 116px minmax(90px, 1fr) 30px;
   gap: var(--space-fixed-3);
   align-items: center;
   margin: 0;
@@ -336,7 +341,7 @@
 }
 
 .status-breakdown b {
-  height: 10px;
+  height: 7px;
   max-width: 100%;
   border-radius: var(--radius-pill);
   background: var(--blue);
@@ -445,7 +450,7 @@
   grid-template-columns: 28px 44px minmax(0, 1fr);
   gap: var(--space-fixed-3);
   align-items: center;
-  padding-bottom: var(--space-fixed-4);
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
 

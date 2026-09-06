@@ -30,6 +30,16 @@ export function DashboardView({
   onChangeView: (view: View) => void;
 }) {
   const stats = getDashboardStats(dashboard);
+  const statusRows = [
+    { label: 'Pending', matches: ['Pending'], fallback: 0 },
+    { label: 'Preparing', matches: ['Accepted', 'In Progress'], fallback: 0 },
+    { label: 'Ready', matches: ['Ready'], fallback: 0 },
+    { label: 'Waiting Payment', matches: ['Waiting Payment'], fallback: 0 },
+  ].map((row) => ({
+    ...row,
+    value: orders.filter((order) => row.matches.includes(order.status)).length,
+  }));
+  const maxStatusCount = Math.max(1, ...statusRows.map((row) => row.value));
   const operationStats: Array<{
     label: string;
     value: string;
@@ -64,8 +74,8 @@ export function DashboardView({
   return (
     <section className="app-view active">
       <header className="topbar">
-        <AdminTitle title="Sales Overview" subtitle="Monitor today's cafe performance and active orders." />
-        <div className="date-label">Sunday, 23 August 2026</div>
+        <AdminTitle title="Sales Overview" subtitle="Monitor today's performance and active orders." />
+        <div className="date-label">Today, {new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date())}</div>
       </header>
       <div className="dashboard-layout">
         <div className="dashboard-main">
@@ -96,10 +106,13 @@ export function DashboardView({
                 <div><h2>Order Status</h2><p>Live operational split</p></div>
               </div>
               <div className="status-breakdown">
-                <p><span>Pending</span><b style={{ width: '38%' }} /><strong>9</strong></p>
-                <p><span>Preparing</span><b style={{ width: '62%' }} /><strong>15</strong></p>
-                <p><span>Ready</span><b style={{ width: '24%' }} /><strong>5</strong></p>
-                <p><span>Waiting Payment</span><b style={{ width: '34%' }} /><strong>8</strong></p>
+                {statusRows.map((row) => (
+                  <p key={row.label}>
+                    <span>{row.label}</span>
+                    <b style={{ width: `${Math.max(8, (row.value / maxStatusCount) * 100)}%` }} />
+                    <strong>{row.value}</strong>
+                  </p>
+                ))}
               </div>
             </section>
 
@@ -119,7 +132,7 @@ export function DashboardView({
           <section className="order-list-panel dashboard-recent">
             <div className="admin-section-head">
               <div><h2>Recent Orders</h2><p>Latest QR and manual orders</p></div>
-              <button type="button">View All</button>
+              <button type="button" onClick={() => onChangeView('orders')}>View All</button>
             </div>
             <div className="order-feed">
               {orders.slice(0, 5).map((order, index) => (
@@ -128,7 +141,7 @@ export function DashboardView({
                   <div><strong>{order.name}</strong><small>{order.items.length} Items</small></div>
                   <span className={`mini-status ${order.statusTone}`}>{order.status}</span>
                   <small>{order.status === 'Ready' ? 'Ready to serve' : 'Waiting for payment'}</small>
-                  <button type="button">Pay Now <span>-&gt;</span></button>
+                  <button type="button" onClick={() => onChangeView('cashier')}>Pay Now <span>-&gt;</span></button>
                 </article>
               ))}
             </div>
@@ -146,7 +159,10 @@ export function DashboardView({
             </div>
           </section>
           <section className="side-panel">
-            <div className="side-head"><h3>Popular Menu</h3><a href="#">View All</a></div>
+            <div className="side-head">
+              <h3>Popular Menu</h3>
+              <button type="button" onClick={() => onChangeView(role === 'owner' ? 'owner-menu' : 'menu')}>View All</button>
+            </div>
             <ol className="rank-list">
               {dishes.slice(0, 4).map((dish, index) => (
                 <li key={dish.id ?? `${dish.name}-${index}`}><span>{String(index + 1).padStart(2, '0')}</span><Image src={dish.image} alt="" width={80} height={80} /><strong>{dish.name}</strong><small>{23 - index * 4} sold - Rp {(1.2 - index * 0.18).toFixed(1)}M</small></li>
