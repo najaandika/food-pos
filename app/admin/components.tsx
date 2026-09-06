@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, LogOut, X } from 'lucide-react';
 import { roleLabel, type AuthUser } from './auth';
+import styles from './styles/Modal.module.css';
 
 export function AdminTitle({
   title,
@@ -52,16 +53,16 @@ export function UserProfileModal({
   onLogout?: () => void;
 }) {
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className={styles['modal-overlay']} onClick={onClose}>
       <div
-        className="modal-box profile-quick-modal"
+        className={`profile-quick-modal ${styles['modal-box']}`}
         role="dialog"
         aria-modal="true"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="modal-top">
+        <div className={styles['modal-top']}>
           <h2>Profil & Shift Staf</h2>
-          <button className="close-btn" type="button" onClick={onClose} aria-label="Close">
+          <button className={styles['close-btn']} type="button" onClick={onClose} aria-label="Close">
             <X />
           </button>
         </div>
