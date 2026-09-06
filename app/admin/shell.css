@@ -78,6 +78,13 @@
   align-items: center;
 }
 
+.sidebar-footer {
+  display: grid;
+  flex: 0 0 auto;
+  gap: var(--space-fixed-2);
+  margin-top: auto;
+}
+
 .stat-head,
 .admin-section-head,
 .side-head,
@@ -176,7 +183,7 @@
 
 .sidebar-role-kasir .profile-box,
 .sidebar-role-waiters .profile-box {
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .sidebar-role-waiters .nav-group,
@@ -370,7 +377,7 @@
 .profile-box {
   gap: var(--space-fixed-3);
   flex: 0 0 auto;
-  margin-top: var(--space-fixed-3);
+  margin-top: 0;
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.74);
@@ -416,7 +423,7 @@
 .logout-btn {
   flex: 0 0 auto;
   min-height: 44px;
-  margin-top: var(--space-fixed-3);
+  margin-top: 0;
   border-radius: var(--radius-sm);
   padding: 0 var(--space-fixed-4);
   font-size: var(--font-size-sm);

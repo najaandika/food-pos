@@ -121,14 +121,16 @@ export function AdminSidebar({
         )}
       </nav>
 
-      <div className="profile-box">
-        <div className="profile-avatar">
-          <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt={user.name} width={96} height={96} />
-          <span aria-hidden="true" />
+      <div className="sidebar-footer">
+        <div className="profile-box">
+          <div className="profile-avatar">
+            <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt={user.name} width={96} height={96} />
+            <span aria-hidden="true" />
+          </div>
+          <div className="profile-meta"><strong>{user.name}</strong><span>{roleLabel(user.role)}</span></div>
         </div>
-        <div className="profile-meta"><strong>{user.name}</strong><span>{roleLabel(user.role)}</span></div>
+        <button className="logout-btn" type="button" onClick={onLogout}><LogOut /><span>Logout</span></button>
       </div>
-      <button className="logout-btn" type="button" onClick={onLogout}><LogOut /><span>Logout</span></button>
     </aside>
   );
 }
