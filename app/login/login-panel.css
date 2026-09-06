@@ -43,7 +43,7 @@
   gap: var(--space-fixed-3);
 }
 
-.login-mark {
+.login-brand .login-mark {
   display: grid;
   place-items: center;
   width: 40px;
@@ -56,6 +56,7 @@
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.08em;
+  margin-top: 0;
 }
 
 .login-brand strong,
