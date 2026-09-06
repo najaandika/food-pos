@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CustomerOrderSchema, MenuItemSchema } from '../lib/validation';
+import { CustomerOrderSchema, MenuItemSchema, PositiveIdSchema } from '../lib/validation';
 
 describe('request validation', () => {
   it('normalizes valid customer order input', () => {
@@ -37,5 +37,12 @@ describe('request validation', () => {
     });
 
     expect(result.success).toBe(false);
+  });
+
+  it('accepts only positive integer route ids', () => {
+    expect(PositiveIdSchema.safeParse('12').data).toBe(12);
+    expect(PositiveIdSchema.safeParse('0').success).toBe(false);
+    expect(PositiveIdSchema.safeParse('abc').success).toBe(false);
+    expect(PositiveIdSchema.safeParse('1.5').success).toBe(false);
   });
 });

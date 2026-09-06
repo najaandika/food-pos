@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export const PositiveIdSchema = z.coerce.number().int().positive();
+
 const tableStatuses = ['available', 'occupied', 'preparing', 'ready', 'waiting_payment', 'need_waiter', 'inactive'] as const;
 const userRoles = ['owner', 'kasir', 'waiters'] as const;
 const orderTypes = ['dine_in', 'takeaway'] as const;
