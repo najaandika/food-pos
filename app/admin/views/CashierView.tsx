@@ -148,7 +148,7 @@ export function CashierView({
         <aside className="cashier-detail">
           <div className="cashier-detail-top">
             <div className="cashier-customer-head">
-              <span className="cashier-ticket-mark">{selectedOrder?.orderNumber?.replace('BB-', '#') ?? '#925'}</span>
+              <span className="cashier-ticket-mark">{selectedOrder?.orderNumber?.replace('POS-', '#') ?? '#925'}</span>
               <div>
                 <span className="mini-status ready">Ready to Pay</span>
                 <h2>{selectedOrder?.name ?? 'No bill selected'}</h2>

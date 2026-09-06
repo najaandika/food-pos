@@ -54,7 +54,7 @@ export function OwnerTablesForm({ draft, onChangeDraft, isCreating, selectedTabl
           <span />
         </div>
         <strong>Table {draft.code || 'New'}</strong>
-        <p>https://blocbarat.local{customerLink}</p>
+        <p>https://pos.local{customerLink}</p>
       </div>
 
       <div className="qr-link-box">

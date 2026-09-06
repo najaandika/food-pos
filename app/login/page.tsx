@@ -7,23 +7,23 @@ import { isAuthUser } from '../admin/auth';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('owner@blocbarat.local');
+  const [email, setEmail] = useState('owner@pos.local');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    const authenticated = window.localStorage.getItem('bloc-pos-authenticated') === 'true';
-    const storedUser = window.localStorage.getItem('bloc-pos-user');
+    const authenticated = window.localStorage.getItem('pos-authenticated') === 'true';
+    const storedUser = window.localStorage.getItem('pos-user');
     if (!authenticated || !storedUser) return;
 
     try {
       const user = JSON.parse(storedUser);
       if (isAuthUser(user)) router.replace('/');
     } catch {
-      window.localStorage.removeItem('bloc-pos-authenticated');
-      window.localStorage.removeItem('bloc-pos-user');
+      window.localStorage.removeItem('pos-authenticated');
+      window.localStorage.removeItem('pos-user');
     }
   }, [router]);
 
@@ -44,28 +44,28 @@ export default function LoginPage() {
     }
 
     const { user } = await response.json();
-    window.localStorage.setItem('bloc-pos-authenticated', 'true');
-    window.localStorage.setItem('bloc-pos-user', JSON.stringify(user));
+    window.localStorage.setItem('pos-authenticated', 'true');
+    window.localStorage.setItem('pos-user', JSON.stringify(user));
     router.push('/');
   };
 
   return (
     <main className="login-page">
-      <section className="login-shell" aria-label="Bloc POS login">
+      <section className="login-shell" aria-label="POS login">
         <div className="login-panel">
           <div className="login-panel-inner">
             <div className="login-brand">
               <span className="login-mark" aria-hidden="true"><i /><i /><i /></span>
               <div>
-                <strong>Bloc POS</strong>
-                <span>Cafe Bloc Barat Krui</span>
+                <strong>POS System</strong>
+                <span>Global Point of Sale</span>
               </div>
             </div>
 
             <div className="login-copy">
               <span>Staff Access</span>
               <h1>Welcome back.</h1>
-              <p>Sign in with your staff role to continue managing Bloc POS.</p>
+              <p>Sign in with your staff role to continue managing the POS workspace.</p>
             </div>
 
             <form className="login-form" onSubmit={(event) => {
@@ -104,7 +104,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <aside className="login-preview" aria-label="Cafe status preview">
+        <aside className="login-preview" aria-label="POS status preview">
           <div className="login-preview-head">
             <span><ShieldCheck aria-hidden="true" /> Secure POS</span>
             <strong>Evening Shift</strong>

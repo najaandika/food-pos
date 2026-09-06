@@ -167,7 +167,7 @@ export async function createCustomerOrder(input: {
 
     const subtotal = orderItems.reduce((total, item) => total + (priceById.get(item.menuItemId) ?? 0) * item.quantity, 0);
     const { tax, serviceCharge, total } = calculateOrderTotal(subtotal, settings);
-    const orderNumber = `BB-${input.tableCode.toUpperCase()}-${Date.now().toString().slice(-6)}`;
+    const orderNumber = `POS-${input.tableCode.toUpperCase()}-${Date.now().toString().slice(-6)}`;
 
     const order = await tx.order.create({
       data: {
@@ -237,7 +237,7 @@ export async function createManualOrder(input: {
 
     const subtotal = orderItems.reduce((total, item) => total + (priceById.get(item.menuItemId) ?? 0) * item.quantity, 0);
     const { tax, serviceCharge, total } = calculateOrderTotal(subtotal, settings);
-    const orderNumber = `BB-${input.type === 'takeaway' ? 'TA' : (table?.code ?? 'POS')}-${Date.now().toString().slice(-6)}`;
+    const orderNumber = `POS-${input.type === 'takeaway' ? 'TA' : (table?.code ?? 'POS')}-${Date.now().toString().slice(-6)}`;
 
     const order = await tx.order.create({
       data: {

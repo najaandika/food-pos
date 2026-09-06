@@ -3,9 +3,9 @@ USE pos;
 INSERT INTO app_settings (`key`, value, created_at, updated_at) VALUES
   ('cafe', JSON_OBJECT(
     'profile', JSON_OBJECT(
-      'cafeName', 'Cafe Bloc Barat',
-      'phone', '+62 812-0000-0000',
-      'address', 'Krui, Pesisir Barat, Lampung'
+      'cafeName', 'POS',
+      'phone', '+00 000 000 000',
+      'address', 'Global location'
     ),
     'tax', JSON_OBJECT(
       'taxRate', 5,

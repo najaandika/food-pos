@@ -19,14 +19,14 @@ type StaffFormPayload = {
 
 const fallbackStaff: AdminStaff[] = [
   {
-    name: 'Owner Bloc Barat',
+    name: 'POS Owner',
     role: 'owner',
     roleLabel: 'Owner',
     status: 'Active',
     isActive: true,
     shift: 'All access',
     activity: 'Today, 18:40',
-    email: 'owner@blocbarat.local',
+    email: 'owner@pos.local',
     area: 'Full access',
     avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=160&q=80',
   },
@@ -38,7 +38,7 @@ const fallbackStaff: AdminStaff[] = [
     isActive: true,
     shift: 'Evening',
     activity: 'Today, 18:32',
-    email: 'waiters@blocbarat.local',
+    email: 'waiters@pos.local',
     area: 'Floor service',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80',
   },
@@ -72,26 +72,26 @@ export function OwnerStaffView({
   onUpdateStaff?: (staffId: number | undefined, payload: StaffFormPayload) => Promise<void> | void;
   onDisableStaff?: (staffId: number | undefined) => Promise<void> | void;
 }) {
-  const cafeStaff = staff?.length ? staff : fallbackStaff;
+  const posStaff = staff?.length ? staff : fallbackStaff;
   const [activeFilter, setActiveFilter] = useState('All');
   const [query, setQuery] = useState('');
-  const [selectedId, setSelectedId] = useState<number | undefined>(cafeStaff[0]?.id);
+  const [selectedId, setSelectedId] = useState<number | undefined>(posStaff[0]?.id);
   const [isCreating, setIsCreating] = useState(false);
-  const [draft, setDraft] = useState<StaffDraft>(() => draftFromStaff(cafeStaff[0]));
+  const [draft, setDraft] = useState<StaffDraft>(() => draftFromStaff(posStaff[0]));
   const [isSaving, setIsSaving] = useState(false);
 
-  const selectedStaff = useMemo(() => cafeStaff.find((person) => person.id === selectedId) ?? cafeStaff[0], [cafeStaff, selectedId]);
+  const selectedStaff = useMemo(() => posStaff.find((person) => person.id === selectedId) ?? posStaff[0], [posStaff, selectedId]);
 
   useEffect(() => {
     if (isCreating) return;
-    const nextStaff = cafeStaff.find((person) => person.id === selectedId) ?? cafeStaff[0];
+    const nextStaff = posStaff.find((person) => person.id === selectedId) ?? posStaff[0];
     setSelectedId(nextStaff?.id);
     setDraft(draftFromStaff(nextStaff));
-  }, [cafeStaff, selectedId, isCreating]);
+  }, [posStaff, selectedId, isCreating]);
 
   const filteredStaff = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return cafeStaff.filter((person) => {
+    return posStaff.filter((person) => {
       const matchesFilter = activeFilter === 'All' || person.roleLabel === activeFilter;
       const matchesQuery =
         !normalizedQuery ||
@@ -100,15 +100,15 @@ export function OwnerStaffView({
         person.roleLabel.toLowerCase().includes(normalizedQuery);
       return matchesFilter && matchesQuery;
     });
-  }, [activeFilter, cafeStaff, query]);
+  }, [activeFilter, posStaff, query]);
 
   const staffStats = useMemo(
     () => [
-      { label: 'Total Staff', value: String(cafeStaff.length), hint: '3 roles configured' },
-      { label: 'On Shift', value: String(cafeStaff.filter((person) => person.isActive).length), hint: 'Active access' },
-      { label: 'Inactive', value: String(cafeStaff.filter((person) => !person.isActive).length), hint: 'Access disabled' },
+      { label: 'Total Staff', value: String(posStaff.length), hint: '3 roles configured' },
+      { label: 'On Shift', value: String(posStaff.filter((person) => person.isActive).length), hint: 'Active access' },
+      { label: 'Inactive', value: String(posStaff.filter((person) => !person.isActive).length), hint: 'Access disabled' },
     ],
-    [cafeStaff],
+    [posStaff],
   );
 
   const permissionPreview = useMemo(() => {
@@ -163,7 +163,7 @@ export function OwnerStaffView({
 
       <div className="staff-layout">
         <OwnerStaffList
-          staff={cafeStaff}
+          staff={posStaff}
           filteredStaff={filteredStaff}
           staffStats={staffStats}
           activeFilter={activeFilter}

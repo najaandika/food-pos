@@ -5,7 +5,7 @@ export const customerCategories = ['Coffee', 'Non Coffee', 'Food', 'Snack', 'Sig
 export const customerMenuItems: CustomerMenuItem[] = [
   {
     id: 1,
-    name: 'Bloc Barat Latte',
+    name: 'House Latte',
     category: 'Coffee',
     description: 'Espresso, fresh milk, and smooth house syrup.',
     price: 32000,
@@ -41,7 +41,7 @@ export const customerMenuItems: CustomerMenuItem[] = [
     id: 5,
     name: 'Crispy Fries',
     category: 'Snack',
-    description: 'Golden fries with Bloc Barat dipping sauce.',
+    description: 'Golden fries with house dipping sauce.',
     price: 28000,
     image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80',
   },

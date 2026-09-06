@@ -11,7 +11,7 @@ type PaymentKey = 'cash' | 'qris' | 'transfer';
 type QrKey = 'guestOrdering' | 'customerName' | 'callWaiter' | 'autoAcceptQr';
 
 const defaultSettings: PosSettings = {
-  profile: { cafeName: 'Cafe Bloc Barat', phone: '+62 812-0000-0000', address: 'Krui, Pesisir Barat, Lampung' },
+  profile: { cafeName: 'POS', phone: '+00 000 000 000', address: 'Global location' },
   tax: { taxRate: 5, serviceRate: 0, currency: 'IDR' },
   payments: { cash: true, qris: true, transfer: false },
   qrOptions: { guestOrdering: true, customerName: true, callWaiter: true, autoAcceptQr: false },

@@ -16,7 +16,7 @@ export function CustomerHero({
   itemCount,
   orderIcon,
   onOpenOrder,
-  cafeName = 'Bloc Barat Cafe',
+  cafeName = 'POS',
   isOrderingOpen = true,
 }: CustomerHeroProps) {
   return (

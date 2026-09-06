@@ -7,7 +7,7 @@ const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) throw new Error('DATABASE_URL must be configured');
 
 const prisma = new PrismaClient({ adapter: new PrismaMariaDb(databaseUrl) });
-const demoPassword = 'blocbarat';
+const demoPassword = 'posdemo';
 
 const categories = [
   ['Coffee', 1],
@@ -30,11 +30,11 @@ const tables = [
 ] as const;
 
 const menuItems = [
-  ['Coffee', 'Bloc Barat Latte', 'Espresso, fresh milk, and smooth house syrup.', 32000, null, true, true, 'Signature', 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80'],
+  ['Coffee', 'House Latte', 'Espresso, fresh milk, and smooth house syrup.', 32000, null, true, true, 'Signature', 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80'],
   ['Signature', 'Krui Sunset Mocktail', 'Tropical citrus, soda, and beach-day freshness.', 36000, null, true, true, 'Best Seller', 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80'],
   ['Coffee', 'Iced Americano', 'Clean espresso over ice for a bright afternoon.', 26000, null, true, false, null, 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80'],
   ['Food', 'Chicken Rice Bowl', 'Grilled chicken, warm rice, egg, and house sauce.', 45000, null, true, false, null, 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'],
-  ['Snack', 'Crispy Fries', 'Golden fries with Bloc Barat dipping sauce.', 28000, null, true, false, null, 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80'],
+  ['Snack', 'Crispy Fries', 'Golden fries with house dipping sauce.', 28000, null, true, false, null, 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80'],
   ['Non Coffee', 'Matcha Cloud', 'Creamy matcha latte with a soft vanilla finish.', 35000, null, true, false, null, 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80'],
   ['Breakfast', 'Scrambled Eggs With Toast', 'Perfectly seasoned scrambled eggs served with warm toast.', 16990, null, true, true, 'Popular', 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80'],
   ['Breakfast', 'Greek Yogurt Parfait', 'Creamy Greek yogurt layered with ripe fruit and granola.', 21490, null, true, false, null, 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80'],
@@ -47,14 +47,14 @@ async function main() {
   const passwordHash = await hashPassword(demoPassword);
 
   for (const [name, email, role] of [
-    ['Owner Bloc Barat', 'owner@blocbarat.local', 'owner'],
-    ['Gladina Samantha', 'cashier@blocbarat.local', 'kasir'],
-    ['Gladina Samantha', 'waiters@blocbarat.local', 'waiters'],
+    ['POS Owner', 'owner@pos.local', 'owner'],
+    ['POS Cashier', 'cashier@pos.local', 'kasir'],
+    ['POS Waiter', 'waiters@pos.local', 'waiters'],
   ] as const) {
     await prisma.user.upsert({
       where: { email },
       create: { name, email, passwordHash, role },
-      update: { name, role, isActive: true },
+      update: { name, role, passwordHash, isActive: true },
     });
   }
 
@@ -71,7 +71,7 @@ async function main() {
     create: {
       key: 'cafe',
       value: {
-        profile: { cafeName: 'Cafe Bloc Barat', phone: '+62 812-0000-0000', address: 'Krui, Pesisir Barat, Lampung' },
+        profile: { cafeName: 'POS', phone: '+00 000 000 000', address: 'Global location' },
         tax: { taxRate: 5, serviceRate: 0, currency: 'IDR' },
         payments: { cash: true, qris: true, transfer: false },
         qrOptions: { guestOrdering: true, customerName: true, callWaiter: true, autoAcceptQr: false },
@@ -143,7 +143,7 @@ async function main() {
     ['925', 'Scrambled Eggs With Toast', 1, 'Extra egg'],
     ['925', 'Smoked Salmon Bagel', 1, null],
     ['925', 'Belgian Waffles', 2, 'Extra honey'],
-    ['925', 'Bloc Barat Latte', 1, null],
+    ['925', 'House Latte', 1, null],
     ['921', 'Chicken Rice Bowl', 1, null],
     ['921', 'Crispy Fries', 1, null],
     ['916', 'Chicken Rice Bowl', 1, null],

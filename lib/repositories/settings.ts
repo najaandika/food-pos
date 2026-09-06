@@ -4,9 +4,9 @@ import { clampRate } from './helpers';
 
 export const defaultSettings: PosSettings = {
   profile: {
-    cafeName: 'Cafe Bloc Barat',
+    cafeName: 'POS',
     phone: '+62 812-0000-0000',
-    address: 'Krui, Pesisir Barat, Lampung',
+    address: 'Global location',
   },
   tax: {
     taxRate: 5,

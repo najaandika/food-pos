@@ -10,7 +10,7 @@ export type SessionUser = {
   role: UserRole;
 };
 
-const cookieName = 'bloc-pos-session';
+const cookieName = 'pos-session';
 const maxAge = 60 * 60 * 12;
 
 const roleAccess: Record<UserRole, UserRole[]> = {

@@ -1,9 +1,9 @@
 USE pos;
 
 INSERT INTO users (name, email, password_hash, role) VALUES
-  ('Owner Bloc Barat', 'owner@blocbarat.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'owner'),
-  ('Gladina Samantha', 'cashier@blocbarat.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'kasir'),
-  ('Gladina Samantha', 'waiters@blocbarat.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'waiters')
+  ('POS Owner', 'owner@pos.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'owner'),
+  ('POS Cashier', 'cashier@pos.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'kasir'),
+  ('POS Waiter', 'waiters@pos.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'waiters')
 ON DUPLICATE KEY UPDATE name = VALUES(name), role = VALUES(role), is_active = TRUE;
 
 INSERT INTO categories (name, sort_order, is_active) VALUES
@@ -19,9 +19,9 @@ ON DUPLICATE KEY UPDATE sort_order = VALUES(sort_order), is_active = VALUES(is_a
 INSERT INTO app_settings (`key`, value, created_at, updated_at) VALUES
   ('cafe', JSON_OBJECT(
     'profile', JSON_OBJECT(
-      'cafeName', 'Cafe Bloc Barat',
+      'cafeName', 'POS',
       'phone', '+62 812-0000-0000',
-      'address', 'Krui, Pesisir Barat, Lampung'
+      'address', 'Global location'
     ),
     'tax', JSON_OBJECT(
       'taxRate', 5,
@@ -60,11 +60,11 @@ ON DUPLICATE KEY UPDATE name = VALUES(name), area = VALUES(area), seats = VALUES
 INSERT INTO menu_items (category_id, name, description, price, old_price, image_url, is_available, is_best_seller, badge)
 SELECT c.id, v.name, v.description, v.price, v.old_price, v.image_url, v.is_available, v.is_best_seller, v.badge
 FROM (
-  SELECT 'Coffee' category, 'Bloc Barat Latte' name, 'Espresso, fresh milk, and smooth house syrup.' description, 32000 price, NULL old_price, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80' image_url, TRUE is_available, TRUE is_best_seller, 'Signature' badge
+  SELECT 'Coffee' category, 'House Latte' name, 'Espresso, fresh milk, and smooth house syrup.' description, 32000 price, NULL old_price, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80' image_url, TRUE is_available, TRUE is_best_seller, 'Signature' badge
   UNION ALL SELECT 'Signature', 'Krui Sunset Mocktail', 'Tropical citrus, soda, and beach-day freshness.', 36000, NULL, 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80', TRUE, TRUE, 'Best Seller'
   UNION ALL SELECT 'Coffee', 'Iced Americano', 'Clean espresso over ice for a bright afternoon.', 26000, NULL, 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', TRUE, FALSE, NULL
   UNION ALL SELECT 'Food', 'Chicken Rice Bowl', 'Grilled chicken, warm rice, egg, and house sauce.', 45000, NULL, 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', TRUE, FALSE, NULL
-  UNION ALL SELECT 'Snack', 'Crispy Fries', 'Golden fries with Bloc Barat dipping sauce.', 28000, NULL, 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80', TRUE, FALSE, NULL
+  UNION ALL SELECT 'Snack', 'Crispy Fries', 'Golden fries with house dipping sauce.', 28000, NULL, 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80', TRUE, FALSE, NULL
   UNION ALL SELECT 'Non Coffee', 'Matcha Cloud', 'Creamy matcha latte with a soft vanilla finish.', 35000, NULL, 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80', TRUE, FALSE, NULL
   UNION ALL SELECT 'Breakfast', 'Scrambled Eggs With Toast', 'Perfectly seasoned scrambled eggs served with warm toast.', 16990, NULL, 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80', TRUE, TRUE, 'Popular'
   UNION ALL SELECT 'Breakfast', 'Greek Yogurt Parfait', 'Creamy Greek yogurt layered with ripe fruit and granola.', 21490, NULL, 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', TRUE, FALSE, NULL
@@ -97,7 +97,7 @@ FROM (
   SELECT '925' order_number, 'Scrambled Eggs With Toast' item_name, 1 quantity, 'Extra egg' notes
   UNION ALL SELECT '925', 'Smoked Salmon Bagel', 1, NULL
   UNION ALL SELECT '925', 'Belgian Waffles', 2, 'Extra honey'
-  UNION ALL SELECT '925', 'Bloc Barat Latte', 1, NULL
+  UNION ALL SELECT '925', 'House Latte', 1, NULL
   UNION ALL SELECT '921', 'Chicken Rice Bowl', 1, NULL
   UNION ALL SELECT '921', 'Crispy Fries', 1, NULL
   UNION ALL SELECT '916', 'Chicken Rice Bowl', 1, NULL

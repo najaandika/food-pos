@@ -132,6 +132,14 @@
     display: block;
     isolation: isolate;
   }
+  @media (min-width: 521px) {
+    .customer-search {
+      --search-icon-right: 14px;
+      --search-icon-size: 28px;
+      --search-icon-bg: transparent;
+      --search-icon-color: var(--muted);
+    }
+  }
   .customer-search input {
     width: 100%;
     height: 56px;

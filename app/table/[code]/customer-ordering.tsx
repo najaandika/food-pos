@@ -23,7 +23,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   const [orderNote, setOrderNote] = useState('');
   const [step, setStep] = useState<'menu' | 'cart' | 'status'>('menu');
   const [menuItems, setMenuItems] = useState<CustomerMenuItem[]>(customerMenuItems);
-  const [orderNumber, setOrderNumber] = useState(`BB-${tableCode.toUpperCase()}-1024`);
+  const [orderNumber, setOrderNumber] = useState(`POS-${tableCode.toUpperCase()}-1024`);
   const [orderId, setOrderId] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');

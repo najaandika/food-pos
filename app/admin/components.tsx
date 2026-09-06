@@ -85,7 +85,7 @@ export function UserProfileModal({
           </div>
           <div className="shift-row">
             <span>Lokasi Outlet</span>
-            <strong>Cafe Bloc Barat Krui</strong>
+            <strong>POS System</strong>
           </div>
         </div>
 

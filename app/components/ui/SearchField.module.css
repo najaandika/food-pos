@@ -22,15 +22,15 @@
 
 .icon {
   position: absolute;
-  right: 7px;
+  right: var(--search-icon-right, 7px);
   top: 50%;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: var(--search-icon-size, 36px);
+  height: var(--search-icon-size, 36px);
   border-radius: var(--radius-sm);
-  background: var(--secondary);
-  color: var(--secondary-foreground);
+  background: var(--search-icon-bg, var(--secondary));
+  color: var(--search-icon-color, var(--secondary-foreground));
   transform: translateY(-50%);
 }
 

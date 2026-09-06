@@ -69,8 +69,8 @@ export default function Home() {
 
   useEffect(() => {
     let isMounted = true;
-    const authenticated = window.localStorage.getItem('bloc-pos-authenticated') === 'true';
-    const storedUser = window.localStorage.getItem('bloc-pos-user');
+    const authenticated = window.localStorage.getItem('pos-authenticated') === 'true';
+    const storedUser = window.localStorage.getItem('pos-user');
 
     if (!authenticated || !storedUser) {
       router.replace('/login');
@@ -100,14 +100,14 @@ export default function Home() {
         if (!isAuthUser(user)) throw new Error('Invalid session');
 
         if (!isMounted) return;
-        window.localStorage.setItem('bloc-pos-authenticated', 'true');
-        window.localStorage.setItem('bloc-pos-user', JSON.stringify(user));
+        window.localStorage.setItem('pos-authenticated', 'true');
+        window.localStorage.setItem('pos-user', JSON.stringify(user));
         setCurrentUser(user);
         setView(getRoleHome(user.role));
         setIsAuthorized(true);
       } catch {
-        window.localStorage.removeItem('bloc-pos-authenticated');
-        window.localStorage.removeItem('bloc-pos-user');
+        window.localStorage.removeItem('pos-authenticated');
+        window.localStorage.removeItem('pos-user');
         router.replace('/login');
       }
     };
@@ -143,8 +143,8 @@ export default function Home() {
 
   const handleLogout = useCallback(() => {
     void fetch('/api/auth/logout', { method: 'POST' });
-    window.localStorage.removeItem('bloc-pos-authenticated');
-    window.localStorage.removeItem('bloc-pos-user');
+    window.localStorage.removeItem('pos-authenticated');
+    window.localStorage.removeItem('pos-user');
     router.replace('/login');
   }, [router]);
 
