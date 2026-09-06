@@ -1,5 +1,6 @@
 /* Base shell & view component styles */
 @import "../shell.css";
+@import "./primitives.css";
 @import "./modal.css";
 @import "../views/OwnerShared.css";
 @import "../views/CashierView.css";
