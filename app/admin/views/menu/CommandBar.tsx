@@ -19,27 +19,29 @@ export function CommandBar({ orderType, tableCode, customerName, guests, itemCou
   const queueCount = orders.filter((order) => order.rawStatus && !['paid', 'cancelled'].includes(order.rawStatus)).length;
 
   return (
-    <div className="pos-command-bar">
-      <div className="pos-live-ticket">
-        <span className="pos-table-chip">{orderType === 'dine_in' ? `Table ${tableCode}` : 'TA'}</span>
+    <div className={`pos-command-bar${qrMode ? ' qr-mode' : ''}`}>
+      <div className={`pos-live-ticket${qrMode ? ' qr-live-ticket' : ''}`}>
+        <span className="pos-table-chip">{qrMode ? 'QR' : orderType === 'dine_in' ? `Table ${tableCode}` : 'TA'}</span>
         <div>
-          <small>Active Ticket</small>
-          <strong>{customerName}</strong>
+          <small>{qrMode ? 'QR Order Queue' : 'Active Ticket'}</small>
+          <strong>{qrMode ? 'Incoming Customer Orders' : customerName}</strong>
           <em>
-            {orderType === 'takeaway' ? 'Takeaway' : `Dine In / ${guests} guests`} / {itemCount} items
+            {qrMode
+              ? `${orders.filter((order) => order.source === 'qr').length} orders waiting`
+              : `${orderType === 'takeaway' ? 'Takeaway' : `Dine In / ${guests} guests`} / ${itemCount} items`}
           </em>
         </div>
       </div>
       <div className="order-type-tabs" aria-label="Order type">
-        <button className={orderType === 'dine_in' ? 'active' : ''} type="button" onClick={() => onChangeOrderType('dine_in')}>
+        <button className={orderType === 'dine_in' && !qrMode ? 'active' : ''} type="button" onClick={() => onChangeOrderType('dine_in')}>
           Dine In
         </button>
-        <button className={orderType === 'takeaway' ? 'active' : ''} type="button" onClick={() => onChangeOrderType('takeaway')}>
+        <button className={orderType === 'takeaway' && !qrMode ? 'active' : ''} type="button" onClick={() => onChangeOrderType('takeaway')}>
           Takeaway
         </button>
         <button className={qrMode ? 'active' : ''} type="button" onClick={onToggleQrMode}>QR ({orders.filter((order) => order.source === 'qr').length})</button>
       </div>
-      <div className="pos-counter-stats">
+      {!qrMode && <div className="pos-counter-stats">
         <article>
           <span>Queue</span>
           <strong>{queueCount}</strong>
@@ -52,7 +54,7 @@ export function CommandBar({ orderType, tableCode, customerName, guests, itemCou
           <span>Last sent</span>
           <strong>{latestOrder?.time ?? '-'}</strong>
         </article>
-      </div>
+      </div>}
     </div>
   );
 }
