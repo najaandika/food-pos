@@ -10,9 +10,11 @@ type Props = {
   itemCount: number;
   orders: AdminOrder[];
   onChangeOrderType: (type: 'dine_in' | 'takeaway') => void;
+  qrMode: boolean;
+  onToggleQrMode: () => void;
 };
 
-export function CommandBar({ orderType, tableCode, customerName, guests, itemCount, orders, onChangeOrderType }: Props) {
+export function CommandBar({ orderType, tableCode, customerName, guests, itemCount, orders, onChangeOrderType, qrMode, onToggleQrMode }: Props) {
   const latestOrder = orders[0];
   const queueCount = orders.filter((order) => order.rawStatus && !['paid', 'cancelled'].includes(order.rawStatus)).length;
 
@@ -35,7 +37,7 @@ export function CommandBar({ orderType, tableCode, customerName, guests, itemCou
         <button className={orderType === 'takeaway' ? 'active' : ''} type="button" onClick={() => onChangeOrderType('takeaway')}>
           Takeaway
         </button>
-        <button type="button">QR</button>
+        <button className={qrMode ? 'active' : ''} type="button" onClick={onToggleQrMode}>QR ({orders.filter((order) => order.source === 'qr').length})</button>
       </div>
       <div className="pos-counter-stats">
         <article>

@@ -48,6 +48,7 @@ export function MenuView({
   const [customerName, setCustomerName] = useState('Walk-in Guest');
   const [guests, setGuests] = useState(2);
   const [cart, setCart] = useState<Record<string, CartLine>>({});
+  const [qrMode, setQrMode] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [sendError, setSendError] = useState('');
   const [sentOrder, setSentOrder] = useState<{ id: number; orderNumber: string; customerName: string; table: string; itemCount: number; total: number } | null>(null);
@@ -149,7 +150,40 @@ export function MenuView({
         itemCount={itemCount}
         orders={orders}
         onChangeOrderType={setOrderType}
+        qrMode={qrMode}
+        onToggleQrMode={() => setQrMode((current) => !current)}
       />
+      {qrMode ? (
+        <section className="qr-order-panel">
+          <div className="qr-order-panel-head">
+            <div>
+              <span>Incoming orders</span>
+              <h2>QR Orders</h2>
+              <p>Orders placed by customers from table QR menus.</p>
+            </div>
+            <button type="button" onClick={() => setQrMode(false)}>Back to Manual Order</button>
+          </div>
+          <div className="qr-order-list">
+            {orders.filter((order) => order.source === 'qr').map((order) => (
+              <article className="qr-order-card" key={order.id ?? order.orderNumber}>
+                <div className={`table-pill ${order.tone}`}>{order.table}</div>
+                <div className="qr-order-info">
+                  <strong>{order.name}</strong>
+                  <span>{order.tableCode ? `Table ${order.tableCode}` : 'Takeaway'} · {order.items.length} items · {order.time}</span>
+                  <small>{order.items.slice(0, 2).map((item) => `${item[0]} x${item[1]}`).join(' · ')}</small>
+                </div>
+                <div className="qr-order-meta">
+                  <b>{order.total}</b>
+                  <span className={`mini-status ${order.statusTone}`}>{order.status}</span>
+                </div>
+              </article>
+            ))}
+            {!orders.some((order) => order.source === 'qr') && (
+              <p className="empty-state">No QR orders are waiting right now.</p>
+            )}
+          </div>
+        </section>
+      ) : (
       <div className="menu-layout">
         <MenuFilterPanel
           categories={categories}
@@ -191,6 +225,7 @@ export function MenuView({
           onGoToCashier={onGoToCashier}
         />
       </div>
+      )}
     </section>
   );
 }
