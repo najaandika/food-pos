@@ -107,33 +107,22 @@ export default function LoginPage() {
         <aside className="login-preview" aria-label="POS status preview">
           <div className="login-preview-head">
             <span><ShieldCheck aria-hidden="true" /> Secure POS</span>
-            <strong>Evening Shift</strong>
+            <strong>Operations workspace</strong>
           </div>
 
           <div className="login-preview-copy">
-            <span>Live Workspace</span>
-            <h2>Ready for the evening rush.</h2>
-            <p>QR orders, cashier queue, and table service stay in one calm workspace.</p>
+            <span>One calm workspace</span>
+            <h2>Make every service moment count.</h2>
+            <p>Keep orders, tables, and payments moving with a clear view of your operation.</p>
           </div>
 
-          <div className="login-preview-panel">
-            <div className="login-preview-metrics">
-              <p><span>QR Orders</span><strong>142</strong></p>
-              <p><span>Active Tickets</span><strong>24</strong></p>
-              <p><span>Waiting Payment</span><strong>8</strong></p>
-            </div>
-            <div className="login-ticket">
-              <div>
-                <span>Current Queue</span>
-                <strong>Table A4</strong>
-                <small>Ready to pay - Order #925</small>
-              </div>
-              <b>$87.34</b>
-            </div>
-            <div className="login-flow">
-              <p><span />QR received</p>
-              <p><span />Kitchen ready</p>
-              <p><span />Cashier closing</p>
+          <div className="login-preview-art" aria-hidden="true">
+            <span className="login-preview-orbit login-preview-orbit-one" />
+            <span className="login-preview-orbit login-preview-orbit-two" />
+            <span className="login-preview-orbit login-preview-orbit-three" />
+            <div className="login-preview-art-label">
+              <strong>Built for flow</strong>
+              <span>From first order to final payment.</span>
             </div>
           </div>
         </aside>
