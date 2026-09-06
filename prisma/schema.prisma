@@ -45,6 +45,7 @@ model Table {
   orders         Order[]
 
   @@index([status])
+  @@index([currentOrderId])
   @@map("tables")
 }
 
@@ -89,6 +90,7 @@ model Order {
   payments      Payment[]
 
   @@index([status, createdAt])
+  @@index([createdAt])
   @@index([tableId])
   @@map("orders")
 }
