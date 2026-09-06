@@ -1,3 +1,5 @@
+import styles from '../../table/[code]/Customer.module.css';
+
 type OrderSummaryProps = {
   subtotal: string;
   tax: string;
@@ -18,7 +20,7 @@ export function OrderSummary({
   total,
 }: OrderSummaryProps) {
   return (
-    <div className="customer-summary">
+    <div className={styles['customer-summary']}>
       <p><span>Subtotal</span><strong>{subtotal}</strong></p>
       <p><span>{taxLabel}</span><strong>{tax}</strong></p>
       {showService && service && serviceLabel && <p><span>{serviceLabel}</span><strong>{service}</strong></p>}

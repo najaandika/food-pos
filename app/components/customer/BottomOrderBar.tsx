@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import styles from '../../table/[code]/Customer.module.css';
 import { Button } from '../ui/Button';
 
 type BottomOrderBarProps = {
@@ -10,7 +11,7 @@ type BottomOrderBarProps = {
 
 export function BottomOrderBar({ itemCount, total, icon, onReview }: BottomOrderBarProps) {
   return (
-    <Button className="customer-bottom-cart" onClick={onReview}>
+    <Button className={styles['customer-bottom-cart']} onClick={onReview}>
       <span>{itemCount} item{itemCount > 1 ? 's' : ''}</span>
       <strong>{total}</strong>
       <b>{icon} Review</b>

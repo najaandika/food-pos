@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from '../ui/Button';
 import type { PosOrderStatus } from '../../../lib/pos-types';
+import styles from '../../table/[code]/Customer.module.css';
 
 type CustomerStatusProps = {
   tableCode: string;
@@ -106,26 +107,26 @@ export function CustomerStatus({ tableCode, orderId, orderNumber, icon, onAddMor
   }, [currentStatus, orderStatus]);
 
   return (
-    <main className="customer-page">
-      <section className="customer-status">
-        <div className="customer-status-icon">{icon}</div>
-        <span className="customer-pill">Table {tableCode.toUpperCase()}</span>
+    <main className={styles['customer-page']}>
+      <section className={styles['customer-status']}>
+        <div className={styles['customer-status-icon']}>{icon}</div>
+        <span className={styles['customer-pill']}>Table {tableCode.toUpperCase()}</span>
         <h1>{copy.title}</h1>
         <p>{copy.body}</p>
-        <div className="status-card">
+        <div className={styles['status-card']}>
           <span>Order Number</span>
           <strong>{orderNumber}</strong>
           <small>{helperText}</small>
         </div>
-        <div className="status-steps">
+        <div className={styles['status-steps']}>
           {statusSteps.map((step, index) => (
-            <div className={index + 1 <= activeStep ? 'active' : ''} key={step.label}>
+            <div className={index + 1 <= activeStep ? styles.active : ''} key={step.label}>
               <b>{index + 1}</b>
               <span>{step.label}</span>
             </div>
           ))}
         </div>
-        {canAddMore && <Button className="customer-primary" onClick={onAddMore}>Add more items</Button>}
+        {canAddMore && <Button className={styles['customer-primary']} onClick={onAddMore}>Add more items</Button>}
       </section>
     </main>
   );

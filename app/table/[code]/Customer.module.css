@@ -1,7 +1,6 @@
-.scope {}
   /* Source: customer-hero.css */
   /* customer-ordering part 1/3 - lines 1-347 */
-  .scope:global(.customer-page) {
+  .customer-page {
     min-height: 100vh;
     background:
       radial-gradient(circle at 18% 0%, rgba(48, 71, 255, 0.08), transparent 32%),
@@ -9,14 +8,14 @@
     color: var(--ink);
     padding: 14px 14px 104px;
   }
-  .scope :global(.customer-hero),
-  .scope :global(.customer-quick-panel),
-  .scope :global(.customer-section-head),
-  .scope :global(.customer-status) {
+  .customer-hero,
+  .customer-quick-panel,
+  .customer-section-head,
+  .customer-status {
     width: min(760px, 100%);
     margin: 0 auto;
   }
-  .scope :global(.customer-hero) {
+  .customer-hero {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -29,15 +28,15 @@
     box-shadow: 0 18px 46px rgba(31, 43, 89, 0.08);
     overflow: hidden;
   }
-  .scope :global(.customer-topline) {
+  .customer-topline {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-fixed-2);
     align-items: center;
   }
-  .scope :global(.customer-pill),
-  .scope :global(.menu-badge),
-  .scope :global(.customer-open) {
+  .customer-pill,
+  .menu-badge,
+  .customer-open {
     display: inline-flex;
     align-items: center;
     min-height: 28px;
@@ -48,31 +47,31 @@
     font-size: var(--font-size-xs);
     font-weight: 700;
   }
-  .scope :global(.customer-open) {
+  .customer-open {
     background: rgba(25, 184, 133, 0.12);
     color: #087856;
   }
-  .scope :global(.customer-hero h1),
-  .scope :global(.customer-status h1) {
+  .customer-hero h1,
+  .customer-status h1 {
     margin: 10px 0 8px;
     font-size: clamp(30px, 5.4vw, 44px);
     line-height: 1;
     letter-spacing: 0;
   }
-  .scope :global(.customer-hero p),
-  .scope :global(.customer-status p) {
+  .customer-hero p,
+  .customer-status p {
     margin: 0;
     color: var(--muted);
     line-height: 1.48;
   }
-  .scope :global(.customer-hero-meta) {
+  .customer-hero-meta {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-fixed-2);
     margin-top: 12px;
   }
-  .scope :global(.customer-hero-meta span),
-  .scope :global(.customer-item-meta span) {
+  .customer-hero-meta span,
+  .customer-item-meta span {
     display: inline-flex;
     align-items: center;
     min-height: 26px;
@@ -83,7 +82,7 @@
     font-size: var(--font-size-xs);
     font-weight: 650;
   }
-  .scope :global(.cart-fab) {
+  .cart-fab {
     position: sticky;
     top: 16px;
     flex: 0 0 auto;
@@ -97,7 +96,7 @@
     white-space: nowrap;
     box-shadow: 0 18px 38px rgba(20, 26, 51, 0.22);
   }
-  .scope :global(.cart-fab span) {
+  .cart-fab span {
     display: inline-grid;
     place-items: center;
     width: 22px;
@@ -106,24 +105,24 @@
     border-radius: 50%;
     background: var(--blue);
   }
-  .scope :global(.cart-fab svg) {
+  .cart-fab svg {
     width: 17px;
     height: 17px;
     margin-right: 6px;
     vertical-align: -3px;
   }
-  .scope :global(.customer-quick-panel) {
+  .customer-quick-panel {
     display: grid;
     gap: var(--space-fixed-3);
     margin-top: 12px;
     margin-bottom: 12px;
   }
-  .scope :global(.customer-search) {
+  .customer-search {
     position: relative;
     display: block;
     isolation: isolate;
   }
-  .scope :global(.customer-search input) {
+  .customer-search input {
     width: 100%;
     height: 56px;
     border: 0;
@@ -135,11 +134,11 @@
     box-shadow: 0 12px 30px rgba(31, 43, 89, 0.07);
     outline: 1px solid var(--border-soft-strong);
   }
-  .scope :global(.customer-search input:focus) {
+  .customer-search input:focus {
     outline-color: rgba(48, 71, 255, 0.28);
     box-shadow: 0 0 0 4px rgba(48, 71, 255, 0.08), 0 12px 30px rgba(31, 43, 89, 0.07);
   }
-  .scope :global(.customer-search span) {
+  .customer-search span {
     position: absolute;
     right: 18px;
     top: 50%;
@@ -154,12 +153,12 @@
     pointer-events: none;
     opacity: 0.72;
   }
-  .scope :global(.customer-search svg) {
+  .customer-search svg {
     width: 22px;
     height: 22px;
     stroke-width: 1.9;
   }
-  .scope :global(.customer-promo) {
+  .customer-promo {
     display: grid;
     gap: 4px;
     border-radius: var(--radius-md);
@@ -168,20 +167,20 @@
     padding: 14px;
     box-shadow: 0 18px 42px rgba(20, 26, 51, 0.18);
   }
-  .scope :global(.customer-promo span) {
+  .customer-promo span {
     color: rgba(255, 255, 255, 0.62);
     font-size: var(--font-size-xs);
     font-weight: 700;
   }
-  .scope :global(.customer-promo strong) {
+  .customer-promo strong {
     font-size: 16px;
   }
-  .scope :global(.customer-promo small) {
+  .customer-promo small {
     color: rgba(255, 255, 255, 0.6);
     font-size: var(--font-size-xs);
     font-weight: 500;
   }
-  .scope :global(.customer-categories) {
+  .customer-categories {
     width: min(760px, 100%);
     display: flex;
     gap: 5px;
@@ -192,8 +191,8 @@
     padding: 6px;
     scrollbar-width: none;
   }
-  .scope :global(.customer-categories::-webkit-scrollbar) { display: none; }
-  .scope :global(.customer-categories button) {
+  .customer-categories::-webkit-scrollbar { display: none; }
+  .customer-categories button {
     flex: 0 0 auto;
     height: 34px;
     border: 0;
@@ -203,45 +202,45 @@
     padding: 0 16px;
     font-weight: 650;
   }
-  .scope :global(.customer-categories button.active) {
+  .customer-categories button.active {
     background: var(--secondary);
     color: white;
     box-shadow: 0 10px 24px rgba(20, 26, 51, 0.16);
   }
-  .scope :global(.customer-section-head) {
+  .customer-section-head {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--pos-gap);
     margin-bottom: 10px;
   }
-  .scope :global(.customer-section-head h2) {
+  .customer-section-head h2 {
     margin: 0;
     color: var(--navy);
     font-size: 21px;
   }
-  .scope :global(.customer-section-head p) {
+  .customer-section-head p {
     margin: 4px 0 0;
     color: var(--muted);
     font-size: var(--font-size-xs);
     font-weight: 600;
   }
-  .scope :global(.customer-section-head > span) {
+  .customer-section-head > span {
     color: var(--blue);
     font-size: var(--font-size-xs);
     font-weight: 700;
     white-space: nowrap;
   }
-  .scope :global(.customer-menu-list),
-  .scope :global(.customer-cart) {
+  .customer-menu-list,
+  .customer-cart {
     width: min(760px, 100%);
     margin: 0 auto;
   }
-  .scope :global(.customer-menu-list) {
+  .customer-menu-list {
     display: grid;
     gap: var(--space-3);
   }
-  .scope :global(.customer-menu-item) {
+  .customer-menu-item {
     container-type: inline-size;
     display: grid;
     grid-template-columns: 100px minmax(0, 1fr);
@@ -253,31 +252,31 @@
     background: rgba(255, 255, 255, 0.94);
     box-shadow: var(--shadow);
   }
-  .scope :global(.customer-menu-image) {
+  .customer-menu-image {
     position: relative;
     min-height: 116px;
   }
-  .scope :global(.customer-menu-image img) {
+  .customer-menu-image img {
     width: 100%;
     height: 100%;
     min-height: 116px;
     border-radius: var(--radius-md);
     object-fit: cover;
   }
-  .scope :global(.customer-menu-image .menu-badge) {
+  .customer-menu-image .menu-badge {
     position: absolute;
     left: 10px;
     top: 10px;
     background: rgba(255, 255, 255, 0.9);
     color: var(--blue);
   }
-  .scope :global(.customer-menu-item > div) {
+  .customer-menu-item > div {
     min-width: 0;
     display: flex;
     flex-direction: column;
     padding: 2px 2px 2px 0;
   }
-  .scope :global(.customer-menu-item h2) {
+  .customer-menu-item h2 {
     margin: 1px 0 6px;
     font-size: var(--font-size-base);
     font-weight: 700;
@@ -287,7 +286,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-  .scope :global(.customer-menu-item p) {
+  .customer-menu-item p {
     margin: 0;
     color: var(--muted);
     display: -webkit-box;
@@ -298,19 +297,19 @@
     font-weight: 450;
     line-height: 1.4;
   }
-  .scope :global(.customer-item-meta) {
+  .customer-item-meta {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-1);
     margin-top: 8px;
   }
-  .scope :global(.customer-item-meta span:first-child) {
+  .customer-item-meta span:first-child {
     color: var(--blue);
     background: var(--mist);
   }
   /* Source: customer-menu.css */
   /* customer-ordering part 2/3 - lines 348-694 */
-  .scope :global(.menu-item-bottom) {
+  .menu-item-bottom {
     display: grid;
     grid-template-columns: minmax(76px, 1fr) auto;
     align-items: center;
@@ -319,22 +318,22 @@
     margin-top: auto;
     padding-top: 9px;
   }
-  .scope :global(.menu-item-bottom strong) {
+  .menu-item-bottom strong {
     color: var(--navy);
     font-size: var(--font-size-base);
     font-weight: 700;
     white-space: nowrap;
     min-width: 0;
   }
-  .scope :global(.menu-item-bottom > button),
-  .scope :global(.customer-primary) {
+  .menu-item-bottom > button,
+  .customer-primary {
     border: 0;
     border-radius: var(--radius-sm);
     background: var(--blue);
     color: white;
     font-weight: 700;
   }
-  .scope :global(.menu-item-bottom > button) {
+  .menu-item-bottom > button {
     height: 36px;
     min-width: 58px;
     border-radius: var(--radius-sm);
@@ -343,12 +342,12 @@
     font-weight: 600;
     box-shadow: 0 10px 22px rgba(48, 71, 255, 0.18);
   }
-  .scope :global(.menu-qty-pill) {
+  .menu-qty-pill {
     --stepper-size: 32px;
     --stepper-count: 24px;
     justify-self: end;
   }
-  .scope :global(.customer-bottom-cart) {
+  .customer-bottom-cart {
     position: fixed;
     left: 14px;
     right: 14px;
@@ -369,7 +368,7 @@
     padding: 10px 12px;
     box-shadow: 0 22px 52px rgba(48, 71, 255, 0.28);
   }
-  .scope :global(.customer-bottom-cart span) {
+  .customer-bottom-cart span {
     grid-column: 1;
     grid-row: 1;
     justify-self: start;
@@ -377,14 +376,14 @@
     font-size: var(--font-size-xs);
     font-weight: 600;
   }
-  .scope :global(.customer-bottom-cart strong) {
+  .customer-bottom-cart strong {
     grid-column: 1;
     grid-row: 2;
     justify-self: start;
     font-size: 17px;
     line-height: 1;
   }
-  .scope :global(.customer-bottom-cart b) {
+  .customer-bottom-cart b {
     grid-column: 2;
     grid-row: 1 / span 2;
     display: inline-flex;
@@ -397,16 +396,16 @@
     font-size: var(--font-size-base);
     font-weight: 650;
   }
-  .scope :global(.customer-bottom-cart svg) {
+  .customer-bottom-cart svg {
     width: 16px;
     height: 16px;
   }
   @media (max-width: 520px) {
-    .scope:global(.customer-page) {
+    .customer-page {
       padding: 10px 10px 92px;
     }
   
-    .scope :global(.customer-hero) {
+    .customer-hero {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: var(--space-3);
@@ -414,46 +413,46 @@
       padding: 14px;
     }
   
-    .scope :global(.customer-hero > div:first-child) {
+    .customer-hero > div:first-child {
       min-width: 0;
     }
   
-    .scope :global(.customer-topline) {
+    .customer-topline {
       gap: var(--space-1);
     }
   
-    .scope :global(.customer-pill),
-    .scope :global(.customer-open) {
+    .customer-pill,
+    .customer-open {
       min-height: 26px;
       padding: 0 10px;
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.customer-hero h1) {
+    .customer-hero h1 {
       max-width: 205px;
       margin: 10px 0 7px;
       font-size: clamp(28px, 8.4vw, 32px);
       line-height: 1;
     }
   
-    .scope :global(.customer-hero p) {
+    .customer-hero p {
       max-width: 228px;
       font-size: var(--font-size-sm);
       line-height: 1.42;
     }
   
-    .scope :global(.customer-hero-meta) {
+    .customer-hero-meta {
       gap: var(--space-1);
       margin-top: 12px;
     }
   
-    .scope :global(.customer-hero-meta span) {
+    .customer-hero-meta span {
       min-height: 22px;
       padding: 0 9px;
       font-size: 10px;
     }
   
-    .scope :global(.cart-fab) {
+    .cart-fab {
       grid-column: 2;
       grid-row: 1;
       top: 12px;
@@ -463,32 +462,32 @@
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.cart-fab span) {
+    .cart-fab span {
       width: 20px;
       height: 20px;
       margin-right: 5px;
     }
   
-    .scope :global(.cart-fab svg) {
+    .cart-fab svg {
       width: 15px;
       height: 15px;
       margin-right: 4px;
     }
   
-    .scope :global(.customer-quick-panel) {
+    .customer-quick-panel {
       margin-top: 12px;
       margin-bottom: 12px;
       gap: var(--space-3);
     }
   
-    .scope :global(.customer-search input) {
+    .customer-search input {
       height: 54px;
       border-radius: var(--radius-md);
       padding: 0 62px 0 15px;
       font-size: var(--font-size-base);
     }
   
-    .scope :global(.customer-search span) {
+    .customer-search span {
       right: 7px;
       top: 50%;
       width: 40px;
@@ -496,17 +495,17 @@
       border-radius: 15px;
     }
   
-    .scope :global(.customer-promo) {
+    .customer-promo {
       border-radius: var(--radius-md);
       padding: 14px;
     }
   
-    .scope :global(.customer-promo strong) {
+    .customer-promo strong {
       font-size: var(--font-size-base);
       line-height: 1.25;
     }
   
-    .scope :global(.customer-categories) {
+    .customer-categories {
       gap: 4px;
       margin-bottom: 16px;
       border-radius: var(--radius-md);
@@ -514,32 +513,32 @@
       scroll-padding: 5px;
     }
   
-    .scope :global(.customer-categories button) {
+    .customer-categories button {
       height: 34px;
       border-radius: 13px;
       padding: 0 13px;
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.customer-section-head) {
+    .customer-section-head {
       align-items: flex-start;
       margin-bottom: 10px;
     }
   
-    .scope :global(.customer-section-head h2) {
+    .customer-section-head h2 {
       font-size: 22px;
     }
   
-    .scope :global(.customer-section-head p),
-    .scope :global(.customer-section-head > span) {
+    .customer-section-head p,
+    .customer-section-head > span {
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.customer-menu-list) {
+    .customer-menu-list {
       gap: var(--space-3);
     }
   
-    .scope :global(.customer-menu-item) {
+    .customer-menu-item {
       grid-template-columns: 96px minmax(0, 1fr);
       gap: var(--space-3);
       min-height: 132px;
@@ -547,46 +546,46 @@
       padding: 10px;
     }
   
-    .scope :global(.customer-menu-image),
-    .scope :global(.customer-menu-image img) {
+    .customer-menu-image,
+    .customer-menu-image img {
       min-height: 112px;
       height: 112px;
     }
   
-    .scope :global(.customer-menu-image img) {
+    .customer-menu-image img {
       border-radius: var(--radius-md);
     }
   
-    .scope :global(.customer-menu-item > div) {
+    .customer-menu-item > div {
       min-height: 112px;
       padding: 2px 0 0;
     }
   
-    .scope :global(.customer-menu-item h2) {
+    .customer-menu-item h2 {
       margin-bottom: 6px;
       font-size: var(--font-size-base);
     }
   
-    .scope :global(.customer-menu-item p) {
+    .customer-menu-item p {
       -webkit-line-clamp: 2;
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.customer-item-meta) {
+    .customer-item-meta {
       display: none;
     }
   
-    .scope :global(.menu-item-bottom) {
+    .menu-item-bottom {
       grid-template-columns: minmax(72px, 1fr) auto;
       gap: 7px;
       padding-top: 8px;
     }
   
-    .scope :global(.menu-item-bottom strong) {
+    .menu-item-bottom strong {
       font-size: var(--font-size-base);
     }
   
-    .scope :global(.menu-item-bottom > button) {
+    .menu-item-bottom > button {
       height: 34px;
       min-width: 54px;
       border-radius: 15px;
@@ -594,12 +593,12 @@
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.menu-qty-pill) {
+    .menu-qty-pill {
       --stepper-size: 30px;
       --stepper-count: 24px;
     }
   
-    .scope :global(.customer-bottom-cart) {
+    .customer-bottom-cart {
       left: 10px;
       right: 10px;
       width: calc(100% - 20px);
@@ -609,33 +608,33 @@
       padding: 9px 10px;
     }
   
-    .scope :global(.customer-bottom-cart span) {
+    .customer-bottom-cart span {
       font-size: var(--font-size-xs);
     }
   
-    .scope :global(.customer-bottom-cart strong) {
+    .customer-bottom-cart strong {
       font-size: 16px;
     }
   
-    .scope :global(.customer-bottom-cart b) {
+    .customer-bottom-cart b {
       min-height: 40px;
       padding: 0 12px;
       font-size: var(--font-size-sm);
     }
   }
-  .scope :global(.customer-cart),
-  .scope :global(.customer-status) {
+  .customer-cart,
+  .customer-status {
     border-radius: 28px;
     background: rgba(255, 255, 255, 0.94);
     box-shadow: var(--shadow);
     padding: 18px;
   }
-  .scope :global(.cart-head) {
+  .cart-head {
     display: grid;
     gap: 4px;
     margin-bottom: 18px;
   }
-  .scope :global(.cart-head span) {
+  .cart-head span {
     display: block;
     color: var(--muted);
     font-size: var(--font-size-xs);
@@ -645,19 +644,19 @@
   }
   /* Source: customer-cart.css */
   /* customer-ordering part 3/3 - lines 695-1037 */
-  .scope :global(.cart-head h2) {
+  .cart-head h2 {
     margin: 0;
     font-size: clamp(25px, 8vw, 34px);
     line-height: 1.1;
   }
-  .scope :global(.cart-head p) {
+  .cart-head p {
     max-width: 30rem;
     margin: 4px 0 0;
     color: var(--muted);
     font-size: var(--font-size-sm);
     line-height: 1.45;
   }
-  .scope :global(.cart-ticket-note) {
+  .cart-ticket-note {
     display: grid;
     gap: 4px;
     margin-bottom: 16px;
@@ -666,22 +665,22 @@
     color: #ffffff;
     padding: 16px;
   }
-  .scope :global(.cart-ticket-note span) {
+  .cart-ticket-note span {
     color: rgba(255, 255, 255, 0.62);
     font-size: var(--font-size-xs);
     font-weight: 650;
   }
-  .scope :global(.cart-ticket-note strong) {
+  .cart-ticket-note strong {
     font-size: 19px;
     line-height: 1.15;
   }
-  .scope :global(.cart-ticket-note p) {
+  .cart-ticket-note p {
     margin: 0;
     color: rgba(255, 255, 255, 0.68);
     font-size: var(--font-size-xs);
     line-height: 1.4;
   }
-  .scope :global(.cart-list) {
+  .cart-list {
     display: grid;
     gap: 0;
     overflow: hidden;
@@ -689,7 +688,7 @@
     background: var(--card-bg);
     outline: 1px solid var(--border-soft-strong);
   }
-  .scope :global(.cart-row) {
+  .cart-row {
     container-type: inline-size;
     display: grid;
     grid-template-columns: 76px minmax(0, 1fr);
@@ -698,27 +697,27 @@
     padding: 14px;
     border-bottom: 1px solid var(--line);
   }
-  .scope :global(.cart-row:last-child) {
+  .cart-row:last-child {
     border-bottom: 0;
   }
-  .scope :global(.cart-row img) {
+  .cart-row img {
     width: 76px;
     height: 76px;
     border-radius: var(--radius-md);
     object-fit: cover;
   }
-  .scope :global(.cart-row h3) {
+  .cart-row h3 {
     margin: 0 0 4px;
     font-size: var(--font-size-base);
   }
-  .scope :global(.cart-row span) {
+  .cart-row span {
     color: var(--blue);
     font-size: var(--font-size-xs);
     font-weight: 700;
   }
-  .scope :global(.cart-row input),
-  .scope :global(.customer-field input),
-  .scope :global(.customer-field textarea) {
+  .cart-row input,
+  .customer-field input,
+  .customer-field textarea {
     width: 100%;
     border: 0;
     border-radius: var(--radius-sm);
@@ -726,20 +725,20 @@
     color: var(--ink);
     outline: 1px solid transparent;
   }
-  .scope :global(.cart-row input) {
+  .cart-row input {
     height: 36px;
     margin-top: 8px;
     padding: 0 12px;
     font-size: var(--font-size-xs);
   }
-  .scope :global(.cart-qty) {
+  .cart-qty {
     grid-column: 2;
     --stepper-size: 34px;
     --stepper-count: 34px;
     justify-self: start;
     margin-top: 8px;
   }
-  .scope :global(.customer-form-panel) {
+  .customer-form-panel {
     display: grid;
     gap: var(--space-fixed-3);
     margin-top: 16px;
@@ -747,17 +746,17 @@
     background: rgba(248, 250, 255, 0.78);
     padding: 14px;
   }
-  .scope :global(.customer-field) {
+  .customer-field {
     display: grid;
     gap: var(--space-fixed-2);
     font-weight: 650;
   }
-  .scope :global(.customer-field input),
-  .scope :global(.customer-field textarea) {
+  .customer-field input,
+  .customer-field textarea {
     padding: 14px;
     font-weight: 600;
   }
-  .scope :global(.customer-summary) {
+  .customer-summary {
     display: grid;
     gap: var(--space-3);
     margin: 18px 0;
@@ -765,26 +764,26 @@
     border-radius: var(--radius-md);
     background: var(--ice);
   }
-  .scope :global(.customer-summary p) {
+  .customer-summary p {
     display: flex;
     justify-content: space-between;
     margin: 0;
   }
-  .scope :global(.customer-summary p:last-child) {
+  .customer-summary p:last-child {
     padding-top: 10px;
     border-top: 1px solid var(--line);
     font-size: 18px;
   }
-  .scope :global(.customer-primary) {
+  .customer-primary {
     width: 100%;
     height: 52px;
     font-size: 16px;
   }
-  .scope :global(.customer-primary:disabled) {
+  .customer-primary:disabled {
     cursor: not-allowed;
     opacity: 0.45;
   }
-  .scope :global(.customer-checkout-error) {
+  .customer-checkout-error {
     margin: -4px 0 12px;
     border-radius: var(--radius-sm);
     background: rgba(255, 79, 108, 0.1);
@@ -793,18 +792,18 @@
     font-size: var(--font-size-xs);
     font-weight: 700;
   }
-  .scope :global(.empty-cart) {
+  .empty-cart {
     padding: 28px 6px;
     text-align: center;
   }
-  .scope :global(.empty-cart p) {
+  .empty-cart p {
     color: var(--muted);
   }
-  .scope :global(.customer-status) {
+  .customer-status {
     margin-top: 18px;
     text-align: center;
   }
-  .scope :global(.customer-status-icon) {
+  .customer-status-icon {
     display: grid;
     place-items: center;
     width: 58px;
@@ -814,7 +813,7 @@
     background: rgba(25, 184, 133, 0.12);
     color: #087856;
   }
-  .scope :global(.customer-status-icon svg) {
+  .customer-status-icon svg {
     width: 28px;
     height: 28px;
     fill: none;
@@ -823,39 +822,39 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .scope :global(.status-card) {
+  .status-card {
     margin: 20px 0;
     padding: 18px;
     border-radius: var(--pos-radius);
     background: var(--secondary);
     color: white;
   }
-  .scope :global(.status-card span),
-  .scope :global(.status-card strong),
-  .scope :global(.status-card small) {
+  .status-card span,
+  .status-card strong,
+  .status-card small {
     display: block;
   }
-  .scope :global(.status-card span) {
+  .status-card span {
     color: rgba(255, 255, 255, 0.62);
     font-size: var(--font-size-xs);
   }
-  .scope :global(.status-card strong) {
+  .status-card strong {
     margin-top: 6px;
     font-size: 26px;
   }
-  .scope :global(.status-card small) {
+  .status-card small {
     margin-top: 8px;
     color: rgba(255, 255, 255, 0.62);
     font-size: var(--font-size-xs);
     font-weight: 500;
   }
-  .scope :global(.status-steps) {
+  .status-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-fixed-2);
     margin-bottom: 20px;
   }
-  .scope :global(.status-steps div) {
+  .status-steps div {
     display: grid;
     justify-items: center;
     gap: var(--space-fixed-2);
@@ -863,7 +862,7 @@
     font-size: var(--font-size-xs);
     font-weight: 650;
   }
-  .scope :global(.status-steps b) {
+  .status-steps b {
     display: grid;
     place-items: center;
     width: 34px;
@@ -872,77 +871,77 @@
     background: var(--mist);
     color: var(--blue);
   }
-  .scope :global(.status-steps .active) {
+  .status-steps .active {
     color: var(--blue);
   }
-  .scope :global(.status-steps .active b) {
+  .status-steps .active b {
     background: var(--blue);
     color: white;
   }
   @media (min-width: 720px) {
-    .scope:global(.customer-page) {
+    .customer-page {
       padding: 34px 24px 120px;
     }
   
-    .scope :global(.customer-quick-panel) {
+    .customer-quick-panel {
       grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
       align-items: stretch;
     }
   
-    .scope :global(.customer-promo) {
+    .customer-promo {
       align-content: center;
     }
   
-    .scope :global(.customer-menu-list) {
+    .customer-menu-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   
-    .scope :global(.customer-menu-item) {
+    .customer-menu-item {
       grid-template-columns: 132px minmax(0, 1fr);
       min-height: 0;
       padding: 14px;
     }
   
-    .scope :global(.customer-menu-image),
-    .scope :global(.customer-menu-image img) {
+    .customer-menu-image,
+    .customer-menu-image img {
       height: 156px;
       min-height: 0;
     }
   
-    .scope :global(.customer-menu-item > div) {
+    .customer-menu-item > div {
       min-height: 156px;
       padding: 2px 4px 4px;
     }
   }
   @media (min-width: 1080px) {
-    .scope :global(.customer-hero),
-    .scope :global(.customer-quick-panel),
-    .scope :global(.customer-section-head),
-    .scope :global(.customer-status),
-    .scope :global(.customer-categories),
-    .scope :global(.customer-menu-list),
-    .scope :global(.customer-cart) {
+    .customer-hero,
+    .customer-quick-panel,
+    .customer-section-head,
+    .customer-status,
+    .customer-categories,
+    .customer-menu-list,
+    .customer-cart {
       width: min(1040px, 100%);
     }
   
-    .scope :global(.customer-bottom-cart) {
+    .customer-bottom-cart {
       width: min(1040px, calc(100% - 48px));
       left: 24px;
       right: 24px;
     }
   
-    .scope :global(.customer-menu-list) {
+    .customer-menu-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: start;
     }
   
-    .scope :global(.customer-menu-item) {
+    .customer-menu-item {
       min-height: 186px;
     }
   
-    .scope :global(.customer-menu-image),
-    .scope :global(.customer-menu-image img),
-    .scope :global(.customer-menu-item > div) {
+    .customer-menu-image,
+    .customer-menu-image img,
+    .customer-menu-item > div {
       height: 160px;
       min-height: 160px;
     }

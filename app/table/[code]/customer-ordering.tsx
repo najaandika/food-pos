@@ -147,7 +147,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   }
 
   return (
-    <main className={`${styles.scope} customer-page`}>
+    <main className={styles['customer-page']}>
       <CustomerHero
         tableCode={tableCode}
         itemCount={itemCount}
@@ -158,8 +158,8 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
       />
 
       {!qrOrderingOpen ? (
-        <section className="customer-cart customer-paused">
-          <div className="cart-ticket-note">
+        <section className={`${styles['customer-cart']} ${styles['customer-paused']}`}>
+          <div className={styles['cart-ticket-note']}>
             <span>Ordering paused</span>
             <strong>QR menu is temporarily closed</strong>
             <p>Please ask our staff to help create your order from the POS counter.</p>
@@ -167,9 +167,9 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
         </section>
       ) : step === 'menu' ? (
         <>
-          <section className="customer-quick-panel">
-            <SearchField className="customer-search" placeholder="Search coffee, food, or snack" icon={<Search />} />
-            <div className="customer-promo">
+          <section className={styles['customer-quick-panel']}>
+            <SearchField className={styles['customer-search']} placeholder="Search coffee, food, or snack" icon={<Search />} />
+            <div className={styles['customer-promo']}>
               <span>Today</span>
               <strong>Free refill water at your table</strong>
               <small>Ask waiters from your order note.</small>
@@ -177,14 +177,14 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
           </section>
 
           <PillTabs
-            className="customer-categories"
+            className={styles['customer-categories']}
             items={categories}
             value={activeCategory}
             label="Menu categories"
             onChange={setActiveCategory}
           />
 
-          <section className="customer-section-head">
+          <section className={styles['customer-section-head']}>
             <div>
               <h2>{activeCategory}</h2>
               <p>{filteredMenu.length} menus available</p>
@@ -192,7 +192,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
             <span>Popular first</span>
           </section>
 
-          <section className="customer-menu-list">
+          <section className={styles['customer-menu-list']}>
             {filteredMenu.map((item) => (
               <MenuCard
                 key={item.id}
