@@ -43,3 +43,16 @@
   background: rgba(244, 183, 64, 0.18);
   color: #8f6209;
 }
+
+.empty-state {
+  margin: 0;
+  border: 1px dashed rgba(129, 139, 164, 0.28);
+  border-radius: 18px;
+  background: rgba(248, 250, 255, 0.72);
+  color: var(--muted);
+  padding: 16px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.45;
+  text-align: center;
+}
