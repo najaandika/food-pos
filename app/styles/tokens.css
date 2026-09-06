@@ -19,19 +19,13 @@
 
   /* Brand */
   --blue: #3047ff;
-  --primary: #3047ff;
   --blue-dark: #1829c9;
-  --primary-dark: #1829c9;
   --violet: #5b4bff;
   --navy: #141a33;
   --secondary: #20263a;
   --secondary-foreground: #ffffff;
   --mist: #eef2ff;
   --ice: #f8faff;
-  --teal: var(--blue);
-  --teal-dark: var(--blue-dark);
-  --yellow: var(--blue);
-  --yellow-dark: var(--blue);
   --pale: #f5f6ff;
 
   /* Feedback */
