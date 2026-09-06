@@ -26,6 +26,7 @@ model Category {
   isActive  Boolean    @default(true) @map("is_active")
   menuItems MenuItem[]
 
+  @@index([isActive, sortOrder])
   @@map("categories")
 }
 
@@ -43,6 +44,7 @@ model Table {
   updatedAt      DateTime    @updatedAt @map("updated_at")
   orders         Order[]
 
+  @@index([status])
   @@map("tables")
 }
 
@@ -62,6 +64,7 @@ model MenuItem {
   category     Category    @relation(fields: [categoryId], references: [id])
   orderItems   OrderItem[]
 
+  @@index([categoryId, isAvailable])
   @@map("menu_items")
 }
 
@@ -85,6 +88,8 @@ model Order {
   items         OrderItem[]
   payments      Payment[]
 
+  @@index([status, createdAt])
+  @@index([tableId])
   @@map("orders")
 }
 
@@ -99,6 +104,8 @@ model OrderItem {
   menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
   order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
+  @@index([orderId])
+  @@index([menuItemId])
   @@map("order_items")
 }
 
@@ -112,6 +119,7 @@ model Payment {
   createdAt DateTime      @default(now()) @map("created_at")
   order     Order         @relation(fields: [orderId], references: [id])
 
+  @@index([orderId, status])
   @@map("payments")
 }
 

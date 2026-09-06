@@ -6,7 +6,13 @@ const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
 };
 
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL ?? 'mysql://root@127.0.0.1:3306/pos');
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL must be configured');
+}
+
+const adapter = new PrismaMariaDb(databaseUrl);
 
 export const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter });
 
