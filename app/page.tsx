@@ -1,6 +1,6 @@
 'use client';
 
-import './styles/admin-bundle.css';
+import './admin/styles/admin.css';
 
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
