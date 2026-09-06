@@ -1,7 +1,5 @@
 'use client';
 
-import './MenuView.css';
-
 import { useMemo, useState } from 'react';
 
 import { Search } from 'lucide-react';

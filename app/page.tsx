@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Menu } from 'lucide-react';
 
 import { AdminSidebar } from './admin/shell';
+import { MobileBottomNav } from './admin/navigation';
 import {
   CashierView,
   DashboardView,
@@ -168,13 +169,21 @@ export default function Home() {
           onChangeView={goToView}
           onLogout={handleLogout}
           onToggleCollapsed={() => setSidebarCollapsed((current) => !current)}
+          onCloseMobileDrawer={() => setMobileSidebarOpen(false)}
+          hidePrimaryBottomItems={mobileSidebarOpen}
+        />
+        <MobileBottomNav
+          activeView={activeView}
+          user={currentUser}
+          onChangeView={goToView}
+          onOpenDrawer={() => setMobileSidebarOpen(true)}
         />
 
         <main className="main-panel">
           <ErrorBoundary>
             {activeView === 'dashboard' && <DashboardView role={currentUser.role} dashboard={adminData.dashboard} dishes={adminData.dishes} orders={adminData.orders} onChangeView={goToView} />}
             {activeView === 'orders' && <OrdersView role={currentUser.role} orders={adminData.orders} onUpdateStatus={handleOrderStatus} />}
-            {activeView === 'cashier' && <CashierView orders={adminData.orders} settings={adminData.settings} onMarkPaid={handlePayment} />}
+            {activeView === 'cashier' && <CashierView orders={adminData.orders} settings={adminData.settings} onMarkPaid={handlePayment} user={currentUser} onLogout={handleLogout} />}
             {activeView === 'waiters' && <WaitersView orders={adminData.orders} tables={adminData.tables} onUpdateStatus={handleOrderStatus} />}
             {activeView === 'owner-menu' && (
               <OwnerMenuView

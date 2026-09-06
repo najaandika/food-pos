@@ -20,7 +20,11 @@ const roleAccess: Record<UserRole, UserRole[]> = {
 };
 
 function authSecret() {
-  return process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || 'bloc-pos-dev-secret';
+  const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+  if (!secret) {
+    throw new Error('AUTH_SECRET must be configured');
+  }
+  return secret;
 }
 
 function encode(value: unknown) {

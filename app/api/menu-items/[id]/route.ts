@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { apiRoles, requireApiRole } from '../../../../lib/auth-session';
-import { handleApiError } from '../../../../lib/errors';
+import { handleApiError, validationErrorResponse } from '../../../../lib/errors';
 import { deleteMenuItem, updateMenuItem, updateMenuItemAvailability } from '../../../../lib/pos-repository';
 import { MenuAvailabilitySchema, MenuItemSchema } from '../../../../lib/validation';
 
@@ -19,9 +19,7 @@ export async function PATCH(request: Request, context: RouteContext) {
     if ('name' in body || 'category' in body || 'price' in body) {
       const parsed = MenuItemSchema.safeParse(body);
       if (!parsed.success) {
-        const fields: Record<string, string> = {};
-        for (const issue of parsed.error.issues) fields[issue.path.join('.') || 'root'] = issue.message;
-        return NextResponse.json({ error: 'Validation failed', code: 'VALIDATION_ERROR', fields }, { status: 422 });
+        return validationErrorResponse(parsed.error);
       }
       await updateMenuItem(Number(id), parsed.data);
       return NextResponse.json({ ok: true });
@@ -29,9 +27,7 @@ export async function PATCH(request: Request, context: RouteContext) {
 
     const parsed = MenuAvailabilitySchema.safeParse(body);
     if (!parsed.success) {
-      const fields: Record<string, string> = {};
-      for (const issue of parsed.error.issues) fields[issue.path.join('.') || 'root'] = issue.message;
-      return NextResponse.json({ error: 'Validation failed', code: 'VALIDATION_ERROR', fields }, { status: 422 });
+      return validationErrorResponse(parsed.error);
     }
 
     await updateMenuItemAvailability(Number(id), parsed.data.isAvailable);

@@ -1,7 +1,5 @@
 'use client';
 
-import './DashboardView.css';
-
 import {
   Bell,
   CreditCard,
@@ -11,6 +9,7 @@ import {
   ReceiptText,
   type LucideIcon,
 } from 'lucide-react';
+import Image from 'next/image';
 
 import { AdminTitle, dishes as fallbackDishes, orders as fallbackOrders } from '..';
 import { getDashboardStats, type AdminDish, type AdminOrder } from '../runtime-data';
@@ -150,7 +149,7 @@ export function DashboardView({
             <div className="side-head"><h3>Popular Menu</h3><a href="#">View All</a></div>
             <ol className="rank-list">
               {dishes.slice(0, 4).map((dish, index) => (
-                <li key={dish.id ?? `${dish.name}-${index}`}><span>{String(index + 1).padStart(2, '0')}</span><img src={dish.image} alt="" /><strong>{dish.name}</strong><small>{23 - index * 4} sold - Rp {(1.2 - index * 0.18).toFixed(1)}M</small></li>
+                <li key={dish.id ?? `${dish.name}-${index}`}><span>{String(index + 1).padStart(2, '0')}</span><Image src={dish.image} alt="" width={80} height={80} /><strong>{dish.name}</strong><small>{23 - index * 4} sold - Rp {(1.2 - index * 0.18).toFixed(1)}M</small></li>
               ))}
             </ol>
           </section>
@@ -159,4 +158,3 @@ export function DashboardView({
     </section>
   );
 }
-

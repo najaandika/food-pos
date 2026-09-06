@@ -1,6 +1,7 @@
 'use client';
 
 import { Copy, Pencil, Search } from 'lucide-react';
+import Image from 'next/image';
 import type { AdminDish } from '../../runtime-data';
 
 const FALLBACK_IMAGE =
@@ -82,7 +83,7 @@ export function OwnerMenuList({
         {visibleDishes.map((dish) => (
           <article className={`owner-menu-row ${dish.id === selectedDish?.id && !isCreating ? 'selected' : ''}`} key={dish.id ?? dish.name}>
             <button className="owner-menu-product" type="button" onClick={() => onStartEdit(dish)}>
-              <img src={dish.image || FALLBACK_IMAGE} alt={dish.name} />
+              <Image src={dish.image || FALLBACK_IMAGE} alt={dish.name} width={96} height={96} />
               <div>
                 <strong>{dish.name}</strong>
                 <small>{dish.desc}</small>

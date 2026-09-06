@@ -1,5 +1,6 @@
 import { Stepper } from '../ui/Stepper';
 import type { CustomerCartItem } from './types';
+import Image from 'next/image';
 
 type CartItemRowProps = {
   item: CustomerCartItem;
@@ -12,7 +13,7 @@ type CartItemRowProps = {
 export function CartItemRow({ item, formattedPrice, onNoteChange, onDecrement, onIncrement }: CartItemRowProps) {
   return (
     <article className="cart-row">
-      <img src={item.image} alt={item.name} />
+      <Image src={item.image} alt={item.name} width={160} height={160} />
       <div>
         <h3>{item.name}</h3>
         <span>{formattedPrice}</span>

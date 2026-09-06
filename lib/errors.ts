@@ -48,6 +48,10 @@ export function toValidationError(error: ZodError): ValidationError {
   return new ValidationError(fields);
 }
 
+export function validationErrorResponse(error: ZodError) {
+  return handleApiError(toValidationError(error));
+}
+
 export function handleApiError(error: unknown) {
   if (error instanceof ValidationError) {
     return NextResponse.json({ error: error.message, code: error.code, fields: error.fields }, { status: error.statusCode });

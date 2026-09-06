@@ -148,14 +148,7 @@
   }
 
   .mobile-nav-toggle {
-    position: fixed;
-    top: 14px;
-    left: 14px;
-    z-index: 210;
-    width: 46px;
-    height: 46px;
-    display: grid;
-    place-items: center;
+    display: none;
   }
 
   .mobile-sidebar-overlay {
@@ -246,7 +239,7 @@
   .main-panel {
     width: 100%;
     max-width: 100%;
-    padding: 76px 14px 104px;
+    padding: 20px 14px 104px;
   }
 }
 
@@ -344,6 +337,13 @@
   .nav-item,
   .sidebar-collapsed .nav-item {
     min-height: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .main-panel {
+    width: 100%;
+    max-width: 100%;
   }
 }
 

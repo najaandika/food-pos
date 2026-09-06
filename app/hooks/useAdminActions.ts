@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react';
 import type { PosOrderStatus } from '@/lib/pos-types';
+import { requestAdminJson, requestAdminOk } from '../lib/admin-api';
 
 type MenuFormPayload = {
   name: string;
@@ -34,28 +35,11 @@ type StaffFormPayload = {
 type ShowNotice = (notice: { tone: 'success' | 'error'; message: string }) => void;
 
 export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice: ShowNotice) {
-  const requestJson = useCallback(async <T,>(url: string, init?: RequestInit): Promise<T> => {
-    const response = await fetch(url, init);
-    if (!response.ok) {
-      const error = (await response.json().catch(() => ({ error: 'Request failed' }))) as { error?: string };
-      throw new Error(error.error ?? 'Request failed');
-    }
-    return response.json() as Promise<T>;
-  }, []);
-
-  const requestOk = useCallback(async (url: string, init?: RequestInit) => {
-    const response = await fetch(url, init);
-    if (!response.ok) {
-      const error = (await response.json().catch(() => ({ error: 'Request failed' }))) as { error?: string };
-      throw new Error(error.error ?? 'Request failed');
-    }
-  }, []);
-
   const handleOrderStatus = useCallback(
     async (orderId: number | undefined, status: PosOrderStatus) => {
       if (!orderId) return;
       try {
-        await requestOk(`/api/orders/${orderId}`, {
+        await requestAdminOk(`/api/orders/${orderId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status }),
@@ -66,14 +50,14 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to update order.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handlePayment = useCallback(
     async (orderId: number | undefined, method: 'cash' | 'qris' | 'transfer' = 'cash') => {
       if (!orderId) return;
       try {
-        await requestOk('/api/payments', {
+        await requestAdminOk('/api/payments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ orderId, method }),
@@ -84,7 +68,7 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to close payment.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleCreateManualOrder = useCallback(
@@ -96,7 +80,7 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
       notes?: string;
       items: Array<{ menuItemId: number; quantity: number; notes?: string }>;
     }) => {
-      const order = await requestJson<{ id: number; orderNumber: string }>('/api/orders', {
+      const order = await requestAdminJson<{ id: number; orderNumber: string }>('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...payload, source: 'manual' }),
@@ -105,14 +89,14 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
       showNotice({ tone: 'success', message: 'Order sent to kitchen.' });
       return order;
     },
-    [refreshSnapshot, requestJson, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleAvailability = useCallback(
     async (dishId: number | undefined, isAvailable: boolean | undefined) => {
       if (!dishId) return;
       try {
-        await requestOk(`/api/menu-items/${dishId}`, {
+        await requestAdminOk(`/api/menu-items/${dishId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ isAvailable: !isAvailable }),
@@ -123,13 +107,13 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to update menu.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleCreateMenu = useCallback(
     async (payload: MenuFormPayload) => {
       try {
-        await requestOk('/api/menu-items', {
+        await requestAdminOk('/api/menu-items', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -140,14 +124,14 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to create menu.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleUpdateMenu = useCallback(
     async (dishId: number | undefined, payload: MenuFormPayload) => {
       if (!dishId) return;
       try {
-        await requestOk(`/api/menu-items/${dishId}`, {
+        await requestAdminOk(`/api/menu-items/${dishId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -158,27 +142,27 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to save menu.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleDeleteMenu = useCallback(
     async (dishId: number | undefined) => {
       if (!dishId) return;
       try {
-        await requestOk(`/api/menu-items/${dishId}`, { method: 'DELETE' });
+        await requestAdminOk(`/api/menu-items/${dishId}`, { method: 'DELETE' });
         await refreshSnapshot();
         showNotice({ tone: 'success', message: 'Menu item removed.' });
       } catch (error) {
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to remove menu.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleCreateTable = useCallback(
     async (payload: TableFormPayload) => {
       try {
-        await requestOk('/api/tables', {
+        await requestAdminOk('/api/tables', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -189,14 +173,14 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to create table.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleUpdateTable = useCallback(
     async (tableId: number | undefined, payload: TableFormPayload) => {
       if (!tableId) return;
       try {
-        await requestOk(`/api/tables/${tableId}`, {
+        await requestAdminOk(`/api/tables/${tableId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -207,27 +191,27 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to save table.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleDeleteTable = useCallback(
     async (tableId: number | undefined) => {
       if (!tableId) return;
       try {
-        await requestOk(`/api/tables/${tableId}`, { method: 'DELETE' });
+        await requestAdminOk(`/api/tables/${tableId}`, { method: 'DELETE' });
         await refreshSnapshot();
         showNotice({ tone: 'success', message: 'Table archived.' });
       } catch (error) {
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to archive table.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleCreateStaff = useCallback(
     async (payload: StaffFormPayload) => {
       try {
-        await requestOk('/api/staff', {
+        await requestAdminOk('/api/staff', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -238,14 +222,14 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to create staff.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleUpdateStaff = useCallback(
     async (staffId: number | undefined, payload: StaffFormPayload) => {
       if (!staffId) return;
       try {
-        await requestOk(`/api/staff/${staffId}`, {
+        await requestAdminOk(`/api/staff/${staffId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -256,21 +240,21 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to save staff.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   const handleDisableStaff = useCallback(
     async (staffId: number | undefined) => {
       if (!staffId) return;
       try {
-        await requestOk(`/api/staff/${staffId}`, { method: 'DELETE' });
+        await requestAdminOk(`/api/staff/${staffId}`, { method: 'DELETE' });
         await refreshSnapshot();
         showNotice({ tone: 'success', message: 'Staff disabled.' });
       } catch (error) {
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to disable staff.' });
       }
     },
-    [refreshSnapshot, requestOk, showNotice],
+    [refreshSnapshot, showNotice],
   );
 
   return {

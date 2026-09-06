@@ -1,6 +1,7 @@
 import { prisma } from '../prisma';
 import type { PosStaff, UserRole } from '../pos-types';
 import { toId, toBigInt } from './helpers';
+import { hashPassword } from '../password';
 
 export type StaffPayload = {
   name: string;
@@ -27,11 +28,14 @@ export async function getStaff(): Promise<PosStaff[]> {
 }
 
 export async function createStaff(input: StaffPayload) {
+  const password = input.password?.trim();
+  if (!password) throw new Error('Password is required when creating staff');
+
   const user = await prisma.user.create({
     data: {
       name: input.name.trim(),
       email: input.email.trim().toLowerCase(),
-      passwordHash: input.password?.trim() || 'blocbarat',
+      passwordHash: await hashPassword(password),
       role: input.role,
       isActive: input.isActive,
     },
@@ -48,7 +52,7 @@ export async function updateStaff(userId: number, input: StaffPayload) {
       email: input.email.trim().toLowerCase(),
       role: input.role,
       isActive: input.isActive,
-      ...(input.password?.trim() ? { passwordHash: input.password.trim() } : {}),
+      ...(input.password?.trim() ? { passwordHash: await hashPassword(input.password.trim()) } : {}),
     },
   });
 }

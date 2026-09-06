@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { apiRoles, requireApiRole } from '../../../../lib/auth-session';
-import { handleApiError } from '../../../../lib/errors';
+import { handleApiError, validationErrorResponse } from '../../../../lib/errors';
 import { disableStaff, updateStaff } from '../../../../lib/pos-repository';
 import { StaffSchema } from '../../../../lib/validation';
 
@@ -18,9 +18,7 @@ export async function PATCH(request: Request, context: RouteContext) {
     const body = await request.json();
     const parsed = StaffSchema.safeParse(body);
     if (!parsed.success) {
-      const fields: Record<string, string> = {};
-      for (const issue of parsed.error.issues) fields[issue.path.join('.') || 'root'] = issue.message;
-      return NextResponse.json({ error: 'Validation failed', code: 'VALIDATION_ERROR', fields }, { status: 422 });
+      return validationErrorResponse(parsed.error);
     }
     await updateStaff(Number(id), parsed.data);
     return NextResponse.json({ ok: true });

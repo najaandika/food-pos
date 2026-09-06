@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { apiRoles, requireApiRole } from '../../../../lib/auth-session';
-import { handleApiError } from '../../../../lib/errors';
+import { handleApiError, validationErrorResponse } from '../../../../lib/errors';
 import { getPublicOrder, updateOrderStatus } from '../../../../lib/pos-repository';
 import type { PosOrderStatus, UserRole } from '../../../../lib/pos-types';
 import { OrderStatusSchema } from '../../../../lib/validation';
@@ -41,9 +41,7 @@ export async function PATCH(request: Request, context: RouteContext) {
     const body = await request.json();
     const parsed = OrderStatusSchema.safeParse(body);
     if (!parsed.success) {
-      const fields: Record<string, string> = {};
-      for (const issue of parsed.error.issues) fields[issue.path.join('.') || 'root'] = issue.message;
-      return NextResponse.json({ error: 'Validation failed', code: 'VALIDATION_ERROR', fields }, { status: 422 });
+      return validationErrorResponse(parsed.error);
     }
     const { status } = parsed.data;
 

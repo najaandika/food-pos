@@ -1,9 +1,7 @@
 'use client';
 
-import './ReportView.css';
-
 import type { CSSProperties } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CalendarDays, RefreshCcw } from 'lucide-react';
 
 import { AdminTitle } from '..';
@@ -38,7 +36,7 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
   const [report, setReport] = useState<PosReport | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const loadReport = async () => {
+  const loadReport = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch(`/api/reports?from=${from}&to=${to}`, { cache: 'no-store' });
@@ -46,11 +44,11 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [from, to]);
 
   useEffect(() => {
     void loadReport();
-  }, [from, to]);
+  }, [loadReport]);
 
   const traffic = report?.traffic.length ? report.traffic : fallbackTraffic;
   const maxTraffic = Math.max(1, ...traffic.flatMap((item) => [item.qr, item.dineIn]));

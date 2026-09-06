@@ -1,71 +1,10 @@
 /* admin-responsive part 3/4 - lines 814-1216 depth 0 */
 
 @media (max-width: 860px) {
-  .sidebar {
-    width: 76px;
-    flex-basis: 76px;
-    padding: 16px 8px;
-  }
-
-  .sidebar-collapsed .sidebar {
-    width: 76px;
-    flex-basis: 76px;
-    overflow: visible;
-    padding: 16px 8px;
-  }
-
-  .brand-wrap {
-    margin-bottom: 20px;
-  }
-
-  .brand-mark,
-  .sidebar-collapsed .brand-mark {
-    width: 38px;
-    transform: scale(0.92);
-  }
-
-  .nav {
-    gap: var(--pos-gap);
-  }
-
-  .nav-group {
-    gap: 7px;
-  }
-
-  .nav-label,
-  .sidebar-collapsed .nav-label {
-    font-size: 8px;
-  }
-
-  .nav-item,
-  .sidebar-collapsed .nav-item {
-    width: 52px;
-    min-height: 50px;
-    border-radius: 17px;
-  }
-
-  .nav-item.active {
-    min-height: 52px;
-  }
-
-  .nav-item svg,
-  .sidebar-collapsed .nav-item svg {
-    width: 21px;
-    height: 21px;
-  }
-
-  .sidebar-toggle,
-  .sidebar-collapsed .sidebar-toggle {
-    display: none;
-    width: 46px;
-    height: 36px;
-    margin-top: 10px;
-  }
+  /* Sidebar is handled as a drawer by admin-responsive-layout.css — no icon-rail overrides here */
 
   .main-panel {
-    width: calc(100vw - 76px);
-    max-width: calc(100vw - 76px);
-    padding: 22px 10px 104px;
+    padding: 76px 10px 104px;
   }
 
   .topbar,
@@ -269,9 +208,9 @@
 
 @media (max-width: 560px) {
   .main-panel {
-    width: calc(100vw - 76px);
-    max-width: calc(100vw - 76px);
-    padding: 20px 8px 104px;
+    width: 100%;
+    max-width: 100%;
+    padding: 76px 8px 104px;
   }
 
   .topbar h1 {

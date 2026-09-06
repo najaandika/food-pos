@@ -1,6 +1,7 @@
 'use client';
 
 import { Pencil, Search, UserX } from 'lucide-react';
+import Image from 'next/image';
 import type { AdminStaff } from '../../runtime-data';
 
 type Props = {
@@ -63,7 +64,7 @@ export function OwnerStaffList({
             <article className={`staff-row ${person.id === selectedStaff?.id && !isCreating ? 'selected' : ''}`} key={person.id ?? person.email}>
               <button className="staff-person" type="button" onClick={() => onStartEdit(person)}>
                 <span>
-                  <img src={person.avatar} alt={person.name} />
+                  <Image src={person.avatar} alt={person.name} width={56} height={56} />
                 </span>
                 <div>
                   <strong>{person.name}</strong>

@@ -1,25 +1,26 @@
 'use client';
 
-import './shell.css';
-
 import {
   ChartColumn,
+  ChevronLeft,
+  ChevronRight,
   ConciergeBell,
   CreditCard,
   LayoutDashboard,
   List,
   LogOut,
-  PanelLeftClose,
-  PanelLeftOpen,
   QrCode,
   ReceiptText,
   Settings,
   SlidersHorizontal,
   UserRoundPlus,
+  X,
   type LucideIcon,
 } from 'lucide-react';
+import Image from 'next/image';
 import { navGroups, type View } from '.';
 import { canAccessView, roleLabel, type AuthUser } from './auth';
+import { getRoleBottomViews } from './navigation';
 
 type AdminSidebarProps = {
   activeView: View;
@@ -28,6 +29,8 @@ type AdminSidebarProps = {
   onToggleCollapsed: () => void;
   onChangeView: (view: View) => void;
   onLogout: () => void;
+  onCloseMobileDrawer?: () => void;
+  hidePrimaryBottomItems?: boolean;
 };
 
 const navIcons: Record<View, LucideIcon> = {
@@ -43,10 +46,20 @@ const navIcons: Record<View, LucideIcon> = {
   settings: Settings,
 };
 
-export function AdminSidebar({ activeView, collapsed, user, onToggleCollapsed, onChangeView, onLogout }: AdminSidebarProps) {
-  const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose;
+export function AdminSidebar({
+  activeView,
+  collapsed,
+  user,
+  onToggleCollapsed,
+  onChangeView,
+  onLogout,
+  onCloseMobileDrawer,
+  hidePrimaryBottomItems = false,
+}: AdminSidebarProps) {
+  const ToggleIcon = collapsed ? ChevronRight : ChevronLeft;
   const SettingsIcon = navIcons.settings;
   const canOpenSettings = canAccessView(user.role, 'settings');
+  const roleBottomViews = getRoleBottomViews(user.role);
 
   const handleChangeView = (view: View) => {
     if (!canAccessView(user.role, view)) return;
@@ -63,11 +76,26 @@ export function AdminSidebar({ activeView, collapsed, user, onToggleCollapsed, o
         <button className="sidebar-toggle" type="button" onClick={onToggleCollapsed} aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
           <ToggleIcon />
         </button>
+        {onCloseMobileDrawer && (
+          <button className="mobile-drawer-close" type="button" onClick={onCloseMobileDrawer} aria-label="Close menu">
+            <X />
+          </button>
+        )}
       </div>
 
       <nav className="nav" aria-label="Sidebar navigation">
+        {hidePrimaryBottomItems && (user.role === 'waiters' || user.role === 'kasir') && (
+          <div className="drawer-role-card">
+            <span className="role-card-badge">{roleLabel(user.role)} Mode</span>
+            <p>Akses cepat panggilan meja, antrean & status pesanan langsung dari navigasi bawah.</p>
+          </div>
+        )}
         {navGroups.map((group) => {
-          const allowedItems = group.items.filter((item) => canAccessView(user.role, item.view));
+          const allowedItems = group.items.filter((item) => {
+            if (!canAccessView(user.role, item.view)) return false;
+            if (hidePrimaryBottomItems && roleBottomViews.includes(item.view)) return false;
+            return true;
+          });
           if (allowedItems.length === 0) return null;
 
           return (
@@ -85,7 +113,7 @@ export function AdminSidebar({ activeView, collapsed, user, onToggleCollapsed, o
             </div>
           );
         })}
-        {canOpenSettings && (
+        {canOpenSettings && (!hidePrimaryBottomItems || !roleBottomViews.includes('settings')) && (
           <div className="nav-group nav-group-system">
             <div className="nav-label">System</div>
             <NavButton active={activeView === 'settings'} icon={SettingsIcon} label="Settings" onClick={() => handleChangeView('settings')} />
@@ -95,7 +123,7 @@ export function AdminSidebar({ activeView, collapsed, user, onToggleCollapsed, o
 
       <div className="profile-box">
         <div className="profile-avatar">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt={user.name} />
+          <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt={user.name} width={96} height={96} />
           <span aria-hidden="true" />
         </div>
         <div className="profile-meta"><strong>{user.name}</strong><span>{roleLabel(user.role)}</span></div>
@@ -124,37 +152,5 @@ function NavButton({ active, icon: NavIcon, label, onClick }: NavButtonProps) {
       <NavIcon />
       <span>{label}</span>
     </button>
-  );
-}
-
-type CreateOrderModalProps = {
-  guestTotal: number;
-  onClose: () => void;
-  onCreate: () => void;
-  onChangeGuestTotal: (guestTotal: number) => void;
-};
-
-export function CreateOrderModal({ guestTotal, onClose, onCreate, onChangeGuestTotal }: CreateOrderModalProps) {
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-box" role="dialog" aria-modal="true" aria-labelledby="create-order-title" onClick={(event) => event.stopPropagation()}>
-        <div className="modal-top">
-          <h2 id="create-order-title">Create New Order</h2>
-          <button className="close-btn" type="button" onClick={onClose} aria-label="Close">x</button>
-        </div>
-        <div className="segmented"><button className="segment active" type="button">Dine In</button><button className="segment" type="button">Takeaway</button></div>
-        <label className="field-label" htmlFor="customer-name">Customer Name</label>
-        <input className="text-field" id="customer-name" type="text" defaultValue="Ariel Hikmat" />
-        <div className="field-label">Guest</div>
-        <div className="counter-box">
-          <button type="button" onClick={() => onChangeGuestTotal(Math.max(1, guestTotal - 1))}>-</button>
-          <span>{guestTotal} Person</span>
-          <button type="button" onClick={() => onChangeGuestTotal(guestTotal + 1)}>+</button>
-        </div>
-        <div className="field-label">Choose Table</div>
-        <button className="table-box" type="button"><span>A4</span><span>&gt;</span></button>
-        <button className="submit-btn" type="button" onClick={onCreate}>Create Order</button>
-      </div>
-    </div>
   );
 }

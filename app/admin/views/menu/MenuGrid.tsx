@@ -1,6 +1,7 @@
 'use client';
 
 import { Settings2, Utensils } from 'lucide-react';
+import Image from 'next/image';
 import type { AdminDish } from '../../runtime-data';
 
 type CartLine = AdminDish & { cartQty: number };
@@ -31,7 +32,7 @@ export function MenuGrid({ dishes, cart, onUpdateCart }: Props) {
       <div className="menu-grid">
         {dishes.map((dish, index) => (
           <article className="dish-card" key={dish.id ?? dish.name}>
-            <img src={dish.image} alt={dish.name} />
+            <Image src={dish.image} alt={dish.name} width={600} height={400} />
             {dish.badge && <span className={`badge ${dish.badgeTone}`}>{dish.badge}</span>}
             <span className="prep-chip">{index % 2 === 0 ? 'Kitchen / 8m' : 'Bar / 3m'}</span>
             <h3>{dish.name}</h3>

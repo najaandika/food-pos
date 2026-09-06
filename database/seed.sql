@@ -1,9 +1,9 @@
 USE pos;
 
 INSERT INTO users (name, email, password_hash, role) VALUES
-  ('Owner Bloc Barat', 'owner@blocbarat.local', 'blocbarat', 'owner'),
-  ('Gladina Samantha', 'cashier@blocbarat.local', 'blocbarat', 'kasir'),
-  ('Gladina Samantha', 'waiters@blocbarat.local', 'blocbarat', 'waiters')
+  ('Owner Bloc Barat', 'owner@blocbarat.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'owner'),
+  ('Gladina Samantha', 'cashier@blocbarat.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'kasir'),
+  ('Gladina Samantha', 'waiters@blocbarat.local', 'scrypt$16384$8$1$M4-QduS4vOkrVaSvYy7lGw$kwghdsBQ590o6dp9P2yWDVSZrf8aPqqW4BhjlRhZwPGIGKeEAltwWhps7KfaX9rdi9YOHVpEEmh7wneW3j4UWg', 'waiters')
 ON DUPLICATE KEY UPDATE name = VALUES(name), role = VALUES(role), is_active = TRUE;
 
 INSERT INTO categories (name, sort_order, is_active) VALUES

@@ -1,5 +1,19 @@
+/* Base shell & view component styles */
+@import "../admin/shell.css";
 @import "../components/ui/admin-modal.css";
 @import "../admin/views/OwnerShared.css";
+@import "../admin/views/CashierView.css";
+@import "../admin/views/DashboardView.css";
+@import "../admin/views/MenuView.css";
+@import "../admin/views/OrdersView.css";
+@import "../admin/views/OwnerMenuView.css";
+@import "../admin/views/OwnerStaffView.css";
+@import "../admin/views/OwnerTablesView.css";
+@import "../admin/views/ReportView.css";
+@import "../admin/views/SettingsView.css";
+@import "../admin/views/WaitersView.css";
+
+/* Responsive & layout overrides (MUST come after base styles) */
 @import "../admin/styles/admin-container-layout.css";
 @import "../admin/styles/admin-container-mobile.css";
 @import "../admin/styles/admin-responsive-layout.css";

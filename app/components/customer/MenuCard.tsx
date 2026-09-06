@@ -1,6 +1,7 @@
 import { Button } from '../ui/Button';
 import { Stepper } from '../ui/Stepper';
 import type { CustomerMenuItem } from './types';
+import Image from 'next/image';
 
 type MenuCardProps = {
   item: CustomerMenuItem;
@@ -14,7 +15,7 @@ export function MenuCard({ item, quantity, formattedPrice, onAdd, onRemove }: Me
   return (
     <article className="customer-menu-item">
       <div className="customer-menu-image">
-        <img src={item.image} alt={item.name} />
+        <Image src={item.image} alt={item.name} width={600} height={400} />
         {item.badge && <span className="menu-badge">{item.badge}</span>}
       </div>
       <div>

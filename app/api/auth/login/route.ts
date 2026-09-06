@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/prisma';
 import { setSessionCookie } from '../../../../lib/auth-session';
+import { hashPassword, verifyPassword } from '../../../../lib/password';
 
 export async function POST(request: Request) {
   const { email, password } = await request.json();
@@ -14,8 +15,20 @@ export async function POST(request: Request) {
     where: { email: normalizedEmail, isActive: true },
   });
 
-  if (!user || (password !== user.passwordHash && password !== 'blocbarat')) {
+  if (!user) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+  }
+
+  const passwordResult = await verifyPassword(String(password), user.passwordHash);
+  if (!passwordResult.valid) {
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+  }
+
+  if (passwordResult.needsRehash) {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { passwordHash: await hashPassword(String(password)) },
+    });
   }
 
   const response = NextResponse.json({

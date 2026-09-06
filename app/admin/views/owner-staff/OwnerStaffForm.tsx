@@ -1,6 +1,7 @@
 'use client';
 
 import { ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
 import { MockSelect } from '../..';
 import type { AdminStaff } from '../../runtime-data';
 
@@ -39,7 +40,7 @@ export function OwnerStaffForm({ draft, onChangeDraft, isCreating, selectedStaff
       </div>
       <div className="staff-editor-head">
         <span className="staff-avatar-large">
-          {selectedStaff?.avatar && !isCreating ? <img src={selectedStaff.avatar} alt={selectedStaff.name} /> : <ShieldCheck aria-hidden="true" />}
+          {selectedStaff?.avatar && !isCreating ? <Image src={selectedStaff.avatar} alt={selectedStaff.name} width={96} height={96} /> : <ShieldCheck aria-hidden="true" />}
         </span>
         <h2>{isCreating ? 'Add Staff' : draft.name || 'Edit Staff'}</h2>
         <p>{isCreating ? 'Create internal account access for the team.' : 'Update role, login access, and profile details.'}</p>

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { apiRoles, requireApiRole } from '../../../lib/auth-session';
-import { handleApiError, ValidationError } from '../../../lib/errors';
+import { handleApiError, validationErrorResponse } from '../../../lib/errors';
 import { createCustomerOrder, createManualOrder } from '../../../lib/pos-repository';
 import { CustomerOrderSchema, ManualOrderSchema } from '../../../lib/validation';
 
@@ -14,9 +14,7 @@ export async function POST(request: Request) {
 
       const parsed = ManualOrderSchema.safeParse(body);
       if (!parsed.success) {
-        const fields: Record<string, string> = {};
-        for (const issue of parsed.error.issues) fields[issue.path.join('.') || 'root'] = issue.message;
-        return NextResponse.json({ error: 'Validation failed', code: 'VALIDATION_ERROR', fields }, { status: 422 });
+        return validationErrorResponse(parsed.error);
       }
 
       const order = await createManualOrder({
@@ -33,9 +31,7 @@ export async function POST(request: Request) {
 
     const parsed = CustomerOrderSchema.safeParse(body);
     if (!parsed.success) {
-      const fields: Record<string, string> = {};
-      for (const issue of parsed.error.issues) fields[issue.path.join('.') || 'root'] = issue.message;
-      return NextResponse.json({ error: 'Validation failed', code: 'VALIDATION_ERROR', fields }, { status: 422 });
+      return validationErrorResponse(parsed.error);
     }
 
     const order = await createCustomerOrder({

@@ -1,7 +1,5 @@
 'use client';
 
-import './OwnerTablesView.css';
-
 import { useEffect, useMemo, useState } from 'react';
 
 import { AdminTitle } from '..';

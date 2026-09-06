@@ -1,6 +1,7 @@
 'use client';
 
 import { Trash2 } from 'lucide-react';
+import Image from 'next/image';
 import { MockSelect } from '../..';
 import type { AdminDish } from '../../runtime-data';
 
@@ -43,7 +44,7 @@ export function OwnerMenuForm({ draft, onChangeDraft, categoryOptions, isCreatin
         )}
       </div>
       <div className="editor-preview">
-        <img src={draft.imageUrl || FALLBACK_IMAGE} alt={draft.name || 'Menu preview'} />
+        <Image src={draft.imageUrl || FALLBACK_IMAGE} alt={draft.name || 'Menu preview'} width={900} height={600} />
         <span>{draft.badge || (draft.isBestSeller ? 'Best Seller' : 'Live Preview')}</span>
       </div>
       <div className="menu-editor-meta">

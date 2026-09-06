@@ -1,10 +1,105 @@
-import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown, LogOut, X } from 'lucide-react';
+import { roleLabel, type AuthUser } from './auth';
 
-export function AdminTitle({ title, subtitle }: { title: string; subtitle: string }) {
+export function AdminTitle({
+  title,
+  subtitle,
+  user,
+  onLogout,
+}: {
+  title: string;
+  subtitle: string;
+  user?: AuthUser;
+  onLogout?: () => void;
+}) {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <div className="admin-title">
-      <h1>{title}</h1>
-      <p>{subtitle}</p>
+    <div className="admin-title-wrap">
+      <div className="admin-title">
+        <h1>{title}</h1>
+        <p>{subtitle}</p>
+      </div>
+      {user && (
+        <>
+          <button
+            type="button"
+            className="topbar-profile-badge"
+            onClick={() => setShowModal(true)}
+            aria-label="User profile and shift info"
+            title={`${user.name} (${roleLabel(user.role)})`}
+          >
+            <div className="profile-initial">{user.name.charAt(0)}</div>
+          </button>
+
+          {showModal && (
+            <UserProfileModal user={user} onClose={() => setShowModal(false)} onLogout={onLogout} />
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+export function UserProfileModal({
+  user,
+  onClose,
+  onLogout,
+}: {
+  user: AuthUser;
+  onClose: () => void;
+  onLogout?: () => void;
+}) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-box profile-quick-modal"
+        role="dialog"
+        aria-modal="true"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="modal-top">
+          <h2>Profil & Shift Staf</h2>
+          <button className="close-btn" type="button" onClick={onClose} aria-label="Close">
+            <X />
+          </button>
+        </div>
+
+        <div className="profile-modal-user">
+          <div className="profile-modal-avatar">
+            <span>{user.name.charAt(0)}</span>
+          </div>
+          <div className="profile-modal-info">
+            <h3>{user.name}</h3>
+            <span className="profile-role-pill">{roleLabel(user.role)}</span>
+            <small>{user.email}</small>
+          </div>
+        </div>
+
+        <div className="profile-shift-box">
+          <div className="shift-row">
+            <span>Status Shift</span>
+            <strong>Evening Shift (Aktif)</strong>
+          </div>
+          <div className="shift-row">
+            <span>Lokasi Outlet</span>
+            <strong>Cafe Bloc Barat Krui</strong>
+          </div>
+        </div>
+
+        <div className="profile-modal-actions">
+          {onLogout && (
+            <button className="logout-action-btn" type="button" onClick={onLogout}>
+              <LogOut />
+              <span>Keluar / Logout</span>
+            </button>
+          )}
+          <button className="close-action-btn" type="button" onClick={onClose}>
+            Tutup
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,5 @@
 'use client';
 
-import './OwnerMenuView.css';
-
 import { useEffect, useMemo, useState } from 'react';
 
 import { AdminTitle, dishes as fallbackDishes } from '..';

@@ -1,7 +1,5 @@
 'use client';
 
-import './CashierView.css';
-
 import { useEffect, useMemo, useState } from 'react';
 import { Banknote, CreditCard, ListFilter, QrCode, Search } from 'lucide-react';
 
@@ -9,6 +7,8 @@ import { AdminTitle, orders as fallbackOrders } from '..';
 import { formatRupiah } from '../../lib/format';
 import type { AdminOrder } from '../runtime-data';
 import type { PosSettings } from '../../../lib/pos-types';
+
+import { roleLabel, type AuthUser } from '../auth';
 
 type PaymentMethod = 'cash' | 'qris' | 'transfer';
 type CashierFilter = 'all' | 'ready' | 'qr' | 'takeaway';
@@ -23,10 +23,14 @@ export function CashierView({
   orders = fallbackOrders,
   settings,
   onMarkPaid,
+  user,
+  onLogout,
 }: {
   orders?: AdminOrder[];
   settings?: PosSettings;
-  onMarkPaid?: (orderId: number | undefined, method?: PaymentMethod) => void;
+  onMarkPaid?: (id: number, method?: PaymentMethod) => void;
+  user?: AuthUser;
+  onLogout?: () => void;
 }) {
   const [selectedId, setSelectedId] = useState<number | undefined>(orders[0]?.id);
   const [method, setMethod] = useState<PaymentMethod>('cash');
@@ -82,7 +86,7 @@ export function CashierView({
   return (
     <section className="app-view active">
       <header className="topbar">
-        <AdminTitle title="Cashier Desk" subtitle="Confirm bills, choose payment method, and close transactions." />
+        <AdminTitle title="Cashier Desk" subtitle="Confirm bills, choose payment method, and close transactions." user={user} onLogout={onLogout} />
         <div className="cashier-shift"><span>Shift</span><strong>Evening - Gladina</strong></div>
       </header>
 
@@ -209,7 +213,7 @@ export function CashierView({
 
           <div className="cashier-actions">
             <button type="button">Print Bill</button>
-            <button type="button" disabled={!selectedOrder?.id || !selectedPayable || paymentOptions.length === 0} onClick={() => onMarkPaid?.(selectedOrder?.id, method)}>Mark as Paid</button>
+            <button type="button" disabled={!selectedOrder?.id || !selectedPayable || paymentOptions.length === 0} onClick={() => selectedOrder?.id && onMarkPaid?.(selectedOrder.id, method)}>Mark as Paid</button>
           </div>
         </aside>
       </div>

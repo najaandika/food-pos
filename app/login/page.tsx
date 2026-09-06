@@ -8,7 +8,7 @@ import { isAuthUser } from '../admin/auth';
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('owner@blocbarat.local');
-  const [password, setPassword] = useState('blocbarat');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
