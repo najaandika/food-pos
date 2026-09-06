@@ -427,6 +427,13 @@
   border-radius: var(--radius-sm);
   padding: 0 var(--space-fixed-4);
   font-size: var(--font-size-sm);
+  color: var(--muted);
+  transition: color var(--transition-hover), background-color var(--transition-hover);
+}
+
+.logout-btn:hover {
+  color: var(--danger);
+  background: rgba(238, 82, 104, 0.1);
 }
 
 .main-panel {
