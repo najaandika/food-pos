@@ -52,6 +52,7 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
 
   const traffic = report?.traffic.length ? report.traffic : fallbackTraffic;
   const maxTraffic = Math.max(1, ...traffic.flatMap((item) => [item.qr, item.dineIn]));
+  const hasTraffic = traffic.some((item) => item.qr > 0 || item.dineIn > 0);
   const categorySales = report?.categorySales.length
     ? report.categorySales
     : [
@@ -108,6 +109,10 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
               <div><h2>Order Traffic</h2><p>Daily QR and dine-in activity</p></div>
               <button type="button">{traffic.length} days</button>
             </div>
+            <div className="report-chart-legend" aria-label="Chart legend">
+              <span><i className="qr" /> QR orders</span>
+              <span><i className="dine-in" /> Dine in</span>
+            </div>
             <div className="bar-chart" aria-label="Order traffic bar chart">
               {traffic.map((item, index) => (
                 <div className="bar-group" style={{ '--chart-delay': `${index * 70}ms` } as CSSProperties} key={`${item.label}-${index}`}>
@@ -118,6 +123,7 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
                   <small>{item.label}</small>
                 </div>
               ))}
+              {!hasTraffic && <p className="report-chart-empty">No order traffic in this date range.</p>}
             </div>
             <div className="report-order-detail">
               <div className="report-card-head compact">
