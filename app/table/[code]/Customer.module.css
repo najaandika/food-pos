@@ -131,7 +131,7 @@
     position: relative;
     display: block;
     isolation: isolate;
-    --search-icon-right: 8px;
+    --search-icon-right: 14px;
     --search-icon-size: 36px;
     --search-icon-bg: transparent;
     --search-icon-color: var(--muted);
