@@ -93,7 +93,7 @@ export function OrdersView({
         <span className="date-label">Sunday, 23 August 2026</span>
       </header>
       <div className="orders-toolbar">
-        <div className="tabs" role="tablist">
+        <div className="admin-tabs" role="tablist">
           {[
             ['all', 'All'],
             ['qr', 'QR'],
@@ -110,7 +110,7 @@ export function OrdersView({
           <button className="icon-btn" type="button" aria-label="Filter orders">
             <ListFilter aria-hidden="true" />
           </button>
-          <label className="search-wrap wide">
+          <label className="admin-search-wrap wide">
             <input type="search" placeholder="Search a name, order, or etc" value={query} onChange={(event) => setQuery(event.target.value)} />
             <Search aria-hidden="true" />
           </label>

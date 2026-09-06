@@ -46,7 +46,7 @@ export function OwnerStaffList({
 
       <div className="staff-panel">
         <div className="table-tools">
-          <label className="search-wrap">
+          <label className="admin-search-wrap">
             <input type="search" placeholder="Search staff name or role" value={query} onChange={(event) => onChangeQuery(event.target.value)} />
             <Search aria-hidden="true" />
           </label>

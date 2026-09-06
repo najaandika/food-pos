@@ -79,7 +79,7 @@
 }
 
 .stat-head,
-.section-head,
+.admin-section-head,
 .side-head,
 .feed-row {
   display: flex;
@@ -87,7 +87,7 @@
 }
 
 .tools-line,
-.order-card-top,
+.admin-order-card-top,
 .order-meta,
 .total-line,
 .card-actions,
@@ -623,7 +623,7 @@ button,
 .table-status-card,
 .category-list button,
 .quick-actions-grid button,
-.order-card,
+.admin-order-card,
 .service-card,
 .topbar-profile-badge {
   transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms ease, opacity 120ms ease;

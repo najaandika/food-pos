@@ -92,7 +92,7 @@ export function DashboardView({
 
           <div className="dashboard-ops-grid">
             <section className="ops-card">
-              <div className="section-head compact-head">
+              <div className="admin-section-head compact-head">
                 <div><h2>Order Status</h2><p>Live operational split</p></div>
               </div>
               <div className="status-breakdown">
@@ -104,7 +104,7 @@ export function DashboardView({
             </section>
 
             <section className="ops-card">
-              <div className="section-head compact-head">
+              <div className="admin-section-head compact-head">
                 <div><h2>Floor Activity</h2><p>Tables needing attention</p></div>
               </div>
               <div className="floor-mini-grid">
@@ -117,7 +117,7 @@ export function DashboardView({
           </div>
 
           <section className="order-list-panel dashboard-recent">
-            <div className="section-head">
+            <div className="admin-section-head">
               <div><h2>Recent Orders</h2><p>Latest QR and manual orders</p></div>
               <button type="button">View All</button>
             </div>

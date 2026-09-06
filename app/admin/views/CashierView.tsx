@@ -120,7 +120,7 @@ export function CashierView({
                   </button>
                 ))}
               </div>
-              <label className="search-wrap">
+              <label className="admin-search-wrap">
                 <input type="search" placeholder="Search bill or table" value={query} onChange={(event) => setQuery(event.target.value)} />
                 <Search aria-hidden="true" />
               </label>

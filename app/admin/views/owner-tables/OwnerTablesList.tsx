@@ -31,7 +31,7 @@ export function OwnerTablesList({ filteredTables, tableStats, activeFilter, quer
       </div>
 
       <div className="table-tools">
-        <label className="search-wrap">
+        <label className="admin-search-wrap">
           <input type="search" placeholder="Search table code or area" value={query} onChange={(event) => onChangeQuery(event.target.value)} />
           <Search aria-hidden="true" />
         </label>

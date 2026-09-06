@@ -53,7 +53,7 @@ export function OwnerMenuList({
       </div>
 
       <div className="owner-menu-toolbar">
-        <label className="search-wrap">
+        <label className="admin-search-wrap">
           <input type="search" placeholder="Search menu item" value={query} onChange={(event) => onChangeQuery(event.target.value)} />
           <Search aria-hidden="true" />
         </label>

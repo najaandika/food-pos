@@ -126,7 +126,7 @@ export function MenuView({
     <section className="app-view active">
       <header className="topbar pos-menu-topbar">
         <AdminTitle title="POS Counter" subtitle="Fast order entry for table service, QR orders, and cashier tickets." />
-        <label className="search-wrap menu-search">
+        <label className="admin-search-wrap menu-search">
           <input type="search" placeholder="Search menu item" value={query} onChange={(event) => setQuery(event.target.value)} />
           <Search aria-hidden="true" />
         </label>

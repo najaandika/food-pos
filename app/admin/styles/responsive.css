@@ -1,4 +1,4 @@
-﻿/* Source: admin-container-layout.css */
+/* Source: admin-container-layout.css */
 /* admin-container layout - 1120 + 920 - lines 1-123 */
 .cashier-summary,
 .waiters-summary,
@@ -207,7 +207,7 @@
 
   .compact-head h2,
   .quick-actions-card h2,
-  .section-head h2 {
+  .admin-section-head h2 {
     font-size: 19px;
     line-height: 1.15;
   }
@@ -866,7 +866,7 @@
 
   .waiters-zone-tabs,
   .owner-filter-tabs,
-  .orders-toolbar .tabs {
+  .orders-toolbar .admin-tabs {
     max-width: 100%;
     overflow-x: hidden;
     flex-wrap: wrap;
@@ -887,7 +887,7 @@
   .stats-row, .orders-grid, .menu-grid, .cashier-summary, .waiters-summary, .tables-summary, .owner-menu-summary, .settings-summary, .table-status-grid, .qr-table-grid, .staff-summary, .dashboard-stats-grid, .dashboard-ops-grid, .report-layout, .report-stats { grid-template-columns: 1fr; }
   .stats-row { gap: 18px; }
   .orders-toolbar .tools-line { width: 100%; grid-template-columns: auto 1fr; }
-  .orders-toolbar .search-wrap.wide { width: 100%; }
+  .orders-toolbar .admin-search-wrap.wide { width: 100%; }
   .kanban-column { flex-basis: 276px; max-height: none; }
   .feed-row { display: grid; grid-template-columns: 58px 1fr; }
   .feed-row > small, .feed-row button { margin-left: 0; grid-column: 2; }
@@ -1073,7 +1073,7 @@
 }
 
 @container admin-main (max-width: 760px) {
-  .orders-toolbar .tabs,
+  .orders-toolbar .admin-tabs,
   .owner-filter-tabs,
   .category-list,
   .category-rail .category-list {
@@ -1088,7 +1088,7 @@
     padding: 0;
   }
 
-  .orders-toolbar .tabs button,
+  .orders-toolbar .admin-tabs button,
   .owner-filter-tabs button {
     flex: 1 1 auto;
   }
@@ -1458,19 +1458,19 @@
     border-radius: 13px;
   }
 
-  .section-head {
+  .admin-section-head {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: var(--space-fixed-3);
     align-items: center;
   }
 
-  .section-head h2 {
+  .admin-section-head h2 {
     font-size: 22px;
     line-height: 1.12;
   }
 
-  .dashboard-recent .section-head button {
+  .dashboard-recent .admin-section-head button {
     padding: 9px 12px;
     font-size: var(--font-size-xs);
   }
@@ -1667,7 +1667,7 @@
     margin-bottom: 14px;
   }
 
-  .orders-toolbar .tabs {
+  .orders-toolbar .admin-tabs {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-fixed-2);
@@ -1676,7 +1676,7 @@
     padding-bottom: 0;
   }
 
-  .orders-toolbar .tabs button {
+  .orders-toolbar .admin-tabs button {
     height: 40px;
     flex: 1 1 auto;
     border-radius: var(--radius-sm);
@@ -1841,7 +1841,7 @@
     font-size: var(--font-size-xs);
   }
 
-  .dashboard-recent .section-head {
+  .dashboard-recent .admin-section-head {
     grid-template-columns: minmax(0, 1fr) auto;
     margin-bottom: 12px;
   }
