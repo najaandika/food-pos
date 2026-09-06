@@ -55,7 +55,7 @@ export default function LoginPage() {
         <div className="login-panel">
           <div className="login-panel-inner">
             <div className="login-brand">
-              <span className="login-mark" aria-hidden="true"><i /><i /><i /></span>
+              <span className="login-mark" aria-hidden="true"><i /></span>
               <div>
                 <strong>POS System</strong>
                 <span>Global Point of Sale</span>
