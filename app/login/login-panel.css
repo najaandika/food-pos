@@ -44,7 +44,6 @@
 }
 
 .login-mark {
-  position: relative;
   display: grid;
   place-items: center;
   width: 40px;
@@ -52,26 +51,11 @@
   flex: 0 0 auto;
   border-radius: 13px;
   background: var(--navy);
-}
-
-.login-mark i {
-  position: absolute;
-  width: 17px;
-  height: 21px;
-  border: 4px solid var(--blue);
-  border-left-width: 5px;
-  border-radius: 4px 10px 10px 4px;
-}
-
-.login-mark i::after {
-  position: absolute;
-  top: 5px;
-  right: -1px;
-  width: 7px;
-  height: 4px;
-  border-radius: 0 4px 4px 0;
-  background: var(--navy);
-  content: '';
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.08em;
 }
 
 .login-brand strong,
