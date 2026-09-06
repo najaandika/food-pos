@@ -13,7 +13,7 @@ import { MenuGrid } from './menu/MenuGrid';
 import type { AdminDish, AdminOrder, AdminTable } from '../runtime-data';
 import type { PosSettings } from '@/lib/pos-types';
 
-type CartLine = AdminDish & { cartQty: number };
+type CartLine = AdminDish & { cartQty: number; note?: string };
 
 export function MenuView({
   dishes = fallbackDishes,
@@ -86,6 +86,16 @@ export function MenuView({
     });
   };
 
+  const updateLineNote = (dishId: number | undefined, note: string) => {
+    if (!dishId) return;
+    setCart((current) => {
+      const key = String(dishId);
+      const line = current[key];
+      if (!line) return current;
+      return { ...current, [key]: { ...line, note } };
+    });
+  };
+
   const sendOrder = async () => {
     if (!cartLines.length || submitting) return;
     setSubmitting(true);
@@ -96,7 +106,7 @@ export function MenuView({
         customerName,
         type: orderType,
         guests,
-        items: cartLines.map((line) => ({ menuItemId: line.id ?? 0, quantity: line.cartQty })),
+        items: cartLines.map((line) => ({ menuItemId: line.id ?? 0, quantity: line.cartQty, notes: line.note || undefined })),
       });
       if (order) {
         setSentOrder({
@@ -175,6 +185,7 @@ export function MenuView({
           sendError={sendError}
           sentOrder={sentOrder}
           onSendOrder={sendOrder}
+          onChangeLineNote={updateLineNote}
           onStartNewTicket={startNewTicket}
           onGoToOrders={onGoToOrders}
           onGoToCashier={onGoToCashier}

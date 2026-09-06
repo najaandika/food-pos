@@ -1,12 +1,13 @@
 'use client';
 
 import { CheckCircle2 } from 'lucide-react';
+import { useState } from 'react';
 
 import { formatRupiah } from '../../../lib/format';
 
 import type { AdminDish } from '../../runtime-data';
 
-type CartLine = AdminDish & { cartQty: number };
+type CartLine = AdminDish & { cartQty: number; note?: string };
 
 type SentOrder = {
   id: number;
@@ -34,6 +35,7 @@ type Props = {
   sendError: string;
   sentOrder: SentOrder;
   onSendOrder: () => void;
+  onChangeLineNote: (dishId: number | undefined, note: string) => void;
   onStartNewTicket: () => void;
   onGoToOrders?: () => void;
   onGoToCashier?: () => void;
@@ -56,10 +58,13 @@ export function CartPanel({
   sendError,
   sentOrder,
   onSendOrder,
+  onChangeLineNote,
   onStartNewTicket,
   onGoToOrders,
   onGoToCashier,
 }: Props) {
+  const [editingNote, setEditingNote] = useState<number | undefined>();
+
   return (
     <aside className="receipt-panel">
       <div className="receipt-top">
@@ -114,7 +119,17 @@ export function CartPanel({
             <div className="receipt-item" key={line.id}>
               <div>
                 <strong>{line.name}</strong>
-                <button>Notes</button>
+                <button type="button" onClick={() => setEditingNote(editingNote === line.id ? undefined : line.id)}>
+                  {line.note ? 'Edit note' : 'Notes'}
+                </button>
+                {editingNote === line.id && (
+                  <textarea
+                    value={line.note ?? ''}
+                    onChange={(event) => onChangeLineNote(line.id, event.target.value)}
+                    placeholder="Add item note"
+                    rows={2}
+                  />
+                )}
               </div>
               <b>x{line.cartQty}</b>
               <strong>{formatRupiah((line.rawPrice ?? 0) * line.cartQty)}</strong>

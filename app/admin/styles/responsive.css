@@ -585,7 +585,7 @@
   }
 
   .receipt-item {
-    grid-template-columns: minmax(0, 1fr) 26px 64px;
+    grid-template-columns: minmax(0, 1fr) 26px max-content;
     gap: var(--space-fixed-2);
     padding: 13px 0;
     font-size: var(--font-size-xs);
