@@ -2,6 +2,7 @@
 
 import { Check, ReceiptText, Search } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
+import styles from './Customer.module.css';
 import { CartReviewPanel } from '../../components/customer/CartReviewPanel';
 import { BottomOrderBar } from '../../components/customer/BottomOrderBar';
 import { CustomerHero } from '../../components/customer/CustomerHero';
@@ -146,7 +147,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   }
 
   return (
-    <main className="customer-page">
+    <main className={`${styles.scope} customer-page`}>
       <CustomerHero
         tableCode={tableCode}
         itemCount={itemCount}
