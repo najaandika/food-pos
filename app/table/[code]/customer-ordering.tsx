@@ -1,7 +1,7 @@
 'use client';
 
 import { Check, ReceiptText, Search } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './Customer.module.css';
 import { CartReviewPanel } from '../../components/customer/CartReviewPanel';
 import { BottomOrderBar } from '../../components/customer/BottomOrderBar';
@@ -28,6 +28,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   const [submitting, setSubmitting] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
   const [settings, setSettings] = useState<PosSettings | null>(null);
+  const pageRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const loadMenu = async () => {
@@ -61,6 +62,10 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
 
     void loadMenu();
   }, []);
+
+  useEffect(() => {
+    pageRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
 
   const categories = useMemo(() => {
     const names = Array.from(new Set(menuItems.map((item) => item.category)));
@@ -147,7 +152,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   }
 
   return (
-    <main className={styles['customer-page']}>
+    <main ref={pageRef} className={styles['customer-page']}>
       <CustomerHero
         tableCode={tableCode}
         itemCount={itemCount}
