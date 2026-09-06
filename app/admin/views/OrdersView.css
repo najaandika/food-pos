@@ -1,3 +1,129 @@
+.admin-tabs {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.admin-tabs button,
+.icon-btn {
+  height: 46px;
+  border: 0;
+  border-radius: 14px;
+  background: white;
+  padding: 0 18px;
+  font-weight: 700;
+}
+
+.admin-tabs button.active {
+  color: white;
+  background: var(--navy);
+}
+
+.tools-line {
+  gap: 16px;
+}
+
+.admin-search-wrap.wide {
+  width: 330px;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.admin-order-card {
+  min-height: 376px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 0;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.admin-order-card-top {
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.admin-order-card-top h3 {
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.admin-order-card-top .mini-status {
+  margin-left: auto;
+}
+
+.order-meta {
+  justify-content: space-between;
+  gap: 16px;
+  margin: 20px 0 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.item-table {
+  display: grid;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.item-table div,
+.item-table p {
+  display: grid;
+  grid-template-columns: 1fr 42px 70px;
+  gap: 10px;
+  margin: 0;
+}
+
+.item-table div {
+  color: var(--muted);
+}
+
+.item-table b,
+.item-table strong {
+  text-align: right;
+}
+
+.item-table em {
+  color: var(--ink);
+  text-align: center;
+  font-style: normal;
+}
+
+.total-line {
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+}
+
+.card-actions {
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.card-actions button {
+  flex: 1;
+  height: 46px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--mist);
+  color: var(--blue-dark);
+  font-weight: 800;
+}
+
+.card-actions button:last-child {
+  color: #ffffff;
+  background: var(--blue);
+}
+
 .orders-topbar {
   margin-bottom: 16px;
 }
@@ -363,4 +489,3 @@
   background: var(--blue);
   color: #ffffff;
 }
-

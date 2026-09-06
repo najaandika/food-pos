@@ -98,6 +98,43 @@
   align-items: center;
 }
 
+.table-pill {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 16px;
+  color: white;
+  background: var(--navy);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.table-pill.gold {
+  color: #ffffff;
+  background: #d89b2b;
+}
+
+.mini-status {
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mini-status.done,
+.mini-status.ready {
+  background: rgba(25, 184, 133, 0.12);
+  color: #0f8d66;
+}
+
+.mini-status.progress {
+  background: rgba(244, 183, 64, 0.18);
+  color: #8f6209;
+}
+
 .brand-wrap {
   justify-content: space-between;
   gap: var(--space-fixed-3);
