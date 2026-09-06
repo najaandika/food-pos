@@ -107,6 +107,9 @@ export function CartReviewPanel({
           <OrderSummary subtotal={subtotal} tax={tax} taxLabel={taxLabel} service={service} serviceLabel={serviceLabel} showService={showService} total={total} />
 
           {error && <p className={styles['customer-checkout-error']} role="alert">{error}</p>}
+          {checkoutDisabled && !submitting && !error && (
+            <p className={styles['customer-checkout-hint']}>Enter your name before checking out.</p>
+          )}
 
           <Button className={styles['customer-primary']} disabled={checkoutDisabled} onClick={onCheckout}>{submitting ? 'Sending Order...' : 'Checkout Order'}</Button>
         </>

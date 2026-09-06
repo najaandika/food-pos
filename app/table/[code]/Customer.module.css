@@ -11,6 +11,13 @@
     color: var(--ink);
     padding: 14px 14px 104px;
   }
+  .customer-checkout-hint {
+    margin: -4px 0 12px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-align: center;
+  }
   .customer-hero,
   .customer-quick-panel,
   .customer-section-head,
@@ -853,10 +860,13 @@
   }
   .status-steps {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, minmax(72px, 1fr));
     gap: var(--space-fixed-2);
+    overflow-x: auto;
+    scrollbar-width: none;
     margin-bottom: 20px;
   }
+  .status-steps::-webkit-scrollbar { display: none; }
   .status-steps div {
     display: grid;
     justify-items: center;
