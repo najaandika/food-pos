@@ -1,6 +1,7 @@
 'use client';
 
 import type { PosSettings } from '@/lib/pos-types';
+import { useLocale } from '../../i18n-context';
 
 type PaymentKey = 'cash' | 'qris' | 'transfer';
 type QrKey = 'guestOrdering' | 'customerName' | 'callWaiter' | 'autoAcceptQr';
@@ -12,78 +13,80 @@ type Props = {
 };
 
 export function SettingsSide({ settings, onTogglePayment, onToggleQrOption }: Props) {
+  const { t } = useLocale();
+
   return (
     <aside className="settings-side">
       <section className="settings-card">
         <div className="settings-card-head">
           <div>
-            <h2>Payment Methods</h2>
-            <p>Available at cashier.</p>
+            <h2>{t('settings.paymentMethods')}</h2>
+            <p>{t('settings.paymentMethodsDesc')}</p>
           </div>
         </div>
         <div className="settings-toggles">
           <button className={settings.payments.cash ? 'active' : ''} type="button" onClick={() => onTogglePayment('cash')}>
-            <span>Cash</span>
-            <b>{settings.payments.cash ? 'Enabled' : 'Off'}</b>
+            <span>{t('settings.cash')}</span>
+            <b>{settings.payments.cash ? t('settings.enabled') : t('settings.off')}</b>
           </button>
           <button className={settings.payments.qris ? 'active' : ''} type="button" onClick={() => onTogglePayment('qris')}>
             <span>QRIS</span>
-            <b>{settings.payments.qris ? 'Enabled' : 'Off'}</b>
+            <b>{settings.payments.qris ? t('settings.enabled') : t('settings.off')}</b>
           </button>
           <button className={settings.payments.transfer ? 'active' : ''} type="button" onClick={() => onTogglePayment('transfer')}>
-            <span>Transfer</span>
-            <b>{settings.payments.transfer ? 'Enabled' : 'Off'}</b>
+            <span>{t('settings.transfer')}</span>
+            <b>{settings.payments.transfer ? t('settings.enabled') : t('settings.off')}</b>
           </button>
         </div>
-        <p className="settings-impact-note">Cashier will only show active methods when closing a bill.</p>
+        <p className="settings-impact-note">{t('settings.paymentImpact')}</p>
       </section>
 
       <section className="settings-card">
         <div className="settings-card-head">
           <div>
-            <h2>QR Ordering</h2>
-            <p>Customer ordering behavior.</p>
+            <h2>{t('settings.qrOrderingTitle')}</h2>
+            <p>{t('settings.qrOrderingDesc')}</p>
           </div>
         </div>
         <div className="settings-options">
           <button className={settings.qrOptions.guestOrdering ? 'active' : ''} type="button" onClick={() => onToggleQrOption('guestOrdering')}>
-            <span>Allow order without login</span>
-            <b>{settings.qrOptions.guestOrdering ? 'On' : 'Off'}</b>
+            <span>{t('settings.allowGuest')}</span>
+            <b>{settings.qrOptions.guestOrdering ? t('settings.on') : t('settings.off')}</b>
             <i />
           </button>
           <button className={settings.qrOptions.customerName ? 'active' : ''} type="button" onClick={() => onToggleQrOption('customerName')}>
-            <span>Require customer name</span>
-            <b>{settings.qrOptions.customerName ? 'On' : 'Off'}</b>
+            <span>{t('settings.requireName')}</span>
+            <b>{settings.qrOptions.customerName ? t('settings.on') : t('settings.off')}</b>
             <i />
           </button>
           <button className={settings.qrOptions.callWaiter ? 'active' : ''} type="button" onClick={() => onToggleQrOption('callWaiter')}>
-            <span>Enable call waiter</span>
-            <b>{settings.qrOptions.callWaiter ? 'On' : 'Off'}</b>
+            <span>{t('settings.enableCallWaiter')}</span>
+            <b>{settings.qrOptions.callWaiter ? t('settings.on') : t('settings.off')}</b>
             <i />
           </button>
           <button className={settings.qrOptions.autoAcceptQr ? 'active' : ''} type="button" onClick={() => onToggleQrOption('autoAcceptQr')}>
-            <span>Auto accept QR orders</span>
-            <b>{settings.qrOptions.autoAcceptQr ? 'On' : 'Off'}</b>
+            <span>{t('settings.autoAcceptQr')}</span>
+            <b>{settings.qrOptions.autoAcceptQr ? t('settings.on') : t('settings.off')}</b>
             <i />
           </button>
         </div>
         <p className={`settings-impact-note ${settings.qrOptions.guestOrdering ? '' : 'warning'}`}>
-          {settings.qrOptions.guestOrdering ? 'Customer table links can create orders.' : 'Customer table links will show ordering paused.'}
+          {settings.qrOptions.guestOrdering ? t('settings.guestOrderingOn') : t('settings.guestOrderingOff')}
         </p>
       </section>
 
       <section className="settings-card">
         <div className="settings-card-head">
           <div>
-            <h2>Receipt</h2>
-            <p>Printed bill and digital receipt.</p>
+            <h2>{t('settings.receipt')}</h2>
+            <p>{t('settings.receiptDesc')}</p>
           </div>
         </div>
         <div className="receipt-mini">
           <strong>{settings.profile.cafeName}</strong>
           <span>{settings.profile.address}</span>
-          <p>Order #925 - Table A4</p>
-          <b>Thank you for visiting.</b>
+          <p>{t('settings.sampleOrder')}</p>
+          <b>{t('settings.thankYou')}</b>
         </div>
       </section>
     </aside>

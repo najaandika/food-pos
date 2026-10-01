@@ -29,6 +29,7 @@ import { useSnapshot } from './hooks/useSnapshot';
 
 import type { View } from './admin';
 import type { AuthUser } from './admin/auth';
+import { LocaleProvider } from './admin/i18n-context';
 
 type ActionNotice = {
   tone: 'success' | 'error';
@@ -156,7 +157,7 @@ export default function Home() {
   const activeView = canAccessView(currentUser.role, view) ? view : getRoleHome(currentUser.role);
 
   return (
-    <>
+    <LocaleProvider>
       <div className={`page-shell ${sidebarCollapsed ? 'sidebar-collapsed' : ''} ${mobileSidebarOpen ? 'mobile-sidebar-open' : ''}`}>
         <button aria-label="Open sidebar menu" className="mobile-nav-toggle" type="button" onClick={() => setMobileSidebarOpen(true)}>
           <Menu aria-hidden="true" />
@@ -227,6 +228,6 @@ export default function Home() {
         </main>
       </div>
       {actionNotice && <div className={`admin-action-toast ${actionNotice.tone}`} role="status">{actionNotice.message}</div>}
-    </>
+    </LocaleProvider>
   );
 }

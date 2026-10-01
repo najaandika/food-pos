@@ -3,11 +3,14 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { AdminTitle } from '..';
+import { ConfirmModal } from '../ConfirmModal';
+import { useLocale } from '../i18n-context';
 import type { AdminStaff } from '../runtime-data';
 import { OwnerStaffForm, type StaffDraft } from './owner-staff/OwnerStaffForm';
 import { OwnerStaffList } from './owner-staff/OwnerStaffList';
 
 type StaffRole = 'owner' | 'kasir' | 'waiters';
+type StaffFilter = 'all' | StaffRole | 'inactive';
 
 type StaffFormPayload = {
   name: string;
@@ -72,13 +75,15 @@ export function OwnerStaffView({
   onUpdateStaff?: (staffId: number | undefined, payload: StaffFormPayload) => Promise<void> | void;
   onDisableStaff?: (staffId: number | undefined) => Promise<void> | void;
 }) {
-  const posStaff = staff?.length ? staff : fallbackStaff;
-  const [activeFilter, setActiveFilter] = useState('All');
+  const { t } = useLocale();
+  const posStaff = staff ?? fallbackStaff;
+  const [activeFilter, setActiveFilter] = useState<StaffFilter>('all');
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState<number | undefined>(posStaff[0]?.id);
   const [isCreating, setIsCreating] = useState(false);
   const [draft, setDraft] = useState<StaffDraft>(() => draftFromStaff(posStaff[0]));
   const [isSaving, setIsSaving] = useState(false);
+  const [staffToDisable, setStaffToDisable] = useState<AdminStaff | null>(null);
 
   const selectedStaff = useMemo(() => posStaff.find((person) => person.id === selectedId) ?? posStaff[0], [posStaff, selectedId]);
 
@@ -92,7 +97,7 @@ export function OwnerStaffView({
   const filteredStaff = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return posStaff.filter((person) => {
-      const matchesFilter = activeFilter === 'All' || person.roleLabel === activeFilter;
+      const matchesFilter = activeFilter === 'all' || person.role === activeFilter || (activeFilter === 'inactive' && !person.isActive);
       const matchesQuery =
         !normalizedQuery ||
         person.name.toLowerCase().includes(normalizedQuery) ||
@@ -104,18 +109,18 @@ export function OwnerStaffView({
 
   const staffStats = useMemo(
     () => [
-      { label: 'Total Staff', value: String(posStaff.length), hint: '3 roles configured' },
-      { label: 'On Shift', value: String(posStaff.filter((person) => person.isActive).length), hint: 'Active access' },
-      { label: 'Inactive', value: String(posStaff.filter((person) => !person.isActive).length), hint: 'Access disabled' },
+      { label: t('ownerStaff.totalStaff'), value: String(posStaff.length), hint: `3 ${t('ownerStaff.rolesConfigured')}` },
+      { label: t('ownerStaff.onShift'), value: String(posStaff.filter((person) => person.isActive).length), hint: t('ownerStaff.activeAccess') },
+      { label: t('ownerStaff.inactiveStaff'), value: String(posStaff.filter((person) => !person.isActive).length), hint: t('ownerStaff.accessDisabled') },
     ],
-    [posStaff],
+    [posStaff, t],
   );
 
   const permissionPreview = useMemo(() => {
-    if (draft.role === 'owner') return ['Full dashboard access', 'Manage menu and tables', 'View reports', 'Manage staff access'];
-    if (draft.role === 'kasir') return ['Open cashier desk', 'Close payment queue', 'Print bills', 'View active tickets'];
-    return ['View table status', 'Confirm customer calls', 'Update service progress', 'Mark order as served'];
-  }, [draft.role]);
+    if (draft.role === 'owner') return [t('perm.fullDashboard'), t('perm.manageMenuTables'), t('perm.viewReports'), t('perm.manageStaff')];
+    if (draft.role === 'kasir') return [t('perm.openCashier'), t('perm.closePayment'), t('perm.printBills'), t('perm.viewTickets')];
+    return [t('perm.viewTable'), t('perm.confirmCalls'), t('perm.updateProgress'), t('perm.markServed')];
+  }, [draft.role, t]);
 
   const startCreate = () => {
     setIsCreating(true);
@@ -127,6 +132,22 @@ export function OwnerStaffView({
     setIsCreating(false);
     setSelectedId(person.id);
     setDraft(draftFromStaff(person));
+  };
+
+  const clearFilters = () => {
+    setActiveFilter('all');
+    setQuery('');
+  };
+
+  const discardStaffDraft = () => {
+    if (isCreating) {
+      const firstStaff = posStaff[0];
+      setIsCreating(false);
+      setSelectedId(firstStaff?.id);
+      setDraft(draftFromStaff(firstStaff));
+      return;
+    }
+    setDraft(draftFromStaff(selectedStaff));
   };
 
   const saveStaff = async () => {
@@ -145,19 +166,24 @@ export function OwnerStaffView({
     }
   };
 
-  const disableStaff = async (person = selectedStaff) => {
+  const disableStaff = (person = selectedStaff) => {
     if (!person?.id) return;
-    const approved = window.confirm(`Disable access for ${person.name}?`);
-    if (!approved) return;
-    await onDisableStaff?.(person.id);
+    setStaffToDisable(person);
+  };
+
+  const confirmDisableStaff = async () => {
+    if (!staffToDisable?.id) return;
+    const personId = staffToDisable.id;
+    setStaffToDisable(null);
+    await onDisableStaff?.(personId);
   };
 
   return (
     <section className="app-view active">
       <header className="topbar">
-        <AdminTitle title="Staff Management" subtitle="Control staff access, role permissions, and shift status." />
+        <AdminTitle title={t('ownerStaff.title')} subtitle={t('ownerStaff.subtitle')} />
         <button className="owner-primary-btn" type="button" onClick={startCreate}>
-          Invite Staff
+          {t('ownerStaff.inviteStaff')}
         </button>
       </header>
 
@@ -173,6 +199,7 @@ export function OwnerStaffView({
           selectedStaff={selectedStaff}
           onChangeFilter={setActiveFilter}
           onChangeQuery={setQuery}
+          onClearFilters={clearFilters}
           onStartEdit={startEdit}
           onDisable={disableStaff}
         />
@@ -184,10 +211,23 @@ export function OwnerStaffView({
           isSaving={isSaving}
           permissionPreview={permissionPreview}
           onSave={saveStaff}
-          onDiscard={() => (isCreating ? setDraft(emptyDraft) : setDraft(draftFromStaff(selectedStaff)))}
+          onDiscard={discardStaffDraft}
           onToggleActive={() => setDraft((current) => ({ ...current, isActive: !current.isActive }))}
         />
       </div>
+
+      <ConfirmModal
+        isOpen={Boolean(staffToDisable)}
+        title={t('ownerStaff.disableTitle')}
+        message={t('ownerStaff.disableMessage')}
+        targetName={staffToDisable?.name}
+        targetDetails={staffToDisable ? `${staffToDisable.email} • ${staffToDisable.roleLabel}` : undefined}
+        confirmLabel={t('ownerStaff.disableConfirm')}
+        cancelLabel={t('common.cancel')}
+        isDanger={true}
+        onConfirm={confirmDisableStaff}
+        onCancel={() => setStaffToDisable(null)}
+      />
     </section>
   );
 }

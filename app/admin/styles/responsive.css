@@ -53,6 +53,15 @@
   .cashier-toolbar {
     grid-template-columns: 1fr;
   }
+
+  .staff-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .staff-editor-panel {
+    position: static;
+    max-width: none;
+  }
 }
 
 @container admin-main (max-width: 920px) {
@@ -248,7 +257,7 @@
   .quick-actions-grid button {
     min-height: 76px;
     border-radius: var(--radius-md);
-    padding: 14px;
+    padding: 18px;
   }
 
   .dashboard-side {
@@ -942,6 +951,39 @@
     grid-template-columns: 1fr;
   }
   .owner-menu-toolbar { display: grid; }
+  .owner-menu-toolbar .owner-toolbar-left,
+  .owner-menu-toolbar .owner-filter-tabs {
+    width: 100%;
+  }
+  .owner-menu-toolbar .admin-search-wrap {
+    width: 100%;
+    max-width: none;
+  }
+  .owner-menu-toolbar .owner-status-tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .owner-menu-toolbar .owner-status-tabs button {
+    flex: 1 0 auto;
+  }
+  .owner-menu-toolbar .owner-filter-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  .owner-menu-toolbar .owner-filter-tabs button {
+    flex: 0 0 auto;
+  }
+  .owner-result-count {
+    justify-self: start;
+  }
+  .menu-editor-panel .editor-fields {
+    grid-template-columns: 1fr;
+  }
+  .menu-editor-panel .editor-fields > label,
+  .menu-editor-panel .editor-fields > .editor-field {
+    grid-column: 1;
+  }
   .table-tools { display: grid; }
   .qr-actions { grid-template-columns: 1fr; }
   .qr-card-body { grid-template-columns: 96px minmax(0, 1fr); }
@@ -1074,11 +1116,12 @@
 /* Source: admin-responsive-drawer.css */
 /* admin-responsive part 2/4 - lines 444-813 depth 0 */
 
-/* Final no-horizontal-scroll polish for admin workspaces. */
+/* Let the order board wrap into readable columns instead of requiring horizontal scrolling. */
 @container admin-main (max-width: 1240px) {
   .orders-kanban {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 232px), 1fr));
     overflow: visible;
+    padding-bottom: 2px;
   }
 
   .kanban-column {
@@ -1375,6 +1418,10 @@
     width: 100%;
   }
 
+  .waiters-panel .cashier-panel-head > button {
+    width: 100%;
+  }
+
   .table-status-grid {
     gap: var(--space-3);
   }
@@ -1541,6 +1588,25 @@
     align-items: flex-start;
   }
 
+  .owner-menu-meta {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 2px;
+    padding-top: 12px;
+  }
+
+  .owner-menu-meta > span:first-child,
+  .owner-menu-meta > strong {
+    min-width: 0;
+  }
+
+  .owner-menu-meta .availability-toggle,
+  .owner-menu-meta .owner-flag {
+    justify-self: start;
+  }
+
   .owner-menu-product img {
     width: 58px;
     height: 58px;
@@ -1705,15 +1771,7 @@
 
   .orders-toolbar .tools-line {
     width: 100%;
-    display: grid;
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: var(--space-3);
-  }
-
-  .orders-toolbar .icon-btn {
-    width: 42px;
-    height: 42px;
-    padding: 0;
+    display: block;
   }
 
   .orders-board-layout {
@@ -1815,7 +1873,12 @@
   }
 
   .dashboard-metric strong {
-    font-size: 25px;
+    min-width: 0;
+    padding-inline: 2px;
+    font-size: clamp(18px, 5vw, 23px);
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
 
   .dashboard-metric small {

@@ -14,7 +14,7 @@
   margin-top: -2px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .report-actions {
@@ -64,14 +64,14 @@
   background: var(--ice);
   color: var(--navy);
   padding: 0 10px;
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
   outline: 0;
 }
 
 .report-date-tools span {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .report-date-tools button {
@@ -92,6 +92,17 @@
 
 .report-date-tools .spinning {
   animation: reportSpin 820ms linear infinite;
+}
+
+.report-load-note {
+  margin: -8px 0 18px;
+  border: 1px solid rgba(244, 183, 64, 0.28);
+  border-radius: var(--radius-sm);
+  background: rgba(244, 183, 64, 0.12);
+  color: #8f6209;
+  padding: 11px 14px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
 .report-layout {
@@ -175,7 +186,7 @@
 
 .report-stat span {
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .report-stat strong {
@@ -223,7 +234,7 @@
   color: var(--navy);
   padding: 8px 12px;
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
   cursor: default;
 }
 
@@ -310,7 +321,7 @@
   color: #ffffff;
   padding: 7px 10px;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
   opacity: 0;
   transform: translate(-50%, 8px);
   transition: opacity var(--transition-hover), transform var(--transition-hover);
@@ -323,7 +334,7 @@
   margin-top: 18px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .report-chart-legend span {
@@ -349,7 +360,7 @@
   margin: 0;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
   text-align: center;
 }
 
@@ -360,7 +371,7 @@
 
 .bar-group small {
   color: var(--muted);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .donut-wrap {
@@ -408,7 +419,7 @@
 .donut-ring span {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .product-list,
@@ -434,7 +445,7 @@
 .product-list span,
 .country-list span {
   color: var(--navy);
-  font-weight: 750;
+  font-weight: var(--font-weight-medium);
 }
 
 .product-list b {
@@ -467,7 +478,7 @@
   border-radius: 50%;
   color: white;
   font-style: normal;
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
   animation: bubbleFloat 3.4s ease-in-out infinite;
   transition: transform var(--transition-sidebar), box-shadow var(--transition-sidebar);
 }
@@ -490,7 +501,7 @@
   margin-bottom: 2px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 10px;
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .bubble-row strong {
@@ -528,7 +539,7 @@
 .country-list p {
   grid-template-columns: 1fr 58px;
   color: var(--navy);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .country-list b {
@@ -565,7 +576,7 @@
   background: var(--navy);
   color: #ffffff;
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .report-order-list strong,
@@ -585,7 +596,7 @@
 .report-order-list small {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
   text-transform: capitalize;
 }
 
@@ -597,7 +608,7 @@
   color: var(--muted);
   font-size: var(--font-size-xs);
   font-style: normal;
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 @keyframes reportSpin {

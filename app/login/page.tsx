@@ -31,22 +31,27 @@ export default function LoginPage() {
     setSubmitting(true);
     setError('');
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    setSubmitting(false);
-    if (!response.ok) {
-      setError('Email atau password belum sesuai.');
-      return;
+      if (!response.ok) {
+        setError('Email atau password belum sesuai.');
+        return;
+      }
+
+      const { user } = await response.json();
+      window.localStorage.setItem('pos-authenticated', 'true');
+      window.localStorage.setItem('pos-user', JSON.stringify(user));
+      router.push('/');
+    } catch {
+      setError('Tidak dapat terhubung ke server. Coba lagi sesaat lagi.');
+    } finally {
+      setSubmitting(false);
     }
-
-    const { user } = await response.json();
-    window.localStorage.setItem('pos-authenticated', 'true');
-    window.localStorage.setItem('pos-user', JSON.stringify(user));
-    router.push('/');
   };
 
   return (
@@ -57,15 +62,15 @@ export default function LoginPage() {
             <div className="login-brand">
               <span className="login-mark" aria-hidden="true">P</span>
               <div>
-                <strong>POS System</strong>
-                <span>Global Point of Sale</span>
+                <strong>POS</strong>
+                <span>Point of Sale</span>
               </div>
             </div>
 
             <div className="login-copy">
-              <span>Staff Access</span>
-              <h1>Welcome back.</h1>
-              <p>Sign in with your staff role to continue managing the POS workspace.</p>
+              <span>Ruang kerja staf</span>
+              <h1>Selamat datang kembali.</h1>
+              <p>Masuk dengan akun staf Anda untuk mengelola layanan hari ini.</p>
             </div>
 
             <form className="login-form" onSubmit={(event) => {
@@ -76,7 +81,7 @@ export default function LoginPage() {
                 <span>Email</span>
                 <div>
                   <Mail aria-hidden="true" />
-                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" />
+                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" placeholder="nama@restoran.com" required disabled={submitting} />
                 </div>
               </label>
 
@@ -84,47 +89,41 @@ export default function LoginPage() {
                 <span>Password</span>
                 <div>
                   <LockKeyhole aria-hidden="true" />
-                  <input type={showPassword ? 'text' : 'password'} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" />
-                  <button type="button" aria-label={showPassword ? 'Hide password' : 'Show password'} onClick={() => setShowPassword(!showPassword)}>
+                  <input type={showPassword ? 'text' : 'password'} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" placeholder="Masukkan password" required disabled={submitting} />
+                  <button type="button" aria-label={showPassword ? 'Sembunyikan password' : 'Tampilkan password'} onClick={() => setShowPassword(!showPassword)} disabled={submitting}>
                     {showPassword ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
                   </button>
                 </div>
               </label>
 
               <div className="login-options">
-                <label><input type="checkbox" defaultChecked /> Keep me signed in</label>
+                <label><input type="checkbox" defaultChecked /> Ingat perangkat ini</label>
               </div>
 
               {error && <p className="login-error">{error}</p>}
 
-              <button className="login-submit" type="submit">
-                {submitting ? 'Signing In...' : 'Sign In'}
+              <button className="login-submit" type="submit" disabled={submitting}>
+                {submitting ? 'Memverifikasi...' : 'Masuk ke POS'}
               </button>
             </form>
+
+            <p className="login-support"><ShieldCheck aria-hidden="true" /> Akses Anda dilindungi dan dicatat dengan aman.</p>
           </div>
         </div>
 
         <aside className="login-preview" aria-label="POS status preview">
           <div className="login-preview-head">
-            <span><ShieldCheck aria-hidden="true" /> Secure POS</span>
-            <strong>Operations workspace</strong>
+            <span className="login-preview-mark" aria-hidden="true">P</span>
+            <strong>POS</strong>
           </div>
 
           <div className="login-preview-copy">
-            <span>One calm workspace</span>
-            <h2>Make every service moment count.</h2>
-            <p>Keep orders, tables, and payments moving with a clear view of your operation.</p>
+            <span>Sistem operasional modern</span>
+            <h2>Lebih fokus pada layanan.</h2>
+            <p>Satu workspace yang sederhana untuk mengelola pesanan, meja, dan pembayaran.</p>
           </div>
 
-          <div className="login-preview-art" aria-hidden="true">
-            <span className="login-preview-orbit login-preview-orbit-one" />
-            <span className="login-preview-orbit login-preview-orbit-two" />
-            <span className="login-preview-orbit login-preview-orbit-three" />
-            <div className="login-preview-art-label">
-              <strong>Built for flow</strong>
-              <span>From first order to final payment.</span>
-            </div>
-          </div>
+          <p className="login-preview-footer"><span /> Dibuat untuk layanan yang mengalir.</p>
         </aside>
       </section>
     </main>

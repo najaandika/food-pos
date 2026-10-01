@@ -3,6 +3,7 @@ import { CartItemRow } from './CartItemRow';
 import { OrderSummary } from './OrderSummary';
 import type { CustomerCartItem } from './types';
 import styles from '../../table/[code]/Customer.module.css';
+import type { CustomerTranslationKey } from '../../table/[code]/customer-i18n';
 
 type CartReviewPanelProps = {
   tableCode: string;
@@ -28,6 +29,7 @@ type CartReviewPanelProps = {
   submitting?: boolean;
   error?: string;
   requireCustomerName?: boolean;
+  t?: (key: CustomerTranslationKey) => string;
 };
 
 export function CartReviewPanel({
@@ -54,6 +56,7 @@ export function CartReviewPanel({
   submitting = false,
   error = '',
   requireCustomerName = true,
+  t = (key) => key,
 }: CartReviewPanelProps) {
   const checkoutDisabled = (requireCustomerName && !customerName.trim()) || submitting;
 
@@ -61,24 +64,30 @@ export function CartReviewPanel({
     <section className={styles['customer-cart']}>
       <div className={styles['cart-head']}>
         <div>
-          <span>Table {tableCode.toUpperCase()}</span>
-          <h2>Review Order</h2>
-          <p>Confirm your items before we send them to staff.</p>
+          <span>
+            {t('table')} {tableCode.toUpperCase()}
+          </span>
+          <h2>{t('reviewTitle')}</h2>
+          <p>{t('reviewSubtitle')}</p>
         </div>
       </div>
 
       {cart.length === 0 ? (
         <div className={styles['empty-cart']}>
-          <h3>Your cart is empty</h3>
-          <p>Add your favorite menu first.</p>
-          <Button className={styles['customer-primary']} onClick={onChooseMenu}>Choose menu</Button>
+          <h3>{t('emptyCartTitle')}</h3>
+          <p>{t('emptyCartDesc')}</p>
+          <Button className={styles['customer-primary']} onClick={onChooseMenu}>
+            {t('chooseMenuButton')}
+          </Button>
         </div>
       ) : (
         <>
           <div className={styles['cart-ticket-note']}>
-            <span>Current ticket</span>
-            <strong>{itemCount} item{itemCount > 1 ? 's' : ''} selected</strong>
-            <p>Check quantity and notes before sending to staff.</p>
+            <span>{t('currentTicket')}</span>
+            <strong>
+              {itemCount} {t('itemsSelected')}
+            </strong>
+            <p>{t('ticketCheckHint')}</p>
           </div>
           <div className={styles['cart-list']}>
             {cart.map((item) => (
@@ -89,29 +98,62 @@ export function CartReviewPanel({
                 onNoteChange={(note) => onItemNoteChange(item.id, note)}
                 onDecrement={() => onItemDecrement(item.id)}
                 onIncrement={() => onItemIncrement(item.id)}
+                notePlaceholder={t('itemNotePlaceholder')}
               />
             ))}
           </div>
 
           <div className={styles['customer-form-panel']}>
             <label className={styles['customer-field']}>
-              <span>Your name{requireCustomerName ? '' : ' (optional)'}</span>
-              <input value={customerName} onChange={(event) => onCustomerNameChange(event.target.value)} placeholder="Input your name" />
+              <span>
+                {t('yourName')}
+                {requireCustomerName ? '' : t('nameOptional')}
+              </span>
+              <input
+                value={customerName}
+                onChange={(event) => onCustomerNameChange(event.target.value)}
+                placeholder={t('namePlaceholder')}
+              />
             </label>
             <label className={styles['customer-field']}>
-              <span>Order note</span>
-              <textarea value={orderNote} onChange={(event) => onOrderNoteChange(event.target.value)} placeholder="Any note for waiters?" rows={3} />
+              <span>{t('orderNote')}</span>
+              <textarea
+                value={orderNote}
+                onChange={(event) => onOrderNoteChange(event.target.value)}
+                placeholder={t('orderNotePlaceholder')}
+                rows={3}
+              />
             </label>
           </div>
 
-          <OrderSummary subtotal={subtotal} tax={tax} taxLabel={taxLabel} service={service} serviceLabel={serviceLabel} showService={showService} total={total} />
+          <OrderSummary
+            subtotal={subtotal}
+            subtotalLabel={t('subtotal')}
+            tax={tax}
+            taxLabel={taxLabel}
+            service={service}
+            serviceLabel={serviceLabel}
+            showService={showService}
+            total={total}
+            totalLabel={t('total')}
+          />
 
-          {error && <p className={styles['customer-checkout-error']} role="alert">{error}</p>}
+          {error && (
+            <p className={styles['customer-checkout-error']} role="alert">
+              {error}
+            </p>
+          )}
           {checkoutDisabled && !submitting && !error && (
-            <p className={styles['customer-checkout-hint']}>Enter your name before checking out.</p>
+            <p className={styles['customer-checkout-hint']}>{t('nameRequiredHint')}</p>
           )}
 
-          <Button className={styles['customer-primary']} disabled={checkoutDisabled} onClick={onCheckout}>{submitting ? 'Sending Order...' : 'Checkout Order'}</Button>
+          <Button
+            className={styles['customer-primary']}
+            disabled={checkoutDisabled}
+            onClick={onCheckout}
+          >
+            {submitting ? t('submittingButton') : t('checkoutButton')}
+          </Button>
         </>
       )}
     </section>

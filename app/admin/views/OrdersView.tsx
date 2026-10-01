@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ListFilter, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 import { AdminTitle, orders as fallbackOrders } from '..';
 import type { PosOrderStatus, PosOrderType, UserRole } from '@/lib/pos-types';
@@ -31,6 +31,8 @@ const roleNextStatus: Record<UserRole, Partial<Record<PosOrderStatus, { label: s
 
 type OrderFilter = 'all' | 'qr' | 'dine_in' | 'takeaway' | 'unpaid';
 
+import { useLocale } from '../i18n-context';
+
 export function OrdersView({
   role = 'owner',
   orders = fallbackOrders,
@@ -40,6 +42,7 @@ export function OrdersView({
   orders?: AdminOrder[];
   onUpdateStatus?: (orderId: number | undefined, status: PosOrderStatus) => void;
 }) {
+  const { locale, t } = useLocale();
   const [activeFilter, setActiveFilter] = useState<OrderFilter>('all');
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState<number | undefined>(orders[0]?.id);
@@ -65,19 +68,19 @@ export function OrdersView({
   }, [activeFilter, orders, query]);
 
   const byStatus = (statuses: PosOrderStatus[]) => visibleOrders.filter((order) => order.rawStatus && statuses.includes(order.rawStatus));
-  const selectedOrder = orders.find((order) => order.id === selectedId) ?? visibleOrders[0] ?? orders[0];
+  const selectedOrder = visibleOrders.find((order) => order.id === selectedId) ?? visibleOrders[0];
   const baseColumns = [
-    { title: 'New', hint: 'Accept incoming QR/manual orders', items: byStatus(['pending']) },
-    { title: 'Kitchen', hint: 'Accepted and cooking tickets', items: byStatus(['accepted', 'preparing']) },
-    { title: 'Ready', hint: 'Ready to serve', items: byStatus(['ready']) },
-    { title: 'Served', hint: 'Served, waiting for bill request', items: byStatus(['served']) },
-    { title: 'Billing', hint: 'Send to cashier', items: byStatus(['waiting_payment']) },
+    { title: t('orders.new'), hint: t('orders.acceptIncoming'), items: byStatus(['pending']) },
+    { title: t('orders.kitchen'), hint: t('orders.cookingTickets'), items: byStatus(['accepted', 'preparing']) },
+    { title: t('orders.ready'), hint: t('orders.readyToServe'), items: byStatus(['ready']) },
+    { title: t('orders.served'), hint: t('orders.waitingBill'), items: byStatus(['served']) },
+    { title: t('orders.billing'), hint: t('orders.sendToCashier'), items: byStatus(['waiting_payment']) },
   ];
   const columns =
     role === 'waiters'
-      ? baseColumns.filter((column) => column.title !== 'Billing')
+      ? baseColumns.filter((column) => column.title !== t('orders.billing'))
       : role === 'kasir'
-        ? baseColumns.filter((column) => ['Served', 'Billing'].includes(column.title))
+        ? baseColumns.filter((column) => [t('orders.served'), t('orders.billing')].includes(column.title))
         : baseColumns;
 
   const moveOrder = (order: AdminOrder) => {
@@ -86,32 +89,31 @@ export function OrdersView({
     onUpdateStatus?.(order.id, action.value);
   };
 
+  const filterTabs: Array<[OrderFilter, string]> = [
+    ['all', t('orders.all')],
+    ['qr', t('orders.qr')],
+    ['dine_in', t('orders.dineIn')],
+    ['takeaway', t('orders.takeaway')],
+    ['unpaid', t('orders.unpaid')],
+  ];
+
   return (
     <section className="app-view active">
       <header className="topbar compact orders-topbar">
-        <AdminTitle title="Orders" subtitle="Track dine-in, takeaway, and QR orders in progress." />
-        <span className="date-label">Sunday, 23 August 2026</span>
+        <AdminTitle title={t('orders.title')} subtitle={t('orders.subtitle')} />
+        <span className="date-label">{new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-US', { dateStyle: 'full' }).format(new Date())}</span>
       </header>
       <div className="orders-toolbar">
         <div className="admin-tabs" role="tablist">
-          {[
-            ['all', 'All'],
-            ['qr', 'QR'],
-            ['dine_in', 'Dine In'],
-            ['takeaway', 'Takeaway'],
-            ['unpaid', 'Unpaid'],
-          ].map(([value, label]) => (
-            <button className={activeFilter === value ? 'active' : ''} type="button" key={value} onClick={() => setActiveFilter(value as OrderFilter)}>
+          {filterTabs.map(([value, label]) => (
+            <button className={activeFilter === value ? 'active' : ''} type="button" key={value} onClick={() => setActiveFilter(value)}>
               {label}
             </button>
           ))}
         </div>
         <div className="tools-line">
-          <button className="icon-btn" type="button" aria-label="Filter orders">
-            <ListFilter aria-hidden="true" />
-          </button>
           <label className="admin-search-wrap wide">
-            <input type="search" placeholder="Search a name, order, or etc" value={query} onChange={(event) => setQuery(event.target.value)} />
+            <input type="search" placeholder={t('orders.searchPlaceholder')} value={query} onChange={(event) => setQuery(event.target.value)} />
             <Search aria-hidden="true" />
           </label>
         </div>

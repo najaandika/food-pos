@@ -31,17 +31,19 @@ const navIcons: Record<View, LucideIcon> = {
   settings: Settings,
 };
 
-const navLabels: Record<View, string> = {
-  dashboard: 'Home',
-  report: 'Report',
-  menu: 'Menu',
-  orders: 'Orders',
-  cashier: 'Kasir',
-  waiters: 'Waiters',
-  'owner-menu': 'Manage Menu',
-  'owner-tables': 'Tables & QR',
-  'owner-staff': 'Staff',
-  settings: 'Settings',
+import { useLocale } from './i18n-context';
+
+export const navKeyMap: Record<View, string> = {
+  dashboard: 'nav.home',
+  report: 'nav.report',
+  menu: 'nav.menu',
+  orders: 'nav.orders',
+  cashier: 'nav.cashier',
+  waiters: 'nav.waiters',
+  'owner-menu': 'nav.manageMenu',
+  'owner-tables': 'nav.tablesQr',
+  'owner-staff': 'nav.staff',
+  settings: 'nav.settings',
 };
 
 export function getRoleBottomViews(role: UserRole): View[] {
@@ -58,9 +60,10 @@ type MobileBottomNavProps = {
 };
 
 export function MobileBottomNav({ activeView, user, onChangeView, onOpenDrawer }: MobileBottomNavProps) {
+  const { t } = useLocale();
   const navItems = getRoleBottomViews(user.role).map((view) => ({
     view,
-    label: navLabels[view],
+    label: t(navKeyMap[view] || 'nav.home'),
     icon: navIcons[view],
   }));
 
@@ -79,7 +82,7 @@ export function MobileBottomNav({ activeView, user, onChangeView, onOpenDrawer }
       ))}
       <button type="button" className="mobile-bottom-item mobile-bottom-more" onClick={onOpenDrawer} aria-label="Open sidebar drawer menu">
         <Menu className="mobile-bottom-icon" />
-        <span className="mobile-bottom-label">More</span>
+        <span className="mobile-bottom-label">{t('nav.more')}</span>
       </button>
     </nav>
   );

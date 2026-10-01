@@ -11,7 +11,7 @@
   border-radius: 14px;
   background: white;
   padding: 0 18px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .admin-tabs button.active {
@@ -116,7 +116,7 @@
   border-radius: 16px;
   background: var(--mist);
   color: var(--blue-dark);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .card-actions button:last-child {
@@ -137,21 +137,45 @@
 }
 
 .orders-toolbar .admin-tabs {
+  display: flex;
+  gap: 4px;
   min-width: 0;
   margin-top: 0;
-  overflow-x: hidden;
-  padding-bottom: 2px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--ice);
+  padding: 4px;
   flex-wrap: wrap;
+}
+
+.orders-toolbar .admin-tabs button {
+  height: 38px;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--muted);
+  padding: 0 13px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.orders-toolbar .admin-tabs button.active {
+  background: var(--navy);
+  color: #ffffff;
 }
 
 .orders-toolbar .tools-line {
   flex: 0 0 auto;
 }
 
+.orders-toolbar .admin-search-wrap.wide {
+  width: min(330px, 100%);
+}
+
 .orders-board-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
-  gap: var(--dashboard-gap);
+  grid-template-columns: minmax(0, 1fr) minmax(304px, 336px);
+  gap: var(--space-fixed-4);
   align-items: start;
   min-width: 0;
 }
@@ -160,7 +184,7 @@
   min-width: 0;
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 232px), 1fr));
   gap: var(--pos-gap);
   overflow: visible;
   padding: 2px;
@@ -169,14 +193,6 @@
 .orders-board-waiters .orders-kanban,
 .orders-board-kasir .orders-kanban {
   align-items: stretch;
-}
-
-.orders-kanban::-webkit-scrollbar {
-  display: none;
-}
-
-.orders-kanban::-webkit-scrollbar-thumb {
-  background: transparent;
 }
 
 .kanban-column,
@@ -190,19 +206,29 @@
   min-width: 0;
   max-height: calc(100vh - 214px);
   overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--ice);
   padding: 14px;
+  box-shadow: none;
 }
 
 .kanban-list {
   max-height: calc(100vh - 304px);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 2px;
-  scrollbar-width: none;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  scrollbar-color: var(--border-soft-strong) transparent;
+  scrollbar-width: thin;
 }
 
 .kanban-list::-webkit-scrollbar {
-  display: none;
+  width: 5px;
+}
+
+.kanban-list::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: var(--border-soft-strong);
 }
 
 .kanban-head {
@@ -216,13 +242,17 @@
 .kanban-head h2 {
   margin: 0;
   font-size: 17px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.018em;
+  line-height: 1.2;
 }
 
 .kanban-head p {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
 }
 
 .kanban-head > span {
@@ -233,7 +263,7 @@
   border-radius: 50%;
   background: var(--mist);
   color: var(--blue);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .kanban-list { display: grid; gap: var(--space-3); }
@@ -241,10 +271,11 @@
 .kanban-card {
   display: grid;
   gap: var(--space-fixed-3);
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--ice);
+  background: var(--card);
   padding: 12px;
+  cursor: pointer;
   transition: border-color var(--transition-hover), background var(--transition-hover), box-shadow var(--transition-hover), transform var(--transition-hover);
 }
 
@@ -255,8 +286,14 @@
 }
 
 .kanban-card.highlight {
-  border-color: rgba(25, 184, 133, 0.24);
-  background: rgba(25, 184, 133, 0.08);
+  border-color: rgba(48, 71, 255, 0.3);
+  background: var(--mist);
+  box-shadow: 0 8px 20px rgba(48, 71, 255, 0.09);
+}
+
+.kanban-card:focus-visible {
+  outline: 3px solid rgba(48, 71, 255, 0.25);
+  outline-offset: 2px;
 }
 
 .workflow-chip {
@@ -266,7 +303,8 @@
   color: var(--blue);
   padding: 6px 9px;
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.01em;
 }
 
 .workflow-chip.new {
@@ -313,14 +351,16 @@
 
 .kanban-card-top strong {
   font-size: var(--font-size-base);
-  line-height: 1.1;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.012em;
+  line-height: 1.2;
 }
 
 .kanban-card-top small {
   margin-top: 3px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 750;
+  font-weight: var(--font-weight-medium);
 }
 
 .kanban-card-top small,
@@ -338,17 +378,17 @@
 }
 
 .kanban-meta span {
-  border-radius: var(--radius-pill);
-  background: white;
-  color: var(--blue);
-  padding: 6px 9px;
+  color: var(--muted);
+  padding: 0;
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-medium);
 }
 
 .kanban-meta b {
   color: var(--muted);
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
 }
 
 .kanban-items {
@@ -362,16 +402,23 @@
   color: var(--muted);
   font-size: var(--font-size-xs);
   font-style: normal;
-  font-weight: 800;
+  font-weight: var(--font-weight-medium);
 }
 
 .kanban-items b {
   color: var(--navy);
+  font-weight: var(--font-weight-semibold);
 }
 
 .kanban-card-bottom {
   padding-top: 10px;
   border-top: 1px solid var(--line);
+}
+
+.kanban-card-bottom > strong {
+  color: var(--navy);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
 }
 
 .kanban-card-bottom button {
@@ -381,7 +428,7 @@
   background: var(--blue);
   color: white;
   padding: 0 13px;
-  font-weight: 900;
+  font-weight: var(--font-weight-semibold);
 }
 
 .kanban-card-bottom button:disabled,
@@ -397,7 +444,7 @@
   place-content: center;
   border: 1px dashed rgba(129, 139, 164, 0.28);
   border-radius: var(--radius-md);
-  background: rgba(248, 250, 255, 0.62);
+  background: rgba(255, 255, 255, 0.62);
   padding: 18px;
   text-align: center;
 }
@@ -405,23 +452,55 @@
 .kanban-empty strong {
   color: var(--navy);
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
 .kanban-empty span {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 750;
+  font-weight: var(--font-weight-medium);
   line-height: 1.4;
 }
 
 .order-detail-panel {
   align-self: start;
   position: sticky;
-  top: 30px;
-  max-height: none;
-  overflow: visible;
+  top: 20px;
+  max-height: calc(100dvh - 40px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px;
   min-width: 0;
+  scrollbar-color: var(--border-soft-strong) transparent;
+  scrollbar-width: thin;
+}
+
+.order-detail-panel::-webkit-scrollbar {
+  width: 5px;
+}
+
+.order-detail-panel::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: var(--border-soft-strong);
+}
+
+@container admin-main (max-width: 1120px) {
+  .orders-board-layout .order-detail-panel {
+    position: static;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 860px) {
+  .orders-board-layout .order-detail-panel {
+    position: static;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 .order-source-box {
@@ -436,7 +515,14 @@
 .order-source-box span {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.order-source-box strong {
+  color: var(--navy);
+  font-weight: var(--font-weight-semibold);
 }
 
 .order-source-box p {
@@ -444,6 +530,7 @@
   color: var(--muted);
   line-height: 1.45;
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
 }
 
 .workflow-progress {
@@ -465,7 +552,7 @@
   color: var(--muted);
   padding: 8px 4px;
   font-size: 10px;
-  font-weight: 900;
+  font-weight: var(--font-weight-semibold);
   text-align: center;
 }
 
@@ -478,6 +565,7 @@
   background: var(--card-bg);
   color: inherit;
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
 }
 
 .workflow-progress span.active {
@@ -488,4 +576,14 @@
 .workflow-progress span.active b {
   background: var(--blue);
   color: #ffffff;
+}
+
+.order-detail-panel .cashier-detail-top h2 {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.order-detail-panel .cashier-detail-top p {
+  font-weight: var(--font-weight-medium);
 }

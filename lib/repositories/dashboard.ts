@@ -1,5 +1,6 @@
 import { prisma } from '../prisma';
 import type { PosDashboard, PosReport } from '../pos-types';
+import { shiftBusinessDays } from '../business-time';
 import { dayKey, reportRange, toId, toNumber, todayStart } from './helpers';
 
 export async function getDashboard(): Promise<PosDashboard> {
@@ -7,7 +8,7 @@ export async function getDashboard(): Promise<PosDashboard> {
   const [paidToday, activeOrders, qrOrders, needAction, waitingPayment, revenue] = await Promise.all([
     prisma.order.count({ where: { createdAt: { gte: start }, status: 'paid' } }),
     prisma.order.count({ where: { status: { notIn: ['paid', 'cancelled'] } } }),
-    prisma.order.count({ where: { createdAt: { gte: start }, source: 'qr' } }),
+    prisma.order.count({ where: { createdAt: { gte: start }, source: 'qr', status: { not: 'cancelled' } } }),
     prisma.order.count({ where: { status: { in: ['pending', 'ready', 'waiting_payment'] } } }),
     prisma.order.count({ where: { status: 'waiting_payment' } }),
     prisma.order.aggregate({
@@ -28,9 +29,8 @@ export async function getDashboard(): Promise<PosDashboard> {
 
 export async function getReport({ from, to }: { from?: string | null; to?: string | null } = {}): Promise<PosReport> {
   const { fromDate, toDate } = reportRange(from, to);
-  const previousFrom = new Date(fromDate);
-  const rangeLength = Math.max(1, Math.ceil((toDate.getTime() - fromDate.getTime()) / 86_400_000));
-  previousFrom.setDate(previousFrom.getDate() - rangeLength);
+  const rangeLength = Math.max(1, Math.ceil((toDate.getTime() - fromDate.getTime() + 1) / 86_400_000));
+  const previousFrom = shiftBusinessDays(fromDate, -rangeLength);
   const previousTo = new Date(fromDate);
   previousTo.setMilliseconds(previousTo.getMilliseconds() - 1);
 

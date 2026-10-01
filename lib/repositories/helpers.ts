@@ -1,4 +1,5 @@
 import type { PosOrderStatus, PosTableStatus } from '../pos-types';
+import { businessDateKey, businessDayStartFromKey, shiftBusinessDays } from '../business-time';
 
 export const toNumber = (value: unknown) => Number(value ?? 0);
 export const toId = (value: bigint | number) => Number(value);
@@ -16,27 +17,23 @@ export const tableStatusByOrderStatus: Partial<Record<PosOrderStatus, PosTableSt
 };
 
 export const todayStart = () => {
-  const date = new Date();
-  date.setHours(0, 0, 0, 0);
-  return date;
+  return shiftBusinessDays(new Date(), 0);
 };
 
-export const dayKey = (date: Date) => date.toISOString().slice(0, 10);
+export const dayKey = businessDateKey;
 
 export function parseReportDate(value: string | null, fallback: Date) {
   if (!value) return fallback;
-  const parsed = new Date(`${value}T00:00:00`);
-  return Number.isNaN(parsed.getTime()) ? fallback : parsed;
+  return businessDayStartFromKey(value) ?? fallback;
 }
 
 export function reportRange(from?: string | null, to?: string | null) {
   const end = todayStart();
-  const start = new Date(end);
-  start.setDate(start.getDate() - 6);
+  const start = shiftBusinessDays(end, -6);
 
   const fromDate = parseReportDate(from ?? null, start);
-  const toDate = parseReportDate(to ?? null, end);
-  toDate.setHours(23, 59, 59, 999);
+  const toStart = parseReportDate(to ?? null, end);
+  const toDate = new Date(shiftBusinessDays(toStart, 1).getTime() - 1);
 
   return fromDate <= toDate ? { fromDate, toDate } : { fromDate: start, toDate: end };
 }

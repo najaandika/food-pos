@@ -1,0 +1,128 @@
+/* ── Confirm Modal Styles ── */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 16px;
+}
+
+.confirm-modal-box {
+  width: min(440px, 94vw);
+  border-radius: 24px;
+  background: #ffffff;
+  padding: 32px 28px 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+  animation: modalSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.confirm-modal-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-modal-icon.warning {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.confirm-modal-body h3 {
+  font-size: 20px;
+  font-weight: var(--font-weight-semibold);
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.confirm-modal-body p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.confirm-modal-target {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.confirm-modal-target strong {
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.confirm-modal-target span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.confirm-modal-btn {
+  flex: 1;
+  height: 46px;
+  border-radius: 12px;
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.confirm-modal-btn.cancel {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.confirm-modal-btn.cancel:hover {
+  background: #e2e8f0;
+}
+
+.confirm-modal-btn.danger {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.confirm-modal-btn.danger:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+.confirm-modal-btn.primary {
+  background: #3047ff;
+  color: #ffffff;
+}
+
+@keyframes modalSlide {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

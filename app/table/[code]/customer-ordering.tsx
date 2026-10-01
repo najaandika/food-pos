@@ -10,14 +10,20 @@ import { CustomerStatus } from '../../components/customer/CustomerStatus';
 import { MenuCard } from '../../components/customer/MenuCard';
 import { customerCategories, customerMenuItems } from '../../components/customer/data';
 import type { CustomerCartItem, CustomerMenuItem } from '../../components/customer/types';
-import { Button } from '../../components/ui/Button';
 import { PillTabs } from '../../components/ui/PillTabs';
 import { SearchField } from '../../components/ui/SearchField';
 import { formatRupiah } from '../../lib/format';
 import type { PosSettings, PosSnapshot } from '../../../lib/pos-types';
+import {
+  customerTranslations,
+  type CustomerLocale,
+  type CustomerTranslationKey,
+} from './customer-i18n';
 
 export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
+  const [locale, setLocale] = useState<CustomerLocale>('id');
   const [activeCategory, setActiveCategory] = useState('Coffee');
+  const [searchQuery, setSearchQuery] = useState('');
   const [cart, setCart] = useState<CustomerCartItem[]>([]);
   const [customerName, setCustomerName] = useState('');
   const [orderNote, setOrderNote] = useState('');
@@ -28,7 +34,38 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   const [submitting, setSubmitting] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
   const [settings, setSettings] = useState<PosSettings | null>(null);
+  const [waiterCalled, setWaiterCalled] = useState(false);
   const pageRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const storedLocale = window.localStorage.getItem('pos-customer-locale');
+    if (storedLocale === 'id' || storedLocale === 'en') {
+      setLocale(storedLocale);
+    }
+  }, []);
+
+  const handleToggleLocale = (next: CustomerLocale) => {
+    setLocale(next);
+    window.localStorage.setItem('pos-customer-locale', next);
+  };
+
+  const t = (key: CustomerTranslationKey): string => {
+    return customerTranslations[locale][key] ?? key;
+  };
+
+  const handleCallWaiter = async () => {
+    try {
+      setWaiterCalled(true);
+      await fetch('/api/tables/call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tableCode }),
+      });
+      window.setTimeout(() => setWaiterCalled(false), 8000);
+    } catch {
+      // Keep optimistic UI
+    }
+  };
 
   useEffect(() => {
     const loadMenu = async () => {
@@ -71,7 +108,20 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
     const names = Array.from(new Set(menuItems.map((item) => item.category)));
     return names.length ? names : [...customerCategories];
   }, [menuItems]);
-  const filteredMenu = useMemo(() => menuItems.filter((item) => item.category === activeCategory), [activeCategory, menuItems]);
+
+  const filteredMenu = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return menuItems.filter((item) => {
+      const matchesCategory = item.category === activeCategory;
+      const matchesQuery =
+        !q ||
+        item.name.toLowerCase().includes(q) ||
+        item.description?.toLowerCase().includes(q) ||
+        item.category.toLowerCase().includes(q);
+      return matchesCategory && matchesQuery;
+    });
+  }, [activeCategory, menuItems, searchQuery]);
+
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const taxRate = settings?.tax.taxRate ?? 5;
@@ -87,7 +137,9 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
     setCart((current) => {
       const existing = current.find((cartItem) => cartItem.id === item.id);
       if (existing) {
-        return current.map((cartItem) => cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem);
+        return current.map((cartItem) =>
+          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem,
+        );
       }
 
       return [...current, { ...item, quantity: 1, note: '' }];
@@ -95,13 +147,15 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
   };
 
   const updateQuantity = (id: number, change: number) => {
-    setCart((current) => current
-      .map((item) => item.id === id ? { ...item, quantity: item.quantity + change } : item)
-      .filter((item) => item.quantity > 0));
+    setCart((current) =>
+      current
+        .map((item) => (item.id === id ? { ...item, quantity: item.quantity + change } : item))
+        .filter((item) => item.quantity > 0),
+    );
   };
 
   const updateNote = (id: number, note: string) => {
-    setCart((current) => current.map((item) => item.id === id ? { ...item, note } : item));
+    setCart((current) => current.map((item) => (item.id === id ? { ...item, note } : item)));
   };
 
   const checkout = async () => {
@@ -116,7 +170,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           tableCode,
-          customerName: customerName || `Table ${tableCode}`,
+          customerName: customerName || `${t('table')} ${tableCode}`,
           notes: orderNote,
           items: cart.map((item) => ({ menuItemId: item.id, quantity: item.quantity, notes: item.note })),
         }),
@@ -133,7 +187,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
       const error = await response.json().catch(() => ({ error: 'Failed to send order' }));
       setCheckoutError(error.error ?? 'Failed to send order');
     } catch {
-      setCheckoutError('Connection problem. Please ask staff for help.');
+      setCheckoutError(locale === 'id' ? 'Gangguan koneksi. Silakan panggil pelayan.' : 'Connection problem. Please ask staff for help.');
     } finally {
       setSubmitting(false);
     }
@@ -147,6 +201,11 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
         orderNumber={orderNumber}
         icon={<Check />}
         onAddMore={() => setStep('menu')}
+        locale={locale}
+        onToggleLocale={handleToggleLocale}
+        t={t}
+        onCallWaiter={handleCallWaiter}
+        waiterCalled={waiterCalled}
       />
     );
   }
@@ -160,24 +219,35 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
         onOpenOrder={() => setStep('cart')}
         cafeName={settings?.profile.cafeName}
         isOrderingOpen={qrOrderingOpen}
+        locale={locale}
+        onToggleLocale={handleToggleLocale}
+        t={t}
+        onCallWaiter={handleCallWaiter}
+        waiterCalled={waiterCalled}
       />
 
       {!qrOrderingOpen ? (
         <section className={`${styles['customer-cart']} ${styles['customer-paused']}`}>
           <div className={styles['cart-ticket-note']}>
-            <span>Ordering paused</span>
-            <strong>QR menu is temporarily closed</strong>
-            <p>Please ask our staff to help create your order from the POS counter.</p>
+            <span>{t('orderingPaused')}</span>
+            <strong>{t('pausedTitle')}</strong>
+            <p>{t('pausedDesc')}</p>
           </div>
         </section>
       ) : step === 'menu' ? (
         <>
           <section className={styles['customer-quick-panel']}>
-            <SearchField className={styles['customer-search']} placeholder="Search coffee, food, or snack" icon={<Search />} />
+            <SearchField
+              className={styles['customer-search']}
+              placeholder={t('searchPlaceholder')}
+              icon={<Search />}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <div className={styles['customer-promo']}>
-              <span>Today</span>
-              <strong>Free refill water at your table</strong>
-              <small>Ask waiters from your order note.</small>
+              <span>{t('todayPromo')}</span>
+              <strong>{t('todayPromoTitle')}</strong>
+              <small>{t('todayPromoDesc')}</small>
             </div>
           </section>
 
@@ -185,16 +255,18 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
             className={styles['customer-categories']}
             items={categories}
             value={activeCategory}
-            label="Menu categories"
+            label={t('categoriesLabel')}
             onChange={setActiveCategory}
           />
 
           <section className={styles['customer-section-head']}>
             <div>
               <h2>{activeCategory}</h2>
-              <p>{filteredMenu.length} menus available</p>
+              <p>
+                {filteredMenu.length} {t('menusAvailable')}
+              </p>
             </div>
-            <span>Popular first</span>
+            <span>{t('popularFirst')}</span>
           </section>
 
           <section className={styles['customer-menu-list']}>
@@ -206,12 +278,22 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
                 formattedPrice={formatRupiah(item.price)}
                 onAdd={() => addToCart(item)}
                 onRemove={() => updateQuantity(item.id, -1)}
+                addLabel={t('addButton')}
+                readySoonLabel={t('readySoon')}
+                staffPickLabel={t('staffPick')}
               />
             ))}
           </section>
 
           {itemCount > 0 && (
-            <BottomOrderBar itemCount={itemCount} total={formatRupiah(total)} icon={<ReceiptText />} onReview={() => setStep('cart')} />
+            <BottomOrderBar
+              itemCount={itemCount}
+              total={formatRupiah(total)}
+              icon={<ReceiptText />}
+              onReview={() => setStep('cart')}
+              itemCountLabel={t('itemCount')}
+              reviewLabel={t('reviewButton')}
+            />
           )}
         </>
       ) : (
@@ -223,9 +305,9 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
           orderNote={orderNote}
           subtotal={formatRupiah(subtotal)}
           tax={formatRupiah(tax)}
-          taxLabel={`Tax (${taxRate}%)`}
+          taxLabel={`${t('tax')} (${taxRate}%)`}
           service={formatRupiah(service)}
-          serviceLabel={`Service (${serviceRate}%)`}
+          serviceLabel={`${t('service')} (${serviceRate}%)`}
           showService={serviceRate > 0}
           total={formatRupiah(total)}
           formatPrice={formatRupiah}
@@ -239,6 +321,7 @@ export default function CustomerOrdering({ tableCode }: { tableCode: string }) {
           submitting={submitting}
           error={checkoutError}
           requireCustomerName={requireCustomerName}
+          t={t}
         />
       )}
     </main>

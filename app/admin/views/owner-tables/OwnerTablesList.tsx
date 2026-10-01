@@ -1,23 +1,44 @@
 'use client';
 
-import { Copy, Printer, Search } from 'lucide-react';
+import { Check, Copy, Pencil, Printer, Search } from 'lucide-react';
+import { useLocale } from '../../i18n-context';
 import type { AdminTable } from '../../runtime-data';
 
 type Props = {
   tables: AdminTable[];
   filteredTables: AdminTable[];
   tableStats: Array<{ label: string; value: string; hint: string }>;
-  activeFilter: string;
+  activeFilter: 'all' | 'available' | 'attention' | 'inactive';
   query: string;
   selectedId: number | undefined;
   isCreating: boolean;
   selectedTable: AdminTable | undefined;
-  onChangeFilter: (filter: string) => void;
+  copiedCode: string | null;
+  onChangeFilter: (filter: 'all' | 'available' | 'attention' | 'inactive') => void;
   onChangeQuery: (query: string) => void;
+  onClearFilters: () => void;
   onStartEdit: (table: AdminTable) => void;
+  onPrintTable: (table: AdminTable) => void;
+  onCopyLink: (table: AdminTable) => void;
 };
 
-export function OwnerTablesList({ filteredTables, tableStats, activeFilter, query, selectedId, isCreating, selectedTable, onChangeFilter, onChangeQuery, onStartEdit }: Props) {
+export function OwnerTablesList({
+  filteredTables,
+  tableStats,
+  activeFilter,
+  query,
+  selectedId,
+  isCreating,
+  selectedTable,
+  copiedCode,
+  onChangeFilter,
+  onChangeQuery,
+  onClearFilters,
+  onStartEdit,
+  onPrintTable,
+  onCopyLink,
+}: Props) {
+  const { t } = useLocale();
   return (
     <section className="tables-main">
       <div className="tables-summary">
@@ -32,16 +53,22 @@ export function OwnerTablesList({ filteredTables, tableStats, activeFilter, quer
 
       <div className="table-tools">
         <label className="admin-search-wrap">
-          <input type="search" placeholder="Search table code or area" value={query} onChange={(event) => onChangeQuery(event.target.value)} />
+          <input type="search" placeholder={t('ownerTables.searchTable')} value={query} onChange={(event) => onChangeQuery(event.target.value)} />
           <Search aria-hidden="true" />
         </label>
         <div className="owner-filter-tabs">
-          {['All', 'Indoor', 'Outdoor', 'Inactive'].map((filter) => (
-            <button className={activeFilter === filter ? 'active' : ''} type="button" key={filter} onClick={() => onChangeFilter(filter)}>
-              {filter}
+          {[
+            ['all', t('common.all')],
+            ['available', t('common.available')],
+            ['attention', t('ownerTables.attention')],
+            ['inactive', t('common.inactive')],
+          ].map(([filter, label]) => (
+            <button className={activeFilter === filter ? 'active' : ''} type="button" key={filter} onClick={() => onChangeFilter(filter as 'all' | 'available' | 'attention' | 'inactive')}>
+              {label}
             </button>
           ))}
         </div>
+        <p className="tables-result-count">{filteredTables.length} {t('ownerTables.tables')}</p>
       </div>
 
       <div className="qr-table-grid">
@@ -52,7 +79,7 @@ export function OwnerTablesList({ filteredTables, tableStats, activeFilter, quer
               <div>
                 <strong>{table.name}</strong>
                 <small>
-                  {table.area} - {table.seats} seats
+                  {table.area} - {table.seats} {t('ownerTables.seats')}
                 </small>
               </div>
             </button>
@@ -71,23 +98,53 @@ export function OwnerTablesList({ filteredTables, tableStats, activeFilter, quer
               <div>
                 <span className={`table-state ${table.status.toLowerCase().replaceAll(' ', '-')}`}>{table.status}</span>
                 <p>{table.lastOrder}</p>
-                <small>{table.scans} scans today</small>
+                <small>{table.scans} {t('ownerTables.scansTodaySuffix')}</small>
               </div>
             </div>
             <div className="qr-card-bottom">
-              <a href={`/table/${table.code}`}>/table/{table.code}</a>
-              <div>
-                <button className="qr-icon-action" type="button" aria-label={`Print QR for table ${table.code}`}>
-                  <Printer aria-hidden="true" />
+              <a href={`/table/${table.code}`} target="_blank" rel="noreferrer">
+                /table/{table.code}
+              </a>
+              <div className="qr-card-actions">
+                <button
+                  className="qr-icon-action"
+                  type="button"
+                  aria-label={`${t('ownerTables.printStandee')} ${table.code}`}
+                  title={t('ownerTables.printStandee')}
+                  onClick={() => onPrintTable(table)}
+                >
+                  <Printer size={16} aria-hidden="true" />
                 </button>
-                <button className="qr-icon-action" type="button" aria-label={`Edit table ${table.code}`} onClick={() => onStartEdit(table)}>
-                  <Copy aria-hidden="true" />
+                <button
+                  className={`qr-icon-action ${copiedCode === table.code ? 'copied' : ''}`}
+                  type="button"
+                  aria-label={`${t('ownerTables.copyLink')} ${table.code}`}
+                  title={t('ownerTables.copyLink')}
+                  onClick={() => onCopyLink(table)}
+                >
+                  {copiedCode === table.code ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
+                </button>
+                <button
+                  className="qr-icon-action"
+                  type="button"
+                  aria-label={`${t('ownerTables.editTable')} ${table.code}`}
+                  title={t('ownerTables.editTable')}
+                  onClick={() => onStartEdit(table)}
+                >
+                  <Pencil size={16} aria-hidden="true" />
                 </button>
               </div>
             </div>
           </article>
         ))}
       </div>
+      {filteredTables.length === 0 && (
+        <div className="tables-empty-state">
+          <strong>{t('ownerTables.noTablesFound')}</strong>
+          <p>{t('ownerTables.noTablesFoundHint')}</p>
+          <button type="button" onClick={onClearFilters}>{t('ownerTables.resetFilters')}</button>
+        </div>
+      )}
     </section>
   );
 }

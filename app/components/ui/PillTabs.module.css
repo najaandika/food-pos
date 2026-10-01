@@ -19,7 +19,7 @@
   background: transparent;
   color: var(--muted);
   padding: 0 var(--space-4);
-  font-weight: 650;
+  font-weight: var(--font-weight-semibold);
   white-space: nowrap;
 }
 

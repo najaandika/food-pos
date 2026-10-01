@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'POS System',
-  description: 'Global QR ordering and point-of-sale dashboard.',
+  title: 'POS',
+  description: 'QR ordering and point-of-sale dashboard.',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

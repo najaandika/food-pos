@@ -54,6 +54,7 @@ export type AdminOrder = {
   tableCode?: string | null | undefined;
   guests?: number | undefined;
   notes?: string | null | undefined;
+  paymentMethod?: string | undefined;
 };
 
 export type AdminTable = {
@@ -177,6 +178,7 @@ export function toAdminOrders(orders?: PosOrder[]): AdminOrder[] {
       type: order.type,
       guests: order.guests,
       notes: order.notes,
+      paymentMethod: (order as unknown as { paymentMethod?: string }).paymentMethod ?? 'cash',
     };
   });
 }

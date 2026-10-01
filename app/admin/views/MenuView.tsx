@@ -12,6 +12,7 @@ import { MenuGrid } from './menu/MenuGrid';
 
 import type { AdminDish, AdminOrder, AdminTable } from '../runtime-data';
 import type { PosSettings } from '@/lib/pos-types';
+import { useLocale } from '../i18n-context';
 
 type CartLine = AdminDish & { cartQty: number; note?: string };
 
@@ -39,13 +40,14 @@ export function MenuView({
   onGoToCashier?: () => void;
   onGoToOrders?: () => void;
 }) {
+  const { t } = useLocale();
   const categories = useMemo(() => ['All Menu', ...Array.from(new Set(dishes.map((dish) => dish.category ?? 'Coffee')))], [dishes]);
   const firstTable = tables.find((table) => table.rawStatus === 'available') ?? tables[0];
   const [activeCategory, setActiveCategory] = useState(categories[0] ?? 'All Menu');
   const [query, setQuery] = useState('');
   const [orderType, setOrderType] = useState<'dine_in' | 'takeaway'>('dine_in');
   const [tableCode, setTableCode] = useState(firstTable?.code ?? 'A4');
-  const [customerName, setCustomerName] = useState('Walk-in Guest');
+  const [customerName, setCustomerName] = useState(t('menu.walkInGuest'));
   const [guests, setGuests] = useState(2);
   const [cart, setCart] = useState<Record<string, CartLine>>({});
   const [qrMode, setQrMode] = useState(false);
@@ -129,16 +131,16 @@ export function MenuView({
   const startNewTicket = () => {
     setSentOrder(null);
     setSendError('');
-    setCustomerName('Walk-in Guest');
+    setCustomerName(t('menu.walkInGuest'));
     setGuests(2);
   };
 
   return (
     <section className="app-view active">
       <header className="topbar pos-menu-topbar">
-        <AdminTitle title="POS Counter" subtitle="Fast order entry for table service, QR orders, and cashier tickets." />
+        <AdminTitle title={t('menu.title')} subtitle={t('menu.subtitle')} />
         <label className="admin-search-wrap menu-search">
-          <input type="search" placeholder="Search menu item" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <input type="search" placeholder={t('menu.searchPlaceholder')} value={query} onChange={(event) => setQuery(event.target.value)} />
           <Search aria-hidden="true" />
         </label>
       </header>
@@ -157,11 +159,11 @@ export function MenuView({
         <section className="qr-order-panel">
           <div className="qr-order-panel-head">
             <div>
-              <span>Incoming orders</span>
-              <h2>QR Orders</h2>
-              <p>Orders placed by customers from table QR menus.</p>
+              <span>{t('menu.incomingOrders')}</span>
+              <h2>{t('menu.qrOrders')}</h2>
+              <p>{t('menu.qrOrdersDesc')}</p>
             </div>
-            <button type="button" onClick={() => setQrMode(false)}>Back to Manual Order</button>
+            <button type="button" onClick={() => setQrMode(false)}>{t('menu.backToManualOrder')}</button>
           </div>
           <div className="qr-order-list">
             {orders.filter((order) => order.source === 'qr').map((order) => (
@@ -169,7 +171,7 @@ export function MenuView({
                 <div className={`table-pill ${order.tone}`}>{order.table}</div>
                 <div className="qr-order-info">
                   <strong>{order.name}</strong>
-                  <span>{order.tableCode ? `Table ${order.tableCode}` : 'Takeaway'} · {order.items.length} items · {order.time}</span>
+                  <span>{order.tableCode ? `${t('common.table')} ${order.tableCode}` : t('menu.takeaway')} · {order.items.length} {t('common.items')} · {order.time}</span>
                   <small>{order.items.slice(0, 2).map((item) => `${item[0]} x${item[1]}`).join(' · ')}</small>
                 </div>
                 <div className="qr-order-meta">
@@ -179,7 +181,7 @@ export function MenuView({
               </article>
             ))}
             {!orders.some((order) => order.source === 'qr') && (
-              <p className="empty-state">No QR orders are waiting right now.</p>
+              <p className="empty-state">{t('menu.noQrOrders')}</p>
             )}
           </div>
         </section>

@@ -7,7 +7,7 @@
   border: 0;
   border-radius: var(--radius-sm);
   padding: 0 var(--space-4);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1;
   white-space: nowrap;
 }

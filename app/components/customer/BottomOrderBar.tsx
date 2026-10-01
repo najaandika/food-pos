@@ -7,14 +7,27 @@ type BottomOrderBarProps = {
   total: string;
   icon: ReactNode;
   onReview: () => void;
+  itemCountLabel?: string;
+  reviewLabel?: string;
 };
 
-export function BottomOrderBar({ itemCount, total, icon, onReview }: BottomOrderBarProps) {
+export function BottomOrderBar({
+  itemCount,
+  total,
+  icon,
+  onReview,
+  itemCountLabel = 'items',
+  reviewLabel = 'Review',
+}: BottomOrderBarProps) {
   return (
     <Button className={styles['customer-bottom-cart']} onClick={onReview}>
-      <span>{itemCount} item{itemCount > 1 ? 's' : ''}</span>
+      <span>
+        {itemCount} {itemCountLabel}
+      </span>
       <strong>{total}</strong>
-      <b>{icon} Review</b>
+      <b>
+        {icon} {reviewLabel}
+      </b>
     </Button>
   );
 }

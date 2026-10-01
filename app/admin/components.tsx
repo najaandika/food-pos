@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, LogOut, X } from 'lucide-react';
 import { roleLabel, type AuthUser } from './auth';
+import { useLocale } from './i18n-context';
 import styles from './styles/Modal.module.css';
 
 export function AdminTitle({
@@ -52,6 +53,8 @@ export function UserProfileModal({
   onClose: () => void;
   onLogout?: () => void;
 }) {
+  const { t } = useLocale();
+
   return (
     <div className={styles['modal-overlay']} onClick={onClose}>
       <div
@@ -61,8 +64,8 @@ export function UserProfileModal({
         onClick={(event) => event.stopPropagation()}
       >
         <div className={styles['modal-top']}>
-          <h2>Profil & Shift Staf</h2>
-          <button className={styles['close-btn']} type="button" onClick={onClose} aria-label="Close">
+          <h2>{t('profile.title')}</h2>
+          <button className={styles['close-btn']} type="button" onClick={onClose} aria-label={t('common.close')}>
             <X />
           </button>
         </div>
@@ -80,12 +83,12 @@ export function UserProfileModal({
 
         <div className="profile-shift-box">
           <div className="shift-row">
-            <span>Status Shift</span>
-            <strong>Evening Shift (Aktif)</strong>
+            <span>{t('profile.shiftStatus')}</span>
+            <strong>{t('profile.eveningShiftActive')}</strong>
           </div>
           <div className="shift-row">
-            <span>Lokasi Outlet</span>
-            <strong>POS System</strong>
+            <span>{t('profile.outletLocation')}</span>
+            <strong>POS</strong>
           </div>
         </div>
 
@@ -93,11 +96,11 @@ export function UserProfileModal({
           {onLogout && (
             <button className="logout-action-btn" type="button" onClick={onLogout}>
               <LogOut />
-              <span>Keluar / Logout</span>
+              <span>{t('profile.logoutLabel')}</span>
             </button>
           )}
           <button className="close-action-btn" type="button" onClick={onClose}>
-            Tutup
+            {t('common.close')}
           </button>
         </div>
       </div>

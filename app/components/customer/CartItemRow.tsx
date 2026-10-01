@@ -9,16 +9,28 @@ type CartItemRowProps = {
   onNoteChange: (note: string) => void;
   onDecrement: () => void;
   onIncrement: () => void;
+  notePlaceholder?: string;
 };
 
-export function CartItemRow({ item, formattedPrice, onNoteChange, onDecrement, onIncrement }: CartItemRowProps) {
+export function CartItemRow({
+  item,
+  formattedPrice,
+  onNoteChange,
+  onDecrement,
+  onIncrement,
+  notePlaceholder = 'Item note, e.g. less sugar',
+}: CartItemRowProps) {
   return (
     <article className={styles['cart-row']}>
       <Image src={item.image} alt={item.name} width={160} height={160} />
       <div>
         <h3>{item.name}</h3>
         <span>{formattedPrice}</span>
-        <input value={item.note} onChange={(event) => onNoteChange(event.target.value)} placeholder="Item note, e.g. less sugar" />
+        <input
+          value={item.note}
+          onChange={(event) => onNoteChange(event.target.value)}
+          placeholder={notePlaceholder}
+        />
       </div>
       <Stepper
         className={styles['cart-qty']}

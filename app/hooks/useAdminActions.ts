@@ -149,9 +149,16 @@ export function useAdminActions(refreshSnapshot: () => Promise<void>, showNotice
     async (dishId: number | undefined) => {
       if (!dishId) return;
       try {
-        await requestAdminOk(`/api/menu-items/${dishId}`, { method: 'DELETE' });
+        const result = await requestAdminJson<{ ok: boolean; deleted: boolean; archived: boolean }>(
+          `/api/menu-items/${dishId}`,
+          { method: 'DELETE' },
+        );
         await refreshSnapshot();
-        showNotice({ tone: 'success', message: 'Menu item removed.' });
+        if (result.archived) {
+          showNotice({ tone: 'success', message: 'Menu item has order history and was archived (hidden) instead of deleted.' });
+        } else {
+          showNotice({ tone: 'success', message: 'Menu item removed.' });
+        }
       } catch (error) {
         showNotice({ tone: 'error', message: error instanceof Error ? error.message : 'Failed to remove menu.' });
       }

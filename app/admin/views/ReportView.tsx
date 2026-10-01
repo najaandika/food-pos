@@ -1,78 +1,69 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { CalendarDays, RefreshCcw } from 'lucide-react';
 
 import { AdminTitle } from '..';
 import { formatRupiah } from '../../lib/format';
-import { getDashboardStats } from '../runtime-data';
-import type { PosReport } from '../../../lib/pos-types';
+import type { PosDashboard, PosReport } from '../../../lib/pos-types';
+import { businessDateKey } from '../../../lib/business-time';
 
-function dateKey(date: Date) {
-  return date.toISOString().slice(0, 10);
-}
-
-function defaultFromDate() {
-  const date = new Date();
-  date.setDate(date.getDate() - 6);
-  return dateKey(date);
-}
-
-const fallbackTraffic = [
-  { label: 'Mon', qr: 8, dineIn: 12 },
-  { label: 'Tue', qr: 14, dineIn: 10 },
-  { label: 'Wed', qr: 11, dineIn: 9 },
-  { label: 'Thu', qr: 16, dineIn: 13 },
-  { label: 'Fri', qr: 18, dineIn: 15 },
-  { label: 'Sat', qr: 22, dineIn: 17 },
-  { label: 'Sun', qr: 19, dineIn: 14 },
-];
-
-export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDashboardStats>[0] }) {
-  const stats = getDashboardStats(dashboard);
-  const [from, setFrom] = useState(defaultFromDate);
-  const [to, setTo] = useState(() => dateKey(new Date()));
+export function ReportView({ dashboard }: { dashboard?: PosDashboard }) {
+  const [from, setFrom] = useState(() => businessDateKey(new Date()));
+  const [to, setTo] = useState(() => businessDateKey(new Date()));
   const [report, setReport] = useState<PosReport | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [reportError, setReportError] = useState('');
+  const latestRequestRef = useRef(0);
 
   const loadReport = useCallback(async () => {
+    const requestId = latestRequestRef.current + 1;
+    latestRequestRef.current = requestId;
     setIsLoading(true);
+    setReportError('');
     try {
       const response = await fetch(`/api/reports?from=${from}&to=${to}`, { cache: 'no-store' });
-      if (response.ok) setReport(await response.json());
+      if (!response.ok) {
+        throw new Error('Unable to load report data.');
+      }
+      const nextReport = (await response.json()) as PosReport;
+      if (requestId === latestRequestRef.current) {
+        setReport(nextReport);
+      }
+    } catch {
+      if (requestId === latestRequestRef.current) {
+        setReportError('Report data could not be refreshed. Please try again.');
+      }
     } finally {
-      setIsLoading(false);
+      if (requestId === latestRequestRef.current) {
+        setIsLoading(false);
+      }
     }
   }, [from, to]);
 
   useEffect(() => {
     void loadReport();
-  }, [loadReport]);
+  }, [dashboard, loadReport]);
 
-  const traffic = report?.traffic.length ? report.traffic : fallbackTraffic;
+  const currentReport = report?.range.from === from && report.range.to === to ? report : null;
+  const traffic = currentReport?.traffic ?? [];
   const maxTraffic = Math.max(1, ...traffic.flatMap((item) => [item.qr, item.dineIn]));
   const hasTraffic = traffic.some((item) => item.qr > 0 || item.dineIn > 0);
-  const categorySales = report?.categorySales.length
-    ? report.categorySales
-    : [
-        { name: 'Coffee', quantity: 168, growth: 9.1 },
-        { name: 'Food', quantity: 132, growth: 6.3 },
-        { name: 'Snack', quantity: 74, growth: -1.4 },
-      ];
-  const channels = report?.serviceChannels ?? { qr: 142, manual: 24, dineIn: 126, takeaway: 60 };
-  const summary = report?.summary ?? {
-    revenue: dashboard?.revenueToday ?? 0,
-    totalOrders: stats.activeOrders + stats.paidToday,
-    qrOrders: stats.qrOrders,
-    menuSold: 428,
-    waitingPayment: stats.waitingPayment,
+  const categorySales = currentReport?.categorySales ?? [];
+  const channels = currentReport?.serviceChannels ?? { qr: 0, manual: 0, dineIn: 0, takeaway: 0 };
+  const summary = currentReport?.summary ?? {
+    revenue: 0,
+    totalOrders: 0,
+    qrOrders: 0,
+    menuSold: 0,
+    waitingPayment: 0,
   };
 
   const rangeLabel = useMemo(() => {
-    if (!report) return 'Selected range';
-    return `${report.range.from} to ${report.range.to}`;
-  }, [report]);
+    if (!currentReport) return `${from} to ${to}`;
+    return `${currentReport.range.from} to ${currentReport.range.to}`;
+  }, [currentReport, from, to]);
 
   return (
     <section className="app-view active">
@@ -90,6 +81,8 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
           </button>
         </div>
       </header>
+
+      {reportError && <p className="report-load-note">{reportError}</p>}
 
       <div className="report-layout">
         <section className="report-main">
@@ -123,14 +116,14 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
                   <small>{item.label}</small>
                 </div>
               ))}
-              {!hasTraffic && <p className="report-chart-empty">No order traffic in this date range.</p>}
+              {!isLoading && !hasTraffic && <p className="report-chart-empty">No order traffic in this date range.</p>}
             </div>
             <div className="report-order-detail">
               <div className="report-card-head compact">
                 <div><h2>Recent Orders</h2><p>Latest transactions in this date range</p></div>
               </div>
               <div className="report-order-list">
-                {(report?.recentOrders ?? []).map((order) => (
+                {(currentReport?.recentOrders ?? []).map((order) => (
                   <p key={order.id}>
                     <span>{order.tableCode ?? 'TA'}</span>
                     <strong>{order.customerName}</strong>
@@ -138,7 +131,7 @@ export function ReportView({ dashboard }: { dashboard?: Parameters<typeof getDas
                     <b>{formatRupiah(order.total)}</b>
                   </p>
                 ))}
-                {report && report.recentOrders.length === 0 && <em>No orders in this date range.</em>}
+                {currentReport && !isLoading && currentReport.recentOrders.length === 0 && <em>No orders in this date range.</em>}
               </div>
             </div>
           </section>

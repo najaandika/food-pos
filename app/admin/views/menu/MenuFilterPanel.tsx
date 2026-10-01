@@ -3,6 +3,7 @@
 import { Plus, Trash2 } from 'lucide-react';
 
 import type { AdminDish } from '../../runtime-data';
+import { useLocale } from '../../i18n-context';
 
 type CartLine = AdminDish & { cartQty: number };
 
@@ -39,11 +40,13 @@ export function MenuFilterPanel({
   onAddGuest,
   onVoidTicket,
 }: Props) {
+  const { t } = useLocale();
+
   return (
     <aside className="category-rail">
       <div className="category-head">
-        <span>Menu Mode</span>
-        <strong>Manual order</strong>
+        <span>{t('menu.menuMode')}</span>
+        <strong>{t('menu.manualOrder')}</strong>
       </div>
       <div className="category-list">
         {categories.map((category) => (
@@ -53,9 +56,9 @@ export function MenuFilterPanel({
             key={category}
             onClick={() => onSelectCategory(category)}
           >
-            <strong>{category}</strong>
+            <strong>{category === 'All Menu' ? t('menu.allMenu') : category}</strong>
             <span>
-              {category === 'All Menu' ? dishes.length : dishes.filter((dish) => dish.category === category).length} Items
+              {category === 'All Menu' ? dishes.length : dishes.filter((dish) => dish.category === category).length} {t('common.items')}
             </span>
             <b>
               {category === 'All Menu'
@@ -71,10 +74,10 @@ export function MenuFilterPanel({
           <input value={tableCode} onChange={(event) => onChangeTableCode(event.target.value.toUpperCase())} aria-label="Table code" />
         )}
         <button type="button" onClick={onAddGuest}>
-          <Plus aria-hidden="true" /> {guests} guests
+          <Plus aria-hidden="true" /> {guests} {t('common.guests')}
         </button>
         <button type="button" onClick={onVoidTicket}>
-          <Trash2 aria-hidden="true" /> Void ticket
+          <Trash2 aria-hidden="true" /> {t('menu.voidTicket')}
         </button>
       </div>
     </aside>

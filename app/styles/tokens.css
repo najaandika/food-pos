@@ -126,6 +126,10 @@
   --font-md: clamp(14px, 2.4vw, 16px);
   --font-lg: clamp(18px, 3.4vw, 22px);
   --font-xl: clamp(28px, 6vw, 44px);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-base: 16px;

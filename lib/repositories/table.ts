@@ -82,3 +82,15 @@ export async function deleteTable(tableId: number) {
   await prisma.table.delete({ where: { id } });
   return { deleted: true, archived: false };
 }
+
+export async function requestWaiterCall(tableCode: string) {
+  const code = tableCode.trim().toUpperCase();
+  const table = await prisma.table.findUnique({ where: { code } });
+  if (!table) return null;
+  await prisma.table.update({
+    where: { id: table.id },
+    data: { status: 'need_waiter' },
+  });
+  return { ok: true, tableCode: code };
+}
+

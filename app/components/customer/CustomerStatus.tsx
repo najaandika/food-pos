@@ -3,6 +3,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button } from '../ui/Button';
 import type { PosOrderStatus } from '../../../lib/pos-types';
 import styles from '../../table/[code]/Customer.module.css';
+import {
+  customerTranslations,
+  type CustomerLocale,
+  type CustomerTranslationKey,
+} from '../../table/[code]/customer-i18n';
 
 type CustomerStatusProps = {
   tableCode: string;
@@ -10,6 +15,11 @@ type CustomerStatusProps = {
   orderNumber: string;
   icon: ReactNode;
   onAddMore: () => void;
+  locale?: CustomerLocale;
+  onToggleLocale?: (next: CustomerLocale) => void;
+  t?: (key: CustomerTranslationKey) => string;
+  onCallWaiter?: () => void;
+  waiterCalled?: boolean;
 };
 
 type PublicOrderStatus = {
@@ -18,58 +28,40 @@ type PublicOrderStatus = {
   total: number;
 };
 
-const statusCopy: Record<PosOrderStatus, { title: string; body: string; activeStep: number }> = {
-  pending: {
-    title: 'Order received',
-    body: 'Your order is waiting for staff confirmation. We will update this screen as soon as it moves to kitchen.',
-    activeStep: 1,
-  },
-  accepted: {
-    title: 'Order confirmed',
-    body: 'Staff accepted your order. The kitchen will start preparing it shortly.',
-    activeStep: 2,
-  },
-  preparing: {
-    title: 'Preparing your order',
-    body: 'Your order is being prepared. Please relax at your table while we handle it.',
-    activeStep: 2,
-  },
-  ready: {
-    title: 'Ready to serve',
-    body: 'Your order is ready. A waiter will bring it to your table soon.',
-    activeStep: 3,
-  },
-  served: {
-    title: 'Order served',
-    body: 'Enjoy your order. You can request the bill when you are ready.',
-    activeStep: 4,
-  },
-  waiting_payment: {
-    title: 'Bill requested',
-    body: 'Your bill has been sent to the cashier. Please complete payment when ready.',
-    activeStep: 5,
-  },
-  paid: {
-    title: 'Payment complete',
-    body: 'Thank you. Your order has been closed.',
-    activeStep: 5,
-  },
-  cancelled: {
-    title: 'Order cancelled',
-    body: 'This order has been cancelled. Please contact staff if you need help.',
-    activeStep: 1,
-  },
-};
+function getStatusDetails(status: PosOrderStatus, t: (key: CustomerTranslationKey) => string) {
+  switch (status) {
+    case 'pending':
+      return { title: t('orderReceivedTitle'), body: t('orderReceivedBody'), activeStep: 1 };
+    case 'accepted':
+      return { title: t('orderAcceptedTitle'), body: t('orderAcceptedBody'), activeStep: 2 };
+    case 'preparing':
+      return { title: t('preparingTitle'), body: t('preparingBody'), activeStep: 2 };
+    case 'ready':
+      return { title: t('readyTitle'), body: t('readyBody'), activeStep: 3 };
+    case 'served':
+      return { title: t('servedTitle'), body: t('servedBody'), activeStep: 4 };
+    case 'waiting_payment':
+      return { title: t('waitingPaymentTitle'), body: t('waitingPaymentBody'), activeStep: 5 };
+    case 'paid':
+      return { title: t('paidTitle'), body: t('paidBody'), activeStep: 5 };
+    case 'cancelled':
+    default:
+      return { title: t('cancelledTitle'), body: t('cancelledBody'), activeStep: 1 };
+  }
+}
 
-const statusSteps = [
-  { label: 'Pending' },
-  { label: 'Kitchen' },
-  { label: 'Ready' },
-  { label: 'Served' },
-  { label: 'Paid' },
-];
-
-export function CustomerStatus({ tableCode, orderId, orderNumber, icon, onAddMore }: CustomerStatusProps) {
+export function CustomerStatus({
+  tableCode,
+  orderId,
+  orderNumber,
+  icon,
+  onAddMore,
+  locale = 'id',
+  onToggleLocale,
+  t = (key) => key,
+  onCallWaiter,
+  waiterCalled = false,
+}: CustomerStatusProps) {
   const [orderStatus, setOrderStatus] = useState<PublicOrderStatus | null>(null);
 
   useEffect(() => {
@@ -97,36 +89,72 @@ export function CustomerStatus({ tableCode, orderId, orderNumber, icon, onAddMor
   }, [orderId]);
 
   const currentStatus = orderStatus?.status ?? 'pending';
-  const copy = statusCopy[currentStatus];
+  const copy = getStatusDetails(currentStatus, t);
   const activeStep = copy.activeStep;
   const canAddMore = !['waiting_payment', 'paid', 'cancelled'].includes(currentStatus);
+  const steps = customerTranslations[locale].steps;
+
   const helperText = useMemo(() => {
-    if (!orderStatus) return 'Estimated confirmation 2-3 min';
-    if (currentStatus === 'paid') return 'Closed by cashier';
-    return `${orderStatus.itemCount} items in this order`;
-  }, [currentStatus, orderStatus]);
+    if (!orderStatus) {
+      return locale === 'id' ? 'Estimasi konfirmasi 2-3 mnt' : 'Estimated confirmation 2-3 min';
+    }
+    if (currentStatus === 'paid') {
+      return t('paidTitle');
+    }
+    return `${orderStatus.itemCount} ${t('itemCount')}`;
+  }, [currentStatus, orderStatus, locale, t]);
 
   return (
     <main className={styles['customer-page']}>
       <section className={styles['customer-status']}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '14px' }}>
+          {onToggleLocale && (
+            <button
+              type="button"
+              className={styles['customer-lang-btn']}
+              onClick={() => onToggleLocale(locale === 'id' ? 'en' : 'id')}
+            >
+              {locale === 'id' ? '🇬🇧 English' : '🇮🇩 Indonesia'}
+            </button>
+          )}
+          {onCallWaiter && (
+            <button
+              type="button"
+              className={`${styles['customer-call-btn']} ${waiterCalled ? styles.called : ''}`}
+              onClick={onCallWaiter}
+            >
+              {waiterCalled ? t('callWaiterSent') : t('callWaiter')}
+            </button>
+          )}
+        </div>
+
         <div className={styles['customer-status-icon']}>{icon}</div>
-        <span className={styles['customer-pill']}>Table {tableCode.toUpperCase()}</span>
+        <span className={styles['customer-pill']}>
+          {t('table')} {tableCode.toUpperCase()}
+        </span>
         <h1>{copy.title}</h1>
         <p>{copy.body}</p>
+
         <div className={styles['status-card']}>
-          <span>Order Number</span>
+          <span>{t('orderNumberLabel')}</span>
           <strong>{orderNumber}</strong>
           <small>{helperText}</small>
         </div>
+
         <div className={styles['status-steps']}>
-          {statusSteps.map((step, index) => (
-            <div className={index + 1 <= activeStep ? styles.active : ''} key={step.label}>
+          {steps.map((label, index) => (
+            <div className={index + 1 <= activeStep ? styles.active : ''} key={label}>
               <b>{index + 1}</b>
-              <span>{step.label}</span>
+              <span>{label}</span>
             </div>
           ))}
         </div>
-        {canAddMore && <Button className={styles['customer-primary']} onClick={onAddMore}>Add more items</Button>}
+
+        {canAddMore && (
+          <Button className={styles['customer-primary']} onClick={onAddMore}>
+            {t('addMoreButton')}
+          </Button>
+        )}
       </section>
     </main>
   );

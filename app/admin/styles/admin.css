@@ -12,6 +12,7 @@
 @import "../views/ReportView.css";
 @import "../views/SettingsView.css";
 @import "../views/WaitersView.css";
+@import "./typography.css";
 
 /* Responsive & layout overrides (MUST come after base styles) */
 @import "./responsive.css";

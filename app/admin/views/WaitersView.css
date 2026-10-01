@@ -62,7 +62,7 @@
 .waiters-stat span {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 850;
+  font-weight: var(--font-weight-bold);
 }
 
 .waiters-stat strong {
@@ -76,7 +76,7 @@
   margin-top: 6px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .waiters-stat.ready .waiters-stat-icon {
@@ -92,6 +92,33 @@
 .waiters-panel,
 .service-queue {
   padding: 18px;
+}
+
+.waiters-panel .cashier-panel-head > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(48, 71, 255, 0.16);
+  border-radius: var(--radius-pill);
+  background: var(--mist);
+  color: var(--blue);
+  padding: 0 14px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  transition: background var(--transition-hover), border-color var(--transition-hover);
+}
+
+.waiters-panel .cashier-panel-head > button:hover {
+  border-color: rgba(48, 71, 255, 0.28);
+  background: var(--ice);
+}
+
+.waiters-panel .cashier-panel-head > button svg {
+  width: 16px;
+  height: 16px;
 }
 
 .service-queue {
@@ -123,7 +150,7 @@
   color: var(--muted);
   padding: 0 14px;
   font-size: var(--font-size-xs);
-  font-weight: 850;
+  font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }
 
@@ -175,7 +202,7 @@
   background: var(--navy);
   color: white;
   font-size: 17px;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .table-state {
@@ -184,7 +211,7 @@
   color: var(--blue);
   padding: 7px 10px;
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }
 
@@ -206,7 +233,7 @@
   gap: var(--space-1);
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .table-card-body svg,
@@ -224,7 +251,7 @@
   color: var(--blue);
   font-size: var(--font-size-xs);
   font-style: normal;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .table-status-card.ready {
@@ -288,7 +315,7 @@
   border-radius: var(--radius-sm);
   background: var(--navy);
   color: white;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .waiter-request.ready .request-table {
@@ -315,7 +342,7 @@
   margin-top: 4px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 800;
+  font-weight: var(--font-weight-semibold);
 }
 
 .waiter-request em {
@@ -325,7 +352,7 @@
   padding: 7px 10px;
   font-size: var(--font-size-xs);
   font-style: normal;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .waiter-request button {
@@ -335,7 +362,7 @@
   background: var(--mist);
   color: var(--blue);
   padding: 0 14px;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .service-queue-strip {
@@ -352,7 +379,7 @@
   color: var(--muted);
   padding: 10px;
   font-size: var(--font-size-xs);
-  font-weight: 850;
+  font-weight: var(--font-weight-bold);
   text-align: center;
 }
 
@@ -402,14 +429,14 @@
   margin-top: 3px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 750;
+  font-weight: var(--font-weight-medium);
 }
 
 .service-card p {
   margin: 14px 0 12px;
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 750;
+  font-weight: var(--font-weight-medium);
   line-height: 1.45;
 }
 
@@ -426,7 +453,7 @@
 .service-meta span {
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .service-meta b {
@@ -444,7 +471,7 @@
   height: 40px;
   border: 0;
   border-radius: 13px;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .service-actions button:first-child {

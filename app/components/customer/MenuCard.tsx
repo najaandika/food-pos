@@ -10,9 +10,21 @@ type MenuCardProps = {
   formattedPrice: string;
   onAdd: () => void;
   onRemove: () => void;
+  addLabel?: string;
+  readySoonLabel?: string;
+  staffPickLabel?: string;
 };
 
-export function MenuCard({ item, quantity, formattedPrice, onAdd, onRemove }: MenuCardProps) {
+export function MenuCard({
+  item,
+  quantity,
+  formattedPrice,
+  onAdd,
+  onRemove,
+  addLabel = 'Add',
+  readySoonLabel = 'Ready soon',
+  staffPickLabel = 'Staff pick',
+}: MenuCardProps) {
   return (
     <article className={styles['customer-menu-item']}>
       <div className={styles['customer-menu-image']}>
@@ -24,7 +36,7 @@ export function MenuCard({ item, quantity, formattedPrice, onAdd, onRemove }: Me
         <p>{item.description}</p>
         <div className={styles['customer-item-meta']}>
           <span>{item.category}</span>
-          <span>{item.id % 2 ? 'Ready soon' : 'Staff pick'}</span>
+          <span>{item.id % 2 ? readySoonLabel : staffPickLabel}</span>
         </div>
         <div className={styles['menu-item-bottom']}>
           <strong>{formattedPrice}</strong>
@@ -37,7 +49,7 @@ export function MenuCard({ item, quantity, formattedPrice, onAdd, onRemove }: Me
               onIncrement={onAdd}
             />
           ) : (
-            <Button onClick={onAdd}>Add</Button>
+            <Button onClick={onAdd}>{addLabel}</Button>
           )}
         </div>
       </div>

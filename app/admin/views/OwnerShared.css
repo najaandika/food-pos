@@ -5,7 +5,7 @@
   background: var(--blue);
   color: white;
   padding: 0 18px;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .owner-menu-toolbar .owner-filter-tabs {
@@ -37,7 +37,7 @@
   background: transparent;
   color: var(--muted);
   padding: 0 16px;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }
 
@@ -58,7 +58,7 @@
   background: rgba(25, 184, 133, 0.12);
   color: #0f8d66;
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .availability-toggle i {
@@ -73,9 +73,17 @@
   color: var(--danger);
 }
 
-.editor-fields {
+.menu-editor-panel .editor-fields {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--pos-gap);
+}
+
+.menu-editor-panel .editor-fields > label:first-child,
+.menu-editor-panel .editor-fields > .editor-field,
+.menu-editor-panel .editor-fields > label:nth-of-type(4),
+.menu-editor-panel .editor-fields > label:nth-of-type(5) {
+  grid-column: 1 / -1;
 }
 
 .editor-fields label,
@@ -85,7 +93,7 @@
   gap: var(--space-fixed-2);
   color: var(--navy);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .editor-fields input,
@@ -97,7 +105,7 @@
   background: var(--card-bg);
   color: var(--ink);
   padding: 14px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   box-shadow: inset 0 0 0 1px rgba(229, 233, 243, 0.82);
   outline: 0;
   transition: border-color var(--transition-hover), box-shadow var(--transition-hover), background-color var(--transition-hover);
@@ -143,7 +151,7 @@
 .editor-fields option {
   color: var(--ink);
   background: var(--card-bg);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .custom-select {
@@ -222,7 +230,7 @@
   color: var(--muted);
   padding: 0 12px;
   text-align: left;
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .custom-select-options button:hover,
@@ -244,12 +252,18 @@
 
 .editor-switches button {
   min-height: 42px;
-  border: 0;
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius-sm);
   background: var(--ice);
   color: var(--muted);
   font-size: var(--font-size-xs);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
+  transition: border-color var(--transition-hover), background-color var(--transition-hover), color var(--transition-hover);
+}
+
+.editor-switches button:hover {
+  border-color: rgba(48, 71, 255, 0.24);
+  color: var(--blue);
 }
 
 .editor-switches button.active {
@@ -266,19 +280,21 @@
 
 .editor-actions button {
   height: 50px;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 .editor-actions button:first-child {
-  background: var(--mist);
+  border-color: var(--border-soft-strong);
+  background: #ffffff;
   color: var(--blue);
 }
 
 .editor-actions button:last-child {
   background: var(--blue);
   color: white;
+  box-shadow: var(--shadow-blue);
 }
 
 .editor-actions button:disabled {
@@ -294,4 +310,3 @@
 .settings-grid .editor-field {
   min-width: 0;
 }
-
