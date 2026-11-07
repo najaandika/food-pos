@@ -5,11 +5,9 @@ import {
     RiBankCardLine,
     RiCheckDoubleLine,
     RiFileList3Line,
-    RiLayoutGridLine,
     RiMoneyDollarCircleLine,
     RiQrCodeLine,
     RiRefreshLine,
-    RiRestaurantLine,
     RiShoppingBag3Line,
     RiTimeLine,
 } from '@remixicon/react';
@@ -33,6 +31,8 @@ import { useLocale } from '../i18n-context';
 import type { AdminDish, AdminOrder } from '../runtime-data';
 import type { View } from '../types';
 import { DashboardFooter } from './dashboard/DashboardFooter';
+import { TopSellingMenu } from './dashboard/components/TopSellingMenu';
+import { OperationalActivity } from './dashboard/components/OperationalActivity';
 import { OrderWorkflowCard } from './dashboard/OrderWorkflowCard';
 import {
     orderQuantity,
@@ -444,299 +444,26 @@ export function DashboardView({
             </div>
 
             <div className="od-analytics-grid">
-                <section
-                    className="od-surface od-menu-card"
-                    aria-labelledby="od-menu-title"
-                >
-                    <div className="od-card-topline">
-                        <div>
-                            <span className="od-section-label">
-                                {t('dashboard.popularMenu')}
-                            </span>
-                            <div className="od-card-heading-line">
-                                <h2 id="od-menu-title">
-                                    {hasSnapshot ? topSales : '—'}
-                                </h2>
-                                <span className="od-neutral-pill">
-                                    {localized(
-                                        'porsi terjual dari 5 menu',
-                                        'servings across top 5 items',
-                                    )}
-                                </span>
-                            </div>
-                        </div>
-                        <RiRestaurantLine
-                            className="od-header-icon"
-                            aria-hidden="true"
-                        />
-                    </div>
-                    <div className="od-menu-plot">
-                        {topDishes.length ? (
-                            topDishes.map((dish, index) => {
-                                const sold = dish.soldToday ?? 0;
-                                const share = topSales
-                                    ? Math.round((sold / topSales) * 100)
-                                    : 0;
-                                return (
-                                    <div
-                                        className="od-menu-plot-row"
-                                        key={dish.id ?? dish.name}
-                                    >
-                                        <div className="od-menu-plot-caption">
-                                            <span className="od-menu-index">
-                                                {String(index + 1).padStart(
-                                                    2,
-                                                    '0',
-                                                )}
-                                            </span>
-                                            <strong title={dish.name}>
-                                                {dish.name}
-                                            </strong>
-                                            <span
-                                                className="od-menu-share"
-                                                title={localized(
-                                                    'Bagian dari 5 menu terlaris',
-                                                    'Share of top 5 items',
-                                                )}
-                                            >
-                                                {share}%
-                                            </span>
-                                            <span className="od-menu-sold">
-                                                {sold}{' '}
-                                                {localized('porsi', 'sold')}
-                                            </span>
-                                        </div>
-                                        <div
-                                            className="od-menu-progress-track"
-                                            role="meter"
-                                            aria-label={`${dish.name}: ${sold} ${localized('porsi', 'sold')}`}
-                                            aria-valuemin={0}
-                                            aria-valuemax={maxDishSales}
-                                            aria-valuenow={sold}
-                                        >
-                                            <span
-                                                className="od-menu-progress-fill"
-                                                style={{
-                                                    width: `${(sold / maxDishSales) * 100}%`,
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <p className="od-empty-copy">
-                                {localized(
-                                    'Data menu terjual belum tersedia.',
-                                    'Sold-item data is not available yet.',
-                                )}
-                            </p>
-                        )}
-                    </div>
-                    {topDishes.length > 0 && (
-                        <div className="od-menu-footnote">
-                            <span
-                                className="od-chart-legend-dot"
-                                aria-hidden="true"
-                            />
-                            {localized(
-                                'Bar dibanding menu terlaris; persentase dari 5 menu.',
-                                'Bars compare with the top item; percentages are shares of the top 5.',
-                            )}
-                        </div>
-                    )}
-                    {role === 'owner' && (
-                        <Button
-                            size="small"
-                            variant="secondary"
-                            className="od-card-footer-action"
-                            onClick={() => onChangeView('owner-menu')}
-                        >
-                            {t('dashboard.manageMenu')}
-                        </Button>
-                    )}
-                </section>
-
-                <section
-                    className="od-surface od-activity-card"
-                    aria-labelledby="od-activity-title"
-                >
-                    <div className="od-card-topline">
-                        <div>
-                            <span className="od-section-label">
-                                {localized(
-                                    'Aktivitas operasional',
-                                    'Operational activity',
-                                )}
-                            </span>
-                            <div className="od-card-heading-line">
-                                <h2 id="od-activity-title">
-                                    {hasSnapshot
-                                        ? (liveInfo?.totalOrders ??
-                                          visibleOrders.length)
-                                        : '—'}
-                                </h2>
-                                <span className="od-neutral-pill">
-                                    {localized(
-                                        'pesanan tercatat',
-                                        'orders recorded',
-                                    )}
-                                </span>
-                            </div>
-                        </div>
-                        <RiLayoutGridLine
-                            className="od-header-icon"
-                            aria-hidden="true"
-                        />
-                    </div>
-                    <div className="od-activity-tiles">
-                        {(
-                            [
-                                {
-                                    icon: RiTimeLine,
-                                    value: hasSnapshot
-                                        ? statusCount('pending')
-                                        : '—',
-                                    label: localized('Menunggu', 'Pending'),
-                                },
-                                {
-                                    icon: RiCheckDoubleLine,
-                                    value: hasSnapshot
-                                        ? statusCount('ready')
-                                        : '—',
-                                    label: localized('Siap disaji', 'Ready'),
-                                },
-                                {
-                                    icon: RiBankCardLine,
-                                    value: dashboard
-                                        ? dashboard.waitingPayment
-                                        : '—',
-                                    label: localized('Belum dibayar', 'Unpaid'),
-                                },
-                                {
-                                    icon: RiRestaurantLine,
-                                    value: hasSnapshot
-                                        ? (liveInfo?.activeTableCount ??
-                                          allActiveTableOrders.length)
-                                        : '—',
-                                    label: localized(
-                                        'Meja aktif',
-                                        'Active tables',
-                                    ),
-                                },
-                            ] as const
-                        ).map(({ icon: Icon, value, label }) => (
-                            <div className="od-activity-tile" key={label}>
-                                <Icon aria-hidden="true" />
-                                <strong>{value}</strong>
-                                <span>{label}</span>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="od-activity-overview">
-                        <div className="od-activity-subheading">
-                            <strong>
-                                {localized(
-                                    'Peta status pesanan',
-                                    'Order status map',
-                                )}
-                            </strong>
-                            <span>
-                                {liveInfo
-                                    ? localized(
-                                          `${Math.min(48, visibleOrders.length)} pesanan terbaru`,
-                                          `${Math.min(48, visibleOrders.length)} latest orders`,
-                                      )
-                                    : visibleOrders.length > 48
-                                      ? localized(
-                                            '48 pesanan terbaru',
-                                            'Latest 48 orders',
-                                        )
-                                      : localized(
-                                            '1 kotak = 1 pesanan',
-                                            '1 cell = 1 order',
-                                        )}
-                            </span>
-                        </div>
-                        {visibleOrders.length ? (
-                            <div
-                                className="od-order-map"
-                                role="img"
-                                aria-label={localized(
-                                    'Peta status pesanan terbaru yang ditampilkan, bukan seluruh riwayat. Warna menunjukkan status, bukan waktu.',
-                                    'Status map of displayed recent orders, not the full history. Colors indicate status, not time.',
-                                )}
-                            >
-                                {visibleOrders
-                                    .slice(0, 48)
-                                    .map((order, index) => {
-                                        const status =
-                                            resolveOrderStatus(order);
-                                        return (
-                                            <span
-                                                key={
-                                                    order.id ??
-                                                    order.orderNumber ??
-                                                    index
-                                                }
-                                                title={`${order.orderNumber ?? order.name}: ${status ? statusTranslations[status][locale] : order.status}`}
-                                                className={cx(
-                                                    'od-order-map-cell',
-                                                    'od-order-map-cell--' +
-                                                        (status ?? 'unknown'),
-                                                )}
-                                            />
-                                        );
-                                    })}
-                            </div>
-                        ) : (
-                            <p className="od-activity-map-empty">
-                                {localized(
-                                    'Belum ada aktivitas pesanan.',
-                                    'No order activity yet.',
-                                )}
-                            </p>
-                        )}
-                        {visibleOrders.length > 0 && (
-                            <div
-                                className="od-order-map-legend"
-                                aria-label={localized(
-                                    'Keterangan warna status',
-                                    'Status color legend',
-                                )}
-                            >
-                                <span>
-                                    <i
-                                        className="od-legend-swatch od-legend-swatch--progress"
-                                        aria-hidden="true"
-                                    />
-                                    {localized('Diproses', 'In progress')}
-                                </span>
-                                <span>
-                                    <i
-                                        className="od-legend-swatch od-legend-swatch--ready"
-                                        aria-hidden="true"
-                                    />
-                                    {localized('Siap / lunas', 'Ready / paid')}
-                                </span>
-                                <span>
-                                    <i
-                                        className="od-legend-swatch od-legend-swatch--payment"
-                                        aria-hidden="true"
-                                    />
-                                    {localized('Bayar', 'Payment')}
-                                </span>
-                                <span>
-                                    <i
-                                        className="od-legend-swatch od-legend-swatch--cancelled"
-                                        aria-hidden="true"
-                                    />
-                                    {localized('Batal', 'Cancelled')}
-                                </span>
-                            </div>
-                        )}
-                    </div>
-                </section>
+                <TopSellingMenu
+                    hasSnapshot={hasSnapshot}
+                    topDishes={topDishes}
+                    topSales={topSales}
+                    maxDishSales={maxDishSales}
+                    role={role}
+                    onChangeView={onChangeView}
+                    localized={localized}
+                    t={t}
+                />
+                <OperationalActivity
+                    hasSnapshot={hasSnapshot}
+                    visibleOrders={visibleOrders}
+                    liveInfo={liveInfo}
+                    dashboard={dashboard}
+                    activeTableOrderCount={allActiveTableOrders.length}
+                    statusCount={statusCount}
+                    localized={localized}
+                    locale={locale}
+                />
             </div>
 
             {role === 'owner' && (
