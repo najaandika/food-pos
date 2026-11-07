@@ -1,0 +1,88 @@
+/*
+ * UI C1 — Food POS typography foundation.
+ *
+ * Use installed BoardUI type tokens, not a second POS-only type scale.
+ * Scope changes to the admin app: no login/customer screen or status/action
+ * colors are affected. Utility-driven components retain their own weights.
+ */
+.page-shell.pos-shell-layout .app-view {
+    font-family: var(--font-family);
+}
+
+/* Legacy AdminTitle, Report and Restaurant Settings had three different H1
+ * sizes/weights. Align all three to BoardUI Display 4: 32 / 44 / semibold. */
+.page-shell.pos-shell-layout .app-view .topbar .admin-title h1,
+.page-shell.pos-shell-layout .app-view.report-boardui .report-page-title h1,
+.page-shell.pos-shell-layout .app-view.pos-boardui-settings > header h1 {
+    margin: 0;
+    font-size: var(--text-display-4-semibold, 2rem);
+    font-weight: var(--text-display-4-semibold--font-weight, 600);
+    line-height: var(--text-display-4-semibold--line-height, 2.75rem);
+    letter-spacing: var(--text-display-4-semibold--letter-spacing, 0);
+}
+
+/* Preserve semantic component typography: section title 20 / 26, body 14 / 20,
+ * caption 12 / 16. These selectors target only older hand-styled elements. */
+.page-shell.pos-shell-layout .app-view.pos-boardui-settings .settings-card-head h2 {
+    font-size: var(--text-title-2-semibold, 1.25rem);
+    line-height: var(--text-title-2-semibold--line-height, 1.625rem);
+    font-weight: var(--text-title-2-semibold--font-weight, 600);
+}
+
+.page-shell.pos-shell-layout .app-view .admin-title p {
+    font-size: var(--text-body-regular, 0.875rem);
+    line-height: var(--text-body-regular--line-height, 1.25rem);
+    font-weight: var(--text-body-regular--font-weight, 400);
+}
+
+/* Ordering UI: product descriptions and count metadata need to remain legible
+ * at both desktop and 390px; 10px/11px was too small for operational reading. */
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-dish-card h3 {
+    font-size: var(--text-body-semibold, 0.875rem);
+    line-height: var(--text-body-semibold--line-height, 1.25rem);
+    font-weight: var(--text-body-semibold--font-weight, 600);
+}
+
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-dish-card p {
+    font-size: var(--text-body-2-regular, 0.8125rem);
+    line-height: var(--text-body-2-regular--line-height, 1.125rem);
+}
+
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-category-count,
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-results,
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-send-info,
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-ticket-chips > span,
+.page-shell.pos-shell-layout .pos-menu-page .receipt-item .menu-p2-item-meta span {
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+}
+
+.page-shell.pos-shell-layout .pos-menu-page .receipt-item > div:first-child > strong,
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-quantity output {
+    font-weight: var(--text-body-semibold--font-weight, 600);
+}
+
+/* The checkout Drawer is rendered in a portal outside .page-shell. It is
+ * marked pos-menu-page, so it needs an explicit typography scope. */
+.pos-menu-page.menu-p2-cart-dialog {
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.pos-menu-page.menu-p2-cart-dialog .receipt-item > div:first-child > strong {
+    font-size: var(--text-body-2-semibold, 0.8125rem);
+    line-height: var(--text-body-2-semibold--line-height, 1.125rem);
+    font-weight: var(--text-body-2-semibold--font-weight, 600);
+}
+
+.pos-menu-page.menu-p2-cart-dialog .receipt-item .menu-p2-item-meta span {
+    font-size: var(--text-caption-1-regular, 0.75rem);
+}
+
+@container admin-main (max-width: 560px) {
+    .page-shell.pos-shell-layout .app-view .topbar .admin-title h1,
+    .page-shell.pos-shell-layout .app-view.report-boardui .report-page-title h1,
+    .page-shell.pos-shell-layout .app-view.pos-boardui-settings > header h1 {
+        font-size: clamp(1.5rem, 6.8cqw, 1.75rem);
+        line-height: 1.25;
+    }
+}

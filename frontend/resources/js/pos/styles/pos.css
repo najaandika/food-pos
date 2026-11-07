@@ -1,0 +1,38 @@
+/* Food POS typography follows the installed BoardUI Inter type system. */
+@import '@fontsource-variable/inter/index.css';
+@import './tokens.css';
+@import './utilities.css';
+@import '../admin/styles/admin.css';
+
+.page-shell {
+    font-family: var(--font-family);
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+}
+
+.page-shell button,
+.page-shell summary {
+    cursor: pointer;
+}
+
+.page-shell button:focus-visible,
+.page-shell a:focus-visible,
+.page-shell input:focus-visible,
+.page-shell select:focus-visible,
+.page-shell textarea:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
+}
+
+.page-shell .main-panel {
+    container-type: inline-size;
+    container-name: admin-main;
+    min-width: 0;
+}
+
+.pos-empty-state {
+    padding: 20px;
+    color: var(--text-secondary);
+    text-align: center;
+}

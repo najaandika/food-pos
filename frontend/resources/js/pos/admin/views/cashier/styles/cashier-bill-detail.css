@@ -1,0 +1,205 @@
+.cashier-detail {
+    align-self: start;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100dvh - 40px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--border);
+    scrollbar-color: var(--border-soft-strong) transparent;
+    scrollbar-width: thin;
+}
+
+.cashier-detail::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cashier-detail::-webkit-scrollbar-thumb {
+    border-radius: var(--radius-pill);
+    background: var(--border-soft-strong);
+}
+
+.cashier-detail-top {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--pos-gap);
+    align-items: flex-start;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+.cashier-customer-head {
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-fixed-3);
+}
+
+.cashier-ticket-mark {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: var(--ice);
+    color: var(--blue);
+    outline: 1px solid rgba(48, 71, 255, 0.08);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0;
+    box-shadow: 0 14px 28px rgba(20, 26, 51, 0.14);
+}
+
+.cashier-table-badge {
+    width: 62px;
+    min-height: 54px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    border-radius: var(--radius-md);
+    background: var(--navy);
+    color: #ffffff;
+}
+
+.cashier-table-badge small,
+.cashier-table-badge strong {
+    display: block;
+    line-height: 1;
+}
+
+.cashier-table-badge small {
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 10px;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+}
+
+.cashier-table-badge strong {
+    font-size: 20px;
+    font-weight: var(--font-weight-bold);
+}
+
+.cashier-customer-head > div {
+    min-width: 0;
+}
+
+.cashier-detail-top h2 {
+    margin-top: 10px;
+    font-size: 23px;
+    overflow-wrap: anywhere;
+}
+
+.payment-due-card {
+    display: grid;
+    gap: var(--space-fixed-2);
+    margin: 18px 0;
+    border-radius: var(--pos-radius);
+    background: var(--ice);
+    padding: 18px;
+    color: var(--navy);
+    border: 1px solid var(--border);
+    box-shadow: none;
+}
+
+.payment-due-card span,
+.payment-due-card small {
+    color: var(--muted);
+    font-weight: var(--font-weight-semibold);
+}
+
+.payment-due-card strong {
+    color: var(--blue);
+    font-size: 34px;
+    line-height: 1;
+}
+
+.cashier-note-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-bottom: 18px;
+}
+
+.cashier-note-grid article {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--ice);
+    padding: 14px;
+}
+
+.cashier-note-grid span,
+.cashier-section-title span {
+    display: block;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.cashier-note-grid strong {
+    display: block;
+    margin-top: 6px;
+    color: var(--navy);
+    font-size: var(--font-size-xs);
+}
+
+.cashier-section-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-fixed-3);
+}
+
+.cashier-section-title h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.cashier-items {
+    display: grid;
+    gap: 0;
+    margin: 18px 0;
+}
+
+.cashier-items div,
+.cashier-bill p {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 36px 76px;
+    gap: var(--space-fixed-3);
+    align-items: center;
+    margin: 0;
+}
+
+.cashier-items div {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.cashier-items span {
+    font-weight: var(--font-weight-semibold);
+    overflow-wrap: anywhere;
+}
+
+.cashier-items b,
+.cashier-items strong,
+.cashier-bill strong {
+    text-align: right;
+}
+
+.cashier-bill {
+    display: grid;
+    gap: var(--space-3);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    background: var(--ice);
+    border: 1px solid var(--border);
+}
+
+.cashier-bill p:last-child {
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 20px;
+}

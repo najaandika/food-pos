@@ -1,0 +1,215 @@
+/* colocated - merged from cashier-summary.css + cashier-detail.css */
+
+.cashier-workspace output.cashier-safety-note,
+.cashier-workspace > output {
+    display: block;
+}
+
+.cashier-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(332px, 360px);
+    gap: var(--space-fixed-4);
+    align-items: start;
+    min-width: 0;
+}
+
+.cashier-feed {
+    display: grid;
+    gap: var(--space-fixed-4);
+    align-content: start;
+    min-width: 0;
+}
+
+.cashier-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--pos-gap);
+}
+
+.cashier-summary article,
+.cashier-panel,
+.cashier-detail {
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--shadow-card);
+}
+
+.cashier-summary article {
+    min-height: 96px;
+    border: 1px solid var(--border);
+    padding: 17px;
+}
+
+.cashier-summary span,
+.cashier-summary strong {
+    display: block;
+}
+
+.cashier-summary span {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.cashier-summary strong {
+    margin-top: 10px;
+    color: var(--navy);
+    font-size: clamp(23px, 2vw, 28px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+
+.cashier-summary small {
+    display: block;
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.cashier-panel,
+.cashier-detail {
+    padding: 20px;
+}
+
+.cashier-panel {
+    border: 1px solid var(--border);
+}
+
+.cashier-panel-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-fixed-4);
+    margin-bottom: 16px;
+}
+
+.cashier-panel-head h2,
+.cashier-detail-top h2,
+.payment-methods h3 {
+    margin: 0;
+}
+
+.cashier-panel-head p,
+.cashier-detail-top p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+}
+
+.cashier-queue-count {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    border-radius: var(--radius-pill);
+    background: var(--mist);
+    color: var(--blue);
+    padding: 0 11px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.cashier-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+    gap: var(--space-fixed-3);
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.cashier-order-list {
+    display: grid;
+    gap: var(--space-fixed-2);
+}
+
+.cashier-order-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr) auto 80px;
+    gap: var(--space-fixed-3);
+    align-items: center;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-md);
+    background: var(--color-background-primary-default);
+    padding: 12px;
+    text-align: left;
+    box-shadow: none;
+    cursor: pointer;
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+
+.cashier-order-row:hover {
+    border-color: var(--color-border-button-hover);
+    background: var(--color-background-primary-hover);
+}
+
+.cashier-order-row strong,
+.cashier-order-row small,
+.cashier-order-row i {
+    display: block;
+}
+
+.cashier-order-row > div {
+    min-width: 0;
+}
+
+.cashier-order-row strong {
+    overflow: hidden;
+    color: var(--navy);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cashier-order-row small {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.cashier-order-row i {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
+}
+
+.cashier-order-row em {
+    justify-self: start;
+    border-radius: var(--radius-pill);
+    background: rgba(244, 183, 64, 0.18);
+    color: #8f6209;
+    padding: 7px 10px;
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+}
+
+.cashier-order-row em.ready,
+.cashier-order-row em.done {
+    background: rgba(25, 184, 133, 0.12);
+    color: #087856;
+}
+
+.cashier-order-row em.progress {
+    background: rgba(244, 183, 64, 0.18);
+    color: #8f6209;
+}
+
+.cashier-row-time {
+    display: none;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-align: right;
+}
+
+.cashier-order-row b {
+    justify-self: end;
+    color: var(--navy);
+    font-size: var(--font-size-base);
+}

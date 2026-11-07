@@ -1,0 +1,205 @@
+{
+  "description": "Wikimedia Commons photo attribution for Food POS seed assets",
+  "photos": {
+    "nasi-goreng-kampung": {
+      "file": "nasi-goreng-kampung.webp",
+      "source_title": "File:Nasi Goreng Kampung Malaysia.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Nasi_Goreng_Kampung_Malaysia.jpg",
+      "author": "The Bangsawan",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 77538
+    },
+    "nasi-ayam-geprek": {
+      "file": "nasi-ayam-geprek.webp",
+      "source_title": "File:Ayam geprek dan lalapan.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Ayam_geprek_dan_lalapan.jpg",
+      "author": "Wiwik P",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 31790
+    },
+    "mie-goreng-jawa": {
+      "file": "mie-goreng-jawa.webp",
+      "source_title": "File:Mie Goreng Jawa.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Mie_Goreng_Jawa.jpg",
+      "author": "Happywu",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 128670
+    },
+    "soto-ayam": {
+      "file": "soto-ayam.webp",
+      "source_title": "File:Soto ayam.JPG",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Soto_ayam.JPG",
+      "author": "Sakurai Midori",
+      "license": "CC BY-SA 3.0",
+      "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 56940
+    },
+    "ayam-bakar-madu": {
+      "file": "ayam-bakar-madu.webp",
+      "source_title": "File:Ayam Bakar Kampung.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Ayam_Bakar_Kampung.jpg",
+      "author": "Akhsan Bae",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 72430
+    },
+    "beef-teriyaki-rice": {
+      "file": "beef-teriyaki-rice.webp",
+      "source_title": "File:Bowl of Teriyaki chicken and beef YakinikuCNE.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Bowl_of_Teriyaki_chicken_and_beef_YakinikuCNE.jpg",
+      "author": "CNEcija12345",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 73076
+    },
+    "es-kopi-susu-gula-aren": {
+      "file": "es-kopi-susu-gula-aren.webp",
+      "source_title": "File:Es Kopi Susu Gula Aren.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Es_Kopi_Susu_Gula_Aren.jpg",
+      "author": "Happywu",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 31264
+    },
+    "americano": {
+      "file": "americano.webp",
+      "source_title": "File:Espresso Americano.jpeg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Espresso_Americano.jpeg",
+      "author": "User:Sameer.siddhanti",
+      "license": "Public domain",
+      "license_url": "",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 54556
+    },
+    "cappuccino": {
+      "file": "cappuccino.webp",
+      "source_title": "File:Cappuccino at ARS Cafe.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Cappuccino_at_ARS_Cafe.jpg",
+      "author": "Robert Smith",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 44284
+    },
+    "matcha-latte": {
+      "file": "matcha-latte.webp",
+      "source_title": "File:Matcha latte in tall glass.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Matcha_latte_in_tall_glass.jpg",
+      "author": "Derjochenmeyer",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 37274
+    },
+    "es-teh-lemon": {
+      "file": "es-teh-lemon.webp",
+      "source_title": "File:Iced Lemon Tea - MOGUMOGU 2024-08-16.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Iced_Lemon_Tea_-_MOGUMOGU_2024-08-16.jpg",
+      "author": "Andy Li",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 75040
+    },
+    "jus-alpukat": {
+      "file": "jus-alpukat.webp",
+      "source_title": "File:Jus Alpukat Coklat.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Jus_Alpukat_Coklat.jpg",
+      "author": "Cendy00",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 43232
+    },
+    "kentang-goreng": {
+      "file": "kentang-goreng.webp",
+      "source_title": "File:Truffle oil french fries (33024792848).jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Truffle_oil_french_fries_(33024792848).jpg",
+      "author": "Tony Webster from Minneapolis, Minnesota, United States",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 50496
+    },
+    "pisang-goreng-keju": {
+      "file": "pisang-goreng-keju.webp",
+      "source_title": "File:Pisang Goreng Hangat.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pisang_Goreng_Hangat.jpg",
+      "author": "AndriFB",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 101996
+    },
+    "tahu-crispy": {
+      "file": "tahu-crispy.webp",
+      "source_title": "File:Tahu goreng crispy.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Tahu_goreng_crispy.jpg",
+      "author": "RXerself (talk · contribs)",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 32386
+    },
+    "chicken-wings": {
+      "file": "chicken-wings.webp",
+      "source_title": "File:Fried Chicken Wings (52769476180).jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Fried_Chicken_Wings_(52769476180).jpg",
+      "author": "Choo Yut Shing from Singapore, Singapore",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 58082
+    },
+    "brownies-cokelat": {
+      "file": "brownies-cokelat.webp",
+      "source_title": "File:Chocolate brownies without table.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Chocolate_brownies_without_table.jpg",
+      "author": "",
+      "license": "CC BY-SA 3.0",
+      "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 40812
+    },
+    "pancake-madu": {
+      "file": "pancake-madu.webp",
+      "source_title": "File:Foodiesfeed.com pouring-honey-on-pancakes-with-walnuts.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Foodiesfeed.com_pouring-honey-on-pancakes-with-walnuts.jpg",
+      "author": "Mae Mu",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 54862
+    },
+    "ice-cream-vanilla": {
+      "file": "ice-cream-vanilla.webp",
+      "source_title": "File:Vanilla ice cream with cherry jam.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Vanilla_ice_cream_with_cherry_jam.jpg",
+      "author": "JIP",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 40054
+    },
+    "cheesecake-strawberry": {
+      "file": "cheesecake-strawberry.webp",
+      "source_title": "File:Strawberry cheesecake round.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Strawberry_cheesecake_round.jpg",
+      "author": "Josefine Linnea Jonsson",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "modifications": "Center-cropped, resized to 800x600 and converted to WebP",
+      "bytes": 87412
+    }
+  }
+}

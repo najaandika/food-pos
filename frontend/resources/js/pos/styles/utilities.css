@@ -1,0 +1,117 @@
+.u-container {
+    width: min(var(--content-lg), 100%);
+    margin-inline: auto;
+}
+
+.u-stack {
+    display: grid;
+    gap: var(--stack-gap, var(--space-3));
+}
+
+.u-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--cluster-gap, var(--space-2));
+}
+
+.u-auto-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, var(--grid-min, 220px)), 1fr)
+    );
+    gap: var(--grid-gap, var(--space-3));
+}
+
+.u-surface {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--surface-radius, var(--radius-lg));
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow);
+}
+
+.u-scroll-x {
+    display: flex;
+    gap: var(--scroll-gap, var(--space-2));
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-2);
+    scrollbar-width: none;
+}
+
+.u-scroll-x::-webkit-scrollbar {
+    display: none;
+}
+
+/* Flexbox utilities - reuse to eliminate 50+ duplicate patterns */
+.u-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.u-flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.u-flex-start {
+    display: flex;
+    align-items: center;
+}
+
+.u-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.u-flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.u-grid-center {
+    display: grid;
+    place-items: center;
+}
+
+/* Gap utilities */
+.u-gap-sm {
+    gap: var(--space-2);
+}
+.u-gap-md {
+    gap: var(--space-3);
+}
+.u-gap-lg {
+    gap: var(--space-4);
+}
+
+/* Text utilities */
+.u-text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.u-text-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.u-hidden {
+    display: none !important;
+}
+.u-invisible {
+    visibility: hidden;
+}
+
+@media (max-width: 640px) {
+    .u-hidden-mobile {
+        display: none !important;
+    }
+}

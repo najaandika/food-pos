@@ -1,0 +1,271 @@
+/*
+ * Official BoardUI Free DashboardSidebar application wrapper.
+ * The BoardUI source supplies the rail, selected gradient, quick search,
+ * collapse motion, and keyboard behavior. POS CSS only sizes its container.
+ */
+@import "@fontsource-variable/inter/index.css";
+@import "tailwindcss/theme.css" layer(theme);
+@import "../../../../../styles/theme.css";
+@import "../../../../../styles/typography.css";
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source '../../../../../components/application/dashboard/dashboard-sidebar.tsx';
+@source '../../../../../components/base/avatar/avatar.tsx';
+@source '../../../../../components/base/buttons/icon-button.tsx';
+@source '../../../../../components/base/dropdown/*.tsx';
+@source './official-sidebar.tsx';
+@source './topbar.tsx';
+
+.page-shell.pos-shell-layout .pos-boardui-sidebar-frame {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex: 0 0 284px;
+    align-self: flex-start;
+    width: 284px;
+    height: 100dvh;
+    min-height: 0;
+    padding: 12px;
+    transition:
+        flex-basis 300ms ease,
+        width 300ms ease;
+}
+
+.page-shell.pos-shell-layout.sidebar-collapsed .pos-boardui-sidebar-frame {
+    flex-basis: 84px;
+    width: 84px;
+}
+
+.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar {
+    height: 100%;
+    font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.page-shell.pos-shell-layout .main-panel {
+    min-width: 0;
+    flex: 1 1 0;
+}
+
+.pos-boardui-brand-dot {
+    color: var(--color-accent-600);
+}
+
+.pos-boardui-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 210;
+    display: flex;
+    justify-content: flex-start;
+    background: color-mix(in srgb, var(--color-text-primary) 32%, transparent);
+    opacity: 1;
+    transition: opacity 260ms ease-out;
+}
+
+.pos-boardui-drawer-modal {
+    width: min(320px, 88vw);
+    height: 100dvh;
+    background: var(--color-background-secondary-default);
+    box-shadow: var(--shadow-sidebar);
+    outline: none;
+    transform: translate3d(0, 0, 0);
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.pos-boardui-drawer-dialog {
+    height: 100%;
+    min-height: 0;
+    padding: 10px;
+    outline: none;
+}
+
+.pos-boardui-drawer-sidebar {
+    width: 100% !important;
+    height: 100%;
+    border-radius: 14px;
+    font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.pos-boardui-drawer-overlay[data-entering],
+.pos-boardui-drawer-overlay[data-exiting] {
+    opacity: 0;
+}
+
+.pos-boardui-drawer-overlay[data-entering] .pos-boardui-drawer-modal,
+.pos-boardui-drawer-overlay[data-exiting] .pos-boardui-drawer-modal {
+    transform: translate3d(calc(-100% - 24px), 0, 0);
+}
+
+.pos-boardui-drawer-overlay[data-exiting] {
+    transition-duration: 180ms;
+}
+
+.pos-boardui-drawer-overlay[data-exiting] .pos-boardui-drawer-modal {
+    transition-duration: 200ms;
+}
+
+@media (max-width: 860px) {
+    .page-shell.pos-shell-layout .pos-boardui-sidebar-frame {
+        display: none;
+    }
+
+    .page-shell.pos-shell-layout .main-panel {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Food POS Quick Search: one rounded blue focus ring on the entire field.
+ * The input is nested inside a BoardUI ring container, so remove only its
+ * competing native/dashboard outline. Applies inside the mobile portal too. */
+:is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    div:has(> input[aria-label="Cari menu Food POS"]):focus-within {
+    --tw-ring-color: var(--color-border-focus-ring);
+}
+
+:is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    input[aria-label="Cari menu Food POS"]:focus-visible {
+    outline: none;
+}
+
+/* Before expansion Quick Search remains keyboard-discoverable, including
+ * when the rail is collapsed and when the mobile menu is portaled. */
+:is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    button[aria-label="Quick Search"]:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+/* Keyboard focus consistency, stage two. Keep the selected nav gradient
+ * unchanged and match the 2px semantic BoardUI focus ring on both the desktop
+ * rail and the mobile drawer (which is portaled outside .page-shell). */
+:is(.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    nav
+    a:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+/* A 36px collapsed rail leaves no exterior gutter for a 2px focus outline.
+ * Draw it inside the item so the sidebar's overflow clip cannot cut it off. */
+.page-shell.pos-shell-layout
+    .pos-boardui-sidebar-frame[data-collapsed="true"]
+    .pos-boardui-dashboard-sidebar
+    nav
+    a:focus-visible {
+    outline-offset: -2px;
+}
+
+/* Give the collapse/expand and mobile-close icons a real rounded hit area.
+ * The controls previously had 0px radius and could show a square/native ring. */
+:is(.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    :is(
+        button[aria-label="Collapse sidebar"],
+        button[aria-label="Expand sidebar"],
+        button[aria-label="Close sidebar"]
+    ) {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-2lg, 10px);
+}
+
+:is(.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    :is(
+        button[aria-label="Collapse sidebar"],
+        button[aria-label="Expand sidebar"],
+        button[aria-label="Close sidebar"]
+    ):focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-shell.pos-shell-layout .pos-boardui-sidebar-frame,
+    .pos-boardui-drawer-overlay,
+    .pos-boardui-drawer-modal {
+        transition-duration: 0.01ms;
+    }
+}
+
+/* P3 — BoardUI mobile sidebar navigation (desktop sidebar remains unchanged). */
+.pos-shell-topbar-leading {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+}
+
+.pos-shell-topbar .pos-shell-mobile-menu-trigger {
+    display: none;
+}
+
+@media (max-width: 860px) {
+    .page-shell.pos-shell-layout .pos-shell-topbar {
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .pos-shell-topbar .pos-shell-mobile-menu-trigger {
+        display: inline-flex;
+        flex: 0 0 36px;
+        width: 36px;
+        height: 36px;
+        color: var(--color-foreground-icon-primary);
+        border: 1px solid var(--color-border-button-default);
+        background: var(--color-background-primary-default);
+        border-radius: var(--radius-2lg, 10px);
+        outline: none;
+    }
+
+    .pos-shell-topbar .pos-shell-mobile-menu-trigger:focus-visible {
+        outline: 2px solid var(--color-border-focus-ring);
+        outline-offset: 2px;
+    }
+
+    .pos-shell-topbar .pos-shell-breadcrumb {
+        gap: 7px;
+        min-width: 0;
+    }
+
+    /* The template uses a floating sidebar inside a dimmed drawer on phones. */
+    .pos-boardui-drawer-overlay {
+        align-items: stretch;
+        padding: 8px;
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+
+    .pos-boardui-drawer-modal {
+        width: min(310px, calc(100vw - 40px));
+        height: 100%;
+        border: 1px solid var(--color-border-button-default);
+        border-radius: var(--radius-3xl, 24px);
+        background: var(--color-background-secondary-default);
+        overflow: hidden;
+    }
+
+    .pos-boardui-drawer-dialog {
+        padding: 0;
+    }
+
+    .pos-boardui-drawer-sidebar {
+        height: 100%;
+        border: 0;
+        border-radius: var(--radius-3xl, 24px);
+    }
+
+    .pos-shell-bottom-nav,
+    .mobile-bottom-nav {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pos-boardui-drawer-modal {
+        transition-duration: 0.01ms;
+    }
+}

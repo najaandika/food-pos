@@ -1,0 +1,3035 @@
+{
+  "schemaVersion": 1,
+  "kind": "BEFORE_ONLY_CASHIER_VISUAL_BASELINE",
+  "status": "PASS",
+  "harnessVersion": "r7.5b-cashier-baseline-1.0.0",
+  "createdAt": "2026-11-07T11:15:20.113Z",
+  "fixedDateTime": "2026-11-07T10:00:00.000Z",
+  "branch": "laravel-inertia-rewrite",
+  "sourceFilePaths": {
+    "cashierCss": "admin/views/CashierView.css",
+    "cashierTsx": "admin/views/CashierView.tsx",
+    "responsiveCss": "admin/styles/responsive.css",
+    "adminCss": "admin/styles/admin.css",
+    "queueCss": "admin/views/cashier/styles/cashier-queue-layout.css",
+    "billCss": "admin/views/cashier/styles/cashier-bill-detail.css",
+    "queueComponent": "admin/views/cashier/components/CashierQueuePanel.tsx",
+    "tenderComponent": "admin/views/cashier/components/CashierTenderForm.tsx",
+    "billComponent": "admin/views/cashier/components/CashierBillPreviewModal.tsx",
+    "receiptComponent": "admin/views/cashier/ConfirmedReceiptModal.tsx",
+    "cashierServer": "admin/views/orders/CashierServer.tsx",
+    "cashierHook": "admin/views/cashier/use-cashier-data.ts",
+    "cashierApi": "admin/views/cashier/cashier-api.ts",
+    "queryCache": "admin/views/shared-query-cache.ts",
+    "sharedHttp": "shared/api/http-client.ts",
+    "browserFixture": "admin/views/cashier/receipt-recovery-tests/browser-fixture.mjs"
+  },
+  "sourceHashesBeforeCapture": {
+    "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+    "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+    "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+    "adminCss": "02a3c6b64032800c04b785792e46feb6c0fb69a4ad98a238caed990e2f18aaaa",
+    "queueCss": "87b00c9c70ef934a887fb3ba0fda188caaaf7289381a57cd854c1cbb595d83a5",
+    "billCss": "b664f7a112085d6d4dc2a48202eda6d38c1691e950dffc92704a10e62fe895e9",
+    "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+    "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+    "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+    "receiptComponent": "e035f91feafcdde376fc6309fa3e82e3e8ba9aaeeda235a85ff592311efe71a8",
+    "cashierServer": "4fa1191e0f94150b7ae2dd68df6e31c842a8501916e3bdccedf3b732532ba146",
+    "cashierHook": "6d3f49f3cd6c55763d589ffc8650d77d221777b8b937fc2bf570d747ba2b0a50",
+    "cashierApi": "c89f3cd08bbbd3811dace65c5def2491caa3187e6f0e94d84920017542e22c56",
+    "queryCache": "067341ed845e13c8fb54a3a413dadef130a95b1fcf7878b48dcee9ce2336a5e5",
+    "sharedHttp": "a4c56bdf103f7bee4b5c7dfbee38bf8cffb24ff8b7634cb91e71a6e02741be8e",
+    "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+  },
+  "sourceHashesAfterCapture": {
+    "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+    "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+    "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+    "adminCss": "02a3c6b64032800c04b785792e46feb6c0fb69a4ad98a238caed990e2f18aaaa",
+    "queueCss": "87b00c9c70ef934a887fb3ba0fda188caaaf7289381a57cd854c1cbb595d83a5",
+    "billCss": "b664f7a112085d6d4dc2a48202eda6d38c1691e950dffc92704a10e62fe895e9",
+    "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+    "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+    "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+    "receiptComponent": "e035f91feafcdde376fc6309fa3e82e3e8ba9aaeeda235a85ff592311efe71a8",
+    "cashierServer": "4fa1191e0f94150b7ae2dd68df6e31c842a8501916e3bdccedf3b732532ba146",
+    "cashierHook": "6d3f49f3cd6c55763d589ffc8650d77d221777b8b937fc2bf570d747ba2b0a50",
+    "cashierApi": "c89f3cd08bbbd3811dace65c5def2491caa3187e6f0e94d84920017542e22c56",
+    "queryCache": "067341ed845e13c8fb54a3a413dadef130a95b1fcf7878b48dcee9ce2336a5e5",
+    "sharedHttp": "a4c56bdf103f7bee4b5c7dfbee38bf8cffb24ff8b7634cb91e71a6e02741be8e",
+    "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+  },
+  "sourceFingerprint": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+  "sourceCheckProtocol": "hash all 16 files before/after Vite, each screenshot, each viewport, after replay; abort on drift",
+  "css": {
+    "isolatedViteAdmin": {
+      "sha256": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "bytes": 608851,
+      "tempPath": "C:\\Users\\najaa\\AppData\\Local\\Temp\\food-pos-r75-b-cashier\\css\\isolated-admin.css",
+      "buildMethod": "vite.build({configFile:false,write:false,publicDir:false,rollupOptions:{input:admin/styles/admin.css}})"
+    },
+    "frozenProductionFixtureAssets": {
+      "qa-style-0.css": {
+        "manifestAsset": "assets/app-Dgf-un_w.css",
+        "bytes": 525060,
+        "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+      },
+      "qa-style-1.css": {
+        "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+        "bytes": 230558,
+        "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+      }
+    },
+    "loadOrder": "Frozen manifest CSS as link tags; in-memory compiled admin CSS injected after page load"
+  },
+  "environment": {
+    "node": "v24.15.0",
+    "platform": "win32",
+    "vite": "1.4.0",
+    "react": "19.3.1",
+    "browser": "Playwright Chromium",
+    "chromiumVersion": "153.0.8010.12",
+    "viewportHeight": "900px for 1440/834, 844px for 390/320",
+    "pixelRatio": 1,
+    "locale": "id-ID",
+    "timezone": "Asia/Jakarta",
+    "prefersReducedMotion": true,
+    "freezeDateNowAndNewDate": "2026-11-07T10:00:00.000Z",
+    "screenshotAnimations": "disabled",
+    "mouse": "(0,0) except queue-hover",
+    "fontWait": "document.fonts.ready",
+    "serverPort": "isolated ephemeral TCP port 0",
+    "fixture": "Actual CashierServer/CashierView/cashier hook, real cashier-api, shared cache/HTTP; fixture-native BoardUI primitive/locale/DTO mocks",
+    "network": "All POS Laravel endpoints intercepted in Playwright; 1 intentional POST per viewport; all receipt retry GET-only",
+    "canonicalBoardUI": false,
+    "realLaravel": false,
+    "realDatabase": false,
+    "realPrinter": false,
+    "productionBuildWasRun": false
+  },
+  "viewports": [
+    1440,
+    834,
+    390,
+    320
+  ],
+  "states": [
+    "queue",
+    "selected-detail",
+    "tender-payment",
+    "receipt-unavailable",
+    "receipt-recovered",
+    "queue-hover",
+    "qris-disabled",
+    "underpayment-disabled",
+    "payment-keyboard-focus",
+    "bill-preview-modal"
+  ],
+  "screenshots": [
+    {
+      "id": "1440/queue",
+      "order": 1,
+      "width": 1440,
+      "height": 900,
+      "state": "queue",
+      "filename": "png/1440-queue.png",
+      "sha256": "edd91d3e9594548ee5d0905f12ad44b4e7b47170dc3b26dfddf43c90e554bcd8",
+      "bytes": 115575,
+      "pngDimensions": [
+        1440,
+        1422
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/queue-hover",
+      "order": 2,
+      "width": 1440,
+      "height": 900,
+      "state": "queue-hover",
+      "filename": "png/1440-queue-hover.png",
+      "sha256": "edd91d3e9594548ee5d0905f12ad44b4e7b47170dc3b26dfddf43c90e554bcd8",
+      "bytes": 115575,
+      "pngDimensions": [
+        1440,
+        1422
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/selected-detail",
+      "order": 3,
+      "width": 1440,
+      "height": 900,
+      "state": "selected-detail",
+      "filename": "png/1440-selected-detail.png",
+      "sha256": "edd91d3e9594548ee5d0905f12ad44b4e7b47170dc3b26dfddf43c90e554bcd8",
+      "bytes": 115575,
+      "pngDimensions": [
+        1440,
+        1422
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/tender-payment",
+      "order": 4,
+      "width": 1440,
+      "height": 900,
+      "state": "tender-payment",
+      "filename": "png/1440-tender-payment.png",
+      "sha256": "bf5fe435d48a0deaed5a50d5168323a7be0bf13d641904eac5c3aacb910965e1",
+      "bytes": 116988,
+      "pngDimensions": [
+        1440,
+        1422
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "cash-preset-btn active",
+          "label": "Rp 50.000"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/qris-disabled",
+      "order": 5,
+      "width": 1440,
+      "height": 900,
+      "state": "qris-disabled",
+      "filename": "png/1440-qris-disabled.png",
+      "sha256": "b9fd2b8d0d93a6df184adced4b0dbfe4147682d23ea1a050805c05a39c57c252",
+      "bytes": 107595,
+      "pngDimensions": [
+        1440,
+        1278
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "active",
+          "label": "cashier.qris"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/underpayment-disabled",
+      "order": 6,
+      "width": 1440,
+      "height": 900,
+      "state": "underpayment-disabled",
+      "filename": "png/1440-underpayment-disabled.png",
+      "sha256": "ae24315dfa2915996b123353bcf0d678d76c2bd6df269441dc7ba8f828337c01",
+      "bytes": 116796,
+      "pngDimensions": [
+        1440,
+        1474
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "INPUT",
+          "className": "cashier-cash-input",
+          "label": ""
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/payment-keyboard-focus",
+      "order": 7,
+      "width": 1440,
+      "height": 900,
+      "state": "payment-keyboard-focus",
+      "filename": "png/1440-payment-keyboard-focus.png",
+      "sha256": "5a0b5c10e30f70c51e14703f6bdecf26dd063491743ed404995d0cbbc254053a",
+      "bytes": 114690,
+      "pngDimensions": [
+        1440,
+        1422
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "Catat lunas (tunai)"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/bill-preview-modal",
+      "order": 8,
+      "width": 1440,
+      "height": 900,
+      "state": "bill-preview-modal",
+      "filename": "png/1440-bill-preview-modal.png",
+      "sha256": "1438797e5b3a5676df7a8d116ee9aa1d14aaabdd3988906a9e584d712eda95b4",
+      "bytes": 146991,
+      "pngDimensions": [
+        1440,
+        2081
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 1,
+        "dialogs": 1,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.printBill"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/receipt-unavailable",
+      "order": 9,
+      "width": 1440,
+      "height": 900,
+      "state": "receipt-unavailable",
+      "filename": "png/1440-receipt-unavailable.png",
+      "sha256": "909c61cea6277d44bcba95d87ebee3830176a925f60e0a345fe2ddf57160a02d",
+      "bytes": 63169,
+      "pngDimensions": [
+        1440,
+        980
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 0,
+        "dialogs": 0,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran pesanan #21 sudah tercatat.Struk belum tersedia. Jangan catat pembaya"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 1,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "1440/receipt-recovered",
+      "order": 10,
+      "width": 1440,
+      "height": 900,
+      "state": "receipt-recovered",
+      "filename": "png/1440-receipt-recovered.png",
+      "sha256": "db9a5bbad2bcad41bbd721272401744bb9ea4f5d9f0fbefc2b3e4b730ad14b47",
+      "bytes": 76052,
+      "pngDimensions": [
+        1440,
+        1255
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 1440,
+        "bodyScrollWidth": 1424,
+        "queueRows": 0,
+        "dialogs": 1,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran tunai sudah tercatat di Laravel. Struk belum tersedia; muat ulang str"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 2,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/queue",
+      "order": 11,
+      "width": 834,
+      "height": 900,
+      "state": "queue",
+      "filename": "png/834-queue.png",
+      "sha256": "bc6e167600dc9b92017ccbab884c8f2bfe81553429fa7c3c2a12194a95aeddbe",
+      "bytes": 36150,
+      "pngDimensions": [
+        834,
+        956
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/queue-hover",
+      "order": 12,
+      "width": 834,
+      "height": 900,
+      "state": "queue-hover",
+      "filename": "png/834-queue-hover.png",
+      "sha256": "bc6e167600dc9b92017ccbab884c8f2bfe81553429fa7c3c2a12194a95aeddbe",
+      "bytes": 36150,
+      "pngDimensions": [
+        834,
+        956
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/selected-detail",
+      "order": 13,
+      "width": 834,
+      "height": 900,
+      "state": "selected-detail",
+      "filename": "png/834-selected-detail.png",
+      "sha256": "497112636d7c4aec86a2382d7e651ad78739845e7f4e51e1858391202e63d5ab",
+      "bytes": 96475,
+      "pngDimensions": [
+        834,
+        1548
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.billDetail"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/tender-payment",
+      "order": 14,
+      "width": 834,
+      "height": 900,
+      "state": "tender-payment",
+      "filename": "png/834-tender-payment.png",
+      "sha256": "29cab40838132798c742c45d1c3fa6a2bc8f3ba276f829886c07eeff0a3132dd",
+      "bytes": 97783,
+      "pngDimensions": [
+        834,
+        1548
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "cash-preset-btn active",
+          "label": "Rp 50.000"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/qris-disabled",
+      "order": 15,
+      "width": 834,
+      "height": 900,
+      "state": "qris-disabled",
+      "filename": "png/834-qris-disabled.png",
+      "sha256": "93d4934fdd6b30c916e96967614b7824aea2e8d21dcedb326f9e93796b72d4ca",
+      "bytes": 88729,
+      "pngDimensions": [
+        834,
+        1387
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "active",
+          "label": "cashier.qris"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/underpayment-disabled",
+      "order": 16,
+      "width": 834,
+      "height": 900,
+      "state": "underpayment-disabled",
+      "filename": "png/834-underpayment-disabled.png",
+      "sha256": "7943b1dc49c82b9cedf95bea8898a84aa70c44afa9ecff7ae9ad2d0705fd927f",
+      "bytes": 97310,
+      "pngDimensions": [
+        834,
+        1600
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "INPUT",
+          "className": "cashier-cash-input",
+          "label": ""
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/payment-keyboard-focus",
+      "order": 17,
+      "width": 834,
+      "height": 900,
+      "state": "payment-keyboard-focus",
+      "filename": "png/834-payment-keyboard-focus.png",
+      "sha256": "364ef564be6333aa97f0924871dfec9a1cf2d174d603db51d3850b465bbbb822",
+      "bytes": 95460,
+      "pngDimensions": [
+        834,
+        1548
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "Catat lunas (tunai)"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/bill-preview-modal",
+      "order": 18,
+      "width": 834,
+      "height": 900,
+      "state": "bill-preview-modal",
+      "filename": "png/834-bill-preview-modal.png",
+      "sha256": "643547a08c45b270cb33e53c966aa8ab3f1eeefb6cb985a28791633202f5a1fc",
+      "bytes": 130682,
+      "pngDimensions": [
+        834,
+        2207
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 1,
+        "dialogs": 1,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.printBill"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/receipt-unavailable",
+      "order": 19,
+      "width": 834,
+      "height": 900,
+      "state": "receipt-unavailable",
+      "filename": "png/834-receipt-unavailable.png",
+      "sha256": "68e0d6f400992c9165d167504a72d7e264b0b7872093883fdaf94053311d374e",
+      "bytes": 51065,
+      "pngDimensions": [
+        834,
+        956
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 0,
+        "dialogs": 0,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran pesanan #21 sudah tercatat.Struk belum tersedia. Jangan catat pembaya"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 1,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "834/receipt-recovered",
+      "order": 20,
+      "width": 834,
+      "height": 900,
+      "state": "receipt-recovered",
+      "filename": "png/834-receipt-recovered.png",
+      "sha256": "8c40d86df9c786fe69fb40e164875e23e211994007686f65ec2c0a71c616a565",
+      "bytes": 68906,
+      "pngDimensions": [
+        834,
+        1259
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 834,
+        "viewportHeight": 900,
+        "htmlScrollWidth": 834,
+        "bodyScrollWidth": 818,
+        "queueRows": 0,
+        "dialogs": 1,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran tunai sudah tercatat di Laravel. Struk belum tersedia; muat ulang str"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 2,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/queue",
+      "order": 21,
+      "width": 390,
+      "height": 844,
+      "state": "queue",
+      "filename": "png/390-queue.png",
+      "sha256": "865f58f88cee28db8e8723ed00bd57da6067aca6915f802dde84c17c0a01eb71",
+      "bytes": 30957,
+      "pngDimensions": [
+        390,
+        900
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/queue-hover",
+      "order": 22,
+      "width": 390,
+      "height": 844,
+      "state": "queue-hover",
+      "filename": "png/390-queue-hover.png",
+      "sha256": "865f58f88cee28db8e8723ed00bd57da6067aca6915f802dde84c17c0a01eb71",
+      "bytes": 30957,
+      "pngDimensions": [
+        390,
+        900
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/selected-detail",
+      "order": 23,
+      "width": 390,
+      "height": 844,
+      "state": "selected-detail",
+      "filename": "png/390-selected-detail.png",
+      "sha256": "747bdc98d587c1c0b8a8970fc92ab57a60b1578cb890f8804ed422ac0356aca3",
+      "bytes": 88867,
+      "pngDimensions": [
+        390,
+        1575
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.billDetail"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/tender-payment",
+      "order": 24,
+      "width": 390,
+      "height": 844,
+      "state": "tender-payment",
+      "filename": "png/390-tender-payment.png",
+      "sha256": "97b4aaa1dc500ab96210b8f931394a1a3cb126bbdd5a513840ed80c770f5493d",
+      "bytes": 90781,
+      "pngDimensions": [
+        390,
+        1575
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "cash-preset-btn active",
+          "label": "Rp 50.000"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/qris-disabled",
+      "order": 25,
+      "width": 390,
+      "height": 844,
+      "state": "qris-disabled",
+      "filename": "png/390-qris-disabled.png",
+      "sha256": "cde43a02c2543e12b1a1c76c90011d4637ef05f1b143a70dfed2e4e3384ddf4c",
+      "bytes": 82133,
+      "pngDimensions": [
+        390,
+        1436
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "active",
+          "label": "cashier.qris"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/underpayment-disabled",
+      "order": 26,
+      "width": 390,
+      "height": 844,
+      "state": "underpayment-disabled",
+      "filename": "png/390-underpayment-disabled.png",
+      "sha256": "3fe16e23674780ba96e35b602be9ddd0a8b39fd73ca76bff6216f58ef9f01cbd",
+      "bytes": 89653,
+      "pngDimensions": [
+        390,
+        1627
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "INPUT",
+          "className": "cashier-cash-input",
+          "label": ""
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/payment-keyboard-focus",
+      "order": 27,
+      "width": 390,
+      "height": 844,
+      "state": "payment-keyboard-focus",
+      "filename": "png/390-payment-keyboard-focus.png",
+      "sha256": "fe5be585659092749d21e2daf2cc447cf7cf61563df092708dadd77fafdc36a8",
+      "bytes": 88337,
+      "pngDimensions": [
+        390,
+        1575
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "Catat lunas (tunai)"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/bill-preview-modal",
+      "order": 28,
+      "width": 390,
+      "height": 844,
+      "state": "bill-preview-modal",
+      "filename": "png/390-bill-preview-modal.png",
+      "sha256": "a7c2e14093898e546b465f6989d19efbadda6acffcffb0ee8d8f50c40a7edf83",
+      "bytes": 120096,
+      "pngDimensions": [
+        390,
+        2249
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 1,
+        "dialogs": 1,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.printBill"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/receipt-unavailable",
+      "order": 29,
+      "width": 390,
+      "height": 844,
+      "state": "receipt-unavailable",
+      "filename": "png/390-receipt-unavailable.png",
+      "sha256": "406ad45547b49b98ed4d5443379b5f07cf0e1c94b65817cafca37e0b9911f3c3",
+      "bytes": 46524,
+      "pngDimensions": [
+        390,
+        900
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 0,
+        "dialogs": 0,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran pesanan #21 sudah tercatat.Struk belum tersedia. Jangan catat pembaya"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 1,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "390/receipt-recovered",
+      "order": 30,
+      "width": 390,
+      "height": 844,
+      "state": "receipt-recovered",
+      "filename": "png/390-receipt-recovered.png",
+      "sha256": "ba4ffadf659778f7106568aaf52fe1789a225c9440f87e291bb235e3bd4fece8",
+      "bytes": 62132,
+      "pngDimensions": [
+        390,
+        1289
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 390,
+        "bodyScrollWidth": 374,
+        "queueRows": 0,
+        "dialogs": 1,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran tunai sudah tercatat di Laravel. Struk belum tersedia; muat ulang str"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 2,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/queue",
+      "order": 31,
+      "width": 320,
+      "height": 844,
+      "state": "queue",
+      "filename": "png/320-queue.png",
+      "sha256": "d28915343bfe5669b7688dd20ac60cb47663fa5da24ed5d41b33be7c27c8ed5b",
+      "bytes": 29938,
+      "pngDimensions": [
+        320,
+        900
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/queue-hover",
+      "order": 32,
+      "width": 320,
+      "height": 844,
+      "state": "queue-hover",
+      "filename": "png/320-queue-hover.png",
+      "sha256": "d28915343bfe5669b7688dd20ac60cb47663fa5da24ed5d41b33be7c27c8ed5b",
+      "bytes": 29938,
+      "pngDimensions": [
+        320,
+        900
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "cashier.titlecashier.paymentQueue (1)cashier.billDetailcashier.unpaidBills 1Tota"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/selected-detail",
+      "order": 33,
+      "width": 320,
+      "height": 844,
+      "state": "selected-detail",
+      "filename": "png/320-selected-detail.png",
+      "sha256": "269abe256bd85b8da0a9519f5ebebf070531e6ae15a68242eac055432fd866ac",
+      "bytes": 87666,
+      "pngDimensions": [
+        320,
+        1696
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.billDetail"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/tender-payment",
+      "order": 34,
+      "width": 320,
+      "height": 844,
+      "state": "tender-payment",
+      "filename": "png/320-tender-payment.png",
+      "sha256": "da6869ec30e78cddf3718bba52a01e559042f99eca7a2d166cb538aa1331055c",
+      "bytes": 89335,
+      "pngDimensions": [
+        320,
+        1696
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "cash-preset-btn active",
+          "label": "Rp 50.000"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/qris-disabled",
+      "order": 35,
+      "width": 320,
+      "height": 844,
+      "state": "qris-disabled",
+      "filename": "png/320-qris-disabled.png",
+      "sha256": "f9ab7ce746974a006071e8f1544110cbc2c5b7ca137c08948f7189bf7fff28b8",
+      "bytes": 81753,
+      "pngDimensions": [
+        320,
+        1578
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "active",
+          "label": "cashier.qris"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/underpayment-disabled",
+      "order": 36,
+      "width": 320,
+      "height": 844,
+      "state": "underpayment-disabled",
+      "filename": "png/320-underpayment-disabled.png",
+      "sha256": "fecb3fc6bae7e5fea7949f8130b57fc5c9a311481051159f72f5fed898546320",
+      "bytes": 88397,
+      "pngDimensions": [
+        320,
+        1749
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          true
+        ],
+        "activeElement": {
+          "tag": "INPUT",
+          "className": "cashier-cash-input",
+          "label": ""
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/payment-keyboard-focus",
+      "order": 37,
+      "width": 320,
+      "height": 844,
+      "state": "payment-keyboard-focus",
+      "filename": "png/320-payment-keyboard-focus.png",
+      "sha256": "8a6e00ad1874484557111882608519e75885e2e0c18e42e99107787b7791bad3",
+      "bytes": 87097,
+      "pngDimensions": [
+        320,
+        1696
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 0,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "Catat lunas (tunai)"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/bill-preview-modal",
+      "order": 38,
+      "width": 320,
+      "height": 844,
+      "state": "bill-preview-modal",
+      "filename": "png/320-bill-preview-modal.png",
+      "sha256": "eecc9e2802d1226881bc1de002c511342c195336c0d20826d326ca9980dfd93a",
+      "bytes": 115737,
+      "pngDimensions": [
+        320,
+        2371
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 1,
+        "dialogs": 1,
+        "paymentDisabled": [
+          false,
+          false
+        ],
+        "activeElement": {
+          "tag": "BUTTON",
+          "className": "",
+          "label": "cashier.printBill"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 0,
+        "receiptGet": 0,
+        "queueGet": 1,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/receipt-unavailable",
+      "order": 39,
+      "width": 320,
+      "height": 844,
+      "state": "receipt-unavailable",
+      "filename": "png/320-receipt-unavailable.png",
+      "sha256": "d99ea542b5815cd5626e6661e000a2158c4f3056283e4d22cc068d91bc79e64d",
+      "bytes": 45561,
+      "pngDimensions": [
+        320,
+        900
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 0,
+        "dialogs": 0,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran pesanan #21 sudah tercatat.Struk belum tersedia. Jangan catat pembaya"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 1,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    },
+    {
+      "id": "320/receipt-recovered",
+      "order": 40,
+      "width": 320,
+      "height": 844,
+      "state": "receipt-recovered",
+      "filename": "png/320-receipt-recovered.png",
+      "sha256": "2f06e2cc39428b6fd7bbdf8ea6a066467cc181b48df7b682b8aa61883a361720",
+      "bytes": 59433,
+      "pngDimensions": [
+        320,
+        1300
+      ],
+      "sourceShaBefore": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceShaAfter": "aadda2f1131fe1906d9e6befd5daf0252ed007bd5adc7ba39d773c65708a1c91",
+      "sourceHashSubset": {
+        "cashierCss": "d5236f7a3936b52fcccadb0f9e2de87ba00176e18d74d5b7ffcc1bd0ce91111e",
+        "cashierTsx": "57d7e9369c43123e4867bbf34b65647a0969f92a2825a8074f0ed7a1b766fa69",
+        "responsiveCss": "8ec36a679550ce6488ffd0795ee2088361777168eb74cb32f43c553cff4eb940",
+        "queueComponent": "eda349f3c1218886d1e457752957134e84592a79a877e89e2d3a020f4cdbeb1c",
+        "tenderComponent": "a22c293f37882e47dea8dbfc33b1a9467605f9274073d49daf018623a259bb72",
+        "billComponent": "ca8010aa0cc2e46a8e589c4d49947a3ff60b760646434d3cd37584dde5e495d3",
+        "browserFixture": "d59c16f71fad0c309c1cabd96c30085bbb573085d45b459ded02f0546237640c"
+      },
+      "cssFingerprint": "1615065f287ad90bc69ed33ddc9de4f7b21412acfec0321c3646d56eef9d4449",
+      "cssSourceHashes": {
+        "qa-style-0.css": {
+          "manifestAsset": "assets/app-Dgf-un_w.css",
+          "bytes": 525060,
+          "sha256": "30e80ced13cbee55ac5cdd1692e707d7821556bf6fd25df51b7ffc0c8874936b"
+        },
+        "qa-style-1.css": {
+          "manifestAsset": "assets/dashboard-Nr0cNsBF.css",
+          "bytes": 230558,
+          "sha256": "98bcf10f9e828787add831a65abf26435f6a76a06e01bddc27f5cbe55eb07ed7"
+        }
+      },
+      "browserPass": "baseline",
+      "dom": {
+        "viewportWidth": 320,
+        "viewportHeight": 844,
+        "htmlScrollWidth": 320,
+        "bodyScrollWidth": 304,
+        "queueRows": 0,
+        "dialogs": 1,
+        "paymentDisabled": [],
+        "activeElement": {
+          "tag": "BODY",
+          "className": "",
+          "label": "Pembayaran tunai sudah tercatat di Laravel. Struk belum tersedia; muat ulang str"
+        },
+        "documentFontStatus": "loaded"
+      },
+      "counters": {
+        "post": 1,
+        "receiptGet": 2,
+        "queueGet": 2,
+        "detailGet": 1,
+        "other": 0
+      },
+      "javascriptErrors": 0,
+      "horizontalOverflow": false,
+      "status": "PASS"
+    }
+  ],
+  "browserChecks": {
+    "widths": [
+      1440,
+      834,
+      390,
+      320
+    ],
+    "focus": 4,
+    "hover": 4,
+    "qrisDisabled": 4,
+    "underpayDisabled": 4,
+    "modalPreview": 4,
+    "receiptRecovery": 4,
+    "paymentPost": 4,
+    "unintendedPost": 0,
+    "errors": 0,
+    "overflow": 0,
+    "otherRoutes": 0,
+    "resourceWarnings": {
+      "320": [
+        {
+          "kind": "http",
+          "status": 404,
+          "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "resourceType": "font"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+        },
+        {
+          "kind": "http",
+          "status": 500,
+          "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+          "resourceType": "fetch"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+        }
+      ],
+      "390": [
+        {
+          "kind": "http",
+          "status": 404,
+          "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "resourceType": "font"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+        },
+        {
+          "kind": "http",
+          "status": 500,
+          "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+          "resourceType": "fetch"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+        }
+      ],
+      "834": [
+        {
+          "kind": "http",
+          "status": 404,
+          "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "resourceType": "font"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+        },
+        {
+          "kind": "http",
+          "status": 500,
+          "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+          "resourceType": "fetch"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+        }
+      ],
+      "1440": [
+        {
+          "kind": "http",
+          "status": 404,
+          "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "resourceType": "font"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+        },
+        {
+          "kind": "http",
+          "status": 500,
+          "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+          "resourceType": "fetch"
+        },
+        {
+          "kind": "fixture-resource",
+          "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+        }
+      ]
+    }
+  },
+  "replay": {
+    "status": "PASS",
+    "runs": 2,
+    "sameHashCount": 40,
+    "screenshotSha256MatchingEveryState": true,
+    "browserChecks": {
+      "widths": [
+        1440,
+        834,
+        390,
+        320
+      ],
+      "focus": 4,
+      "hover": 4,
+      "qrisDisabled": 4,
+      "underpayDisabled": 4,
+      "modalPreview": 4,
+      "receiptRecovery": 4,
+      "paymentPost": 4,
+      "unintendedPost": 0,
+      "errors": 0,
+      "overflow": 0,
+      "otherRoutes": 0,
+      "resourceWarnings": {
+        "320": [
+          {
+            "kind": "http",
+            "status": 404,
+            "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "resourceType": "font"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+          },
+          {
+            "kind": "http",
+            "status": 500,
+            "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+            "resourceType": "fetch"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+            "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+          }
+        ],
+        "390": [
+          {
+            "kind": "http",
+            "status": 404,
+            "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "resourceType": "font"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+          },
+          {
+            "kind": "http",
+            "status": 500,
+            "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+            "resourceType": "fetch"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+            "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+          }
+        ],
+        "834": [
+          {
+            "kind": "http",
+            "status": 404,
+            "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "resourceType": "font"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+          },
+          {
+            "kind": "http",
+            "status": 500,
+            "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+            "resourceType": "fetch"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+            "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+          }
+        ],
+        "1440": [
+          {
+            "kind": "http",
+            "status": 404,
+            "url": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "resourceType": "font"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "location": "http://127.0.0.1:60969/build/assets/inter-latin-wght-normal-Dx4kXJAl.woff2"
+          },
+          {
+            "kind": "http",
+            "status": 500,
+            "url": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt",
+            "resourceType": "fetch"
+          },
+          {
+            "kind": "fixture-resource",
+            "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+            "location": "http://127.0.0.1:60969/pos/cashier/orders/21/receipt"
+          }
+        ]
+      }
+    }
+  },
+  "evidenceRoot": "C:\\Users\\najaa\\AppData\\Local\\Temp\\food-pos-r75-b-cashier",
+  "limitations": [
+    "Mocked Laravel JSON/API, no real authentication or CSRF",
+    "Lightweight BoardUI primitives and locale controls in existing fixture; not canonical BoardUI focus trap proof",
+    "CSS from frozen production manifest links plus isolated in-memory Vite admin CSS",
+    "Playwright Chromium only; does not validate thermal printer hardware or database concurrency",
+    "Baseline BEFORE only; no responsive.css extraction or AFTER screenshot comparison"
+  ]
+}

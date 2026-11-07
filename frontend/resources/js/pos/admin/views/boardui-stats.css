@@ -1,0 +1,330 @@
+/* BoardUI typography and KPI utilities for the Food POS dashboard shell.
+ * Keep the official composite type tokens in this Tailwind-processed entry;
+ * legacy view/shell styles only own layout, spacing, and semantic colors.
+ * This does not modify the shared global styles or the login theme. */
+@import 'tailwindcss/theme.css' layer(theme);
+@import '../../../../../styles/theme.css';
+@import '../../../../../styles/typography.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@source '../../../../../components/application/dashboard/stat-cards.tsx';
+@source '../../../../../components/application/dashboard/revenue-chart-card.tsx';
+@source '../../../../../components/application/dashboard/orders-chart-card.tsx';
+@source '../../../../../components/base/date-picker/date-range-picker.tsx';
+@source '../../../../../components/base/date-picker/shared.tsx';
+@source '../../../../../components/base/badges/chip.tsx';
+@source '../../../../../components/base/tooltip/tooltip.tsx';
+@source '../../../../../components/base/input/input.tsx';
+@source '../../../../../components/base/buttons/button.tsx';
+@source './OwnerOrdersTable.tsx';
+@source './OwnerHistoryPanels.tsx';
+@source './OwnerLiveDashboard.tsx';
+@source './ReportView.tsx';
+@source './ReportAnalytics.tsx';
+@source './ReportTransactions.tsx';
+@source './CashierView.tsx';
+@source '../../../../../components/base/modal/modal.tsx';
+@source '../../../../../components/base/table/table.tsx';
+@source '../../../../../components/base/pagination/pagination.tsx';
+@source '../../../../../components/base/select/select.tsx';
+@source '../../../../../components/base/segmented-control/segmented-control.tsx';
+
+/* Cashier P6.1: use BoardUI composite typography instead of the legacy
+   per-element font-size/font-weight declarations in CashierView.css. */
+.cashier-workspace .cashier-panel-head h2,
+.cashier-workspace .cashier-detail-top h2 {
+    @apply text-title-2-semibold;
+}
+
+.cashier-workspace .cashier-kpi-disclaimer,
+.cashier-workspace .cashier-panel-head p,
+.cashier-workspace .cashier-detail-top p,
+.cashier-workspace .cashier-safety-note {
+    @apply text-body-2-regular;
+}
+
+.cashier-workspace .cashier-panel-head .cashier-queue-count,
+.cashier-workspace .cashier-order-row small,
+.cashier-workspace .cashier-note-grid span,
+.cashier-workspace .cashier-quick-cash > span {
+    @apply text-caption-1-medium;
+}
+
+.cashier-workspace .cashier-order-row strong,
+.cashier-workspace .cashier-note-grid strong,
+.cashier-workspace .cashier-items span,
+.cashier-workspace .cashier-tendered span {
+    @apply text-body-2-medium;
+}
+
+.cashier-workspace .cashier-order-row > b,
+.cashier-workspace .cashier-items strong {
+    @apply text-body-2-semibold;
+}
+
+/* BoardUI Home composition: composite type tokens instead of manual
+ * per-element font sizes/weights. Higher specificity protects these tokens
+ * from the legacy POS .app-view heading and strong defaults. */
+.owner-dashboard-home .od-overline,
+.owner-dashboard-home .od-menu-index,
+.owner-dashboard-home .od-order-status,
+.owner-dashboard-home .od-activity-subheading > span,
+.owner-dashboard-home .od-order-table th {
+    @apply text-caption-1-medium;
+}
+
+.report-boardui .report-page-title h1 {
+    @apply text-title-1-medium;
+}
+
+.report-boardui .report-panel h2,
+.report-boardui .report-transactions h2 {
+    @apply text-title-2-semibold;
+}
+
+.report-boardui .report-page-title p,
+.report-boardui .report-panel-heading p,
+.report-boardui .report-transactions-header p,
+.report-boardui .report-data-caption,
+.report-boardui .report-chart-note,
+.report-boardui .report-disclaimer {
+    @apply text-body-2-regular;
+}
+
+.report-boardui .report-eyebrow,
+.report-boardui .report-table-footer,
+.report-boardui .report-breakdown-meta,
+.report-boardui .report-channel-group h3 {
+    @apply text-caption-1-medium;
+}
+
+.owner-dashboard-home .od-priority-info strong {
+    @apply text-body-2-semibold;
+}
+
+.owner-dashboard-home .od-priority-info small,
+.owner-dashboard-home .od-priority-time,
+.owner-dashboard-home .od-order-sort {
+    @apply text-caption-1-regular;
+}
+
+.owner-dashboard-home .od-chart-axis,
+.owner-dashboard-home .od-bar-count,
+.owner-dashboard-home .od-menu-share,
+.owner-dashboard-home .od-menu-sold {
+    @apply text-caption-1-medium;
+}
+
+.owner-dashboard-home .od-menu-footnote,
+.owner-dashboard-home .od-order-map-legend {
+    @apply text-caption-1-regular;
+}
+
+.owner-dashboard-home .od-history-heading h2,
+.owner-dashboard-home .od-history-card-head h3 {
+    @apply text-title-2-semibold;
+}
+
+.owner-dashboard-home .od-history-heading p,
+.owner-dashboard-home .od-history-card-head p,
+.owner-dashboard-home .od-history-note,
+.owner-dashboard-home .od-history-placeholder,
+.owner-dashboard-home .od-history-error span,
+.owner-dashboard-home .od-history-inline-error,
+.owner-dashboard-home .od-time-insight {
+    @apply text-body-2-regular;
+}
+
+.owner-dashboard-home .od-time-day,
+.owner-dashboard-home .od-time-hour,
+.owner-dashboard-home .od-time-legend {
+    @apply text-caption-1-medium;
+}
+
+.owner-dashboard-home .od-home-heading h1 {
+    @apply text-display-4-semibold;
+}
+
+.owner-dashboard-home .od-home-heading > p,
+.owner-dashboard-home .od-date,
+.owner-dashboard-home .od-empty-copy,
+.owner-dashboard-home .od-priority-empty > span {
+    @apply text-body-2-regular;
+}
+
+.owner-dashboard-home .od-section-label,
+.owner-dashboard-home .od-tiny-subtitle,
+.owner-dashboard-home .od-bar-label,
+.owner-dashboard-home .od-chart-footnote,
+.owner-dashboard-home .od-activity-tile > span,
+.owner-dashboard-home .od-activity-map-empty,
+.owner-dashboard-home .od-order-identity-text small,
+.owner-dashboard-home .od-order-muted,
+.owner-dashboard-home .od-shortcut-copy small,
+.owner-dashboard-home .od-table-pulse-item > span,
+.owner-dashboard-home .od-orders-title > p,
+.owner-dashboard-home .od-orders-footer,
+.owner-dashboard-home .od-empty-table > span {
+    @apply text-caption-1-regular;
+}
+
+.owner-dashboard-home .od-card-heading-line h2 {
+    @apply text-display-4-medium;
+}
+
+.owner-dashboard-home .od-card-topline > div > h2,
+.owner-dashboard-home .od-orders-title h2 {
+    @apply text-title-2-semibold;
+}
+
+.owner-dashboard-home .od-neutral-pill,
+.owner-dashboard-home .od-filter-tab,
+.owner-dashboard-home .od-order-filter,
+.owner-dashboard-home .od-priority-tile > span:last-child,
+.owner-dashboard-home .od-menu-plot-caption > span:last-child,
+.owner-dashboard-home .od-order-table-pill,
+.owner-dashboard-home .od-order-table td,
+.owner-dashboard-home .od-table-count {
+    @apply text-body-2-medium;
+}
+
+.owner-dashboard-home .od-priority-tile strong,
+.owner-dashboard-home .od-priority-empty strong,
+.owner-dashboard-home .od-menu-plot-caption strong,
+.owner-dashboard-home .od-activity-subheading strong,
+.owner-dashboard-home .od-order-identity-text strong,
+.owner-dashboard-home .od-order-amount,
+.owner-dashboard-home .od-shortcut-copy strong,
+.owner-dashboard-home .od-table-pulse-item strong,
+.owner-dashboard-home .od-empty-table strong {
+    @apply text-body-2-semibold;
+}
+
+.owner-dashboard-home .od-activity-tile strong {
+    @apply text-title-2-medium;
+}
+
+/* Owner page hierarchy: official 32/44 title, 20/26 panel title,
+ * 13/18 secondary copy, and 11/15 metadata. */
+.owner-dashboard .admin-title h1 {
+    @apply text-display-4-semibold;
+}
+
+.owner-dashboard .admin-title p,
+.owner-dashboard .owner-dashboard-panel-heading p,
+.owner-dashboard .owner-dashboard-context,
+.owner-dashboard .owner-dashboard-empty {
+    @apply text-body-2-regular;
+}
+
+.owner-dashboard .owner-dashboard-eyebrow,
+.owner-dashboard .owner-dashboard-kicker,
+.owner-dashboard .owner-dashboard-context-tag,
+.owner-dashboard .owner-dashboard-order-table,
+.owner-dashboard .owner-dashboard-chip,
+.owner-dashboard .owner-dashboard-menu-rank {
+    @apply text-caption-2-semibold;
+}
+
+.owner-dashboard .owner-dashboard-date,
+.owner-dashboard .owner-dashboard-boardui-button,
+.owner-dashboard .owner-dashboard-menu-sold {
+    @apply text-caption-1-semibold;
+}
+
+.owner-dashboard .owner-dashboard-panel-heading h2,
+.owner-dashboard .owner-dashboard-panel-count strong {
+    @apply text-title-2-semibold;
+}
+
+.owner-dashboard .owner-dashboard-panel-count span,
+.owner-dashboard .owner-dashboard-table-caption {
+    @apply text-caption-2-medium;
+}
+
+.owner-dashboard .owner-dashboard-status-meta,
+.owner-dashboard .owner-dashboard-order-name span,
+.owner-dashboard .owner-dashboard-order-details,
+.owner-dashboard .owner-dashboard-attention-text small,
+.owner-dashboard .owner-dashboard-quick-action-text small,
+.owner-dashboard .owner-dashboard-menu-name small,
+.owner-dashboard .owner-dashboard-empty--center span {
+    @apply text-caption-1-regular;
+}
+
+.owner-dashboard .owner-dashboard-status-meta strong {
+    @apply text-caption-1-semibold;
+}
+
+.owner-dashboard .owner-dashboard-order-name strong,
+.owner-dashboard .owner-dashboard-order-end > strong,
+.owner-dashboard .owner-dashboard-attention-text strong,
+.owner-dashboard .owner-dashboard-quick-action-text strong,
+.owner-dashboard .owner-dashboard-menu-name strong,
+.owner-dashboard .owner-dashboard-empty--center strong {
+    @apply text-body-2-semibold;
+}
+
+.owner-dashboard .owner-dashboard-alert-count {
+    @apply text-body-semibold;
+}
+
+.owner-dashboard .owner-dashboard-table-code {
+    @apply text-headline-semibold;
+}
+
+/* Shared navigation semantics (Owner / Kasir / Waiters, including mobile). */
+.pos-shell-brand {
+    @apply text-title-2-semibold;
+}
+
+.pos-shell-menu-heading,
+.pos-shell-language-option,
+.pos-shell-role-tag {
+    @apply text-caption-2-semibold;
+}
+
+.pos-shell-menu-link {
+    @apply text-body-medium;
+}
+
+.pos-shell-menu-link-active,
+.pos-shell-menu-link-active:hover {
+    @apply text-body-semibold;
+}
+
+.pos-shell-sidebar-user-copy strong,
+.pos-shell-topbar-account-info strong,
+.pos-shell-breadcrumb-current {
+    @apply text-caption-1-semibold;
+}
+
+.pos-shell-sidebar-user-copy > span,
+.pos-shell-topbar-account-info > span,
+.pos-shell-account-heading > span:not(.pos-shell-role-tag) {
+    @apply text-caption-2-regular;
+}
+
+.pos-shell-breadcrumb {
+    @apply text-caption-1-medium;
+}
+
+.pos-shell-account-heading strong {
+    @apply text-body-2-semibold;
+}
+
+.pos-shell-account-logout {
+    @apply text-body-2-medium;
+}
+
+.pos-shell-drawer-dialog .pos-shell-drawer-empty {
+    @apply text-caption-1-regular;
+}
+
+.pos-shell-bottom-item {
+    @apply text-caption-2-medium;
+}
+
+.pos-shell-bottom-item[aria-current='page'] {
+    @apply text-caption-2-semibold;
+}

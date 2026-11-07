@@ -1,0 +1,22 @@
+@import '@fontsource-variable/inter/index.css';
+@import '../../../styles/globals.css';
+
+@source '../../../components/base/buttons/*.tsx';
+@source '../../../components/base/badges/*.tsx';
+@source '../../../components/base/input/*.tsx';
+@source '../../../components/base/number-field/*.tsx';
+@source '../../../components/base/search-field/*.tsx';
+@source '../../../components/base/tabs/*.tsx';
+@source '../../../components/base/textarea/*.tsx';
+@source './**/*.{ts,tsx}';
+
+.customer-boardui {
+    --font-inter: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-inter);
+}
+
+/* Reuse the login form's accent focus ring while preserving invalid states. */
+.customer-boardui
+    .customer-input-focus[data-focus-within]:not(:has([aria-invalid='true'])) {
+    --tw-ring-color: var(--color-border-focus-ring);
+}

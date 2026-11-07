@@ -1,0 +1,254 @@
+/*
+ * Food POS <> BoardUI Dashboard palette alignment.
+ *
+ * Measured against https://www.boardui.com/templates/dashboard:
+ *  - page/canvas: background-full (white)
+ *  - floating sidebar and primary content cards: background-secondary-default
+ *    (very light neutral, ~#f7f7f7 in the official light theme)
+ *  - inset rows, table items, and controls: background-inner-default (white).
+ *
+ * All selectors are scoped to the Inertia POS shell. The BoardUI semantic
+ * tokens supply actual colors, so no extra palette or global overrides exist.
+ */
+
+/* Match the official BoardUI page and its 12px sidebar / content gutters. */
+.page-shell.pos-shell-layout {
+    background: var(--color-background-full);
+    color: var(--color-text-primary);
+}
+
+.page-shell.pos-shell-layout .pos-boardui-sidebar-frame {
+    flex-basis: 272px;
+    width: 272px;
+    padding: 12px 0 12px 12px;
+}
+
+.page-shell.pos-shell-layout.sidebar-collapsed .pos-boardui-sidebar-frame {
+    flex-basis: 72px;
+    width: 72px;
+}
+
+.page-shell.pos-shell-layout .main-panel {
+    min-width: 0;
+    padding: 24px 12px 40px;
+    background: var(--color-background-full);
+    background-image: none;
+    color: var(--color-text-primary);
+}
+
+/* A modest light breadcrumb and divider, not a large secondary toolbar. */
+.page-shell.pos-shell-layout .pos-shell-topbar {
+    min-height: 42px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom-color: var(--color-separator-border);
+}
+
+.page-shell.pos-shell-layout .pos-shell-breadcrumb-root,
+.page-shell.pos-shell-layout .pos-shell-breadcrumb-divider {
+    color: var(--color-text-tertiary);
+}
+
+/* The BoardUI homepage uses flat, soft-gray sections rather than elevated
+ * white cards on cream. Its nested information tiles are white. */
+.page-shell.pos-shell-layout .owner-dashboard {
+    --od-gap: 16px;
+    --od-radius: var(--radius-2xl);
+    --od-subtle: var(--color-background-secondary-default);
+    --od-surface: var(--color-background-inner-default);
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-panel {
+    padding: 16px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-2xl);
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-panel-heading {
+    margin-bottom: 16px;
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-context {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-separator-border);
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-context-tag,
+.page-shell.pos-shell-layout .owner-dashboard-panel-count,
+.page-shell.pos-shell-layout .owner-dashboard-order-table {
+    background: var(--color-background-inner-default);
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-order-list,
+.page-shell.pos-shell-layout .owner-dashboard-attention-list,
+.page-shell.pos-shell-layout .owner-dashboard-actions-list,
+.page-shell.pos-shell-layout .owner-dashboard-tables {
+    gap: 8px;
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-order {
+    border: 1px solid var(--color-border-button-white);
+    border-radius: var(--radius-2lg);
+    padding: 12px;
+    background: var(--color-background-inner-default);
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-order:first-child,
+.page-shell.pos-shell-layout .owner-dashboard-order:last-child {
+    padding: 12px;
+}
+
+.page-shell.pos-shell-layout .owner-dashboard-attention-row,
+.page-shell.pos-shell-layout .owner-dashboard-table {
+    border: 1px solid var(--color-border-button-white);
+    background: var(--color-background-inner-default);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout .owner-dashboard .owner-dashboard-quick-action {
+    border: 1px solid var(--color-border-button-white);
+    background: var(--color-background-inner-default);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    .owner-dashboard
+    .owner-dashboard-quick-action--primary {
+    border-color: var(--color-accent-500);
+    background: var(--color-accent-600);
+    color: var(--color-foreground-full);
+}
+
+.page-shell.pos-shell-layout
+    .owner-dashboard
+    .owner-dashboard-quick-action--primary:hover {
+    background: var(--color-accent-700);
+}
+
+/* Orders: status/summary/filter sections are light grey; individual tickets
+ * remain white, preserving the hierarchy of BoardUI's inset content tiles. */
+.page-shell.pos-shell-layout
+    :is(
+        .orders-kpi,
+        .orders-controls,
+        .orders-stage-column,
+        .orders-demo-notice
+    ) {
+    border-color: transparent;
+    border-radius: var(--radius-2xl);
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    :is(.orders-stage-card, .orders-kanban-card, .kanban-card) {
+    background: var(--color-background-inner-default);
+}
+
+/* Cashier + Waiters: keep POS status colors, but invert the surface hierarchy
+ * so that a white order/ticket lives inside a neutral work area. */
+.page-shell.pos-shell-layout
+    :is(
+        .cashier-panel,
+        .cashier-detail,
+        .cashier-summary article,
+        .waiters-stat,
+        .waiters-panel,
+        .service-queue,
+        .waiters-overview-item
+    ) {
+    border-color: transparent;
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    :is(
+        .cashier-order-row,
+        .table-status-card,
+        .waiters-queue-card,
+        .service-card
+    ) {
+    background: var(--color-background-inner-default);
+}
+
+/* Owner tools/reports/settings use the same neutral major panel level,
+ * but their actionable rows and editor inputs remain white. */
+.page-shell.pos-shell-layout
+    :is(
+        .owner-menu-main,
+        .menu-editor-panel,
+        .staff-panel,
+        .staff-editor-panel,
+        .tables-main,
+        .qr-editor-panel,
+        .report-stat,
+        .habits-card,
+        .product-stat-card,
+        .growth-card,
+        .settings-card
+    ) {
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    :is(.owner-menu-row, .staff-row, .qr-table-card, .permission-card) {
+    background: var(--color-background-inner-default);
+}
+
+/* A consistent focus treatment on the new white/grey nesting. */
+.page-shell.pos-shell-layout
+    :is(
+        .owner-dashboard-order,
+        .owner-dashboard-attention-row,
+        .owner-dashboard .owner-dashboard-quick-action
+    ):focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+    .page-shell.pos-shell-layout .main-panel {
+        padding: 16px 12px calc(24px + env(safe-area-inset-bottom));
+    }
+
+    .page-shell.pos-shell-layout .pos-shell-topbar {
+        margin-bottom: 14px;
+    }
+
+    .page-shell.pos-shell-layout .owner-dashboard-panel {
+        padding: 14px;
+    }
+
+    /* Keep the wide orders table independently swipeable on phones. */
+    .page-shell.pos-shell-layout .od-order-table-scroll {
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+    }
+}
+
+@media (max-width: 440px) {
+    .page-shell.pos-shell-layout .main-panel {
+        padding-inline: 12px;
+    }
+}
+
+/* Use one document-level vertical scrollbar. The previous 100vh
+ * .main-panel with overflow:auto created a second scroll track beside the
+ * browser scrollbar. The BoardUI sidebar stays sticky, and its own navigation
+ * can still scroll internally when required. */
+.page-shell.pos-shell-layout {
+    min-height: 100dvh;
+    overflow: clip;
+    align-items: flex-start;
+}
+
+.page-shell.pos-shell-layout .main-panel {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+}

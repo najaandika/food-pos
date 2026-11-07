@@ -1,0 +1,16 @@
+/*
+ * BoardUI is the source of truth for type size, line height and weight.
+ * Legacy POS used to force every heading/strong/button/input to a bold weight,
+ * overriding the official text-title-*, text-body-* and Button styles.
+ *
+ * Preserve the accessible default text color and kerning, but do not override
+ * the component's typography utility classes. Page-level legacy fallbacks are
+ * handled explicitly by typography-foundation.css.
+ */
+.app-view {
+    font-kerning: normal;
+}
+
+.app-view :where(h1, h2, h3, h4) {
+    color: var(--color-text-primary, var(--navy));
+}

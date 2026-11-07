@@ -1,0 +1,627 @@
+/*
+ * BoardUI-style navigation shell, isolated from POS view content and global CSS.
+ * Semantic token fallbacks use the existing POS variables until BoardUI theme
+ * is migrated to the whole dashboard. No view-specific selectors are altered.
+ */
+@import '@fontsource-variable/inter/index.css';
+
+.page-shell.pos-shell-layout {
+    --pos-nav-surface: var(--color-background-primary-default, var(--card));
+    --pos-nav-canvas: var(--color-background-full, var(--surface));
+    --pos-nav-hover: var(--color-background-secondary-hover, var(--mist));
+    --pos-nav-selected: var(--color-accent-50, var(--mist));
+    --pos-nav-accent: var(--color-accent-600, var(--blue));
+    --pos-nav-accent-strong: var(--color-accent-700, var(--blue-dark));
+    --pos-nav-foreground: var(--color-text-primary, var(--ink));
+    --pos-nav-muted: var(--color-text-secondary, var(--muted));
+    --pos-nav-border: var(--color-border-button-default, var(--border-soft));
+    --pos-nav-divider: var(--color-separator-border, var(--line));
+    --pos-nav-icon: var(--color-foreground-icon-secondary, var(--muted));
+    --pos-nav-focus: var(--color-border-focus-ring, var(--blue));
+}
+
+.pos-shell-layout .pos-shell-sidebar,
+.pos-shell-layout .pos-shell-topbar,
+.pos-shell-layout .pos-shell-bottom-nav,
+.pos-shell-drawer-overlay,
+.pos-shell-account-popover {
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page-shell.pos-shell-layout .pos-shell-sidebar {
+    display: flex;
+    flex: 0 0 248px;
+    flex-direction: column;
+    min-width: 0;
+    width: 248px;
+    height: 100dvh;
+    padding: 20px 12px 16px;
+    background: var(--pos-nav-surface);
+    border-right: 1px solid var(--pos-nav-border);
+    box-shadow: none;
+    transition:
+        flex-basis 200ms ease,
+        width 200ms ease;
+}
+
+.pos-shell-sidebar-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    gap: 8px;
+    padding-inline: 10px 2px;
+    margin-bottom: 24px;
+}
+
+.pos-shell-brand {
+    min-width: 0;
+    color: var(--pos-nav-foreground);
+    white-space: nowrap;
+}
+
+.pos-shell-brand-dot {
+    color: var(--pos-nav-accent);
+}
+
+.pos-shell-brand-compact {
+    display: none;
+}
+
+.pos-shell-layout .pos-shell-icon-action {
+    background: var(--pos-nav-surface);
+    border-color: var(--pos-nav-border);
+    border-radius: 10px;
+    color: var(--pos-nav-icon);
+    box-shadow: none;
+}
+
+.pos-shell-layout .pos-shell-icon-action:hover {
+    color: var(--pos-nav-foreground);
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-menu {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    gap: 22px;
+    overflow: auto;
+    padding: 0 4px 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pos-nav-border) transparent;
+}
+
+.pos-shell-menu-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pos-shell-menu-group + .pos-shell-menu-group {
+    padding-top: 16px;
+    border-top: 1px solid var(--pos-nav-divider);
+}
+
+.pos-shell-menu-heading {
+    padding-inline: 12px;
+    color: var(--pos-nav-muted);
+    text-transform: uppercase;
+}
+
+.pos-shell-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pos-shell-menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 42px;
+    padding-inline: 12px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--pos-nav-muted);
+    text-align: start;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.pos-shell-menu-link:hover {
+    color: var(--pos-nav-foreground);
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-menu-link-active,
+.pos-shell-menu-link-active:hover {
+    color: var(--pos-nav-accent-strong);
+    background: var(--pos-nav-selected);
+}
+
+.pos-shell-menu-link-active::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 11px;
+    bottom: 11px;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--pos-nav-accent);
+}
+
+.pos-shell-menu-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: var(--pos-nav-icon);
+}
+
+.pos-shell-menu-link-active .pos-shell-menu-icon {
+    color: var(--pos-nav-accent);
+}
+
+.pos-shell-menu-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pos-shell-sidebar-footer {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--pos-nav-divider);
+}
+
+.pos-shell-language-switch {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 10px;
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-language-option {
+    flex: 1 1 auto;
+    min-height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--pos-nav-muted);
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.pos-shell-language-option:hover {
+    color: var(--pos-nav-foreground);
+}
+
+.pos-shell-language-option[aria-pressed='true'] {
+    background: var(--pos-nav-surface);
+    color: var(--pos-nav-accent-strong);
+}
+
+.pos-shell-sidebar-user {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+    padding: 0 6px;
+}
+
+.pos-shell-layout .pos-shell-avatar {
+    background: var(--pos-nav-selected);
+    color: var(--pos-nav-accent-strong);
+    font-weight: 600;
+}
+
+.pos-shell-sidebar-user-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.pos-shell-sidebar-user-copy strong {
+    overflow: hidden;
+    color: var(--pos-nav-foreground);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pos-shell-sidebar-user-copy > span {
+    color: var(--pos-nav-muted);
+}
+
+.page-shell.pos-shell-layout.sidebar-collapsed .pos-shell-sidebar {
+    flex-basis: 72px;
+    width: 72px;
+    padding-inline: 8px;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-sidebar-brand-row {
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-inline: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-brand-expanded,
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-text,
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-heading,
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-sidebar-user-copy {
+    display: none;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-brand-compact {
+    display: inline;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu {
+    gap: 16px;
+    overflow-x: visible;
+    padding-inline: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-group {
+    gap: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-links {
+    align-items: center;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-link {
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-link-active::before {
+    top: 12px;
+    bottom: 12px;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-sidebar-user {
+    justify-content: center;
+    padding-inline: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-language-switch {
+    flex-direction: column;
+}
+
+.pos-shell-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 54px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--pos-nav-divider);
+    color: var(--pos-nav-foreground);
+}
+
+.pos-shell-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 0;
+    gap: 9px;
+}
+
+.pos-shell-breadcrumb-root,
+.pos-shell-breadcrumb-divider {
+    color: var(--pos-nav-muted);
+}
+
+.pos-shell-breadcrumb-current {
+    color: var(--pos-nav-foreground);
+}
+
+.pos-shell-breadcrumb-home-icon {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    color: var(--pos-nav-icon);
+}
+
+.pos-shell-layout .pos-shell-account-trigger {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 42px;
+    padding: 4px 6px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--pos-nav-foreground);
+    box-shadow: none;
+}
+
+.pos-shell-layout .pos-shell-account-trigger:hover {
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-topbar-account-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    gap: 2px;
+}
+
+.pos-shell-topbar-account-info strong {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pos-shell-topbar-account-info > span {
+    color: var(--pos-nav-muted);
+}
+
+.pos-shell-account-chevron {
+    width: 16px;
+    height: 16px;
+    color: var(--pos-nav-icon);
+}
+
+.pos-shell-account-popover {
+    z-index: 250;
+    width: min(280px, calc(100vw - 24px));
+    padding: 6px;
+    border: 1px solid var(--color-border-button-default, var(--border));
+    border-radius: 14px;
+    background: var(--color-background-primary-default, var(--popover));
+    box-shadow: var(--shadow-md);
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    outline: none;
+    transition:
+        opacity 150ms ease,
+        transform 150ms ease;
+}
+
+.pos-shell-account-popover[data-entering],
+.pos-shell-account-popover[data-exiting] {
+    opacity: 0;
+    transform: scale(0.97);
+}
+
+.pos-shell-account-menu {
+    outline: none;
+}
+
+.pos-shell-account-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px 12px;
+    border-bottom: 1px solid var(--color-border-button-default, var(--border));
+}
+
+.pos-shell-account-heading strong {
+}
+
+.pos-shell-account-heading > span:not(.pos-shell-role-tag) {
+    overflow: hidden;
+    color: var(--color-text-secondary, var(--muted-foreground));
+    text-overflow: ellipsis;
+}
+
+.pos-shell-role-tag {
+    width: fit-content;
+    margin-top: 2px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--color-accent-50, var(--secondary));
+    color: var(--color-accent-700, var(--primary));
+}
+
+.pos-shell-account-logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    margin-top: 4px;
+    padding: 8px 12px;
+    border-radius: 9px;
+    color: var(--color-text-primary, var(--foreground));
+    outline: none;
+    cursor: pointer;
+}
+
+.pos-shell-account-logout[data-hovered],
+.pos-shell-account-logout[data-focused] {
+    background: var(--color-background-secondary-hover, var(--secondary));
+}
+
+.pos-shell-account-action-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-foreground-icon-secondary, var(--muted-foreground));
+}
+
+.pos-shell-layout .pos-shell-menu-link:focus-visible,
+.pos-shell-layout .pos-shell-icon-action:focus-visible,
+.pos-shell-layout .pos-shell-account-trigger:focus-visible,
+.pos-shell-layout .pos-shell-language-option:focus-visible,
+.pos-shell-layout .pos-shell-bottom-item:focus-visible,
+.pos-shell-account-logout[data-focus-visible] {
+    outline: 2px solid var(--pos-nav-focus, var(--color-border-focus-ring));
+    outline-offset: 2px;
+}
+
+.pos-shell-bottom-nav {
+    display: none;
+}
+
+.pos-shell-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 210;
+    background: color-mix(
+        in srgb,
+        var(--color-text-primary, var(--foreground)) 32%,
+        transparent
+    );
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pos-shell-drawer-modal {
+    height: 100dvh;
+    width: min(308px, 86vw);
+    background: var(--color-background-primary-default, var(--popover));
+    border-right: 1px solid var(--color-border-button-default, var(--border));
+    box-shadow: var(--shadow-md);
+    outline: none;
+    transition: transform 200ms ease;
+}
+
+.pos-shell-drawer-overlay[data-entering],
+.pos-shell-drawer-overlay[data-exiting] {
+    opacity: 0;
+}
+
+.pos-shell-drawer-overlay[data-entering] .pos-shell-drawer-modal,
+.pos-shell-drawer-overlay[data-exiting] .pos-shell-drawer-modal {
+    transform: translateX(-12px);
+}
+
+.pos-shell-drawer-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    gap: 0;
+    padding: 20px 14px max(16px, env(safe-area-inset-bottom));
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    outline: none;
+}
+
+.pos-shell-drawer-dialog .pos-shell-sidebar-brand-row {
+    margin-bottom: 22px;
+}
+
+.pos-shell-drawer-dialog .pos-shell-menu {
+    padding-block: 0 16px;
+}
+
+.pos-shell-drawer-dialog .pos-shell-menu-link {
+    color: var(--color-text-secondary, var(--foreground));
+}
+
+.pos-shell-drawer-dialog .pos-shell-menu-link-active {
+    color: var(--color-accent-700, var(--primary));
+}
+
+.pos-shell-drawer-dialog .pos-shell-drawer-empty {
+    color: var(--color-text-secondary, var(--muted-foreground));
+}
+
+@media (max-width: 860px) {
+    .page-shell.pos-shell-layout .pos-shell-sidebar {
+        display: none;
+    }
+
+    .pos-shell-layout .main-panel {
+        padding-top: 18px;
+    }
+
+    .pos-shell-topbar {
+        min-height: 48px;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+    }
+
+    .pos-shell-topbar-account-info {
+        display: none;
+    }
+
+    .pos-shell-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        inset-inline: 0;
+        z-index: 170;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-around;
+        gap: 4px;
+        height: calc(66px + env(safe-area-inset-bottom));
+        padding: 6px 8px max(6px, env(safe-area-inset-bottom));
+        background: var(--color-background-primary-default, var(--card));
+        border-top: 1px solid var(--color-border-button-default, var(--border));
+        box-shadow: var(--shadow-sm);
+    }
+
+    .pos-shell-bottom-item {
+        display: flex;
+        flex: 1 1 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 0;
+        min-height: 48px;
+        gap: 4px;
+        border: none;
+        border-radius: 9px;
+        background: transparent;
+        color: var(--color-text-secondary, var(--muted));
+        font-family:
+            'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+        text-decoration: none;
+        transition:
+            color 150ms ease,
+            background-color 150ms ease;
+    }
+
+    .pos-shell-bottom-item:hover {
+        background: var(--color-background-secondary-hover, var(--mist));
+    }
+
+    .pos-shell-bottom-item[aria-current='page'] {
+        color: var(--color-accent-700, var(--blue-dark));
+        background: var(--color-accent-50, var(--mist));
+    }
+
+    .pos-shell-bottom-icon {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 auto;
+    }
+
+    .pos-shell-bottom-item > span {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pos-shell-layout .pos-shell-sidebar,
+    .pos-shell-layout .pos-shell-menu-link,
+    .pos-shell-layout .pos-shell-bottom-item,
+    .pos-shell-account-popover,
+    .pos-shell-drawer-overlay,
+    .pos-shell-drawer-modal {
+        transition-duration: 0.01ms;
+    }
+}

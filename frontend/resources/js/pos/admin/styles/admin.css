@@ -1,0 +1,35 @@
+/* Base shell & view component styles */
+@import '../shell.css';
+@import './primitives.css';
+@import '../views/OwnerShared.css';
+@import '../views/CashierView.css';
+@import '../views/DashboardView.css';
+@import '../views/MenuView.css';
+@import '../views/OrdersView.css';
+@import '../views/OwnerMenuView.css';
+@import '../views/OwnerStaffView.css';
+@import '../views/OwnerTablesView.css';
+@import '../views/ReportView.css';
+@import '../views/SettingsView.css';
+@import '../views/WaitersView.css';
+@import './typography.css';
+
+/* Responsive & layout overrides (MUST come after base styles) */
+@import './responsive.css';
+
+/* Menu P1 overrides are scoped to the manual ordering page. */
+@import '../views/MenuP1.css';
+/* Menu P2 uses the official BoardUI control tokens and components. */
+@import '../views/MenuP2.css';
+
+/* Stage 3 focus overrides: last in admin layer, scoped to five workspaces. */
+@import './focus-consistency-stage3.css';
+
+/* UI C1: BoardUI Inter typography, page-title parity and readable captions. */
+@import './typography-foundation.css';
+
+/* UI C2: scoped BoardUI controls for Manage Menu, Staff and Cashier. */
+@import './boardui-controls-c2.css';
+
+/* P1: preserve legacy POS tokens while fixing BoardUI radii, shadows and focus. */
+@import './boardui-token-bridge.css';

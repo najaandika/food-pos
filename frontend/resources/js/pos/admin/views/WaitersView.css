@@ -1,0 +1,553 @@
+@import '@fontsource-variable/inter/index.css';
+
+/*
+ * Food POS / Waiters Station
+ * Operational layout composed from native BoardUI StatCards, Button, Chip,
+ * StatusDot, SegmentedControl, Input and Drawer. No custom dialog/filter skin.
+ * Scoped to Waiters only; Owner, Orders and the shared sidebar are unaffected.
+ */
+.waiters-workspace {
+    --waiters-surface: var(--color-background-primary-default);
+    --waiters-line: var(--color-separator-border);
+    --waiters-muted: var(--color-text-secondary);
+    --waiters-text: var(--color-text-primary);
+    --waiters-accent: var(--color-accent-600);
+    min-width: 0;
+    color: var(--waiters-text);
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.waiters-workspace .waiters-page-header {
+    margin-bottom: 20px;
+}
+
+.waiters-workspace .waiters-boardui-stats {
+    margin-bottom: 20px;
+    gap: 12px;
+}
+
+.waiters-workspace .waiters-action-error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: 12px;
+    background: var(--color-background-secondary-default);
+}
+
+.waiters-workspace .waiters-boardui-panel {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 20px;
+    background: var(--waiters-surface);
+    box-shadow: var(--shadow-card);
+}
+
+.waiters-workspace .waiters-section-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.waiters-workspace .waiters-section-head > div {
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-section-label {
+    margin: 0 0 6px;
+    color: var(--waiters-accent);
+}
+
+.waiters-workspace .waiters-section-head h2 {
+    margin: 0;
+    color: var(--waiters-text);
+    font-weight: var(--text-title-3-semibold--font-weight);
+    line-height: var(--text-title-3-semibold--line-height);
+}
+
+.waiters-workspace .waiters-section-head p:not(.waiters-section-label) {
+    margin: 5px 0 0;
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-section-head > span {
+    flex-shrink: 0;
+}
+
+/* Put time-sensitive work above every table and keep it readable in one glance. */
+.waiters-workspace .waiters-attention-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+    gap: 10px;
+}
+
+.waiters-workspace .waiters-attention-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 12px;
+    background: var(--color-background-secondary-default);
+}
+
+.waiters-workspace .waiters-attention-row.tone-call {
+    border-color: color-mix(
+        in srgb,
+        var(--color-status-rose-text) 24%,
+        var(--waiters-line)
+    );
+}
+
+.waiters-workspace .waiters-attention-table {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 46px;
+    min-height: 36px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: var(--color-background-primary-default);
+    color: var(--waiters-text);
+    white-space: nowrap;
+}
+
+.waiters-workspace .waiters-attention-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-attention-copy strong {
+    color: var(--waiters-text);
+    font-weight: var(--text-body-semibold--font-weight);
+    overflow-wrap: anywhere;
+}
+
+.waiters-workspace .waiters-attention-copy > span:last-child {
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-attention-row > button {
+    min-height: 36px;
+}
+
+/* Table and queue share the available width without nested scrollbars.
+   DOM order is queue → tables, matching mobile service priority. */
+.waiters-workspace .waiters-work-grid {
+    display: grid;
+    grid-template-areas: 'tables queue';
+    grid-template-columns: minmax(0, 1.25fr) minmax(345px, 0.9fr);
+    gap: 18px;
+    align-items: start;
+    margin-top: 18px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-queue {
+    grid-area: queue;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-table-section {
+    grid-area: tables;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-table-tools {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.waiters-workspace .waiters-search,
+.waiters-workspace .waiters-search [role='group'] {
+    width: 100%;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-filter-scroll {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    padding: 2px 1px 6px;
+    scrollbar-width: thin;
+}
+
+.waiters-workspace .waiters-boardui-segments {
+    width: max-content;
+    min-width: max-content;
+}
+
+.waiters-workspace .waiters-boardui-segments button {
+    min-height: 36px;
+    white-space: nowrap;
+}
+
+.waiters-workspace .waiters-floor-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    padding: 12px 0 16px;
+    border-top: 1px solid var(--waiters-line);
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-floor-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.waiters-workspace .waiters-call-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-status-rose-text);
+}
+
+.waiters-workspace .waiters-table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+    gap: 10px;
+}
+
+.waiters-workspace .waiters-table-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 139px;
+    padding: 13px;
+    gap: 9px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 12px;
+    background: var(--waiters-surface);
+    text-align: left;
+    color: var(--waiters-text);
+    cursor: pointer;
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.waiters-workspace .waiters-table-tile:hover {
+    border-color: var(--color-border-button-default);
+    box-shadow: var(--shadow-xs);
+}
+
+.waiters-workspace .waiters-table-tile:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+.waiters-workspace .waiters-table-tile.needs-attention {
+    border-color: color-mix(
+        in srgb,
+        var(--color-status-rose-text) 24%,
+        var(--waiters-line)
+    );
+}
+
+.waiters-workspace .waiters-table-tile-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.waiters-workspace .waiters-table-code {
+    font-weight: var(--text-headline-semibold--font-weight);
+}
+
+.waiters-workspace .waiters-table-name {
+    margin: 0;
+    color: var(--waiters-text);
+    overflow-wrap: anywhere;
+}
+
+.waiters-workspace .waiters-table-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 9px;
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-table-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.waiters-workspace .waiters-table-meta svg {
+    width: 13px;
+    height: 13px;
+}
+
+.waiters-workspace .waiters-table-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--waiters-line);
+    margin-top: auto;
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-table-bottom span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-table-bottom svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--waiters-accent);
+}
+
+/* Service queue is a proper content surface, not an 820px scroll cage. */
+.waiters-workspace .waiters-queue-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+}
+
+.waiters-workspace .waiters-queue-more,
+.waiters-workspace .waiters-attention-more {
+    min-height: 38px;
+    justify-self: stretch;
+}
+
+.waiters-workspace .waiters-attention-more {
+    display: none;
+}
+
+.waiters-workspace .waiters-queue-card {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 12px;
+    background: var(--waiters-surface);
+}
+
+.waiters-workspace .waiters-queue-card.is-priority {
+    border-color: var(--color-border-button-default);
+}
+
+.waiters-workspace .waiters-queue-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-queue-table {
+    color: var(--waiters-accent);
+}
+
+.waiters-workspace .waiters-queue-person {
+    margin: 10px 0 13px;
+}
+
+.waiters-workspace .waiters-queue-person strong {
+    display: block;
+    color: var(--waiters-text);
+    font-weight: var(--text-body-semibold--font-weight);
+}
+
+.waiters-workspace .waiters-queue-person p {
+    margin: 5px 0 0;
+    color: var(--waiters-muted);
+    overflow-wrap: anywhere;
+}
+
+.waiters-workspace .waiters-queue-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.waiters-workspace .waiters-queue-card-actions > button {
+    flex: 1 1 0;
+    min-width: 95px;
+}
+
+.waiters-workspace .waiters-boardui-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 12px;
+    color: var(--waiters-muted);
+    text-align: center;
+}
+
+.waiters-workspace .waiters-boardui-empty svg {
+    width: 22px;
+    height: 22px;
+    color: var(--color-success-600);
+}
+
+.waiters-workspace .waiters-boardui-empty p {
+    margin: 0;
+}
+
+/* BoardUI Drawer owns overlay, focus trap, Escape and scroll locking. */
+/* Drawer renders in a portal outside .waiters-workspace. */
+.waiters-detail-body {
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.waiters-detail-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.waiters-detail-fields > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--color-background-secondary-default);
+}
+
+.waiters-detail-fields span:not([class]) {
+    color: var(--color-text-secondary);
+}
+
+.waiters-detail-fields strong {
+    color: var(--color-text-primary);
+    overflow-wrap: anywhere;
+}
+
+.waiters-detail-items {
+    display: grid;
+    gap: 9px;
+}
+
+.waiters-detail-items h3 {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-weight: var(--text-body-semibold--font-weight);
+    line-height: var(--text-body-semibold--line-height);
+}
+
+.waiters-detail-items > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-separator-border);
+}
+
+.waiters-order-notes,
+.waiters-dialog-note {
+    margin: 0;
+    padding: 12px;
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-secondary);
+    border-radius: 10px;
+}
+
+/* At tighter BoardUI container widths, queue is first in reading order. */
+@container admin-main (max-width: 1150px) {
+    .waiters-workspace .waiters-work-grid {
+        grid-template-areas: 'queue' 'tables';
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .waiters-workspace .waiters-queue-list {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 265px), 1fr));
+    }
+}
+
+@container admin-main (max-width: 900px) {
+    .waiters-workspace .waiters-boardui-stats {
+        gap: 8px;
+    }
+}
+
+@container admin-main (max-width: 580px) {
+    .waiters-workspace .waiters-page-header {
+        margin-bottom: 14px;
+    }
+    .waiters-workspace .waiters-boardui-stats {
+        margin-bottom: 14px;
+    }
+    .waiters-workspace .waiters-boardui-panel {
+        padding: 15px;
+        border-radius: 16px;
+    }
+    .waiters-workspace .waiters-section-head {
+        gap: 9px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+    }
+    .waiters-workspace .waiters-work-grid {
+        gap: 14px;
+        margin-top: 14px;
+    }
+    .waiters-workspace .waiters-attention-list,
+    .waiters-workspace .waiters-queue-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .waiters-workspace .waiters-attention-row {
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 9px;
+    }
+    .waiters-workspace .waiters-attention-row > button {
+        grid-column: 2;
+        width: 100%;
+    }
+    .waiters-workspace .waiters-attention-row.is-mobile-collapsed {
+        display: none;
+    }
+    .waiters-workspace .waiters-attention-more {
+        display: inline-flex;
+    }
+    .waiters-workspace .waiters-table-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+    .waiters-workspace .waiters-table-tile {
+        min-height: 137px;
+        padding: 11px;
+    }
+}
+
+@container admin-main (max-width: 360px) {
+    .waiters-workspace .waiters-table-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .waiters-workspace .waiters-table-tile {
+        transition: none;
+    }
+}

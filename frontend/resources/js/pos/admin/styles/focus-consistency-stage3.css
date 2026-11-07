@@ -1,0 +1,147 @@
+/*
+ * Food POS | Stage 3: focused controls across the remaining admin workspaces.
+ * Keep BoardUI's semantic focus token and never change selected/active styling.
+ * This sheet comes after view CSS; selectors are deliberately limited to
+ * Manage Menu, Settings, Orders, Cashier and Waiters.
+ */
+
+.page-shell.pos-shell-layout
+    :is(
+        .app-view:has(> .owner-menu-layout),
+        .app-view:has(> .settings-layout),
+        .orders-workspace,
+        .cashier-workspace,
+        .waiters-workspace
+    )
+    :is(button, a, summary, [role='button']):focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+/* Manage Menu's legacy input, textarea and summary fields use a colored border
+   and the global 3px square outline. The container gets the same 2px blue
+   inset focus ring used in the Login/Table forms. */
+.page-shell.pos-shell-layout
+    .owner-menu-layout
+    .menu-editor-panel
+    :is(
+        .editor-fields input,
+        .editor-fields textarea,
+        .custom-select summary
+    ):focus:not([aria-invalid='true'], [data-invalid]) {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+    border-color: var(--color-border-focus-ring);
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    .owner-menu-layout
+    .owner-menu-toolbar
+    .admin-search-wrap:focus-within {
+    border-radius: var(--radius-2lg, 10px);
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+.page-shell.pos-shell-layout
+    .owner-menu-layout
+    .owner-menu-toolbar
+    .admin-search-wrap
+    input:focus-visible {
+    outline: none;
+}
+
+/* Settings: remove the 4px legacy glow and the second outer 3px outline.
+   Leave normal, disabled and invalid values to the existing form rules. */
+.page-shell.pos-shell-layout
+    .settings-layout
+    :is(
+        .settings-grid input,
+        .settings-grid select,
+        .hours-row input
+    ):focus:not([aria-invalid='true'], [data-invalid]) {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+    border-color: var(--color-border-focus-ring);
+    box-shadow: none;
+}
+
+/* Orders already uses a blue BoardUI SearchField group. Its input must not
+   redraw an outline inside that ring. */
+.page-shell.pos-shell-layout
+    .orders-workspace
+    .orders-search-row
+    input:focus-visible {
+    outline: none;
+}
+
+/* Cashier and Waiters use installed BoardUI Input; show the blue focus ring
+   on the field shell, never a separate 3px square outline on the inner input. */
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    :is(.cashier-search-shell, .cashier-cash-input)
+    [data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ),
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    :is(.cashier-search-shell, .cashier-cash-input)[data-focus-within]:not(
+        [data-invalid]
+    ):not(:has(input[aria-invalid='true'])),
+.page-shell.pos-shell-layout
+    .waiters-workspace
+    .waiters-search
+    [data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ),
+.page-shell.pos-shell-layout
+    .waiters-workspace
+    .waiters-search[data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ) {
+    --tw-ring-color: var(--color-border-focus-ring);
+}
+
+.page-shell.pos-shell-layout
+    :is(
+        .cashier-workspace .cashier-search-shell,
+        .cashier-workspace .cashier-cash-input,
+        .waiters-workspace .waiters-search
+    )
+    input:focus-visible {
+    outline: none;
+}
+
+/* Some legacy POS wrappers override Tailwind's computed ring shadow with
+ * a transparent value. Give the focused BoardUI SearchField shell a visible
+ * inset ring instead of leaving keyboard/mouse focus visually empty. */
+.page-shell.pos-shell-layout
+    .orders-workspace
+    .orders-search-row
+    [role='group'][data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ),
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .cashier-search-shell
+    [data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ),
+.page-shell.pos-shell-layout
+    .waiters-workspace
+    .waiters-search
+    [data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ) {
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+/* A separate legacy Cashier amount input is not an InputBase group. */
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .custom-cash-wrap
+    input:focus:not([aria-invalid='true']) {
+    outline: none;
+    border-color: var(--color-border-focus-ring);
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}

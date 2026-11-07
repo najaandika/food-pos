@@ -1,0 +1,29 @@
+.tabs {
+    display: flex;
+    gap: var(--space-1);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-2);
+    scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tabs button {
+    flex: 0 0 auto;
+    min-height: var(--touch-sm);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--muted);
+    padding: 0 var(--space-4);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+}
+
+.tabs button.active {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+}

@@ -1,0 +1,43 @@
+.button {
+    min-height: var(--touch-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    padding: 0 var(--space-4);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.primary {
+    background: var(--blue);
+    color: #ffffff;
+}
+
+.secondary {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+}
+
+.soft {
+    background: var(--mist);
+    color: var(--blue);
+}
+
+.ghost {
+    background: transparent;
+    color: var(--blue);
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
