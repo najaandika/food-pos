@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { RiPrinterLine as Printer, RiCloseLine as X } from '@remixicon/react';
 import { RiAddLine, RiRefreshLine } from '@remixicon/react';
 import { Button } from '../../../../../components/base/buttons/button';
 import {
@@ -19,6 +18,8 @@ import {
     type TableDraft,
 } from './owner-tables/OwnerTablesForm';
 import { OwnerTablesList } from './owner-tables/OwnerTablesList';
+import { TablePrintStandee } from './owner-tables/TablePrintStandee';
+import { TableManualCopyDialog } from './owner-tables/TableManualCopyDialog';
 import {
     deleteSavedTable,
     getCustomerTableUrl,
@@ -433,6 +434,16 @@ export function OwnerTablesView({
         }
     };
 
+    const retryManualCopy = () => {
+        if (!manualCopyUrl) return;
+        void copyCustomerLink(manualCopyUrl).then((copied) => {
+            if (copied) {
+                setManualCopyUrl(null);
+                setCopyToast('Tautan QR berhasil disalin.');
+                window.setTimeout(() => setCopyToast(null), 3000);
+            }
+        });
+    };
     const handlePrintTable = async (table: AdminTable) => {
         try {
             const url = await resolveCustomerUrl(table);
@@ -712,188 +723,23 @@ export function OwnerTablesView({
             </Drawer>
             {/* QR Standee & Sticker Print Modal */}
             {tableToPrint && (
-                <div
-                    className="admin-modal-overlay"
-                    onClick={() => setTableToPrint(null)}
-                >
-                    <div
-                        className="standee-modal-content"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="standee-modal-header">
-                            <div>
-                                <h3>{t('ownerTables.standeeTitle')}</h3>
-                                <p>{t('ownerTables.standeeDesc')}</p>
-                            </div>
-                            <button
-                                type="button"
-                                className="standee-modal-close"
-                                onClick={() => setTableToPrint(null)}
-                            >
-                                <X size={20} />
-                            </button>
-                        </div>
-
-                        {/* Standee Printable Card */}
-                        <div
-                            className="standee-card-wrap"
-                            id="printable-table-standee"
-                        >
-                            <div className="standee-card">
-                                <div className="standee-header">
-                                    <span className="standee-badge">
-                                        {t('ownerTables.selfServiceOrder')}
-                                    </span>
-                                    <h2>{t('ownerTables.standeeCafeName')}</h2>
-                                    <p>{t('ownerTables.standeeTagline')}</p>
-                                </div>
-
-                                <div className="standee-table-box">
-                                    <span className="standee-table-label">
-                                        {t('ownerTables.tableNumber')}
-                                    </span>
-                                    <strong className="standee-table-number">
-                                        {tableToPrint.code}
-                                    </strong>
-                                    <span className="standee-table-area">
-                                        {tableToPrint.area} •{' '}
-                                        {tableToPrint.seats}{' '}
-                                        {t('ownerTables.seats')}
-                                    </span>
-                                </div>
-
-                                <div className="standee-qr-frame">
-                                    {printQrImage && (
-                                        <img
-                                            src={printQrImage}
-                                            alt={
-                                                'QR pemesanan meja ' +
-                                                tableToPrint.code
-                                            }
-                                            width={170}
-                                            height={170}
-                                            className="standee-qr-svg"
-                                        />
-                                    )}
-                                </div>
-                                <div className="standee-instructions">
-                                    <p>
-                                        <strong>
-                                            {t('ownerTables.step1')}
-                                        </strong>
-                                    </p>
-                                    <p>
-                                        <strong>
-                                            {t('ownerTables.step2')}
-                                        </strong>
-                                    </p>
-                                    <p>
-                                        <strong>
-                                            {t('ownerTables.step3')}
-                                        </strong>
-                                    </p>
-                                </div>
-
-                                <div className="standee-footer">
-                                    <small style={{ overflowWrap: 'anywhere' }}>
-                                        {printUrl}
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="standee-modal-actions">
-                            <button
-                                type="button"
-                                className="standee-btn-secondary"
-                                onClick={() => setTableToPrint(null)}
-                            >
-                                {t('common.close')}
-                            </button>
-                            <button
-                                type="button"
-                                className="standee-btn-primary"
-                                onClick={() => window.print()}
-                            >
-                                <Printer size={18} />
-                                <span>{t('ownerTables.printStandee')}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <TablePrintStandee
+                    table={tableToPrint}
+                    url={printUrl}
+                    qrImage={printQrImage}
+                    t={t}
+                    onClose={() => setTableToPrint(null)}
+                    onPrint={() => window.print()}
+                />
             )}
 
             {manualCopyUrl && (
-                <div
-                    className="admin-modal-overlay"
-                    onClick={() => setManualCopyUrl(null)}
-                >
-                    <div
-                        className="standee-modal-content tables-copy-dialog"
-                        role="dialog"
-                        aria-modal="true"
-                        aria-label="Salin tautan pemesanan customer"
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <h3>Salin tautan QR meja</h3>
-                        <p>
-                            Browser tidak mengizinkan penyalinan otomatis. Klik
-                            tautan di bawah, lalu tekan Ctrl+C.
-                        </p>
-                        <label htmlFor="customer-qr-url">
-                            Tautan pemesanan
-                        </label>
-                        <input
-                            id="customer-qr-url"
-                            value={manualCopyUrl}
-                            readOnly
-                            autoFocus
-                            onFocus={(event) => event.currentTarget.select()}
-                            onClick={(event) => event.currentTarget.select()}
-                        />
-                        <div className="standee-modal-actions">
-                            <button
-                                type="button"
-                                className="standee-btn-secondary"
-                                onClick={() => setManualCopyUrl(null)}
-                            >
-                                Tutup
-                            </button>
-                            <a
-                                className="standee-btn-secondary"
-                                href={manualCopyUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Buka customer
-                            </a>
-                            <button
-                                type="button"
-                                className="standee-btn-primary"
-                                onClick={() => {
-                                    void copyCustomerLink(manualCopyUrl).then(
-                                        (copied) => {
-                                            if (copied) {
-                                                setManualCopyUrl(null);
-                                                setCopyToast(
-                                                    'Tautan QR berhasil disalin.',
-                                                );
-                                                window.setTimeout(
-                                                    () => setCopyToast(null),
-                                                    3000,
-                                                );
-                                            }
-                                        },
-                                    );
-                                }}
-                            >
-                                Coba salin lagi
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <TableManualCopyDialog
+                    url={manualCopyUrl}
+                    onClose={() => setManualCopyUrl(null)}
+                    onRetryCopy={retryManualCopy}
+                />
             )}
-
             {/* Feedback Toast */}
             {copyToast && (
                 <div
