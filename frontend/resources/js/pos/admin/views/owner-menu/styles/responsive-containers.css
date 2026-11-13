@@ -1,0 +1,330 @@
+@container admin-main (max-width: 1120px) {
+    .owner-menu-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-editor-panel {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        overscroll-behavior: auto;
+    }
+}
+
+/* R8.15B: tablet-sized admin content falls outside R8.14D mobile range.
+   Keep desktop compact and reuse the proven 44px mobile action geometry. */
+@container admin-main (min-width: 621px) and (max-width: 920px) {
+    .owner-menu-c2-page .owner-menu-row .owner-menu-actions {
+        justify-self: end;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width: 100%;
+        gap: 8px;
+    }
+
+    .owner-menu-c2-page
+        .owner-menu-row
+        .owner-menu-actions
+        button.c2-icon-action {
+        flex: 0 0 44px;
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
+        min-height: 44px;
+        border-radius: var(--radius-2lg, 10px);
+    }
+
+    .owner-menu-c2-page
+        .owner-menu-row
+        .owner-menu-actions
+        button.c2-danger-action {
+        margin-inline-start: 4px;
+    }
+
+    /* The archive-management stylesheet sets restore height: 32px !important. */
+    .owner-menu-c2-page
+        .owner-menu-row
+        .owner-menu-actions
+        button.menu-restore-action {
+        min-height: 44px;
+        height: 44px !important;
+    }
+
+    .owner-menu-c2-page
+        .owner-menu-row
+        .owner-menu-actions
+        button:focus-visible {
+        outline: 2px solid var(--color-border-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+@container admin-main (max-width: 620px) {
+    .owner-menu-main,
+    .menu-editor-panel {
+        padding: 16px;
+        border-radius: var(--radius-md);
+    }
+
+    .owner-menu-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-menu-summary article {
+        min-height: 0;
+    }
+
+    /* R8.14D: full-width product copy above mobile-only action targets. */
+    .owner-menu-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .owner-menu-row .owner-menu-actions {
+        grid-column: 1 / -1;
+        justify-self: end;
+        align-items: center;
+        gap: 8px;
+        margin-block-start: 10px;
+    }
+
+    /* Preserve BoardUI's compact desktop actions; expand mobile hit areas. */
+    .owner-menu-row .owner-menu-actions button.c2-icon-action {
+        flex: 0 0 44px;
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
+        min-height: 44px;
+        border-radius: var(--radius-2lg, 10px);
+    }
+
+    .owner-menu-row .owner-menu-actions button.c2-danger-action {
+        margin-inline-start: 4px;
+    }
+
+    /* Archived Restore has a legacy explicit !important 32px height. */
+    .owner-menu-row .owner-menu-actions button.menu-restore-action {
+        height: 44px !important;
+        min-height: 44px;
+    }
+}
+
+/* R8.22D — Owner Menu card parity. The real POS card JSX and all callbacks
+ * stay unchanged; only the archived/active presentation and wrapping adapt. */
+.owner-menu-c2-page .owner-menu-row {
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--color-background-primary-default);
+}
+
+.owner-menu-c2-page .owner-menu-row.is-archived {
+    border: 1px solid var(--color-border-button-default);
+    background: var(--color-background-primary-default);
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-product {
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-product > div {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-product img {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-xl, 12px);
+    background: var(--color-background-secondary-default);
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-product strong {
+    display: block;
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-product small {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-product em {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+}
+
+.owner-menu-c2-page .owner-menu-row .archived-badge {
+    max-width: 100%;
+    margin-inline-start: 6px;
+    padding: 3px 8px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-secondary);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.3;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-meta {
+    flex-wrap: wrap;
+    gap: 12px;
+    min-width: 0;
+    border-color: var(--color-border-button-default);
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-meta > span,
+.owner-menu-c2-page .owner-menu-row .owner-menu-meta > strong {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+    line-height: 1.35;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-lg, 8px);
+}
+
+.owner-menu-c2-page .owner-menu-row .availability-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 32px;
+    white-space: nowrap;
+    border-radius: var(--radius-lg, 8px);
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-actions button.c2-icon-action {
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-secondary-default);
+    color: var(--color-foreground-icon-secondary);
+}
+
+.owner-menu-c2-page
+    .owner-menu-row
+    .owner-menu-actions
+    button.c2-icon-action:hover {
+    background: var(--color-background-secondary-hover);
+    color: var(--color-foreground-icon-primary);
+    transform: none;
+}
+
+.owner-menu-c2-page .owner-menu-row .owner-menu-actions button:focus-visible,
+.owner-menu-c2-page .owner-menu-row .owner-menu-product:focus-visible,
+.owner-menu-c2-page .owner-menu-row .availability-toggle:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+@container admin-main (max-width: 620px) {
+    .owner-menu-c2-page .owner-menu-row {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+        row-gap: 0;
+        padding: 14px;
+    }
+
+    .owner-menu-c2-page .owner-menu-row .owner-menu-product {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .owner-menu-c2-page .owner-menu-row .owner-menu-meta {
+        grid-column: 1;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        column-gap: 12px;
+        row-gap: 12px;
+        margin-top: 14px;
+        padding-top: 12px;
+    }
+
+    .owner-menu-c2-page .owner-menu-row .owner-menu-meta > span:first-child,
+    .owner-menu-c2-page .owner-menu-row .owner-menu-meta > strong {
+        min-width: 0;
+    }
+
+    .owner-menu-c2-page .owner-menu-row .availability-toggle,
+    .owner-menu-c2-page .owner-menu-row .owner-flag {
+        justify-self: start;
+        align-self: start;
+    }
+
+    .owner-menu-c2-page .owner-menu-row .owner-menu-actions {
+        grid-column: 1;
+        grid-row: 3;
+        display: grid;
+        grid-template-columns: repeat(3, 44px);
+        align-items: center;
+        justify-content: end;
+        justify-self: stretch;
+        width: 100%;
+        min-width: 0;
+        /* R8.27A: real Duplicate→Delete bounding boxes need >=10px on mobile. */
+        column-gap: 10px;
+        row-gap: 8px;
+        margin-block-start: 12px;
+        padding-top: 4px;
+    }
+
+    .owner-menu-c2-page
+        .owner-menu-row
+        .owner-menu-actions
+        button.c2-icon-action {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+        margin-inline-start: 0;
+    }
+
+    .owner-menu-c2-page
+        .owner-menu-row
+        .owner-menu-actions
+        button.menu-restore-action {
+        grid-column: 1 / -1;
+        display: inline-flex;
+        justify-content: center;
+        justify-self: stretch;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 44px;
+        text-align: center;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+}

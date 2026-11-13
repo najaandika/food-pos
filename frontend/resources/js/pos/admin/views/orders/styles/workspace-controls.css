@@ -1,0 +1,154 @@
+/* Orders P1 — compact hierarchy, no decorative ticket rails.
+   Layout groups are operational; server statuses remain unchanged. */
+.orders-workspace .orders-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.orders-workspace .orders-kpi-grid > section {
+    height: 106px;
+    min-height: 106px;
+    padding: 13px 16px;
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--color-background-inner-default);
+    box-shadow: none;
+}
+
+/* R8.16D Leader correction: the dark inner surface is translucent over a
+   light fallback canvas. Use an opaque semantic card/ink pair for KPI labels
+   without changing the light mode, KPI values, icons, grid, or dimensions. */
+.dark .orders-workspace .orders-kpi-grid > section {
+    background: var(--color-background-primary-default);
+}
+
+.dark .orders-workspace .orders-kpi-grid > section p:first-child {
+    color: var(--color-text-primary);
+}
+
+.orders-workspace .orders-kpi-grid > section > span:first-child {
+    padding: 5px;
+}
+
+.orders-workspace .orders-controls {
+    padding: 15px 16px;
+    margin-bottom: 12px;
+    border: 0;
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+.orders-workspace .orders-controls-heading {
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.orders-workspace .orders-eyebrow {
+    display: none;
+}
+
+.orders-workspace .orders-controls-heading h2 {
+    font-size: var(--text-headline-medium, 1rem);
+    line-height: var(--text-headline-medium--line-height, 1.5rem);
+    font-weight: var(--text-headline-medium--font-weight, 500);
+}
+
+.orders-workspace .orders-controls-heading p {
+    margin-top: 2px;
+}
+
+.orders-workspace .orders-view-switch {
+    gap: 2px;
+    padding: 3px;
+    background: var(--color-background-inner-default);
+}
+
+.orders-workspace .orders-view-switch button {
+    min-height: 32px;
+    padding: 6px 10px;
+}
+
+.orders-workspace .orders-primary-filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    margin-bottom: 10px;
+}
+
+.orders-workspace .orders-stage-filters {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    min-height: 36px;
+    gap: 5px;
+    margin: 0;
+    padding: 0 1px;
+    border-bottom: 0;
+    scrollbar-width: none;
+}
+
+.orders-workspace .orders-stage-filters::-webkit-scrollbar,
+.orders-workspace .orders-source-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.orders-workspace .orders-stage-filters > button {
+    min-height: 34px;
+    padding: 6px 11px;
+}
+
+.orders-workspace .orders-more-statuses {
+    flex: 0 0 auto;
+    width: 164px;
+    min-width: 0;
+}
+
+.orders-workspace .orders-more-statuses-trigger {
+    min-height: 36px;
+    max-height: 36px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-inner-default);
+}
+
+.orders-workspace .orders-secondary-filters {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.orders-workspace .orders-source-filters {
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    gap: 4px;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.orders-workspace .orders-source-filters > button {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 6px 10px;
+}
+
+.orders-workspace .orders-search-row {
+    flex: 0 1 340px;
+    width: 100%;
+    max-width: 340px;
+    min-width: 0;
+}
+
+.orders-workspace .orders-search-row [role='group'] {
+    min-height: 36px;
+    background: var(--color-background-inner-default);
+}
+
+.orders-workspace .orders-results-meta {
+    min-height: 22px;
+    margin-bottom: 8px;
+}

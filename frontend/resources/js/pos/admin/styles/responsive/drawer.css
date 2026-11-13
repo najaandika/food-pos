@@ -1,0 +1,7 @@
+/* Source: admin-responsive-drawer.css */
+/* admin-responsive part 2/4 - lines 444-813 depth 0 */
+
+/* Let the order board wrap into readable columns instead of requiring horizontal scrolling. */
+@import './drawer/drawer-board-containers.css';
+@import './drawer/drawer-sidebar-overlay.css';
+@import './drawer/drawer-mobile-compact.css';

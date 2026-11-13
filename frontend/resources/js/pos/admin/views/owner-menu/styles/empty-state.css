@@ -1,0 +1,60 @@
+/* ── Empty State ── */
+.owner-menu-empty {
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    padding: 48px 20px;
+    text-align: center;
+    background: var(--ice);
+    border-radius: var(--radius-md);
+    margin-top: 12px;
+}
+
+.owner-menu-empty-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--mist);
+    color: var(--blue);
+}
+
+.owner-menu-empty-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.owner-menu-empty p {
+    color: var(--muted);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.owner-menu-empty small {
+    max-width: 280px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    line-height: 1.45;
+}
+
+.reset-filter-btn {
+    width: auto;
+    min-width: 102px;
+    height: 38px;
+    min-width: 0;
+    padding: 0 18px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--navy);
+    color: #ffffff;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+.reset-filter-btn:hover {
+    opacity: 0.9;
+}

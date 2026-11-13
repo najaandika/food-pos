@@ -7,6 +7,10 @@ import {
     ModalHeader,
 } from '../../../../../../../components/base/modal/modal';
 import type { AdminOrder } from '../../../runtime-data';
+import {
+    displayOrderReference,
+    displayTableReference,
+} from '../../../presentation-labels';
 import type { AuthUser } from '../../../auth';
 import type { PosSettings } from '../../../../../lib/pos-types';
 import type { useLocale } from '../../../i18n-context';
@@ -120,8 +124,9 @@ export function CashierBillPreviewModal({
                                             :
                                         </span>
                                         <strong>
-                                            {selectedOrder.orderNumber ??
-                                                `#POS-${selectedOrder.id}`}
+                                            {displayOrderReference(
+                                                selectedOrder.orderNumber,
+                                            ) || `#POS-${selectedOrder.id}`}
                                         </strong>
                                     </div>
                                     <div>
@@ -160,7 +165,10 @@ export function CashierBillPreviewModal({
                                             :
                                         </span>
                                         <strong>
-                                            {selectedOrder.table} (
+                                            {displayTableReference(
+                                                selectedOrder.table,
+                                            )}{' '}
+                                            (
                                             {selectedOrder.type === 'takeaway'
                                                 ? t('menu.takeaway')
                                                 : t('menu.dineIn')}

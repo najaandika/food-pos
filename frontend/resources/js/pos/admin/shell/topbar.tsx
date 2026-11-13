@@ -1,4 +1,4 @@
-import { RiMenu2Line } from '@remixicon/react';
+import { RiCloseLine, RiMenuLine } from '@remixicon/react';
 import { IconButton } from '../../../../../components/base/buttons/icon-button';
 import { useLocale } from '../i18n-context';
 import { navIcons, navKeyMap } from '../navigation';
@@ -27,13 +27,21 @@ export function ShellTopbar({
         >
             <div className="pos-shell-topbar-leading flex min-w-0 items-center gap-2.5">
                 <IconButton
-                    icon={RiMenu2Line}
+                    icon={mobileDrawerOpen ? RiCloseLine : RiMenuLine}
                     size="medium"
                     className="pos-shell-mobile-menu-trigger"
-                    aria-label="Buka menu navigasi"
+                    aria-label={
+                        mobileDrawerOpen
+                            ? 'Tutup menu navigasi'
+                            : 'Buka menu navigasi'
+                    }
                     aria-controls="pos-mobile-drawer"
                     aria-expanded={mobileDrawerOpen}
-                    onClick={onOpenMobileDrawer}
+                    onClick={() => {
+                        // The trigger opens the Free overlay. Closing is owned by
+                        // the modal (Escape/backdrop/close), never this callback.
+                        if (!mobileDrawerOpen) onOpenMobileDrawer();
+                    }}
                 />
                 <nav
                     className="pos-shell-breadcrumb text-body-medium flex min-w-0 items-center gap-2"

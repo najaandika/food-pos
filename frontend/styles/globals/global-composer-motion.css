@@ -1,0 +1,65 @@
+/* Composer Loader (components/application/composer-loader): the light band
+ * orbiting the composer while the agent works. Dash segments on a
+ * pathLength-normalized SVG stroke — the offset laps once per duration. */
+@keyframes bui-composer-loader-dash {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bui-composer-loader-rect {
+        animation: none !important;
+    }
+}
+
+/* Composer mic listening state (components/application/ai-chat): equalizer
+ * bars dancing while voice input is active. Per-bar duration/delay come in
+ * inline so the bars drift out of phase like real audio. */
+@keyframes bui-composer-mic-bars {
+    0%,
+    100% {
+        transform: scaleY(0.4);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+.bui-composer-mic-bar {
+    animation: bui-composer-mic-bars 0.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bui-composer-mic-bar {
+        animation: none;
+        transform: scaleY(0.7);
+    }
+}
+
+/* Shimmer sweep on a primary call to action (the Pro prompt card). */
+@keyframes bui-badge-shimmer {
+    0% {
+        transform: translateX(0) skewX(-12deg);
+    }
+    40%,
+    100% {
+        transform: translateX(350%) skewX(-12deg);
+    }
+}
+
+.bui-badge-shimmer {
+    animation: bui-badge-shimmer 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bui-badge-shimmer {
+        animation: none;
+        opacity: 0;
+    }
+}

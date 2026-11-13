@@ -1,0 +1,75 @@
+.report-charts-grid,
+.report-breakdown-grid,
+.report-channel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    min-width: 0;
+    align-items: stretch;
+}
+.report-chart-slot {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--rp-surface);
+    border: 1px solid var(--rp-line);
+    border-radius: 18px;
+}
+.report-revenue-chart,
+.report-orders-chart {
+    height: 344px;
+    min-height: 344px;
+    flex: 0 0 344px;
+    min-width: 0;
+    width: 100%;
+    box-shadow: none;
+}
+.report-chart-note {
+    margin: 0;
+    padding: 10px 16px 12px;
+    border-top: 1px solid var(--rp-line);
+    color: var(--rp-secondary);
+}
+.report-chart-empty {
+    flex: 1 0 344px;
+    min-height: 344px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    color: var(--rp-secondary);
+}
+.report-chart-empty strong {
+    color: var(--rp-primary);
+}
+.report-chart-empty svg {
+    width: 28px;
+    height: 28px;
+}
+
+.report-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    min-width: 0;
+    background: var(--rp-surface);
+    border: 1px solid var(--rp-line);
+    border-radius: 18px;
+}
+.report-panel-heading {
+    display: grid;
+    gap: 4px;
+}
+.report-panel-heading h2 {
+    margin: 0;
+    color: var(--rp-primary);
+}
+.report-panel-heading p {
+    margin: 0;
+    color: var(--rp-secondary);
+}

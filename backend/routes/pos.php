@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Pos\CategoryController;
+use App\Http\Controllers\Pos\MenuImageUploadController;
 use App\Http\Controllers\Pos\MenuItemController;
 use App\Http\Controllers\Pos\OrderManagementController;
 use App\Http\Controllers\Pos\RestaurantTableController;
@@ -63,6 +64,8 @@ Route::middleware(['auth', 'verified', 'staff.role:owner'])
     ->name('pos.')
     ->group(function (): void {
         Route::apiResource('categories', CategoryController::class);
+        Route::post('menu-images', MenuImageUploadController::class)->name('menu-images.store');
+
         Route::apiResource('menu-items', MenuItemController::class)
             ->parameters(['menu-items' => 'menuItem']);
         Route::apiResource('tables', RestaurantTableController::class)

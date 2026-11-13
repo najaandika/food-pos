@@ -2,7 +2,7 @@ import { RiAddLine, RiSearchLine, RiSubtractLine } from '@remixicon/react';
 
 import { Chip } from '../../../../../../components/base/badges/chip';
 import { IconButton } from '../../../../../../components/base/buttons/icon-button';
-import Image from '@/pos/components/pos-image';
+import { MenuProductImage } from './MenuProductImage';
 import type { AdminDish } from '../../runtime-data';
 import { useLocale } from '../../i18n-context';
 
@@ -18,7 +18,10 @@ export function MenuGrid({ dishes, cart, onUpdateCart }: Props) {
     const { t } = useLocale();
 
     return (
-        <section className="menu-board menu-p2-board" aria-label="Katalog produk">
+        <section
+            className="menu-board menu-p2-board"
+            aria-label="Katalog produk"
+        >
             <div className="menu-board-head menu-p2-board-head">
                 <div>
                     <span>{t('menu.serviceLane')}</span>
@@ -39,21 +42,29 @@ export function MenuGrid({ dishes, cart, onUpdateCart }: Props) {
                     {dishes.map((dish) => {
                         const qty = cart[String(dish.id)]?.cartQty ?? 0;
                         return (
-                            <article className="dish-card menu-p2-dish-card" key={dish.id ?? dish.name}>
+                            <article
+                                className="dish-card menu-p2-dish-card"
+                                key={dish.id ?? dish.name}
+                            >
                                 <div className="menu-p2-image-wrap">
-                                    <Image
+                                    <MenuProductImage
                                         src={dish.image}
                                         alt={dish.name}
-                                        width={600}
-                                        height={400}
                                     />
                                     {dish.badge && (
                                         <Chip
-                                            color={dish.badgeTone === 'discount' ? 'rose' : 'purple'}
+                                            color={
+                                                dish.badgeTone === 'discount'
+                                                    ? 'rose'
+                                                    : 'purple'
+                                            }
                                             variant="caption"
                                             className="menu-p2-product-badge"
+                                            title={dish.badge}
                                         >
-                                            {dish.badge}
+                                            <span className="min-w-0 truncate">
+                                                {dish.badge}
+                                            </span>
                                         </Chip>
                                     )}
                                 </div>
@@ -64,18 +75,28 @@ export function MenuGrid({ dishes, cart, onUpdateCart }: Props) {
                                         <div className="menu-p2-price">
                                             <strong>{dish.price}</strong>
                                             {dish.oldPrice && (
-                                                <span className="old-price">{dish.oldPrice}</span>
+                                                <span className="old-price">
+                                                    {dish.oldPrice}
+                                                </span>
                                             )}
                                         </div>
-                                        <div className="menu-p2-quantity" aria-label={`Jumlah ${dish.name}`}>
+                                        <div
+                                            className="menu-p2-quantity"
+                                            aria-label={`Jumlah ${dish.name}`}
+                                        >
                                             <IconButton
                                                 icon={RiSubtractLine}
                                                 size="small"
                                                 aria-label={`Kurangi ${dish.name}`}
                                                 disabled={!dish.id || qty === 0}
-                                                onClick={() => onUpdateCart(dish, -1)}
+                                                onClick={() =>
+                                                    onUpdateCart(dish, -1)
+                                                }
                                             />
-                                            <output aria-live="polite" aria-label={`${qty} item`}>
+                                            <output
+                                                aria-live="polite"
+                                                aria-label={`${qty} item`}
+                                            >
                                                 {qty}
                                             </output>
                                             <IconButton
@@ -83,7 +104,9 @@ export function MenuGrid({ dishes, cart, onUpdateCart }: Props) {
                                                 size="small"
                                                 aria-label={`Tambah ${dish.name}`}
                                                 disabled={!dish.id}
-                                                onClick={() => onUpdateCart(dish, 1)}
+                                                onClick={() =>
+                                                    onUpdateCart(dish, 1)
+                                                }
                                             />
                                         </div>
                                     </div>

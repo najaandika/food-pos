@@ -1,0 +1,43 @@
+@container admin-main (max-width: 480px) {
+    .orders-workspace .orders-kpi-grid {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    .orders-workspace .orders-kpi {
+        border-radius: 14px;
+        padding: 12px;
+        min-height: 78px;
+        gap: 12px;
+    }
+    .orders-workspace .orders-kpi-icon {
+        width: 33px;
+        height: 33px;
+        border-radius: 9px;
+    }
+    .orders-workspace .orders-kpi-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+    .orders-workspace .orders-kpi strong {
+    }
+    .orders-workspace .orders-kpi > div:last-child > span {
+    }
+    .orders-workspace .orders-demo-notice {
+        align-items: flex-start;
+        padding: 12px 12px;
+        margin-bottom: 12px;
+    }
+    .orders-workspace .orders-demo-notice p {
+    }
+    .orders-workspace .orders-controls {
+        padding: 12px;
+        border-radius: 14px;
+    }
+    .orders-workspace .orders-results-meta > span:last-child {
+        max-width: 58%;
+        text-align: right;
+    }
+    .orders-workspace .orders-kanban-track {
+        grid-auto-columns: min(86%, 290px);
+    }
+}

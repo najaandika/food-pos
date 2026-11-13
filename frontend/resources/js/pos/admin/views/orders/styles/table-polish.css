@@ -1,0 +1,64 @@
+/* Orders P2 — BoardUI DataTable polish. Restore explicit 32px controls when
+   older POS styles outrank registry utility classes in the local page shell. */
+.orders-workspace .orders-pagination > ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+.orders-workspace .orders-pagination > ul > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orders-workspace .orders-pagination > ul > li > button {
+    display: inline-flex;
+    min-width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border-radius: var(--radius-lg, 8px);
+    font-variant-numeric: tabular-nums;
+}
+
+.orders-workspace .orders-pagination > button {
+    min-height: 32px;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--color-background-primary-default);
+    color: var(--color-text-primary);
+}
+
+.orders-workspace .orders-pagination > button:hover:not(:disabled) {
+    background: var(--color-background-primary-hover);
+}
+
+.orders-workspace .orders-table-actions button.bg-button-primary {
+    background-image: var(--gradient-button-primary-default);
+    color: var(--color-text-white);
+}
+
+.orders-workspace
+    .orders-table-actions
+    button.bg-button-primary:hover:not(:disabled) {
+    background-image: var(--gradient-button-primary-hover);
+}
+
+.orders-workspace
+    .orders-table-actions
+    button.bg-button-primary:active:not(:disabled) {
+    background-image: var(--gradient-button-primary-active);
+}
+
+.orders-workspace .orders-table-empty {
+    display: flex;
+    min-height: 136px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-tertiary);
+}

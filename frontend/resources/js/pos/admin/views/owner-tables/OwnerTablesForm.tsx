@@ -90,7 +90,7 @@ export function OwnerTablesForm({
     return (
         <div className="qr-editor-panel tables-p2-editor">
             <div className="qr-panel-head">
-                <Badge color={isCreating ? 'primary' : 'neutral'}>
+                <Badge color="primary">
                     {isCreating
                         ? t('ownerTables.newTable')
                         : t('ownerTables.selectedTable')}

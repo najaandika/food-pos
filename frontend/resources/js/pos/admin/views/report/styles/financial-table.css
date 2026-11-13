@@ -1,0 +1,70 @@
+.report-table-scroll {
+    min-width: 0;
+    width: 100%;
+    overflow-x: auto;
+}
+.report-payment-table {
+    width: 100%;
+    min-width: 690px;
+    border-collapse: collapse;
+    text-align: left;
+    background: var(--color-background-primary-default);
+}
+.report-boardui .report-payment-table th {
+    padding: 11px 13px;
+    color: var(--color-text-primary);
+    background: var(
+        --color-background-tertiary-default,
+        var(--rp-muted-surface)
+    );
+    border-top: 1px solid var(--rp-line);
+    border-bottom: 1px solid var(--rp-line);
+    text-align: left;
+    white-space: nowrap;
+}
+.report-boardui .report-payment-table td {
+    padding: 11px 13px;
+    color: var(--rp-primary);
+    vertical-align: middle;
+}
+.report-boardui .report-payment-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid var(--rp-line);
+}
+.report-boardui .report-payment-table tbody tr:hover {
+    background: var(--color-background-secondary-hover, var(--rp-surface));
+}
+.report-boardui
+    .report-payment-table
+    :is(tr, th, td):is(:focus-visible, [data-focus-visible]) {
+    outline: 2px solid var(--color-border-focus-ring, var(--rp-accent));
+    outline-offset: -2px;
+}
+.report-order-identity {
+    display: grid;
+    gap: 3px;
+    min-width: 130px;
+}
+.report-order-identity strong {
+    color: var(--rp-primary);
+}
+.report-order-identity small {
+    color: var(--rp-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.report-time {
+    white-space: nowrap;
+    color: var(--rp-secondary);
+}
+.report-amount {
+    white-space: nowrap;
+    color: var(--rp-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* R8.16D: the small transaction identity caption shares the dark table
+   surface, so it must not inherit the dim legacy --rp-secondary color. */
+.dark .report-boardui .report-payment-table .report-order-identity small {
+    color: var(--color-text-primary);
+}

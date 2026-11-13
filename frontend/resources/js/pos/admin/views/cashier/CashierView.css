@@ -1,0 +1,22 @@
+@import '@fontsource-variable/inter/index.css';
+
+@import './styles/cashier-queue-layout.css';
+@import './styles/cashier-bill-detail.css';
+@import './styles/payment-methods.css';
+@import './styles/responsive-tabs.css';
+@import './styles/bill-discounts.css';
+@import './styles/payment-cash-presets.css';
+@import './styles/modal-overlay.css';
+@import './styles/modal-qris.css';
+@import './styles/receipt-thermal.css';
+@import './styles/responsive-base.css';
+@import './styles/print-receipt.css';
+@import './styles/queue-workspace.css';
+@import './styles/bill-workspace.css';
+@import './styles/responsive-workspace.css';
+@import './styles/queue-boardui.css';
+@import './styles/receipt-confirmation.css';
+@import './styles/responsive-boardui.css';
+@import './styles/receipt-modal.css';
+@import './styles/print-thermal.css';
+@import './styles/queue-mobile.css';

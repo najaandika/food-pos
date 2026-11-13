@@ -1,0 +1,28 @@
+/*
+ * R8.22A — Menu keyboard focus parity with official BoardUI Free controls.
+ * React Aria SearchField owns an inset field ring; only the wrapper draws it.
+ * Installed Button, SegmentedControl and PillTab keep a single 2px focus ring.
+ */
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    .menu-p2-search
+    [role='group'][data-focus-within]:not([data-invalid]) {
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    .menu-p2-search
+    input:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    :is(button, [role='button']):focus-visible:not(:disabled, [data-disabled]) {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-border-focus-ring);
+}
+
+/* Keep native BoardUI selected, pressed, disabled and hover states untouched. */

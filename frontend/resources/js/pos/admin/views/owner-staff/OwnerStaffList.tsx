@@ -1,4 +1,16 @@
+'use client';
+
+import { useMemo, useState } from 'react';
 import {
+    flexRender,
+    getCoreRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    useReactTable,
+} from '@tanstack/react-table';
+import type { ColumnDef, SortingState } from '@tanstack/react-table';
+import {
+    RiArrowUpDownLine,
     RiCloseCircleLine,
     RiFilter3Line,
     RiPencilLine,
@@ -28,6 +40,7 @@ import {
 } from '../../../../../../components/base/table/table';
 import { useLocale } from '../../i18n-context';
 import type { AdminStaff } from '../../runtime-data';
+import { PAGE_SIZE } from './owner-staff-model';
 
 type RoleFilter = 'all' | 'owner' | 'kasir' | 'waiters';
 type StatusFilter = 'all' | 'active' | 'inactive';
@@ -64,14 +77,13 @@ function initials(name: string) {
 
 function roleColor(role: AdminStaff['role']): ChipColor {
     if (role === 'owner') return 'blue';
-    if (role === 'kasir') return 'purple';
+    if (role === 'kasir') return 'lime';
     return 'cyan';
 }
 
 export function OwnerStaffList({
     staff,
     filteredStaff,
-    visibleStaff,
     roleFilter,
     statusFilter,
     query,
@@ -89,6 +101,7 @@ export function OwnerStaffList({
     const isId = locale === 'id';
     const hasFilter =
         roleFilter !== 'all' || statusFilter !== 'all' || query.trim() !== '';
+    const [sorting, setSorting] = useState<SortingState>([]);
 
     const actionsFor = (person: AdminStaff) => (
         <div className="staff-finance-actions">
@@ -121,7 +134,13 @@ export function OwnerStaffList({
         <div className="staff-finance-identity">
             <Avatar
                 size="lg"
-                color={person.role === 'owner' ? 'blue' : 'neutral'}
+                color={
+                    person.role === 'owner'
+                        ? 'blue'
+                        : person.role === 'kasir'
+                          ? 'lime'
+                          : 'pink'
+                }
                 initials={initials(person.name)}
                 alt=""
             />
@@ -139,6 +158,95 @@ export function OwnerStaffList({
             </div>
         </div>
     );
+
+    // Follow the official BoardUI Data Table composition: the accessible
+    // React Aria Table renders TanStack's real filtered, sorted, paged rows.
+    // Parent OwnerStaffView still owns role/status/search and page selection.
+    // Sorting happens on ALL filtered staff before pagination, never just
+    // the visible eight rows. No mock template customer records are loaded.
+    const columns = useMemo<ColumnDef<AdminStaff>[]>(
+        () => [
+            {
+                id: 'staff',
+                accessorKey: 'name',
+                header: isId ? 'Staf' : 'Staff',
+            },
+            {
+                id: 'role',
+                accessorKey: 'role',
+                header: t('ownerStaff.role'),
+            },
+            {
+                id: 'access',
+                accessorFn: (person) => (person.isActive ? 1 : 0),
+                header: isId ? 'Akses' : 'Access',
+            },
+            {
+                id: 'activity',
+                accessorKey: 'activity',
+                header: isId ? 'Aktivitas' : 'Activity',
+                enableSorting: false,
+            },
+            {
+                id: 'actions',
+                header: isId ? 'Tindakan' : 'Actions',
+                enableSorting: false,
+            },
+        ],
+        [isId, t],
+    );
+
+    const table = useReactTable({
+        data: filteredStaff,
+        columns,
+        getRowId: (person) => String(person.id ?? person.email),
+        state: {
+            sorting,
+            pagination: {
+                pageIndex: Math.max(0, page - 1),
+                pageSize: PAGE_SIZE,
+            },
+        },
+        onSortingChange: setSorting,
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+    });
+    const rows = table.getRowModel().rows;
+    const currentSort = sorting[0];
+    const mobileSort =
+        currentSort?.id === 'staff'
+            ? currentSort.desc
+                ? 'staff-desc'
+                : 'staff-asc'
+            : currentSort?.id === 'role'
+              ? currentSort.desc
+                  ? 'role-desc'
+                  : 'role-asc'
+              : currentSort?.id === 'access'
+                ? currentSort.desc
+                    ? 'active-first'
+                    : 'inactive-first'
+                : 'default';
+
+    const updateSort = (key: string) => {
+        if (key === 'default') {
+            table.resetSorting();
+        } else if (key === 'staff-asc') {
+            table.setSorting([{ id: 'staff', desc: false }]);
+        } else if (key === 'staff-desc') {
+            table.setSorting([{ id: 'staff', desc: true }]);
+        } else if (key === 'role-asc') {
+            table.setSorting([{ id: 'role', desc: false }]);
+        } else if (key === 'role-desc') {
+            table.setSorting([{ id: 'role', desc: true }]);
+        } else if (key === 'active-first') {
+            table.setSorting([{ id: 'access', desc: true }]);
+        } else if (key === 'inactive-first') {
+            table.setSorting([{ id: 'access', desc: false }]);
+        }
+        onPageChange(1);
+    };
 
     return (
         <section aria-labelledby="staff-directory-title">
@@ -159,7 +267,7 @@ export function OwnerStaffList({
                             : 'Manage identities, roles and operational access.'}
                     </p>
                 </div>
-                <Chip variant="caption" color="neutral">
+                <Chip variant="caption" color="blue">
                     {staff.length} {t('ownerStaff.members')}
                 </Chip>
             </div>
@@ -176,6 +284,31 @@ export function OwnerStaffList({
                     onChange={onChangeQuery}
                 />
                 <div className="staff-finance-toolbar-filters">
+                    <Select
+                        size="sm"
+                        aria-label={isId ? 'Urutkan staf' : 'Sort staff'}
+                        selectedKey={mobileSort}
+                        onSelectionChange={(key) => updateSort(String(key))}
+                        className="staff-finance-sort"
+                    >
+                        <SelectItem id="default">
+                            {isId ? 'Urutan asli' : 'Original order'}
+                        </SelectItem>
+                        <SelectItem id="staff-asc">
+                            {isId ? 'Nama A–Z' : 'Name A–Z'}
+                        </SelectItem>
+                        <SelectItem id="staff-desc">
+                            {isId ? 'Nama Z–A' : 'Name Z–A'}
+                        </SelectItem>
+                        <SelectItem id="role-asc">Role A–Z</SelectItem>
+                        <SelectItem id="role-desc">Role Z–A</SelectItem>
+                        <SelectItem id="active-first">
+                            {isId ? 'Aktif lebih dulu' : 'Active first'}
+                        </SelectItem>
+                        <SelectItem id="inactive-first">
+                            {isId ? 'Nonaktif lebih dulu' : 'Inactive first'}
+                        </SelectItem>
+                    </Select>
                     <Select
                         size="sm"
                         aria-label={
@@ -242,23 +375,48 @@ export function OwnerStaffList({
                         isId ? 'Tabel data staf' : 'Staff directory table'
                     }
                     containerClassName="staff-finance-table-scroll"
+                    sortDescriptor={
+                        currentSort
+                            ? {
+                                  column: currentSort.id,
+                                  direction: currentSort.desc
+                                      ? 'descending'
+                                      : 'ascending',
+                              }
+                            : undefined
+                    }
+                    onSortChange={(next) => {
+                        table.setSorting([
+                            {
+                                id: String(next.column),
+                                desc: next.direction === 'descending',
+                            },
+                        ]);
+                        onPageChange(1);
+                    }}
                 >
                     <TableHeader>
-                        <TableColumn id="staff" isRowHeader>
-                            {isId ? 'Staf' : 'Staff'}
-                        </TableColumn>
-                        <TableColumn id="role">
-                            {t('ownerStaff.role')}
-                        </TableColumn>
-                        <TableColumn id="access">
-                            {isId ? 'Akses' : 'Access'}
-                        </TableColumn>
-                        <TableColumn id="activity">
-                            {isId ? 'Aktivitas' : 'Activity'}
-                        </TableColumn>
-                        <TableColumn id="actions">
-                            {isId ? 'Tindakan' : 'Actions'}
-                        </TableColumn>
+                        {table.getHeaderGroups()[0]?.headers.map((header) => (
+                            <TableColumn
+                                key={header.id}
+                                id={header.column.id}
+                                isRowHeader={header.column.id === 'staff'}
+                                allowsSorting={header.column.getCanSort()}
+                            >
+                                <span className="staff-finance-sort-heading">
+                                    {flexRender(
+                                        header.column.columnDef.header,
+                                        header.getContext(),
+                                    )}
+                                    {header.column.getCanSort() && (
+                                        <RiArrowUpDownLine
+                                            className="staff-finance-sort-icon"
+                                            aria-hidden="true"
+                                        />
+                                    )}
+                                </span>
+                            </TableColumn>
+                        ))}
                     </TableHeader>
                     <TableBody
                         renderEmptyState={() => (
@@ -285,81 +443,89 @@ export function OwnerStaffList({
                             </div>
                         )}
                     >
-                        {visibleStaff.map((person) => (
-                            <TableRow
-                                key={person.id ?? person.email}
-                                id={String(person.id ?? person.email)}
-                            >
-                                <TableCell>{identity(person)}</TableCell>
-                                <TableCell>
-                                    <Chip
-                                        variant="caption"
-                                        color={roleColor(person.role)}
-                                    >
-                                        {person.roleLabel}
-                                    </Chip>
-                                </TableCell>
-                                <TableCell>
-                                    <Chip
-                                        variant="caption"
-                                        color={
-                                            person.isActive ? 'lime' : 'rose'
-                                        }
-                                    >
-                                        {person.isActive
-                                            ? t('common.active')
-                                            : t('common.inactive')}
-                                    </Chip>
-                                </TableCell>
-                                <TableCell>
-                                    <div className="staff-finance-activity">
-                                        <span className="text-body-2-medium text-text-primary">
-                                            {person.shift}
-                                        </span>
-                                        <span className="text-caption-1-regular text-text-secondary">
-                                            {person.activity}
-                                        </span>
-                                    </div>
-                                </TableCell>
-                                <TableCell>{actionsFor(person)}</TableCell>
-                            </TableRow>
-                        ))}
+                        {rows.map((row) => {
+                            const person = row.original;
+                            return (
+                                <TableRow
+                                    key={person.id ?? person.email}
+                                    id={String(person.id ?? person.email)}
+                                >
+                                    <TableCell>{identity(person)}</TableCell>
+                                    <TableCell>
+                                        <Chip
+                                            variant="caption"
+                                            color={roleColor(person.role)}
+                                        >
+                                            {person.roleLabel}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Chip
+                                            variant="caption"
+                                            color={
+                                                person.isActive
+                                                    ? 'lime'
+                                                    : 'rose'
+                                            }
+                                        >
+                                            {person.isActive
+                                                ? t('common.active')
+                                                : t('common.inactive')}
+                                        </Chip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <div className="staff-finance-activity">
+                                            <span className="text-body-2-medium text-text-primary">
+                                                {person.shift}
+                                            </span>
+                                            <span className="text-caption-1-regular text-text-secondary">
+                                                {person.activity}
+                                            </span>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell>{actionsFor(person)}</TableCell>
+                                </TableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </div>
 
             <div className="staff-finance-mobile-list">
-                {visibleStaff.map((person) => (
-                    <article
-                        className="staff-finance-mobile-card"
-                        key={person.id ?? person.email}
-                    >
-                        <div className="staff-finance-mobile-head">
-                            {identity(person)}
-                            {actionsFor(person)}
-                        </div>
-                        <div className="staff-finance-mobile-meta">
-                            <Chip
-                                variant="caption"
-                                color={roleColor(person.role)}
-                            >
-                                {person.roleLabel}
-                            </Chip>
-                            <Chip
-                                variant="caption"
-                                color={person.isActive ? 'lime' : 'rose'}
-                            >
-                                {person.isActive
-                                    ? t('common.active')
-                                    : t('common.inactive')}
-                            </Chip>
-                        </div>
-                        <p className="text-caption-1-regular text-text-secondary">
-                            {person.shift} · {person.activity}
-                        </p>
-                    </article>
-                ))}
-                {!visibleStaff.length && (
+                {rows.map((row) => {
+                    const person = row.original;
+                    return (
+                        <article
+                            className="staff-finance-mobile-card"
+                            key={person.id ?? person.email}
+                        >
+                            <div className="staff-finance-mobile-head">
+                                {identity(person)}
+                                {actionsFor(person)}
+                            </div>
+                            <div className="staff-finance-mobile-meta">
+                                <Chip
+                                    variant="caption"
+                                    color={roleColor(person.role)}
+                                >
+                                    {person.roleLabel}
+                                </Chip>
+                                <Chip
+                                    variant="caption"
+                                    color={person.isActive ? 'lime' : 'rose'}
+                                >
+                                    {person.isActive
+                                        ? t('common.active')
+                                        : t('common.inactive')}
+                                </Chip>
+                            </div>
+                            <p className="text-caption-1-regular text-text-secondary">
+                                {person.shift} · {person.activity}
+                            </p>
+                        </article>
+                    );
+                })}
+                {!rows.length && (
                     <div className="staff-finance-empty">
                         <RiGroupLine
                             className="text-foreground-icon-secondary size-6"
@@ -383,8 +549,8 @@ export function OwnerStaffList({
 
             <div className="staff-finance-pagination">
                 <span className="text-caption-1-regular text-text-secondary">
-                    {filteredStaff.length ? (page - 1) * 8 + 1 : 0}–
-                    {Math.min(page * 8, filteredStaff.length)}{' '}
+                    {filteredStaff.length ? (page - 1) * PAGE_SIZE + 1 : 0}–
+                    {Math.min(page * PAGE_SIZE, filteredStaff.length)}{' '}
                     {isId ? 'dari' : 'of'} {filteredStaff.length}
                 </span>
                 <Pagination

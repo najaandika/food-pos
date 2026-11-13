@@ -1,6 +1,7 @@
 import type { ChipColor } from '../../../../../../components/base/badges/chip';
 import type { PosOrderStatus, PosTableStatus } from '../../../../lib/pos-types';
 import type { AdminOrder, AdminTable } from '../../runtime-data';
+import { orderStatusChipColor } from '../orders/order-status-colors';
 
 export type QueueFilter = 'all' | 'ready' | 'inProgress' | 'billing';
 export type DetailTarget = { kind: 'table' | 'order'; key: string } | null;
@@ -101,11 +102,7 @@ export function filterQueueOrders(
 }
 
 export function orderColor(status?: PosOrderStatus): ChipColor {
-    if (status === 'ready') return 'lime';
-    if (status === 'waiting_payment') return 'yellow';
-    if (status === 'pending') return 'blue';
-    if (status === 'served') return 'cyan';
-    return 'neutral';
+    return orderStatusChipColor(status);
 }
 
 export function tableStatusStyles(

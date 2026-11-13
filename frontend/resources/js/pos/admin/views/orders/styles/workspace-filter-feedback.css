@@ -1,0 +1,120 @@
+.orders-secondary-filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.orders-source-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.orders-workspace .orders-source-filters > button {
+    min-height: 33px;
+    border-radius: var(--radius-2lg, 10px);
+    padding: 8px 12px;
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-1-semibold--letter-spacing, 0.15px);
+}
+.orders-search-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 310px;
+    max-width: 420px;
+    min-width: 0;
+}
+.orders-search-input {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+}
+.orders-workspace .orders-search-row [role='group'] {
+    border: 1px solid var(--orders-border);
+    border-radius: 10px;
+    background: var(--orders-ground);
+    min-height: 39px;
+}
+.orders-workspace .orders-search-row input {
+    font-family: inherit;
+    font-size: var(--text-body-2-regular, 0.8125rem);
+    line-height: var(--text-body-2-regular--line-height, 1.125rem);
+    font-weight: var(--text-body-2-regular--font-weight, 400);
+    letter-spacing: var(--text-body-2-regular--letter-spacing, 0);
+}
+.orders-workspace .orders-reset-filter {
+    flex: 0 0 auto;
+}
+.orders-feedback {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 12px;
+    margin-bottom: 14px;
+    border: 1px solid var(--orders-border);
+    border-radius: 11px;
+    color: var(--orders-secondary);
+    background: var(--orders-ground);
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-feedback > svg {
+    width: 17px;
+    height: 17px;
+    color: var(--orders-accent);
+    flex-shrink: 0;
+}
+.orders-feedback > span {
+    flex: 1;
+}
+.orders-feedback button {
+    flex-shrink: 0;
+}
+.orders-results {
+    min-width: 0;
+}
+.orders-results-meta {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 3px;
+    margin-bottom: 10px;
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-medium, 0.75rem);
+    line-height: var(--text-caption-1-medium--line-height, 1rem);
+    font-weight: var(--text-caption-1-medium--font-weight, 500);
+    letter-spacing: var(--text-caption-1-medium--letter-spacing, 0.15px);
+}
+.orders-results-meta > span:last-child {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.orders-results-meta svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* R8.16D: use a readable semantic foreground for real search placeholder and
+   operational feedback instead of the low-contrast tertiary/legacy fallback. */
+.orders-workspace .orders-search-row input::placeholder {
+    color: color-mix(in srgb, var(--color-text-primary) 76%, transparent);
+    opacity: 1;
+}
+
+.orders-workspace .orders-feedback {
+    color: var(--color-text-primary);
+}
+
+/* Only results metadata actually inside the dark orders result region.
+   Do not force light-on-light text on legacy light outer canvas. */
+.orders-workspace .orders-results .orders-results-meta {
+    color: var(--color-text-primary);
+}

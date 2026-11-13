@@ -1,0 +1,65 @@
+.orders-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.orders-kpi {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    min-height: 98px;
+    min-width: 0;
+    border: 1px solid var(--orders-border);
+    background: var(--orders-surface);
+    border-radius: var(--radius-3xl, 24px);
+    box-shadow: var(--shadow-card, none);
+}
+.orders-kpi-icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--orders-ground);
+    color: var(--orders-accent);
+}
+.orders-kpi-icon svg {
+    width: 20px;
+    height: 20px;
+}
+.orders-kpi[data-tone='pending'] .orders-kpi-icon {
+    background: var(--color-warning-50, var(--orders-ground));
+    color: var(--orders-warning);
+}
+.orders-kpi[data-tone='ready'] .orders-kpi-icon {
+    background: var(--color-success-50, var(--orders-ground));
+    color: var(--orders-success);
+}
+.orders-kpi[data-tone='billing'] .orders-kpi-icon {
+    background: var(--color-accent-50, var(--orders-ground));
+    color: var(--orders-accent);
+}
+.orders-kpi > div:last-child {
+    min-width: 0;
+}
+.orders-workspace .orders-kpi > div:last-child > span {
+    display: block;
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-medium, 0.75rem);
+    line-height: var(--text-caption-1-medium--line-height, 1rem);
+    font-weight: var(--text-caption-1-medium--font-weight, 500);
+    letter-spacing: var(--text-caption-1-medium--letter-spacing, 0.15px);
+}
+.orders-kpi strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--orders-text);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-title-1-bold, 1.5rem);
+    line-height: var(--text-title-1-bold--line-height, 2.125rem);
+    font-weight: var(--text-title-1-bold--font-weight, 700);
+    letter-spacing: var(--text-title-1-bold--letter-spacing, 0);
+}

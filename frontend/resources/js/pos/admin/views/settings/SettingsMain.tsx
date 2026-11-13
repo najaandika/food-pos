@@ -9,7 +9,7 @@ import {
     Select,
     SelectItem,
 } from '../../../../../../components/base/select/select';
-import { Switch } from '../../../../../../components/base/switch/switch';
+import { SwitchCard } from '../../../../../../components/base/switch/switch-card';
 import type { PosSettings } from '@/lib/pos-types';
 import { useLocale } from '../../i18n-context';
 
@@ -53,7 +53,12 @@ export function SettingsMain({
 
     return (
         <div className="flex min-w-0 flex-col gap-5">
-            <StatCards variant="plain" columns={3} stats={stats} />
+            <StatCards
+                variant="plain"
+                columns={3}
+                stats={stats}
+                className="max-sm:grid-cols-1!"
+            />
 
             {validationMessage && (
                 <p
@@ -126,22 +131,20 @@ export function SettingsMain({
                             key={hour.label}
                             className="border-separator-border bg-background-secondary-default flex flex-col gap-3 rounded-xl border p-4"
                         >
-                            <div className="flex flex-wrap items-center justify-between gap-3">
-                                <strong className="text-body-medium text-text-primary">
-                                    {hour.label}
-                                </strong>
-                                <Switch
-                                    size="md"
-                                    isSelected={hour.isOpen}
-                                    onChange={(checked) =>
-                                        onUpdateHours(index, 'isOpen', checked)
-                                    }
-                                >
-                                    {hour.isOpen
+                            <SwitchCard
+                                size="md"
+                                className="[&_.truncate]:overflow-visible [&_.truncate]:text-clip [&_.truncate]:whitespace-normal"
+                                title={hour.label}
+                                description={
+                                    hour.isOpen
                                         ? t('common.open')
-                                        : t('common.closed')}
-                                </Switch>
-                            </div>
+                                        : t('common.closed')
+                                }
+                                isSelected={hour.isOpen}
+                                onChange={(checked) =>
+                                    onUpdateHours(index, 'isOpen', checked)
+                                }
+                            />
                             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                 <Input
                                     label="Jam buka"

@@ -1,0 +1,80 @@
+.nav {
+    display: grid;
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: var(--space-fixed-4);
+    align-content: start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    padding-right: 2px;
+    padding-bottom: var(--space-fixed-5);
+}
+
+.sidebar-role-kasir .nav,
+.sidebar-role-waiters .nav {
+    flex: 0 1 auto;
+    max-height: none;
+    padding-bottom: 0;
+}
+
+.sidebar-role-kasir .profile-box,
+.sidebar-role-waiters .profile-box {
+    margin-top: 0;
+}
+
+.sidebar-role-waiters .nav-group,
+.sidebar-role-kasir .nav-group {
+    gap: var(--space-fixed-2);
+}
+
+.nav::-webkit-scrollbar {
+    width: 0;
+}
+
+.nav-group {
+    display: grid;
+    gap: var(--space-1);
+}
+
+.nav-label {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    padding: 0 14px;
+    text-transform: uppercase;
+}
+
+.nav-item,
+.logout-btn {
+    width: 100%;
+    gap: var(--pos-gap);
+    border: 0;
+    color: #3d4245;
+    background: transparent;
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+}
+.nav-item {
+    position: relative;
+    min-height: 46px;
+    padding: 0 var(--space-fixed-4);
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    transition:
+        color var(--transition-hover),
+        background-color var(--transition-hover),
+        transform var(--transition-hover);
+}
+.nav-item:hover {
+    color: var(--navy);
+    background: rgba(238, 241, 255, 0.8);
+    transform: translateX(2px);
+}
+.nav-item.active {
+    color: #ffffff;
+    background: var(--blue);
+    box-shadow: var(--shadow-blue);
+}

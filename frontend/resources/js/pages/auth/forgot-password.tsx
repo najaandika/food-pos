@@ -68,13 +68,15 @@ export default function ForgotPassword({ status }: Props) {
                 >
                     {form.processing
                         ? 'Mengirim tautan...'
-                        : 'Kirim tautan reset password'}
+                        : 'Kirim tautan atur ulang'}
                 </Button>
             </form>
 
             <div className="text-body-regular text-text-secondary mt-8 flex flex-wrap items-center justify-center gap-1">
                 Ingat kata sandi?
-                <PosAuthLink href={login().url}>Kembali ke login</PosAuthLink>
+                <PosAuthLink href={login().url}>
+                    Kembali ke halaman masuk
+                </PosAuthLink>
             </div>
         </>
     );

@@ -1,0 +1,150 @@
+.order-sent-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-3);
+    margin: -2px 0 14px;
+    border: 1px solid var(--color-status-lime-text);
+    border-radius: var(--radius-md);
+    background: var(--color-status-lime-background);
+    padding: 13px;
+}
+
+.order-sent-card svg {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    color: var(--color-status-lime-text);
+}
+
+.order-sent-card span,
+.order-sent-card strong,
+.order-sent-card p {
+    display: block;
+}
+
+.order-sent-card span {
+    color: var(--color-status-lime-text);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.order-sent-card strong {
+    margin-top: 2px;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+}
+
+.order-sent-card p {
+    margin: 4px 0 0;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.pos-send-error {
+    margin: -2px 0 14px;
+    border-radius: var(--radius-sm);
+    background: var(--color-status-rose-background);
+    color: var(--color-status-rose-text);
+    padding: 11px 12px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.ticket-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-fixed-2);
+    margin-bottom: 16px;
+}
+
+.ticket-actions button {
+    height: 38px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--ice);
+    color: var(--blue);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.ticket-actions button:nth-child(2) {
+    background: var(--navy);
+    color: white;
+    box-shadow: none;
+}
+
+.post-send-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-fixed-2);
+    margin-bottom: 16px;
+}
+
+.post-send-actions button {
+    min-height: 42px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--mist);
+    color: var(--blue);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.post-send-actions button:first-child {
+    background: var(--navy);
+    color: #ffffff;
+}
+
+.receipt-order-scroll {
+    min-height: 128px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    margin-right: -8px;
+}
+
+.receipt-order-scroll h3 {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin: 0;
+    background: linear-gradient(180deg, #ffffff 72%, rgba(255, 255, 255, 0));
+    padding: 0 0 10px;
+    font-size: 19px;
+}
+
+/* R8.15D: the POS receipt still inherits a light legacy surface in dark
+   mode. Pair the receipt with the actual BoardUI dark surface so the
+   semantic lime/rose feedback and its headings stay readable. */
+.dark .pos-menu-page .receipt-panel {
+    border-color: var(--color-separator-border);
+    background: var(--color-background-primary-default);
+    color: var(--color-text-primary);
+}
+
+.dark .pos-menu-page .receipt-order-scroll h3 {
+    color: var(--color-text-primary);
+    background: transparent;
+}
+
+.dark .pos-menu-page .pos-send-error {
+    color: var(--color-notification-error-foreground);
+}
+
+/* R8.15D: only the mounted Menu page uses the dark page canvas;
+   the portalled cart Drawer retains its own BoardUI surface. */
+.dark .pos-menu-page.app-view {
+    background-color: var(--color-background-full);
+    color: var(--color-text-primary);
+}
+
+/* R8.15D: on the dark Menu canvas the legacy category/catalog headings
+   still use --navy. Only correct these visible label colors. */
+.dark .pos-menu-page .menu-p2-filter-panel .category-head strong,
+.dark .pos-menu-page .menu-p2-board-head strong,
+.dark .pos-menu-page .menu-p2-filter-panel .category-head span,
+.dark .pos-menu-page .menu-p2-board-head > div > span {
+    color: var(--color-text-primary);
+}

@@ -29,4 +29,5 @@ Route::middleware(['auth', 'verified', 'staff.role:owner'])->group(function () {
 
 require __DIR__.'/settings.php';
 require __DIR__.'/pos.php';
+require __DIR__.'/pos-organization.php';
 require __DIR__.'/qr.php';

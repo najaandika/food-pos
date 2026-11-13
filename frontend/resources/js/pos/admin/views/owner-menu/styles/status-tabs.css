@@ -1,0 +1,129 @@
+/* ── Status Filter Tabs & Controls ── */
+.owner-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-3);
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+}
+
+.owner-status-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--ice);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(20, 26, 51, 0.04);
+}
+
+.owner-status-tabs button {
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
+    color: var(--muted);
+    padding: 0 12px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.owner-status-tabs button:hover {
+    color: var(--navy);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.owner-status-tabs button.active {
+    background: #ffffff;
+    color: var(--navy);
+    box-shadow: 0 4px 12px rgba(20, 26, 51, 0.08);
+}
+
+.owner-status-tabs button.active.archived {
+    background: #eef0f5;
+    color: var(--navy);
+}
+
+.owner-status-tabs .count-pill {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    background: rgba(20, 26, 51, 0.06);
+    color: currentColor;
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+}
+
+.owner-status-tabs button.active.archived .count-pill {
+    background: rgba(20, 26, 51, 0.08);
+    color: var(--navy);
+}
+
+/* R8.16B: Resolve light WCAG AA for the mounted BoardUI SearchField
+   placeholder and status-count pill. The original text colors were 3.35:1
+   and 4.35:1 against their actual light surfaces. */
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-owner-search
+    input::placeholder {
+    color: color-mix(
+        in srgb,
+        var(--color-text-primary) 45%,
+        var(--color-text-secondary)
+    );
+    opacity: 1;
+}
+
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-owner-status-tabs
+    .count-pill {
+    color: color-mix(
+        in srgb,
+        var(--color-text-primary) 30%,
+        var(--color-text-secondary)
+    );
+}
+
+/* The mounted status filter is BoardUI SegmentedControl (.c2-...).
+   These dark overrides preserve its selected, disabled and focus contracts. */
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-owner-status-tabs
+    button:not([data-disabled]) {
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-owner-status-tabs
+    .count-pill {
+    background: var(--color-background-primary-default);
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-owner-search
+    input:not(:disabled) {
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-owner-search
+    input::placeholder {
+    color: var(--color-text-primary);
+    opacity: 0.82;
+}

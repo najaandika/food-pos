@@ -1,0 +1,75 @@
+.order-source-box span {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.order-source-box strong {
+    color: var(--navy);
+    font-weight: var(--font-weight-semibold);
+}
+
+.order-source-box p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    line-height: 1.45;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-regular);
+}
+
+.workflow-progress {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-1);
+    margin-top: 16px;
+    border-radius: var(--radius-md);
+    background: var(--ice);
+    padding: 8px;
+}
+
+.workflow-progress span {
+    min-width: 0;
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+    border-radius: 13px;
+    color: var(--muted);
+    padding: 8px 4px;
+    font-size: 10px;
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+}
+
+.workflow-progress b {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-pill);
+    background: var(--card-bg);
+    color: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.workflow-progress span.active {
+    background: rgba(48, 71, 255, 0.1);
+    color: var(--blue);
+}
+
+.workflow-progress span.active b {
+    background: var(--blue);
+    color: #ffffff;
+}
+
+.order-detail-panel .cashier-detail-top h2 {
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.order-detail-panel .cashier-detail-top p {
+    font-weight: var(--font-weight-medium);
+}

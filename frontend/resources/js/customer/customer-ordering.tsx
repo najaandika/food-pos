@@ -14,31 +14,21 @@ import {
     type CustomerLocale,
     type CustomerTranslationKey,
 } from './customer-i18n';
+import {
+    addCartItem,
+    canSubmitOrder,
+    changeCartNote,
+    changeCartQuantity,
+    chooseCatalogCategory,
+    createCheckoutPayload,
+    filterCatalogItems,
+    getCartSummary,
+    mapCatalogItems,
+    type QrCatalog,
+} from './customer-ordering-model';
 import './boardui-customer.css';
 
-export type QrCatalog = {
-    table: {
-        code: string;
-        name: string;
-        area: string | null;
-        seats: number;
-        status: string;
-    };
-    can_order: boolean;
-    categories: Array<{
-        id: number;
-        name: string;
-        items: Array<{
-            id: number;
-            name: string;
-            description: string | null;
-            price: string;
-            image_url: string | null;
-            is_best_seller: boolean;
-            badge: string | null;
-        }>;
-    }>;
-};
+export type { QrCatalog } from './customer-ordering-model';
 
 type OrderReceipt = {
     order_number: string;
@@ -131,21 +121,7 @@ export default function CustomerOrdering({
     };
 
     const menuItems = useMemo<CustomerMenuItem[]>(
-        () =>
-            catalog.categories.flatMap((entry) =>
-                entry.items.map((item) => ({
-                    id: item.id,
-                    name: item.name,
-                    category: entry.name,
-                    description: item.description ?? '',
-                    price: Number(item.price),
-                    image: item.image_url,
-                    badge:
-                        item.badge ??
-                        (item.is_best_seller ? 'Best Seller' : undefined),
-                    available: true,
-                })),
-            ),
+        () => mapCatalogItems(catalog.categories),
         [catalog.categories],
     );
 
@@ -153,66 +129,25 @@ export default function CustomerOrdering({
         () => catalog.categories.map((entry) => entry.name),
         [catalog.categories],
     );
-    const filteredMenu = useMemo(() => {
-        const search = query.trim().toLowerCase();
-        return menuItems.filter(
-            (item) =>
-                item.category === category &&
-                (!search ||
-                    [item.name, item.description, item.category].some((part) =>
-                        part.toLowerCase().includes(search),
-                    )),
-        );
-    }, [menuItems, category, query]);
-
-    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-    const subtotal = cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0,
+    const filteredMenu = useMemo(
+        () => filterCatalogItems(menuItems, category, query),
+        [menuItems, category, query],
     );
-    // Until the backend supports pricing policy, it charges zero tax and service.
-    const estimatedTotal = subtotal;
+
+    const { itemCount, subtotal, estimatedTotal } = getCartSummary(cart);
 
     const addToCart = (item: CustomerMenuItem) => {
         if (!catalog.can_order || submitting) return;
-        setCart((current) => {
-            const selected = current.find((entry) => entry.id === item.id);
-            if (selected) {
-                return current.map((entry) =>
-                    entry.id === item.id
-                        ? {
-                              ...entry,
-                              quantity: Math.min(20, entry.quantity + 1),
-                          }
-                        : entry,
-                );
-            }
-            if (current.length >= 30) return current;
-            return [...current, { ...item, quantity: 1, note: '' }];
-        });
+        setCart((current) => addCartItem(current, item));
     };
 
     const updateQuantity = (id: number, change: number) => {
-        setCart((current) =>
-            current
-                .map((item) =>
-                    item.id === id
-                        ? {
-                              ...item,
-                              quantity: Math.min(20, item.quantity + change),
-                          }
-                        : item,
-                )
-                .filter((item) => item.quantity > 0),
-        );
+        setCart((current) => changeCartQuantity(current, id, change));
     };
 
     const updateNote = (id: number, note: string) => {
-        setCart((current) =>
-            current.map((item) => (item.id === id ? { ...item, note } : item)),
-        );
+        setCart((current) => changeCartNote(current, id, note));
     };
-
     const refreshMenu = async () => {
         setCatalogError('');
         try {
@@ -229,9 +164,7 @@ export default function CustomerOrdering({
             const next: QrCatalog = await response.json();
             setCatalog(next);
             setCategory((previous) =>
-                next.categories.some((entry) => entry.name === previous)
-                    ? previous
-                    : (next.categories[0]?.name ?? ''),
+                chooseCatalogCategory(next.categories, previous),
             );
             setCart([]);
         } catch {
@@ -245,16 +178,14 @@ export default function CustomerOrdering({
 
     const checkout = async () => {
         if (
-            submitting ||
-            !catalog.can_order ||
-            cart.length === 0 ||
-            !customerName.trim()
-        )
-            return;
-        if (
-            !Number.isInteger(guestCount) ||
-            guestCount < 1 ||
-            guestCount > catalog.table.seats
+            !canSubmitOrder(
+                submitting,
+                catalog.can_order,
+                cart,
+                customerName,
+                guestCount,
+                catalog.table.seats,
+            )
         )
             return;
         setSubmitting(true);
@@ -272,16 +203,14 @@ export default function CustomerOrdering({
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': csrfToken,
                     },
-                    body: JSON.stringify({
-                        customer_name: customerName.trim(),
-                        guests: guestCount,
-                        notes: orderNote.trim() || null,
-                        items: cart.map((item) => ({
-                            menu_item_id: item.id,
-                            quantity: item.quantity,
-                            notes: item.note.trim() || null,
-                        })),
-                    }),
+                    body: JSON.stringify(
+                        createCheckoutPayload(
+                            customerName,
+                            guestCount,
+                            orderNote,
+                            cart,
+                        ),
+                    ),
                 },
             );
             const body: unknown = await response.json().catch(() => null);
@@ -373,7 +302,7 @@ export default function CustomerOrdering({
                                 onChange={setQuery}
                             />
                             <div className="bg-background-secondary-default flex flex-col gap-1 rounded-2xl px-4 py-3">
-                                <span className="text-caption-1-semibold text-text-tertiary">
+                                <span className="text-caption-1-semibold text-text-primary/75">
                                     {locale === 'id'
                                         ? 'Informasi'
                                         : 'Information'}
@@ -383,7 +312,12 @@ export default function CustomerOrdering({
                                         ? 'Pesan langsung dari meja'
                                         : 'Order from your table'}
                                 </strong>
-                                <small className="text-caption-1-regular text-text-secondary">
+                                <small
+                                    className="text-caption-1-regular"
+                                    style={{
+                                        color: 'color-mix(in srgb, var(--color-text-primary) 75%, transparent)',
+                                    }}
+                                >
                                     {locale === 'id'
                                         ? 'Pilih menu dan periksa ringkasan sebelum mengirim pesanan.'
                                         : 'Choose items and review the summary before submitting your order.'}

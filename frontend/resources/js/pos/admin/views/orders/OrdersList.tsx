@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
 import {
     flexRender,
     getCoreRowModel,
@@ -9,14 +8,9 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import type {
-    ColumnDef,
-    PaginationState,
-    SortingState,
-} from '@tanstack/react-table';
-import { RiEyeLine, RiArrowUpDownLine } from '@remixicon/react';
+import type { PaginationState, SortingState } from '@tanstack/react-table';
+import { RiArrowUpDownLine } from '@remixicon/react';
 import type { UserRole } from '@/lib/pos-types';
-import { Button } from '../../../../../../components/base/buttons/button';
 import { Pagination } from '../../../../../../components/base/pagination/pagination';
 import {
     SegmentedControl,
@@ -32,72 +26,11 @@ import {
 } from '../../../../../../components/base/table/table';
 import type { AdminOrder } from '../../runtime-data';
 import { useLocale } from '../../i18n-context';
-import { StatusChip } from './StatusChip';
-import {
-    countItems,
-    nextOrderStatus,
-    orderActionLabel,
-    orderIdentity,
-    orderNumber,
-    orderSourceLabel,
-    ORDER_STATUSES,
-} from './order-ui';
+import { orderIdentity } from './order-ui';
+import { createOrderColumns } from './OrdersListColumns';
+import { columnIds } from './orders-list-model';
 
 const PAGE_SIZE = 10;
-
-type SortColumn =
-    | 'order'
-    | 'customer'
-    | 'source'
-    | 'time'
-    | 'items'
-    | 'total'
-    | 'status';
-
-const columnIds = [
-    'order',
-    'customer',
-    'source',
-    'time',
-    'items',
-    'total',
-    'status',
-    'actions',
-] as const;
-
-function minutesFromTime(text: string): number | string {
-    const match = text.trim().match(/^(\d{1,2}):(\d{2})(?:\s*(AM|PM))?$/i);
-    if (!match) return text;
-    const hours = Number(match[1]);
-    const minutes = Number(match[2]);
-    if (hours > 23 || minutes > 59) return text;
-    const period = match[3]?.toUpperCase();
-    const normalizedHours = period
-        ? (hours % 12) + (period === 'PM' ? 12 : 0)
-        : hours;
-    return normalizedHours * 60 + minutes;
-}
-
-function sortValue(order: AdminOrder, column: SortColumn): string | number {
-    switch (column) {
-        case 'order':
-            return order.id ?? orderNumber(order);
-        case 'customer':
-            return order.name;
-        case 'source':
-            return order.source ?? '';
-        case 'time':
-            return minutesFromTime(order.time);
-        case 'items':
-            return countItems(order);
-        case 'total':
-            return order.rawTotal ?? Number(order.total.replace(/[^\d]/g, ''));
-        case 'status':
-            return order.rawStatus
-                ? ORDER_STATUSES.indexOf(order.rawStatus)
-                : Number.MAX_SAFE_INTEGER;
-    }
-}
 
 /** The installed BoardUI data-table entry is a customer-specific example.
  * Compose its actual pattern here: official BoardUI Table primitives backed by
@@ -154,127 +87,11 @@ export function OrdersList({
               'Actions',
           ];
 
-    const columns = useMemo<ColumnDef<AdminOrder>[]>(() => {
-        const collator = new Intl.Collator(isId ? 'id-ID' : 'en-US', {
-            numeric: true,
-            sensitivity: 'base',
-        });
-
-        const sortColumn = (
-            column: SortColumn,
-            label: string,
-            cell: (order: AdminOrder) => ReactNode,
-        ): ColumnDef<AdminOrder> => ({
-            id: column,
-            header: label,
-            accessorFn: (order) => sortValue(order, column),
-            sortingFn: (rowA, rowB) => {
-                const left = sortValue(rowA.original, column);
-                const right = sortValue(rowB.original, column);
-                return typeof left === 'number' && typeof right === 'number'
-                    ? left - right
-                    : collator.compare(String(left), String(right));
-            },
-            cell: ({ row }) => cell(row.original),
-        });
-
-        return [
-            sortColumn('order', isId ? 'Pesanan' : 'Order', (order) => (
-                <div className="orders-data-id">
-                    <strong>{orderNumber(order)}</strong>
-                    <small>
-                        {order.type === 'takeaway'
-                            ? t('orders.takeaway')
-                            : t('orders.dineIn')}
-                    </small>
-                </div>
-            )),
-            sortColumn(
-                'customer',
-                isId ? 'Meja & pelanggan' : 'Table & customer',
-                (order) => (
-                    <div className="orders-data-person">
-                        <strong>{order.name}</strong>
-                        <span>{order.table}</span>
-                    </div>
-                ),
-            ),
-            sortColumn('source', isId ? 'Sumber' : 'Source', (order) => (
-                <span
-                    className="orders-source-label"
-                    data-source={order.source ?? 'unknown'}
-                >
-                    {orderSourceLabel(order.source, t)}
-                </span>
-            )),
-            sortColumn('time', isId ? 'Waktu' : 'Time', (order) => (
-                <span className="text-caption-1-regular text-text-secondary">
-                    {order.time}
-                </span>
-            )),
-            sortColumn('items', isId ? 'Item' : 'Items', (order) => (
-                <span className="text-body-medium">{countItems(order)}</span>
-            )),
-            sortColumn('total', 'Total', (order) => (
-                <strong className="orders-data-price text-body-2-bold text-text-primary">
-                    {order.total}
-                </strong>
-            )),
-            sortColumn('status', 'Status', (order) => (
-                <StatusChip
-                    status={order.rawStatus}
-                    fallbackLabel={order.status}
-                />
-            )),
-            {
-                id: 'actions',
-                header: isId ? 'Tindakan' : 'Actions',
-                enableSorting: false,
-                cell: ({ row }) => {
-                    const order = row.original;
-                    const next = nextOrderStatus(role, order.rawStatus);
-                    const canAdvance =
-                        canUpdate && order.id != null && next !== null;
-                    return (
-                        <div className="orders-table-actions">
-                            <Button
-                                variant="secondary"
-                                size="small"
-                                leadingIcon={RiEyeLine}
-                                aria-label={
-                                    (isId
-                                        ? 'Detail pesanan '
-                                        : 'Order details ') + orderNumber(order)
-                                }
-                                onClick={() => onSelect(order)}
-                            >
-                                {t('common.details')}
-                            </Button>
-                            {canAdvance && order.rawStatus && (
-                                <Button
-                                    size="small"
-                                    variant={
-                                        order.rawStatus === 'pending' ||
-                                        order.rawStatus === 'ready'
-                                            ? 'primary'
-                                            : 'secondary'
-                                    }
-                                    aria-label={
-                                        orderActionLabel(order.rawStatus, t) +
-                                        ' ' +
-                                        orderNumber(order)
-                                    }
-                                    onClick={() => onMove(order)}
-                                >
-                                    {orderActionLabel(order.rawStatus, t)}
-                                </Button>
-                            )}
-                        </div>
-                    );
-                },
-            },
-        ];
-    }, [canUpdate, isId, onMove, onSelect, role, t]);
+    const columns = useMemo(
+        () =>
+            createOrderColumns({ role, isId, canUpdate, onSelect, onMove, t }),
+        [canUpdate, isId, onMove, onSelect, role, t],
+    );
 
     const table = useReactTable({
         data: orders,

@@ -1,0 +1,56 @@
+/* Split-flap ("Solari" board) digit, used by the image-generation countdown.
+ * Two leaves hinged on the card's centre seam:
+ *   flap-fall  the outgoing digit's TOP half swings down over the incoming
+ *              bottom half. Eased IN, because a real flap is falling under
+ *              gravity — it accelerates — and it darkens as it tips away
+ *              from the light.
+ *   flap-rise  the incoming digit's BOTTOM half swings up from edge-on,
+ *              starting exactly when the fall lands (delay = fall duration,
+ *              `both` so it waits at 90deg instead of flashing flat). The
+ *              small overshoot past 0deg is the slap against the stop —
+ *              that bounce is what makes it read mechanical rather than
+ *              like a plain rotation. */
+@keyframes flap-fall {
+    from {
+        transform: rotateX(0deg);
+        filter: brightness(1);
+    }
+    to {
+        transform: rotateX(-90deg);
+        filter: brightness(0.86);
+    }
+}
+@keyframes flap-rise {
+    0% {
+        transform: rotateX(90deg);
+        filter: brightness(0.86);
+    }
+    70% {
+        transform: rotateX(-9deg);
+    }
+    86% {
+        transform: rotateX(4deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+        filter: brightness(1);
+    }
+}
+.animate-flap-fall {
+    transform-origin: bottom center;
+    backface-visibility: hidden;
+    animation: flap-fall 150ms cubic-bezier(0.55, 0, 0.9, 0.35) forwards;
+}
+.animate-flap-rise {
+    transform-origin: top center;
+    backface-visibility: hidden;
+    animation: flap-rise 230ms cubic-bezier(0.25, 0.7, 0.35, 1) 150ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-flap-fall,
+    .animate-flap-rise {
+        animation-duration: 1ms;
+        animation-delay: 0ms;
+    }
+}

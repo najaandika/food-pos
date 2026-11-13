@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../../../../../../components/base/buttons/button';
 import { Spinner } from '../../../../../../components/base/spinner/spinner';
-import { OwnerMenuView } from '../OwnerMenuView';
+import { OwnerMenuView } from './OwnerMenuView';
 import {
     deleteSavedMenu,
     getSavedMenu,

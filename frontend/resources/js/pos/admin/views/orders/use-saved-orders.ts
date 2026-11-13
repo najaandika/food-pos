@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { AdminOrder } from '../../runtime-data';
-import { getSavedOrders, peekSavedOrders, OrdersApiError } from './server-orders';
+import {
+    getSavedOrders,
+    peekSavedOrders,
+    OrdersApiError,
+} from './server-orders';
 
 export type SavedOrdersState = {
     orders: AdminOrder[];
@@ -36,30 +40,34 @@ export function useSavedOrders(): SavedOrdersState {
     const savingRef = useRef(false);
     const mounted = useRef(true);
 
-    const read = useCallback(async (
-        showLoader = false,
-        force = false,
-    ): Promise<void> => {
-        if (showLoader && peekSavedOrders() === undefined) setIsLoading(true);
-        try {
-            const next = await getSavedOrders(force);
-            if (mounted.current) {
-                setOrders(next);
-                setError('');
+    const read = useCallback(
+        async (showLoader = false, force = false): Promise<void> => {
+            if (showLoader && peekSavedOrders() === undefined)
+                setIsLoading(true);
+            try {
+                const next = await getSavedOrders(force);
+                if (mounted.current) {
+                    setOrders(next);
+                    setError('');
+                }
+            } catch (reason) {
+                if (mounted.current) setError(errorText(reason));
+                throw reason;
+            } finally {
+                if (mounted.current) setIsLoading(false);
             }
-        } catch (reason) {
-            if (mounted.current) setError(errorText(reason));
-            throw reason;
-        } finally {
-            if (mounted.current) setIsLoading(false);
-        }
-    }, []);
+        },
+        [],
+    );
 
-    const reload = useCallback(async (force = false): Promise<void> => {
-        await read(true, force).catch(() => {
-            // Keep last confirmed records visible after a transient outage.
-        });
-    }, [read]);
+    const reload = useCallback(
+        async (force = false): Promise<void> => {
+            await read(true, force).catch(() => {
+                // Keep last confirmed records visible after a transient outage.
+            });
+        },
+        [read],
+    );
 
     useEffect(() => {
         mounted.current = true;

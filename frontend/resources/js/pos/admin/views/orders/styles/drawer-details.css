@@ -1,0 +1,56 @@
+/* Detail Drawer: make the live status/steps, item list and totals scan as
+   separate sections; keep the server-persistence caveat visible in the footer. */
+.orders-boardui-drawer .orders-detail-status-row {
+    min-width: 0;
+    margin-top: 4px;
+    padding: 12px;
+    border: 1px solid var(--orders-border);
+    border-radius: var(--radius-xl, 12px);
+    background: var(--orders-ground);
+}
+.orders-boardui-drawer .orders-detail-flow {
+    padding: 16px;
+    border: 1px solid var(--orders-border);
+    border-radius: var(--radius-xl, 12px);
+    background: var(--orders-ground);
+}
+.orders-boardui-drawer .orders-flow-index {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+}
+.orders-boardui-drawer
+    .orders-detail-flow
+    li[aria-current='step']
+    .orders-flow-index {
+    outline: 2px solid
+        color-mix(in srgb, var(--orders-success) 28%, transparent);
+    outline-offset: 2px;
+}
+.orders-boardui-drawer .orders-detail-block {
+    gap: 12px;
+    padding-top: 0;
+}
+.orders-boardui-drawer .orders-detail-item-row {
+    align-items: center;
+}
+.orders-boardui-drawer .orders-detail-totals {
+    border: 1px solid var(--orders-border);
+    background: var(--orders-ground);
+}
+.orders-boardui-drawer .orders-detail-footer-note {
+    gap: 8px;
+}
+.orders-boardui-drawer .orders-detail-actions > button {
+    min-height: 40px;
+}
+@media (max-width: 520px) {
+    .orders-boardui-drawer .orders-detail-flow {
+        padding: 12px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .orders-workspace .orders-ticket {
+        transition: none;
+    }
+}

@@ -1,0 +1,48 @@
+@media print {
+    .cashier-receipt-overlay {
+        display: block !important;
+        position: fixed !important;
+        inset: 0 auto auto 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+    .cashier-receipt-overlay > div:first-child {
+        display: none !important;
+    }
+    .cashier-receipt-overlay > div:last-child {
+        position: static !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: none !important;
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .cashier-receipt-overlay * {
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    .cashier-receipt-dialog,
+    .cashier-receipt-body {
+        display: block !important;
+        overflow: visible !important;
+        max-height: none !important;
+        padding: 0 !important;
+    }
+    .cashier-receipt-body .receipt-paper {
+        overflow: visible !important;
+    }
+
+    #printable-pos-receipt {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0 !important;
+        width: 80mm !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}

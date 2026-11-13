@@ -1,0 +1,48 @@
+.workflow-chip.new {
+    background: rgba(244, 183, 64, 0.16);
+    color: #8f6209;
+}
+
+.workflow-chip.kitchen {
+    background: rgba(48, 71, 255, 0.1);
+    color: var(--blue);
+}
+
+.workflow-chip.ready,
+.workflow-chip.paid {
+    background: rgba(25, 184, 133, 0.12);
+    color: #087856;
+}
+
+.workflow-chip.served,
+.workflow-chip.billing {
+    background: rgba(20, 26, 51, 0.08);
+    color: var(--navy);
+}
+
+.workflow-chip.cancelled {
+    background: rgba(238, 82, 104, 0.12);
+    color: var(--danger);
+}
+
+.kanban-card-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.kanban-card-top > div {
+    min-width: 0;
+}
+
+.kanban-card-top strong,
+.kanban-card-top small {
+    display: block;
+}
+
+.kanban-card-top strong {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.012em;
+    line-height: 1.2;
+}

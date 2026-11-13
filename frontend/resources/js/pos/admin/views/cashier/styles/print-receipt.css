@@ -1,0 +1,23 @@
+/* Thermal Printer CSS @media print */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #printable-pos-receipt,
+    #printable-pos-receipt * {
+        visibility: visible;
+    }
+
+    #printable-pos-receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 80mm;
+        margin: 0;
+        padding: 10px;
+        background: #ffffff;
+        border: none;
+        box-shadow: none;
+    }
+}

@@ -1,0 +1,23 @@
+@import '@fontsource-variable/inter/index.css';
+
+@import './styles/orders-foundation.css';
+
+@import './styles/orders-workspace-board.css';
+
+@import './styles/orders-list.css';
+
+@import './styles/orders-detail-drawer.css';
+
+@import './styles/boardui-primitives.css';
+@import './styles/status-chips.css';
+@import './styles/board-tickets.css';
+@import './styles/drawer-details.css';
+@import './styles/stats-pagination.css';
+@import './styles/mobile-list.css';
+@import './styles/responsive-views.css';
+@import './styles/workspace-controls.css';
+@import './styles/board-layout.css';
+@import './styles/board-responsive.css';
+@import './styles/layout-accessibility.css';
+@import './styles/table-polish.css';
+@import './styles/drawer-portal.css';

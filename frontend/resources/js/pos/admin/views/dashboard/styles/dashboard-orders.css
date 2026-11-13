@@ -1,0 +1,250 @@
+.od-orders-panel {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--od-bg);
+    border: 1px solid var(--od-outline);
+    border-radius: 18px;
+}
+
+.od-orders-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+}
+
+.od-orders-title {
+    min-width: 0;
+}
+
+.od-orders-title h2 {
+    color: var(--od-ink);
+    margin: 2px 0 3px;
+}
+
+.od-orders-title p {
+    color: var(--od-muted);
+}
+
+.od-orders-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    min-width: 0;
+}
+
+.od-orders-filters {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 2px;
+    padding: 3px;
+    background: var(--od-panel);
+    border-radius: 9px;
+}
+
+.od-orders-controls .od-order-search {
+    width: clamp(150px, 16vw, 210px);
+    flex: 0 1 auto;
+    min-width: 132px;
+}
+/* Dashboard search shares BoardUI Input and the same valid-focus ring token
+   as login's pos-login-input-focus. Apply it to the field group, not input. */
+.owner-dashboard-home
+    .od-orders-controls
+    .pos-login-input-focus[data-focus-within]:not(
+        :has(input[aria-invalid='true'])
+    ) {
+    --tw-ring-color: var(--color-border-focus-ring);
+}
+/* POS shell's legacy 3px input outline would stack a second focus ring on
+   top of the BoardUI field group. Login has no such legacy outline. */
+.owner-dashboard-home .od-orders-controls .od-order-search input:focus-visible {
+    outline: none;
+}
+
+.od-order-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.od-order-table {
+    width: 100%;
+    min-width: 710px;
+    border-collapse: collapse;
+    table-layout: auto;
+    text-align: left;
+    color: var(--od-ink);
+}
+
+.od-order-table th {
+    background: var(--od-panel);
+    color: var(--od-muted);
+    white-space: nowrap;
+    text-align: left;
+    padding: 12px 12px;
+}
+
+.od-order-table th:first-child,
+.od-order-table td:first-child {
+    padding-left: 17px;
+}
+
+.od-order-table th:last-child,
+.od-order-table td:last-child {
+    padding-right: 17px;
+    text-align: right;
+}
+
+.od-order-table td {
+    padding: 10px 12px;
+    border-top: 1px solid var(--od-line);
+    vertical-align: middle;
+}
+
+.od-order-table tbody tr:hover {
+    background: var(--od-panel);
+}
+
+.od-order-identity {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-width: 0;
+}
+
+.od-order-avatar {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 33px;
+    height: 33px;
+    border-radius: 10px;
+    color: var(--od-brand);
+    background: var(--color-accent-50, var(--od-panel));
+}
+
+.od-order-avatar svg {
+    width: 17px;
+    height: 17px;
+}
+
+.od-order-identity-text {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.od-order-identity-text strong,
+.od-order-identity-text small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 190px;
+}
+
+.od-order-identity-text small,
+.od-order-muted {
+    color: var(--od-muted);
+}
+
+.od-order-table-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    background: var(--od-panel);
+    white-space: nowrap;
+}
+
+.od-order-table-pill svg {
+    width: 14px;
+    height: 14px;
+    color: var(--od-muted);
+}
+
+.od-order-amount {
+    color: var(--od-ink);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.od-order-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    padding: 5px 7px;
+    border-radius: 7px;
+    color: var(--od-muted);
+    background: var(--od-panel);
+    white-space: nowrap;
+}
+
+.od-order-status-dot {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.od-order-status--pending,
+.od-order-status--accepted,
+.od-order-status--preparing {
+    color: var(--color-status-orange-text, var(--od-ink));
+    background: var(--color-status-orange-background, var(--od-panel));
+}
+
+.od-order-status--ready,
+.od-order-status--served,
+.od-order-status--paid {
+    color: var(--color-status-lime-text, var(--od-ink));
+    background: var(--color-status-lime-background, var(--od-panel));
+}
+
+.od-order-status--waiting_payment {
+    color: var(--color-status-purple-text, var(--od-ink));
+    background: var(--color-status-purple-background, var(--od-panel));
+}
+
+.od-order-status--cancelled {
+    color: var(--color-status-rose-text, var(--od-ink));
+    background: var(--color-status-rose-background, var(--od-panel));
+}
+
+.od-empty-table {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    padding: 34px;
+    text-align: center;
+}
+
+.od-empty-table svg {
+    width: 28px;
+    height: 28px;
+    color: var(--od-muted);
+}
+
+.od-empty-table > span {
+    color: var(--od-muted);
+}
+
+.od-orders-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 48px;
+    padding: 8px 15px;
+    border-top: 1px solid var(--od-line);
+    color: var(--od-muted);
+}

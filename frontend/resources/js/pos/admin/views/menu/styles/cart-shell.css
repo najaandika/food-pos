@@ -1,0 +1,34 @@
+.pos-menu-page .menu-cart-shell {
+    min-width: 0;
+    align-self: start;
+    position: sticky;
+    top: 18px;
+}
+
+.pos-menu-page .menu-cart-shell .receipt-panel {
+    width: 100%;
+    max-height: calc(100dvh - 40px);
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: auto;
+    grid-column: auto;
+    overflow: hidden;
+}
+
+.pos-menu-page .receipt-order-scroll {
+    min-height: 56px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.pos-menu-page .receipt-footer {
+    flex: 0 0 auto;
+}
+
+.pos-menu-page .menu-cart-drawer-head,
+.pos-menu-page .menu-cart-backdrop,
+.pos-menu-page .menu-mobile-cart-bar {
+    display: none;
+}

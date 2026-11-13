@@ -1,0 +1,11 @@
+.waiters-workspace .waiters-action-error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: 12px;
+    background: var(--color-background-secondary-default);
+}

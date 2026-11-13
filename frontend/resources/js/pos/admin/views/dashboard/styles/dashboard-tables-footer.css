@@ -1,0 +1,134 @@
+.od-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    min-width: 0;
+    gap: 12px;
+}
+
+.od-footer-grid .od-surface {
+    gap: 8px;
+    padding: 16px;
+}
+
+.od-footer-grid .od-card-topline {
+    margin-bottom: 2px;
+}
+
+.od-shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.od-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    min-height: 65px;
+    padding: 10px 12px;
+    background: var(--od-inner);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    text-align: left;
+    color: var(--od-ink);
+    cursor: pointer;
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+
+.od-shortcut:hover {
+    border-color: var(--od-outline);
+    background: var(--color-background-primary-hover, var(--od-bg));
+}
+
+.od-shortcut:active {
+    background: var(--color-background-primary-active, var(--od-panel-muted));
+}
+
+.od-shortcut-icon {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    color: var(--color-foreground-icon-primary, var(--od-brand));
+    background: var(--color-accent-50, var(--od-panel));
+}
+
+.od-shortcut-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.od-shortcut-copy {
+    display: grid;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.od-shortcut-copy strong,
+.od-shortcut-copy small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.od-shortcut-copy small {
+    color: var(--od-muted);
+}
+
+.od-table-count {
+    display: grid;
+    place-items: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border-radius: 9px;
+    background: var(--od-inner);
+    color: var(--od-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.od-table-pulse {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.od-table-pulse-item {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+    min-width: 0;
+    padding: 10px;
+    background: var(--od-inner);
+    border-radius: 10px;
+}
+
+.od-table-pulse-item svg {
+    width: 17px;
+    height: 17px;
+    color: var(--od-muted);
+}
+
+.od-table-pulse-item span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--od-muted);
+}
+
+.od-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}

@@ -1,0 +1,101 @@
+/* Final mobile drawer override. Keep this last so old icon-rail rules cannot win. */
+@media (max-width: 860px) {
+    .page-shell {
+        display: block;
+    }
+
+    .mobile-nav-toggle {
+        display: none;
+    }
+
+    .mobile-sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 180;
+    }
+
+    .sidebar,
+    .sidebar-collapsed .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 200;
+        width: min(292px, 86vw);
+        flex-basis: auto;
+        height: 100dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 22px 14px 18px;
+        transform: translateX(-106%);
+    }
+
+    .mobile-sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .brand-wrap,
+    .sidebar-collapsed .brand-wrap {
+        display: flex;
+        justify-content: space-between;
+        justify-items: stretch;
+        margin-bottom: 26px;
+    }
+
+    .brand-name,
+    .sidebar-collapsed .brand-name,
+    .nav-item span,
+    .sidebar-collapsed .nav-item span {
+        display: block;
+    }
+
+    .sidebar-toggle,
+    .sidebar-collapsed .sidebar-toggle {
+        display: none;
+    }
+
+    .nav-group-owner,
+    .nav-group-system,
+    .profile-box,
+    .logout-btn,
+    .sidebar-collapsed .profile-box,
+    .sidebar-collapsed .logout-btn {
+        display: flex;
+    }
+
+    .nav-group-owner,
+    .nav-group-system {
+        display: grid;
+    }
+
+    .nav,
+    .sidebar-collapsed .nav {
+        display: grid;
+        gap: var(--pos-gap);
+        overflow: visible;
+    }
+
+    .nav-label,
+    .sidebar-collapsed .nav-label {
+        padding: 0 14px;
+        text-align: left;
+        font-size: var(--font-size-xs);
+        letter-spacing: 0.08em;
+    }
+
+    .nav-item,
+    .sidebar-collapsed .nav-item {
+        width: 100%;
+        min-height: 46px;
+        justify-content: flex-start;
+        gap: var(--pos-gap);
+        margin: 0;
+        padding: 0 14px;
+        border-radius: 13px;
+        font-size: var(--font-size-sm);
+    }
+
+    .main-panel {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 14px 104px;
+    }
+}

@@ -1,0 +1,69 @@
+.pos-shell-sidebar-footer {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--pos-nav-divider);
+}
+
+.pos-shell-language-switch {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 10px;
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-language-option {
+    flex: 1 1 auto;
+    min-height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--pos-nav-muted);
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.pos-shell-language-option:hover {
+    color: var(--pos-nav-foreground);
+}
+
+.pos-shell-language-option[aria-pressed='true'] {
+    background: var(--pos-nav-surface);
+    color: var(--pos-nav-accent-strong);
+}
+
+.pos-shell-sidebar-user {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+    padding: 0 6px;
+}
+
+.pos-shell-layout .pos-shell-avatar {
+    background: var(--pos-nav-selected);
+    color: var(--pos-nav-accent-strong);
+    font-weight: 600;
+}
+
+.pos-shell-sidebar-user-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.pos-shell-sidebar-user-copy strong {
+    overflow: hidden;
+    color: var(--pos-nav-foreground);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pos-shell-sidebar-user-copy > span {
+    color: var(--pos-nav-muted);
+}

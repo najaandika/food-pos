@@ -1,5 +1,6 @@
 import type { PosOrderStatus, UserRole } from '@/lib/pos-types';
 import type { AdminOrder } from '../../runtime-data';
+import { displayOrderReference } from '../../presentation-labels';
 
 export const ORDER_STATUSES: PosOrderStatus[] = [
     'pending',
@@ -62,8 +63,12 @@ export function orderStatusLabel(
     status: PosOrderStatus,
     t: (key: string) => string,
 ): string {
-    const result = t('status.' + status);
-    return result === 'status.' + status
+    const key =
+        status === 'waiting_payment'
+            ? 'status.waitingPayment'
+            : 'status.' + status;
+    const result = t(key);
+    return result === key
         ? status
               .replaceAll('_', ' ')
               .replace(/\b\w/g, (char) => char.toUpperCase())
@@ -88,7 +93,11 @@ export function orderIdentity(order: AdminOrder): string {
 }
 
 export function orderNumber(order: AdminOrder): string {
-    return order.orderNumber ?? (order.id != null ? '#' + order.id : '—');
+    return order.orderNumber
+        ? displayOrderReference(order.orderNumber)
+        : order.id != null
+          ? '#' + order.id
+          : '—';
 }
 
 export function countItems(order: AdminOrder): number {

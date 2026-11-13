@@ -1,0 +1,58 @@
+.orders-detail-notes > svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    color: var(--orders-accent);
+}
+.orders-detail-notes strong {
+    display: block;
+    color: var(--orders-text);
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-1-semibold--letter-spacing, 0.15px);
+}
+.orders-detail-notes p {
+    margin: 5px 0 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-detail-totals {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-radius: var(--radius-xl, 12px);
+    background: var(--orders-ground);
+}
+.orders-detail-totals > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-detail-totals strong {
+    color: var(--orders-text);
+    text-align: right;
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-1-semibold--letter-spacing, 0.15px);
+}
+.orders-detail-totals .orders-detail-grand-total {
+    padding-top: 13px;
+    border-top: 1px solid var(--orders-divider);
+    color: var(--orders-text);
+    font-size: var(--text-body-semibold, 0.875rem);
+    line-height: var(--text-body-semibold--line-height, 1.25rem);
+    font-weight: var(--text-body-semibold--font-weight, 600);
+    letter-spacing: var(--text-body-semibold--letter-spacing, 0);
+}

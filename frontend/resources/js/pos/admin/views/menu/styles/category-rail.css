@@ -1,0 +1,107 @@
+.category-rail {
+    align-self: start;
+    position: sticky;
+    top: 18px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--pos-radius);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 12px 28px rgba(31, 34, 48, 0.055);
+    overflow: hidden;
+}
+.category-head {
+    margin-bottom: 14px;
+}
+
+.category-head span,
+.category-head strong {
+    display: block;
+}
+
+.category-head span {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.category-head strong {
+    margin-top: 5px;
+    color: var(--navy);
+    font-size: 18px;
+    line-height: 1.08;
+}
+
+.category-rail h2 {
+    font-size: 24px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+.category-list {
+    display: grid;
+    gap: 9px;
+    border-top: 0;
+}
+.category-list button {
+    position: relative;
+    min-height: 58px;
+    border: 0;
+    border-radius: 15px;
+    background: var(--ice);
+    box-shadow: none;
+    padding: 12px 42px 12px 13px;
+    text-align: left;
+    transition:
+        background var(--transition-hover),
+        color var(--transition-hover),
+        transform var(--transition-hover),
+        box-shadow var(--transition-hover);
+}
+.category-list button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(20, 26, 51, 0.08);
+}
+.category-list button.active {
+    color: #ffffff;
+    background: var(--navy);
+    box-shadow: 0 16px 34px rgba(20, 26, 51, 0.18);
+    padding-left: 14px;
+}
+.category-list button.active span {
+    color: rgba(255, 255, 255, 0.68);
+}
+.category-list strong,
+.category-list span,
+.category-list b {
+    display: block;
+}
+.category-list strong {
+    font-size: var(--font-size-sm);
+    line-height: 1.15;
+}
+.category-list span {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+.category-list b {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    min-width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-pill);
+    background: white;
+    color: var(--blue);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    transform: translateY(-50%);
+}
+
+.category-list button.active b {
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+}

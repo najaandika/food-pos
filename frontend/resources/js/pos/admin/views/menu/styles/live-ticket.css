@@ -1,0 +1,66 @@
+.pos-live-ticket {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-3);
+}
+
+.qr-live-ticket em {
+    color: var(--blue);
+}
+
+.pos-live-ticket > div {
+    min-width: 0;
+}
+
+.pos-live-ticket strong,
+.pos-live-ticket small,
+.pos-live-ticket em,
+.receipt-top span,
+.receipt-top small {
+    display: block;
+}
+
+.pos-live-ticket strong {
+    overflow: hidden;
+    color: var(--navy);
+    font-size: 18px;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pos-live-ticket small,
+.receipt-top small {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+}
+
+.pos-live-ticket em {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: var(--font-weight-semibold);
+}
+
+.pos-table-chip,
+.receipt-meta-chips span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    border-radius: var(--radius-pill);
+    background: var(--navy);
+    color: #ffffff;
+    padding: 0 11px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+}
+
+.receipt-meta-chips span {
+    background: var(--mist);
+    color: var(--blue);
+}

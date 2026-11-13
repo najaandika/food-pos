@@ -1,0 +1,331 @@
+/*
+ * R8.24 — BoardUI component parity for the actual mounted controls.
+ * Keep semantic colors in installed Chip, Textarea and Input components.
+ * These rules only neutralize legacy POS wrappers that override their tokens.
+ */
+
+/* The Description field uses BoardUI Textarea + React Aria Group.
+ * Do not paint a second focus outline on the native textarea. */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .c2-editor-fields
+    .owner-menu-description-field[data-focus-within]:not([data-invalid]),
+.menu-add-fields
+    .owner-menu-description-field[data-focus-within]:not([data-invalid]) {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .c2-editor-fields
+    .owner-menu-description-field
+    textarea:focus,
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .c2-editor-fields
+    .owner-menu-description-field
+    textarea:focus-visible,
+.menu-add-fields .owner-menu-description-field textarea:focus,
+.menu-add-fields .owner-menu-description-field textarea:focus-visible {
+    outline: none;
+    outline-offset: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Availability remains a button (its toggle behavior must not regress).
+ * The child is the same semantic BoardUI Chip as other POS status labels. */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .owner-menu-meta
+    .menu-availability-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    min-height: 32px;
+    min-width: 0;
+    max-width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg, 8px);
+    background: transparent;
+    color: inherit;
+    line-height: 1;
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .menu-availability-chip,
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .owner-flag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-width: 0;
+    min-height: 32px;
+    max-width: 100%;
+    padding: 5px 10px;
+    /* The installed BoardUI Chip uses rounded-md, not the legacy POS card radius. */
+    border-radius: var(--radius-md, 6px);
+    border: 1px solid transparent;
+    line-height: 20px;
+    font-size: var(--text-caption-1-medium, 12px);
+    font-weight: var(--text-caption-1-medium--font-weight, 500);
+}
+
+/* The availability status stays compact, while the promotional Chip follows
+ * R8.22D's mobile wrap intent with at most two visible lines. Its complete
+ * semantic text remains in the DOM for assistive technologies. */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .menu-availability-chip {
+    overflow: hidden;
+    white-space: nowrap;
+    overflow-wrap: normal;
+    text-overflow: ellipsis;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .owner-flag {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 50px;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    text-align: center;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .menu-availability-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
+    flex: 0 0 7px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+/* The legacy "owner-flag" classes used pale hardcoded backgrounds.
+ * Pair them with the exact BoardUI semantic Chip colors in both themes. */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .owner-flag {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+    color: var(--color-text-primary);
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-row
+    .owner-flag.active {
+    background: var(--color-status-blue-background);
+    border-color: transparent;
+    color: var(--color-status-blue-text);
+}
+
+/* The R8.16 light KPI exception is not correct for a dark dashboard.
+ * Keep hierarchy, but use dark BoardUI surfaces and text tokens. */
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-summary
+    article {
+    background: var(--color-background-primary-default);
+    border-color: var(--color-border-button-default);
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-summary
+    article.active-filter:not(.active-filter-danger) {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-accent-500);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-summary
+    article.active-filter-danger {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-summary
+    article
+    :is(strong, span) {
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-summary
+    article
+    small {
+    color: var(--color-text-secondary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .menu-editor-panel {
+    background: var(--color-background-primary-default);
+    border-color: var(--color-border-button-default);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .menu-editor-panel
+    .menu-editor-meta
+    article {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .menu-editor-panel
+    .menu-editor-meta
+    :is(strong, span) {
+    color: var(--color-text-primary);
+}
+
+/* The legacy editor selector can paint the Textarea shell a light gray
+ * even when the BoardUI editor itself is dark. Keep its field surface dark. */
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-description-field {
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-description-field
+    textarea {
+    background: transparent;
+    color: var(--color-text-primary);
+}
+
+/* Menu ticket has a dark panel but historically kept light readiness and
+ * totals strips and a legacy navy heading. Use the same semantic surfaces. */
+.dark .page-shell.pos-shell-layout .pos-menu-page .menu-order-details {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .pos-menu-page
+    .menu-order-details-heading
+    > strong {
+    color: var(--color-text-primary);
+}
+
+.dark .page-shell.pos-shell-layout .pos-menu-page .ticket-readiness {
+    background: var(--color-background-secondary-default);
+    border: 1px solid var(--color-border-button-default);
+}
+
+.dark .page-shell.pos-shell-layout .pos-menu-page .ticket-readiness span {
+    color: var(--color-text-primary);
+}
+
+.dark .page-shell.pos-shell-layout .pos-menu-page .receipt-footer {
+    background: transparent;
+    border-color: var(--color-border-button-default);
+}
+
+.dark .page-shell.pos-shell-layout .pos-menu-page .receipt-total {
+    color: var(--color-text-secondary);
+}
+
+.dark .page-shell.pos-shell-layout .pos-menu-page .receipt-total strong {
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .pos-menu-page
+    .receipt-customer
+    :is(span, small) {
+    color: var(--color-text-secondary);
+}
+
+/* Order identifiers are codes, not running prose. Do not split "DEMO-"
+ * across lines or force table codes into narrow multi-line badges. */
+.page-shell.pos-shell-layout .orders-workspace .orders-ticket-number {
+    display: block;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-wrap: normal;
+    word-break: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+}
+
+.page-shell.pos-shell-layout .orders-workspace .orders-ticket-top {
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.page-shell.pos-shell-layout
+    .orders-workspace
+    .orders-ticket-person
+    .orders-ticket-table {
+    flex: 0 0 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .menu-availability-chip {
+        transition: none;
+    }
+}

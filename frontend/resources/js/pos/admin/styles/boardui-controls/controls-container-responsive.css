@@ -1,0 +1,31 @@
+@container admin-main (max-width: 740px) {
+    .page-shell.pos-shell-layout .owner-menu-c2-page .c2-owner-status-tabs {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    .page-shell.pos-shell-layout
+        .owner-menu-c2-page
+        .c2-owner-status-tabs
+        button {
+        min-width: max-content;
+    }
+    .page-shell.pos-shell-layout .app-view .c2-owner-search {
+        flex: 1 1 100%;
+    }
+}
+@container admin-main (max-width: 560px) {
+    .page-shell.pos-shell-layout
+        .owner-menu-c2-page
+        .c2-editor-fields
+        > :nth-child(3),
+    .page-shell.pos-shell-layout
+        .owner-menu-c2-page
+        .c2-editor-fields
+        > :nth-child(4) {
+        grid-column: 1 / -1;
+    }
+    .page-shell.pos-shell-layout .owner-menu-c2-page .editor-switches {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+}

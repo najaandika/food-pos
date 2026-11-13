@@ -31,6 +31,7 @@ type StaffDraft = {
 
 type Props = {
     draft: StaffDraft;
+    persisted?: boolean;
     onChangeDraft: (updater: (current: StaffDraft) => StaffDraft) => void;
     isCreating: boolean;
     selectedStaff: AdminStaff | undefined;
@@ -44,6 +45,7 @@ type Props = {
 
 export function OwnerStaffForm({
     draft,
+    persisted = false,
     onChangeDraft,
     isCreating,
     selectedStaff,
@@ -76,7 +78,13 @@ export function OwnerStaffForm({
                 <div className="staff-finance-drawer-profile">
                     <Avatar
                         size="lg"
-                        color={draft.role === 'owner' ? 'blue' : 'neutral'}
+                        color={
+                            draft.role === 'owner'
+                                ? 'blue'
+                                : draft.role === 'kasir'
+                                  ? 'lime'
+                                  : 'pink'
+                        }
                         initials={
                             draft.name
                                 .trim()
@@ -177,14 +185,24 @@ export function OwnerStaffForm({
                         }
                         placeholder={
                             isCreating
-                                ? t('ownerStaff.minChars')
+                                ? isId
+                                    ? 'Minimal 8 karakter'
+                                    : 'Minimum 8 characters'
                                 : t('ownerStaff.keepCurrent')
                         }
                         isDisabled={isSaving}
                         hint={
-                            isId
-                                ? 'Perubahan password belum tersimpan permanen pada mode sesi.'
-                                : 'Password changes are not permanently saved in session mode.'
+                            persisted
+                                ? isId
+                                    ? isCreating
+                                        ? 'Wajib minimal 8 karakter. Password disimpan secara aman.'
+                                        : 'Kosongkan jika tidak ingin mengubah password.'
+                                    : isCreating
+                                      ? 'At least 8 characters. The password is securely stored.'
+                                      : 'Leave blank to keep the current password.'
+                                : isId
+                                  ? 'Password belum terhubung ke penyimpanan server.'
+                                  : 'Password is not connected to server storage.'
                         }
                     />
                 </div>
@@ -198,8 +216,8 @@ export function OwnerStaffForm({
                         </p>
                         <p className="text-caption-1-regular text-text-secondary">
                             {isId
-                                ? 'Akun nonaktif tidak dapat digunakan untuk masuk saat aturan backend diterapkan.'
-                                : 'Inactive accounts cannot sign in once backend access rules are applied.'}
+                                ? 'Akun nonaktif tidak dapat masuk ke aplikasi.'
+                                : 'Inactive accounts cannot sign in.'}
                         </p>
                     </div>
                     <Button

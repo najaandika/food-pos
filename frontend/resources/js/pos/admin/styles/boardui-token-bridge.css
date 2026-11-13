@@ -13,7 +13,7 @@
     .page-shell.pos-shell-layout .pos-boardui-account-panel,
     .pos-boardui-account-popover
 ) {
-    --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
 
     /* Tailwind v4 radii + BoardUI's separate 2lg (10px) theme token. */
     --radius-xs: 2px;
@@ -24,11 +24,42 @@
 
     /* BoardUI light-theme elevations, not the large legacy POS shadows. */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.1);
-    --shadow-md: 0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-md:
+        0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg:
+        0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.1);
     --shadow-card: 0 1px 1px 0 rgb(0 0 0 / 0.05);
 
     font-family: var(--font-sans);
+}
+
+/* Explicit Tailwind/BoardUI radius and shadow utility classes are opt-in to
+ * the canonical root scale. Do not remap the legacy --radius-* / --shadow-*
+ * variables on .page-shell itself: native POS cards/receipts depend on them.
+ * The original BoardUI components carry these utility classes themselves. */
+.page-shell.pos-shell-layout :where(.rounded-xs) {
+    --radius-xs: var(--pos-boardui-radius-xs);
+}
+.page-shell.pos-shell-layout :where(.rounded-sm) {
+    --radius-sm: var(--pos-boardui-radius-sm);
+}
+.page-shell.pos-shell-layout :where(.rounded-md) {
+    --radius-md: var(--pos-boardui-radius-md);
+}
+.page-shell.pos-shell-layout :where(.rounded-lg) {
+    --radius-lg: var(--pos-boardui-radius-lg);
+}
+.page-shell.pos-shell-layout :where(.rounded-xl) {
+    --radius-xl: var(--pos-boardui-radius-xl);
+}
+.page-shell.pos-shell-layout :where(.shadow-sm) {
+    --shadow-sm: var(--pos-boardui-shadow-sm);
+}
+.page-shell.pos-shell-layout :where(.shadow-md) {
+    --shadow-md: var(--pos-boardui-shadow-md);
+}
+.page-shell.pos-shell-layout :where(.shadow-lg) {
+    --shadow-lg: var(--pos-boardui-shadow-lg);
 }
 
 /* BoardUI components use focus-visible rings; suppress the POS 3px outline
@@ -39,7 +70,7 @@
         .page-shell.pos-shell-layout .pos-boardui-settings,
         .page-shell.pos-shell-layout .pos-boardui-account-panel
     )
-    :is(button, a, summary, [role="button"]):focus-visible {
+    :is(button, a, summary, [role='button']):focus-visible {
     outline: 2px solid var(--color-border-focus-ring);
     outline-offset: 2px;
 }
@@ -50,7 +81,12 @@
         .page-shell.pos-shell-layout .pos-boardui-settings,
         .page-shell.pos-shell-layout .pos-boardui-account-panel
     )
-    :is(button, a, summary, [role="button"])[class*="focus-visible:ring"]:focus-visible {
+    :is(
+        button,
+        a,
+        summary,
+        [role='button']
+    )[class*='focus-visible:ring']:focus-visible {
     outline: none;
 }
 
@@ -59,7 +95,7 @@
         .page-shell.pos-shell-layout .pos-boardui-settings,
         .page-shell.pos-shell-layout .pos-boardui-account-panel
     )
-    [role="group"][data-focus-within]
+    [role='group'][data-focus-within]
     input:focus-visible {
     outline: none;
 }

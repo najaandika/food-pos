@@ -10,7 +10,7 @@ import {
     invalidateSharedQueries,
     loadSharedQuery,
     peekSharedQuery,
-} from '../shared-query-cache';
+} from '../../shared/data/shared-query-cache';
 
 type Paginated<T> = { data: T[]; last_page: number };
 

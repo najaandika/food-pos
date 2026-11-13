@@ -1,0 +1,52 @@
+.waiters-workspace .waiters-table-tools {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.waiters-workspace .waiters-search,
+.waiters-workspace .waiters-search [role='group'] {
+    width: 100%;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-filter-scroll {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    padding: 2px 1px 6px;
+    scrollbar-width: thin;
+}
+
+.waiters-workspace .waiters-boardui-segments {
+    width: max-content;
+    min-width: max-content;
+}
+
+.waiters-workspace .waiters-boardui-segments button {
+    min-height: 36px;
+    white-space: nowrap;
+}
+
+.waiters-workspace .waiters-floor-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    padding: 12px 0 16px;
+    border-top: 1px solid var(--waiters-line);
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-floor-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.waiters-workspace .waiters-call-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-status-rose-text);
+}

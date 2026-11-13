@@ -1,0 +1,63 @@
+.order-type-tabs {
+    display: flex;
+    gap: var(--space-1);
+    border-radius: var(--pos-radius-sm);
+    background: var(--ice);
+    padding: 6px;
+}
+
+.order-type-tabs button {
+    height: 40px;
+    border: 0;
+    border-radius: 13px;
+    background: transparent;
+    color: var(--muted);
+    padding: 0 14px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.order-type-tabs button.active {
+    background: var(--blue);
+    color: white;
+    box-shadow: 0 12px 26px rgba(48, 71, 255, 0.22);
+}
+
+.receipt-top span {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+}
+
+.pos-counter-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-fixed-2);
+}
+
+.pos-counter-stats article {
+    min-height: 50px;
+    border-radius: var(--pos-radius-sm);
+    background: var(--ice);
+    padding: 9px 11px;
+}
+
+.pos-counter-stats span,
+.pos-counter-stats strong {
+    display: block;
+}
+
+.pos-counter-stats span {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.pos-counter-stats strong {
+    margin-top: 6px;
+    color: var(--navy);
+    font-size: var(--font-size-base);
+    line-height: 1;
+}

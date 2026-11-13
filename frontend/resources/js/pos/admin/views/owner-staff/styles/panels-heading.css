@@ -1,0 +1,33 @@
+.staff-finance-table-panel {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: 24px;
+    background: var(--color-background-primary-default);
+    box-shadow: var(--shadow-card);
+}
+
+.staff-finance-panel-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.staff-finance-panel-heading > div {
+    min-width: 0;
+}
+
+.staff-finance-panel-heading h2 {
+    margin: 4px 0 0;
+}
+
+.staff-finance-panel-heading p {
+    margin: 6px 0 0;
+}
+
+.staff-finance-eyebrow {
+    color: var(--color-accent-600);
+    letter-spacing: 0.08em;
+}

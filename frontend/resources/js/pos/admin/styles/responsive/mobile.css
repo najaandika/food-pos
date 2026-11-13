@@ -1,0 +1,7 @@
+/* Source: admin-responsive-mobile.css */
+/* admin-responsive part 4/4 - lines 1217-1564 */
+
+/* Dashboard final polish: keep the landing admin page compact across sidebar widths. */
+@import './mobile/mobile-dashboard.css';
+@import './mobile/drawer-overrides.css';
+@import './mobile/mobile-sidebar-breakpoints.css';

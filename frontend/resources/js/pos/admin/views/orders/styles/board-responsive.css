@@ -1,0 +1,79 @@
+@container admin-main (max-width: 960px) {
+    .orders-workspace .orders-kanban-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .orders-workspace .orders-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .orders-workspace .orders-secondary-filters {
+        flex-wrap: wrap;
+    }
+    .orders-workspace .orders-search-row {
+        flex: 1 1 240px;
+        max-width: none;
+    }
+}
+
+@container admin-main (max-width: 620px) {
+    .orders-workspace .orders-kanban-track {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .orders-workspace .orders-kpi-grid {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    .orders-workspace .orders-kpi-grid > section {
+        height: 88px;
+        min-height: 88px;
+        padding: 10px 12px;
+    }
+    .orders-workspace .orders-controls {
+        padding: 12px;
+    }
+    .orders-workspace .orders-controls-heading {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .orders-workspace .orders-primary-filters {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .orders-workspace .orders-stage-filters {
+        flex-basis: 100%;
+    }
+    .orders-workspace .orders-more-statuses {
+        width: 100%;
+    }
+    .orders-workspace .orders-secondary-filters {
+        gap: 9px;
+    }
+    .orders-workspace .orders-source-filters {
+        flex-basis: 100%;
+    }
+    .orders-workspace .orders-search-row {
+        flex: 1 1 100%;
+    }
+    .orders-workspace .orders-stage-column {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 1120px) {
+    .orders-workspace .orders-kanban-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .orders-workspace .orders-kanban-track {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .orders-workspace .orders-controls {
+        padding: 12px;
+    }
+    .orders-workspace .orders-kpi-grid > section {
+        height: 88px;
+        min-height: 88px;
+        padding: 10px 12px;
+    }
+}

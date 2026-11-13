@@ -1,0 +1,4 @@
+/* Orders status colors use the official BoardUI StatusChip semantic tones.
+ * Remove the old 13%-mix override, including its neutral foreground override.
+ * Keep contextual 27px chip geometry in the separate boardui-primitives.css.
+ */

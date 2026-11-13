@@ -1,0 +1,107 @@
+.receipt-panel::-webkit-scrollbar,
+.receipt-order-scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.receipt-panel::-webkit-scrollbar-button,
+.receipt-order-scroll::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.receipt-panel::-webkit-scrollbar-track,
+.receipt-order-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.receipt-panel::-webkit-scrollbar-thumb,
+.receipt-order-scroll::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: var(--radius-pill);
+    background: rgba(20, 26, 51, 0.2);
+    background-clip: padding-box;
+}
+
+.receipt-panel,
+.receipt-order-scroll {
+    scrollbar-color: transparent transparent;
+    scrollbar-width: none;
+}
+
+.receipt-top {
+    justify-content: space-between;
+    gap: var(--pos-gap);
+}
+.receipt-top h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.receipt-customer {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-3);
+}
+
+.receipt-meta-chips {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-fixed-2);
+}
+
+.receipt-customer > div {
+    min-width: 0;
+}
+
+.receipt-customer h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.receipt-date {
+    margin: 18px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    color: #36393b;
+    font-size: var(--font-size-sm);
+}
+
+.ticket-readiness {
+    display: grid;
+    gap: 7px;
+    margin: -4px 0 14px;
+    border-radius: var(--radius-sm);
+    background: var(--ice);
+    padding: 12px;
+}
+
+.ticket-readiness span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-2);
+    color: var(--navy);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.ticket-readiness b {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--success);
+}
+
+.ticket-readiness span:last-child b {
+    background: var(--blue);
+}
+/* R8.16C: the dark receipt surface from R8.15D needs a readable date.
+   Scope to the actual receipt panel; print/light tickets remain untouched. */
+.dark .pos-menu-page .receipt-panel .receipt-date {
+    color: var(--color-text-primary);
+}

@@ -1,5 +1,6 @@
 import { RiDeleteBin6Line as Trash2 } from '@remixicon/react';
 import Image from '@/pos/components/pos-image';
+import { FileUpload } from '../../../../../../components/base/file-upload/file-upload';
 import { Badge } from '../../../../../../components/base/badges/badge';
 import { Button } from '../../../../../../components/base/buttons/button';
 import { IconButton } from '../../../../../../components/base/buttons/icon-button';
@@ -37,6 +38,7 @@ type Props = {
     inDrawer?: boolean;
     hideActions?: boolean;
     onSave: () => void;
+    onImageUploadingChange: (uploading: boolean) => void;
     onDelete?: () => void;
     onDiscard: () => void;
 };
@@ -51,10 +53,77 @@ export function OwnerMenuForm({
     inDrawer = false,
     hideActions = false,
     onSave,
+    onImageUploadingChange,
     onDelete,
     onDiscard,
 }: Props) {
     const { t } = useLocale();
+    const uploadImage = async (file: File): Promise<void> => {
+        const types = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!types.includes(file.type) || file.size > 2 * 1024 * 1024) {
+            throw new Error('Pilih gambar JPG, PNG, atau WebP maksimal 2 MB.');
+        }
+
+        const encoded = document.cookie
+            .split('; ')
+            .find((value) => value.startsWith('XSRF-TOKEN='))
+            ?.slice('XSRF-TOKEN='.length);
+        const token = encoded ? decodeURIComponent(encoded) : undefined;
+        const data = new FormData();
+        data.append('image', file);
+        let response: Response;
+        try {
+            response = await fetch('/pos/menu-images', {
+                method: 'POST',
+                credentials: 'same-origin',
+                cache: 'no-store',
+                headers: {
+                    Accept: 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    ...(token ? { 'X-XSRF-TOKEN': token } : {}),
+                },
+                body: data,
+            });
+        } catch {
+            throw new Error(
+                'Tidak dapat menghubungi Laravel untuk mengunggah gambar.',
+            );
+        }
+
+        const result: unknown = await response.json().catch(() => null);
+        if (!response.ok) {
+            const error =
+                result && typeof result === 'object' && 'errors' in result
+                    ? (result as { errors?: { image?: string[] } }).errors
+                          ?.image?.[0]
+                    : undefined;
+            throw new Error(
+                error ??
+                    (response.status === 403
+                        ? 'Hanya Owner aktif yang dapat mengunggah gambar.'
+                        : response.status === 419 || response.status === 401
+                          ? 'Sesi berakhir. Silakan login ulang.'
+                          : 'Upload gambar gagal. Silakan coba lagi.'),
+            );
+        }
+
+        const url =
+            result && typeof result === 'object' && 'image_url' in result
+                ? (result as { image_url?: unknown }).image_url
+                : null;
+        if (
+            typeof url !== 'string' ||
+            !/^\/storage\/menu\/[A-Za-z0-9._/-]+$/.test(url)
+        ) {
+            throw new Error('URL gambar dari Laravel tidak valid.');
+        }
+        onChangeDraft((current) => ({ ...current, imageUrl: url }));
+    };
+    const previewLabel =
+        draft.badge ||
+        (draft.isBestSeller
+            ? t('ownerMenu.bestSeller')
+            : t('ownerMenu.livePreview'));
     const preview = (
         <div className="editor-preview">
             <Image
@@ -63,12 +132,7 @@ export function OwnerMenuForm({
                 width={900}
                 height={600}
             />
-            <span>
-                {draft.badge ||
-                    (draft.isBestSeller
-                        ? t('ownerMenu.bestSeller')
-                        : t('ownerMenu.livePreview'))}
-            </span>
+            <span title={previewLabel}>{previewLabel}</span>
         </div>
     );
 
@@ -81,7 +145,7 @@ export function OwnerMenuForm({
             }
         >
             <div className="menu-editor-head">
-                <Badge color={isCreating ? 'primary' : 'neutral'}>
+                <Badge color="primary">
                     {isCreating
                         ? t('ownerMenu.newItem')
                         : t('ownerMenu.editingItem')}
@@ -194,6 +258,17 @@ export function OwnerMenuForm({
                         }))
                     }
                 />
+                <div className="owner-menu-image-upload">
+                    <p className="text-body-medium text-text-primary">
+                        {t('ownerMenu.imageUrl')}
+                    </p>
+                    <FileUpload
+                        uploadFile={uploadImage}
+                        onUploadingChange={onImageUploadingChange}
+                        allowedExtensions={['jpg', 'jpeg', 'png', 'webp']}
+                        maxBytes={2 * 1024 * 1024}
+                    />
+                </div>
                 <Input
                     label={t('ownerMenu.imageUrl')}
                     size={inDrawer ? 'medium' : 'small'}
@@ -212,7 +287,9 @@ export function OwnerMenuForm({
                     label={t('ownerMenu.description')}
                     size={inDrawer ? 'medium' : 'small'}
                     fieldClassName={
-                        inDrawer ? 'menu-add-focus-field' : undefined
+                        inDrawer
+                            ? 'menu-add-focus-field owner-menu-description-field'
+                            : 'owner-menu-description-field'
                     }
                     resize="vertical"
                     value={draft.description}

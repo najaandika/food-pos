@@ -1,0 +1,68 @@
+/* Official Drawer is portalled outside the POS view. The dialog itself
+   carries pos-menu-page so the scoped form & receipt styles still apply. */
+.pos-menu-page.menu-p2-cart-dialog {
+    min-width: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+.pos-menu-page.menu-p2-cart-dialog .menu-p2-drawer-heading {
+    padding: 16px 17px 12px;
+    border-bottom: 1px solid var(--menu-p2-line);
+}
+
+.pos-menu-page.menu-p2-cart-dialog .menu-p2-cart-drawer-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    padding: 10px 14px 16px;
+}
+
+.pos-menu-page.menu-p2-cart-dialog .receipt-panel {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    width: 100%;
+    padding: 0;
+    position: relative;
+    top: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.pos-menu-page.menu-p2-cart-dialog .receipt-top,
+.pos-menu-page.menu-p2-cart-dialog .ticket-readiness {
+    display: none;
+}
+
+/* Keep the success receipt number after sending, but hide the redundant
+   idle 'ready to send' message in the mobile ordering drawer. */
+.pos-menu-page.menu-p2-cart-dialog .receipt-date {
+    display: none;
+}
+
+.pos-menu-page.menu-p2-cart-dialog
+    .receipt-panel:has(.order-sent-card)
+    .receipt-date {
+    display: block;
+}
+
+.pos-menu-page.menu-p2-cart-dialog .receipt-order-scroll {
+    flex: 1 1 auto;
+    min-height: 100px;
+}
+
+.pos-menu-page.menu-p2-cart-dialog .receipt-footer {
+    flex: 0 0 auto;
+}
+
+/* R8.15D: the official Drawer is a portal; its P2 transparent receipt
+   override otherwise wins against the dark surface rule in the base menu. */
+.dark .pos-menu-page.menu-p2-cart-dialog .receipt-panel {
+    background: var(--color-background-primary-default);
+    color: var(--color-text-primary);
+}

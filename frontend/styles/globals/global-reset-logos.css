@@ -1,0 +1,36 @@
+/* Reset + base */
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-ligatures: contextual;
+    font-kerning: normal;
+}
+
+html {
+    color-scheme: light;
+    background-color: var(--color-background-full);
+}
+html.dark {
+    color-scheme: dark;
+}
+body {
+    background-color: var(--color-background-full);
+    color: var(--color-text-primary);
+}
+
+/* Theme-aware monochrome BoardUI mark. Both images keep their intrinsic
+ * dimensions while the root theme class decides which one participates in
+ * layout, avoiding a light-logo flash during hydration. */
+.theme-logo-dark,
+.theme-asset-dark {
+    display: none;
+}
+.dark .theme-logo-light,
+.dark .theme-asset-light {
+    display: none;
+}
+.dark .theme-logo-dark,
+.dark .theme-asset-dark {
+    display: block;
+}

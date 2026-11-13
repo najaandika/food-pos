@@ -31,6 +31,9 @@ type StaggerState = 'shown' | 'hiding' | 'hidden';
 export interface FileUploadProps {
     /** Called after the progress and success states finish. */
     onUploadComplete?: (file: File) => void;
+    /** Real backend transfer: disables simulated progress. */
+    uploadFile?: (file: File) => Promise<void>;
+    onUploadingChange?: (uploading: boolean) => void;
     /** Accepted filename extensions without dots. */
     allowedExtensions?: readonly string[];
     /** Maximum accepted file size in bytes. */
@@ -135,6 +138,8 @@ function ringPath(
 
 export function FileUpload({
     onUploadComplete,
+    uploadFile,
+    onUploadingChange,
     allowedExtensions = DEFAULT_EXTENSIONS,
     maxBytes = DEFAULT_MAX_BYTES,
     renderFileIcon,
@@ -192,6 +197,33 @@ export function FileUpload({
         setFile(nextFile);
         setProgress(0);
         setPhase('uploading');
+        setRejection(null);
+
+        if (uploadFile) {
+            onUploadingChange?.(true);
+            void uploadFile(nextFile)
+                .then(() => {
+                    setPhase('complete');
+                    onUploadComplete?.(nextFile);
+                    timers.current.push(
+                        setTimeout(() => {
+                            setPhase('idle');
+                            setFile(null);
+                        }, 1200),
+                    );
+                })
+                .catch((reason: unknown) => {
+                    setRejection(
+                        reason instanceof Error
+                            ? reason.message
+                            : 'Upload gagal. Coba lagi.',
+                    );
+                    setPhase('idle');
+                    setFile(null);
+                })
+                .finally(() => onUploadingChange?.(false));
+            return;
+        }
 
         let value = 0;
         const tick = () => {
@@ -313,7 +345,7 @@ export function FileUpload({
                     strokeWidth={2}
                     strokeLinecap="round"
                     pathLength={100}
-                    strokeDasharray={`${busy ? (progress >= 100 ? 102 : progress) : 0} 200`}
+                    strokeDasharray={`${uploadFile ? 0 : busy ? (progress >= 100 ? 102 : progress) : 0} 200`}
                     className="transition-[stroke-dasharray] duration-200 ease-linear"
                 />
             </svg>
@@ -324,7 +356,7 @@ export function FileUpload({
                     'absolute -top-[9.5px] left-1/2 -translate-x-1/2 rounded-md bg-accent-400 px-1.5 py-0.5',
                     'text-caption-1-medium whitespace-nowrap text-white tabular-nums',
                     '[transition:opacity_160ms_ease-out,filter_160ms_ease-out,translate_300ms_ease-out]',
-                    busy
+                    busy && !uploadFile
                         ? 'translate-y-0 opacity-100 blur-0'
                         : '-translate-y-2.5 opacity-0 blur-[2px]',
                 )}

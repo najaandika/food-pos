@@ -1,0 +1,117 @@
+.pos-menu-page .menu-order-details {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 10px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--ice);
+}
+
+.pos-menu-page .menu-order-details-heading,
+.pos-menu-page .menu-guests-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+}
+
+.pos-menu-page .menu-order-details-heading > strong {
+    color: var(--navy);
+    font-size: var(--font-size-sm);
+}
+
+.pos-menu-page .menu-void-button {
+    min-height: 29px;
+    border: 0;
+    border-radius: 9px;
+    background: rgba(255, 77, 109, 0.09);
+    color: var(--danger);
+    padding: 5px 9px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+}
+
+.pos-menu-page .menu-void-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.pos-menu-page .menu-order-field {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+}
+
+.pos-menu-page .menu-order-field > span {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--muted);
+}
+
+.pos-menu-page .menu-order-field input,
+.pos-menu-page .menu-order-field select {
+    width: 100%;
+    min-width: 0;
+    min-height: 39px;
+    padding: 8px 11px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    outline: none;
+    background: #fff;
+    color: var(--navy);
+    font: inherit;
+    font-size: var(--font-size-sm);
+}
+
+.pos-menu-page .menu-order-field input:focus-visible,
+.pos-menu-page .menu-order-field select:focus-visible,
+.pos-menu-page .menu-guests-stepper button:focus-visible,
+.pos-menu-page .menu-void-button:focus-visible,
+.pos-menu-page .menu-cart-drawer-head button:focus-visible,
+.pos-menu-page .menu-mobile-cart-bar:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+.pos-menu-page .menu-order-field small,
+.pos-menu-page .menu-guests-row small {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.pos-menu-page .menu-guests-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 3px;
+}
+
+.pos-menu-page .menu-guests-stepper button {
+    display: grid;
+    place-items: center;
+    width: 31px;
+    height: 31px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--mist);
+    color: var(--blue);
+    cursor: pointer;
+}
+
+.pos-menu-page .menu-guests-stepper button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pos-menu-page .menu-guests-stepper output {
+    min-width: 17px;
+    text-align: center;
+    color: var(--navy);
+    font-weight: var(--font-weight-bold);
+}

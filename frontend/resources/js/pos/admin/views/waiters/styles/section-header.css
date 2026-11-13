@@ -1,0 +1,41 @@
+.waiters-workspace .waiters-boardui-panel {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 20px;
+    background: var(--waiters-surface);
+    box-shadow: var(--shadow-card);
+}
+
+.waiters-workspace .waiters-section-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.waiters-workspace .waiters-section-head > div {
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-section-label {
+    margin: 0 0 6px;
+    color: var(--waiters-accent);
+}
+
+.waiters-workspace .waiters-section-head h2 {
+    margin: 0;
+    color: var(--waiters-text);
+    font-weight: var(--text-title-3-semibold--font-weight);
+    line-height: var(--text-title-3-semibold--line-height);
+}
+
+.waiters-workspace .waiters-section-head p:not(.waiters-section-label) {
+    margin: 5px 0 0;
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-section-head > span {
+    flex-shrink: 0;
+}

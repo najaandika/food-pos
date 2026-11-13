@@ -76,7 +76,7 @@ export function CartReviewPanel({
         submitting;
 
     return (
-        <section className="mx-auto flex max-w-5xl flex-col gap-6">
+        <section className="mx-auto flex w-full max-w-5xl min-w-0 flex-col gap-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <span className="text-caption-1-semibold text-text-tertiary">
@@ -150,7 +150,7 @@ export function CartReviewPanel({
                         ))}
                     </div>
 
-                    <div className="border-border-button-default bg-background-primary-default grid gap-4 rounded-3xl border p-5 sm:grid-cols-2 sm:p-6">
+                    <div className="border-border-button-default bg-background-primary-default grid min-w-0 grid-cols-1 gap-4 rounded-3xl border p-5 sm:grid-cols-2 sm:p-6">
                         <NumberField
                             fieldClassName="customer-input-focus"
                             id="customer-guests"

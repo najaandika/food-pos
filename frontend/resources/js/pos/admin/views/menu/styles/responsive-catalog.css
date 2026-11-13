@@ -1,0 +1,11 @@
+@container admin-main (max-width: 1120px) {
+    .menu-layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+    }
+
+    .receipt-panel {
+        grid-column: 1 / -1;
+        position: static;
+        max-height: none;
+    }
+}

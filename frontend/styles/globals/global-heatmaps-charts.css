@@ -1,0 +1,205 @@
+/* ---------------------------------------------------------------------------
+ * Chart entrance animations (AI profile template & contributions heatmap)
+ * ------------------------------------------------------------------------- */
+
+/* Heatmap cells pop in softly — each cell gets a random-looking per-cell
+ * animation-delay so the grid fills in a scattered order. */
+.contributions-grid {
+    --contribution-tier-0: var(--color-chart-neutral);
+}
+.contributions-grid[data-accent='emerald'] {
+    --contribution-tier-1: var(--color-emerald-200);
+    --contribution-tier-2: var(--color-emerald-400);
+    --contribution-tier-3: var(--color-emerald-500);
+    --contribution-tier-4: var(--color-emerald-600);
+    --contribution-tier-5: var(--color-emerald-700);
+}
+.contributions-grid[data-accent='green'] {
+    --contribution-tier-1: var(--color-green-200);
+    --contribution-tier-2: var(--color-green-400);
+    --contribution-tier-3: var(--color-green-500);
+    --contribution-tier-4: var(--color-green-600);
+    --contribution-tier-5: var(--color-green-700);
+}
+.contributions-grid[data-accent='teal'] {
+    --contribution-tier-1: var(--color-teal-200);
+    --contribution-tier-2: var(--color-teal-400);
+    --contribution-tier-3: var(--color-teal-500);
+    --contribution-tier-4: var(--color-teal-600);
+    --contribution-tier-5: var(--color-teal-700);
+}
+.contributions-grid[data-accent='cyan'] {
+    --contribution-tier-1: var(--color-cyan-200);
+    --contribution-tier-2: var(--color-cyan-400);
+    --contribution-tier-3: var(--color-cyan-500);
+    --contribution-tier-4: var(--color-cyan-600);
+    --contribution-tier-5: var(--color-cyan-700);
+}
+.contributions-grid[data-accent='blue'] {
+    --contribution-tier-1: var(--color-blue-200);
+    --contribution-tier-2: var(--color-blue-400);
+    --contribution-tier-3: var(--color-blue-500);
+    --contribution-tier-4: var(--color-blue-600);
+    --contribution-tier-5: var(--color-blue-700);
+}
+.contributions-grid[data-accent='indigo'] {
+    --contribution-tier-1: var(--color-indigo-200);
+    --contribution-tier-2: var(--color-indigo-400);
+    --contribution-tier-3: var(--color-indigo-500);
+    --contribution-tier-4: var(--color-indigo-600);
+    --contribution-tier-5: var(--color-indigo-700);
+}
+.contributions-grid[data-accent='violet'] {
+    --contribution-tier-1: var(--color-violet-200);
+    --contribution-tier-2: var(--color-violet-400);
+    --contribution-tier-3: var(--color-violet-500);
+    --contribution-tier-4: var(--color-violet-600);
+    --contribution-tier-5: var(--color-violet-700);
+}
+.contributions-grid[data-accent='rose'] {
+    --contribution-tier-1: var(--color-rose-200);
+    --contribution-tier-2: var(--color-rose-400);
+    --contribution-tier-3: var(--color-rose-500);
+    --contribution-tier-4: var(--color-rose-600);
+    --contribution-tier-5: var(--color-rose-700);
+}
+.contributions-grid[data-accent='amber'] {
+    --contribution-tier-1: var(--color-amber-200);
+    --contribution-tier-2: var(--color-amber-400);
+    --contribution-tier-3: var(--color-amber-500);
+    --contribution-tier-4: var(--color-amber-600);
+    --contribution-tier-5: var(--color-amber-700);
+}
+
+.dark .contributions-grid[data-accent='emerald'] {
+    --contribution-tier-1: var(--color-emerald-950);
+    --contribution-tier-2: var(--color-emerald-800);
+    --contribution-tier-3: var(--color-emerald-700);
+    --contribution-tier-4: var(--color-emerald-600);
+    --contribution-tier-5: var(--color-emerald-500);
+}
+.dark .contributions-grid[data-accent='green'] {
+    --contribution-tier-1: var(--color-green-950);
+    --contribution-tier-2: var(--color-green-800);
+    --contribution-tier-3: var(--color-green-700);
+    --contribution-tier-4: var(--color-green-600);
+    --contribution-tier-5: var(--color-green-500);
+}
+.dark .contributions-grid[data-accent='teal'] {
+    --contribution-tier-1: var(--color-teal-950);
+    --contribution-tier-2: var(--color-teal-800);
+    --contribution-tier-3: var(--color-teal-700);
+    --contribution-tier-4: var(--color-teal-600);
+    --contribution-tier-5: var(--color-teal-500);
+}
+.dark .contributions-grid[data-accent='cyan'] {
+    --contribution-tier-1: var(--color-cyan-950);
+    --contribution-tier-2: var(--color-cyan-800);
+    --contribution-tier-3: var(--color-cyan-700);
+    --contribution-tier-4: var(--color-cyan-600);
+    --contribution-tier-5: var(--color-cyan-500);
+}
+.dark .contributions-grid[data-accent='blue'] {
+    --contribution-tier-1: var(--color-blue-950);
+    --contribution-tier-2: var(--color-blue-800);
+    --contribution-tier-3: var(--color-blue-700);
+    --contribution-tier-4: var(--color-blue-600);
+    --contribution-tier-5: var(--color-blue-500);
+}
+.dark .contributions-grid[data-accent='indigo'] {
+    --contribution-tier-1: var(--color-indigo-950);
+    --contribution-tier-2: var(--color-indigo-800);
+    --contribution-tier-3: var(--color-indigo-700);
+    --contribution-tier-4: var(--color-indigo-600);
+    --contribution-tier-5: var(--color-indigo-500);
+}
+.dark .contributions-grid[data-accent='violet'] {
+    --contribution-tier-1: var(--color-violet-950);
+    --contribution-tier-2: var(--color-violet-800);
+    --contribution-tier-3: var(--color-violet-700);
+    --contribution-tier-4: var(--color-violet-600);
+    --contribution-tier-5: var(--color-violet-500);
+}
+.dark .contributions-grid[data-accent='rose'] {
+    --contribution-tier-1: var(--color-rose-950);
+    --contribution-tier-2: var(--color-rose-800);
+    --contribution-tier-3: var(--color-rose-700);
+    --contribution-tier-4: var(--color-rose-600);
+    --contribution-tier-5: var(--color-rose-500);
+}
+.dark .contributions-grid[data-accent='amber'] {
+    --contribution-tier-1: var(--color-amber-950);
+    --contribution-tier-2: var(--color-amber-800);
+    --contribution-tier-3: var(--color-amber-700);
+    --contribution-tier-4: var(--color-amber-600);
+    --contribution-tier-5: var(--color-amber-500);
+}
+
+.contribution-cell[data-tier='0'] {
+    background-color: var(--contribution-tier-0);
+}
+.contribution-cell[data-tier='1'] {
+    background-color: var(--contribution-tier-1);
+}
+.contribution-cell[data-tier='2'] {
+    background-color: var(--contribution-tier-2);
+}
+.contribution-cell[data-tier='3'] {
+    background-color: var(--contribution-tier-3);
+}
+.contribution-cell[data-tier='4'] {
+    background-color: var(--contribution-tier-4);
+}
+.contribution-cell[data-tier='5'] {
+    background-color: var(--contribution-tier-5);
+}
+
+@keyframes cell-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.animate-cell-pop {
+    animation: cell-pop 380ms ease-out both;
+}
+
+/* Bars grow up from the baseline; a per-bar delay staggers them left→right. */
+@keyframes bar-rise {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+.animate-bar-rise {
+    transform-origin: bottom;
+    animation: bar-rise 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Line chart draws in left→right via a clip-path sweep over the whole plot
+ * (line + gradient area together). */
+@keyframes chart-reveal {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+.animate-chart-reveal {
+    animation: chart-reveal 1800ms cubic-bezier(0.33, 0, 0.15, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-cell-pop,
+    .animate-bar-rise,
+    .animate-chart-reveal {
+        animation: none;
+    }
+}

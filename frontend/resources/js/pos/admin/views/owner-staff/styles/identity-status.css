@@ -1,0 +1,47 @@
+.staff-finance-identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.staff-finance-identity-text {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.staff-finance-name {
+    width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text-primary);
+    text-align: left;
+    cursor: pointer;
+}
+
+.staff-finance-name:hover {
+    color: var(--color-accent-600);
+}
+
+.staff-finance-name:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.staff-finance-identity-text > p {
+    margin: 0;
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.staff-finance-activity {
+    display: grid;
+    gap: 3px;
+    white-space: nowrap;
+}

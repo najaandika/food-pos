@@ -1,0 +1,29 @@
+/*
+ * UI C2 — BoardUI control consistency.
+ * Scope overrides to existing POS management screens only.
+ * BoardUI components own their semantics/keyboard/disabled behavior;
+ * these rules neutralize legacy POS rules that otherwise paint them navy.
+ */
+
+/* Shared Owner search and single-row filter tabs. */
+.page-shell.pos-shell-layout .app-view .c2-owner-search {
+    flex: 1 1 230px;
+    width: min(100%, 310px);
+    max-width: 100%;
+    min-width: min(200px, 100%);
+}
+.page-shell.pos-shell-layout .app-view .c2-owner-search > [role='group'] {
+    border-radius: var(--radius-2lg, 10px);
+}
+.page-shell.pos-shell-layout .app-view .c2-owner-search input:focus-visible {
+    /* The SearchField group owns the BoardUI ring, not the inner input. */
+    outline: none;
+    box-shadow: none;
+}
+.page-shell.pos-shell-layout
+    .app-view
+    .c2-owner-search
+    [role='group'][data-focus-within] {
+    box-shadow: inset 0 0 0 2px
+        var(--color-border-focus-ring, var(--color-accent-600));
+}

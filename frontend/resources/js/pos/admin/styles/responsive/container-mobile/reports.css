@@ -1,0 +1,139 @@
+/* Reports, charts and visual indicators; original rule order preserved. */
+@container admin-main (max-width: 560px) {
+    .report-layout,
+    .report-main,
+    .report-side {
+        gap: var(--space-fixed-3);
+        min-width: 0;
+    }
+
+    .report-topbar {
+        align-items: start;
+    }
+
+    .report-actions {
+        gap: var(--space-fixed-2);
+    }
+
+    .report-actions button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .report-actions img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .report-stat,
+    .habits-card,
+    .product-stat-card,
+    .growth-card {
+        padding: 16px;
+        border-radius: var(--pos-radius);
+    }
+
+    .report-stat {
+        min-height: 116px;
+    }
+
+    .report-stat strong {
+        margin-top: 14px;
+        font-size: 26px;
+    }
+
+    .report-stat small {
+        max-width: none;
+        font-size: var(--font-size-xs);
+    }
+
+    .report-card-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--space-3);
+        align-items: start;
+    }
+
+    .report-card-head h2 {
+        font-size: 19px;
+        line-height: 1.15;
+    }
+
+    .report-card-head p {
+        font-size: var(--font-size-xs);
+        line-height: 1.35;
+    }
+
+    .report-card-head button {
+        padding: 7px 10px;
+        font-size: var(--font-size-xs);
+    }
+
+    .bar-chart {
+        height: 188px;
+        gap: 9px;
+        margin-top: 18px;
+        overflow: hidden;
+    }
+
+    .bars {
+        height: 144px;
+        gap: 4px;
+    }
+
+    .bars span,
+    .bars b {
+        width: 10px;
+    }
+
+    .donut-wrap {
+        margin: 14px 0;
+    }
+
+    .donut-ring {
+        width: min(184px, 72cqw);
+        aspect-ratio: 1 / 1;
+    }
+
+    .donut-ring strong {
+        font-size: 24px;
+    }
+
+    .product-list p,
+    .country-list p {
+        gap: var(--space-fixed-2);
+        font-size: var(--font-size-xs);
+    }
+
+    .bubble-row {
+        height: 132px;
+        margin: 16px 0;
+        overflow: hidden;
+    }
+
+    .bubble-row strong {
+        left: 34%;
+        top: 10px;
+        width: 84px;
+        height: 84px;
+    }
+
+    .bubble-row em {
+        left: 12%;
+        width: 72px;
+        height: 72px;
+    }
+
+    .bubble-row b {
+        right: 12%;
+        width: 58px;
+        height: 58px;
+    }
+
+    .bubble-row span {
+        left: 8%;
+        top: 26px;
+        width: 52px;
+        height: 52px;
+    }
+}

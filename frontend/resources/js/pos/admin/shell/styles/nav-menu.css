@@ -1,0 +1,105 @@
+.pos-shell-layout .pos-shell-icon-action {
+    background: var(--pos-nav-surface);
+    border-color: var(--pos-nav-border);
+    border-radius: 10px;
+    color: var(--pos-nav-icon);
+    box-shadow: none;
+}
+
+.pos-shell-layout .pos-shell-icon-action:hover {
+    color: var(--pos-nav-foreground);
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-menu {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    gap: 22px;
+    overflow: auto;
+    padding: 0 4px 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pos-nav-border) transparent;
+}
+
+.pos-shell-menu-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pos-shell-menu-group + .pos-shell-menu-group {
+    padding-top: 16px;
+    border-top: 1px solid var(--pos-nav-divider);
+}
+
+.pos-shell-menu-heading {
+    padding-inline: 12px;
+    color: var(--pos-nav-muted);
+    text-transform: uppercase;
+}
+
+.pos-shell-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pos-shell-menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 42px;
+    padding-inline: 12px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--pos-nav-muted);
+    text-align: start;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.pos-shell-menu-link:hover {
+    color: var(--pos-nav-foreground);
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-menu-link-active,
+.pos-shell-menu-link-active:hover {
+    color: var(--pos-nav-accent-strong);
+    background: var(--pos-nav-selected);
+}
+
+.pos-shell-menu-link-active::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 11px;
+    bottom: 11px;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--pos-nav-accent);
+}
+
+.pos-shell-menu-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: var(--pos-nav-icon);
+}
+
+.pos-shell-menu-link-active .pos-shell-menu-icon {
+    color: var(--pos-nav-accent);
+}
+
+.pos-shell-menu-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

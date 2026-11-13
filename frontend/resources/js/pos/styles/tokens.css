@@ -1,3 +1,19 @@
+/* Freeze the canonical BoardUI Free scale at the document root before the
+ * POS legacy page-shell token names are inherited by feature CSS. Values are
+ * resolved on :root (including Dark) instead of reusing the legacy 20px radius
+ * or the larger POS card shadows inside explicit BoardUI utility classes. */
+:root {
+    --pos-boardui-radius-xs: var(--radius-xs, 2px);
+    --pos-boardui-radius-sm: var(--radius-sm, 4px);
+    --pos-boardui-radius-md: var(--radius-md, 6px);
+    --pos-boardui-radius-lg: var(--radius-lg, 8px);
+    --pos-boardui-radius-xl: var(--radius-xl, 12px);
+    --pos-boardui-shadow-sm: var(--shadow-sm);
+    --pos-boardui-shadow-md: var(--shadow-md);
+    --pos-boardui-shadow-lg: var(--shadow-lg);
+    --pos-boardui-shadow-card: var(--shadow-card);
+}
+
 .page-shell {
     /* Canvas & Surface */
     --canvas: #f1eee8;
@@ -167,4 +183,12 @@
     --container-md: 768px;
     --container-lg: 1120px;
     --container-xl: 1240px;
+}
+
+/* R8.26A: the POS canvas must resolve with the same BoardUI theme as its
+ * mounted cards. Keep the intentional warm light canvas and legacy layout
+ * tokens unchanged; only resolve the two shell colors in dark mode. */
+.dark .page-shell.pos-shell-layout {
+    --surface: var(--color-background-primary-default);
+    --ink: var(--color-text-primary);
 }

@@ -1,0 +1,69 @@
+/* colocated - merged from owner-tables-1.css + owner-tables-2.css */
+.table-tools .admin-search-wrap {
+    flex: 1 1 260px;
+}
+
+.table-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pos-gap);
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.table-state {
+    border-radius: var(--radius-pill);
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-primary);
+    padding: 8px 10px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.table-state.available {
+    background: var(--color-status-lime-background);
+    color: var(--color-status-lime-text);
+}
+
+.table-state.waiting-payment {
+    background: var(--color-status-yellow-background);
+    color: var(--color-status-yellow-text);
+}
+
+.table-state.need-waiter {
+    background: var(--color-status-rose-background);
+    color: var(--color-status-rose-text);
+}
+
+.table-state.inactive {
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-primary);
+}
+
+/* R8.15D: dark status surfaces must be opaque even when nested inside the
+   remaining light POS canvas; the tokens' dark chip fill is translucent. */
+.dark .owner-tables-p1 .table-state.available {
+    background: color-mix(
+        in srgb,
+        var(--color-status-lime-text) 12%,
+        var(--color-background-primary-default)
+    );
+}
+
+.dark .owner-tables-p1 .table-state.waiting-payment {
+    background: color-mix(
+        in srgb,
+        var(--color-status-yellow-text) 12%,
+        var(--color-background-primary-default)
+    );
+}
+
+.dark .owner-tables-p1 .table-state.need-waiter {
+    background: color-mix(
+        in srgb,
+        var(--color-status-rose-text) 12%,
+        var(--color-background-primary-default)
+    );
+    color: var(--color-notification-error-foreground);
+}

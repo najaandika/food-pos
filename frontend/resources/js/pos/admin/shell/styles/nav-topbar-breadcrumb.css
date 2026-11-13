@@ -1,0 +1,59 @@
+.pos-shell-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 54px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--pos-nav-divider);
+    color: var(--pos-nav-foreground);
+}
+
+.pos-shell-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 0;
+    gap: 9px;
+}
+
+.pos-shell-breadcrumb-root,
+.pos-shell-breadcrumb-divider {
+    color: var(--pos-nav-muted);
+}
+
+.pos-shell-breadcrumb-current {
+    color: var(--pos-nav-foreground);
+}
+
+.pos-shell-breadcrumb-home-icon {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    color: var(--pos-nav-icon);
+}
+/* R8.20C: BoardUI Free header alignment, scoped to POS. */
+.page-shell.pos-shell-layout .pos-shell-topbar-leading {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.page-shell.pos-shell-layout .pos-shell-breadcrumb {
+    flex-wrap: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    gap: 8px;
+}
+
+.page-shell.pos-shell-layout .pos-shell-breadcrumb-current {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-shell.pos-shell-layout .pos-shell-breadcrumb-divider {
+    flex: 0 0 auto;
+}

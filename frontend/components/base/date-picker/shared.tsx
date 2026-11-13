@@ -312,8 +312,13 @@ export function MonthPanel({
                 <CalendarGrid
                     offset={{ months: offset }}
                     weekdayStyle={latinWeekdays ? 'short' : 'narrow'}
-                    className="-m-3 border-separate self-start outline-none"
-                    style={{ borderSpacing: '12px 12px' }}
+                    className={cx(
+                        'border-separate self-start outline-none',
+                        compact ? '-mx-1 -my-2' : '-m-3',
+                    )}
+                    style={{
+                        borderSpacing: compact ? '4px 8px' : '12px 12px',
+                    }}
                 >
                     <CalendarGridHeader>
                         {(day) => (
@@ -403,6 +408,8 @@ export const triggerButtonClassName = cx(
 /** Shared popover chrome (Figma's rounded/3xl, background/secondary/default
  *  "Calendar component" surface) for both pickers. */
 export const popoverClassName = cx(
+    // Portaled React Aria calendar needs explicit POS BoardUI typography.
+    'pos-boardui-calendar-popover',
     // Above the modal layer (z-100), like the menu surfaces.
     'z-110 origin-top rounded-3xl bg-background-secondary-default shadow-dropdown',
     'transition duration-150 ease-out',

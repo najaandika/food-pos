@@ -23,7 +23,10 @@
 
 /* Preserve semantic component typography: section title 20 / 26, body 14 / 20,
  * caption 12 / 16. These selectors target only older hand-styled elements. */
-.page-shell.pos-shell-layout .app-view.pos-boardui-settings .settings-card-head h2 {
+.page-shell.pos-shell-layout
+    .app-view.pos-boardui-settings
+    .settings-card-head
+    h2 {
     font-size: var(--text-title-2-semibold, 1.25rem);
     line-height: var(--text-title-2-semibold--line-height, 1.625rem);
     font-weight: var(--text-title-2-semibold--font-weight, 600);
@@ -52,12 +55,20 @@
 .page-shell.pos-shell-layout .pos-menu-page .menu-p2-results,
 .page-shell.pos-shell-layout .pos-menu-page .menu-p2-send-info,
 .page-shell.pos-shell-layout .pos-menu-page .menu-p2-ticket-chips > span,
-.page-shell.pos-shell-layout .pos-menu-page .receipt-item .menu-p2-item-meta span {
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    .receipt-item
+    .menu-p2-item-meta
+    span {
     font-size: var(--text-caption-1-regular, 0.75rem);
     line-height: var(--text-caption-1-regular--line-height, 1rem);
 }
 
-.page-shell.pos-shell-layout .pos-menu-page .receipt-item > div:first-child > strong,
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    .receipt-item
+    > div:first-child
+    > strong,
 .page-shell.pos-shell-layout .pos-menu-page .menu-p2-quantity output {
     font-weight: var(--text-body-semibold--font-weight, 600);
 }

@@ -1,0 +1,118 @@
+.orders-ticket-table {
+    border: 1px solid var(--orders-border);
+    background: var(--orders-ground);
+    border-radius: var(--radius-lg, 8px);
+    padding: 4px 8px;
+    flex: 0 0 auto;
+    color: var(--orders-text);
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-1-semibold--letter-spacing, 0.15px);
+}
+.orders-ticket-subline {
+    padding: 12px 0;
+    margin-top: 4px;
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-ticket-subline > span:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.orders-ticket-subline svg {
+    width: 14px;
+    height: 14px;
+}
+.orders-ticket-items {
+    display: grid;
+    gap: 8px;
+    padding-top: 9px;
+    border-top: 1px solid var(--orders-divider);
+}
+.orders-ticket-items p {
+    margin: 0;
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-ticket-items p span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.orders-workspace .orders-ticket-items p b {
+    flex-shrink: 0;
+    color: var(--orders-text);
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-1-semibold--letter-spacing, 0.15px);
+}
+.orders-ticket-items small {
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-2-regular, 0.6875rem);
+    line-height: var(--text-caption-2-regular--line-height, 0.9375rem);
+    font-weight: var(--text-caption-2-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-2-regular--letter-spacing, 0.2px);
+}
+.orders-ticket-footer {
+    gap: 8px;
+    padding: 12px 12px;
+    border-top: 1px solid var(--orders-divider);
+    margin-top: auto;
+}
+.orders-workspace .orders-ticket-footer > strong {
+    color: var(--orders-text);
+    white-space: nowrap;
+    font-size: var(--text-body-semibold, 0.875rem);
+    line-height: var(--text-body-semibold--line-height, 1.25rem);
+    font-weight: var(--text-body-semibold--font-weight, 600);
+    letter-spacing: var(--text-body-semibold--letter-spacing, 0);
+}
+.orders-workspace .orders-ticket-action {
+    flex: 0 1 auto;
+    min-width: 0;
+    border-radius: var(--radius-2lg, 10px);
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-1-semibold--letter-spacing, 0.15px);
+}
+.orders-ticket-view-hint {
+    color: var(--orders-secondary);
+    white-space: nowrap;
+    font-size: var(--text-caption-2-medium, 0.6875rem);
+    line-height: var(--text-caption-2-medium--line-height, 0.9375rem);
+    font-weight: var(--text-caption-2-medium--font-weight, 500);
+    letter-spacing: var(--text-caption-2-medium--letter-spacing, 0.2px);
+}
+.orders-stage-empty {
+    display: grid;
+    place-content: center;
+    gap: 8px;
+    min-height: 150px;
+    padding: 20px;
+    text-align: center;
+    color: var(--orders-secondary);
+    border: 1px dashed var(--orders-border);
+    border-radius: 13px;
+    background: var(--orders-surface);
+}
+.orders-stage-empty > span {
+    font-size: 22px;
+}
+.orders-stage-empty p {
+    margin: 0;
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}

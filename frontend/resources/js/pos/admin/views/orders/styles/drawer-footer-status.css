@@ -1,0 +1,59 @@
+.orders-detail-grand-total strong {
+    font-size: var(--text-title-2-bold, 1.25rem);
+    line-height: var(--text-title-2-bold--line-height, 1.625rem);
+    font-weight: var(--text-title-2-bold--font-weight, 700);
+    letter-spacing: var(--text-title-2-bold--letter-spacing, 0);
+}
+.orders-detail-footer {
+    margin-top: auto;
+    display: grid;
+    gap: 12px;
+    border-top: 1px solid var(--orders-divider);
+    padding-top: 16px;
+}
+.orders-detail-footer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-detail-footer-note svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    color: var(--orders-accent);
+}
+.orders-detail-actions {
+    display: flex;
+    gap: 8px;
+}
+.orders-detail-actions button {
+    flex: 1;
+    white-space: normal;
+    min-height: 38px;
+    border-radius: 10px;
+}
+.orders-cancelled-banner {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 11px;
+    background: var(--color-danger-50, var(--orders-ground));
+    color: var(--orders-danger);
+}
+.orders-cancelled-banner svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+.orders-cancelled-banner p {
+    margin: 0;
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}

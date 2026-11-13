@@ -1,0 +1,59 @@
+.pos-menu-page .menu-p2-send-button {
+    display: flex;
+    width: 100%;
+    min-height: 60px;
+    margin-top: 12px;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.pos-menu-page .menu-p2-send-button > span {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+    padding: 0;
+}
+
+.pos-menu-page .menu-p2-send-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    min-width: 0;
+}
+
+.pos-menu-page .menu-p2-send-info {
+    font-size: 10px;
+    opacity: 0.82;
+    white-space: nowrap;
+}
+
+.pos-menu-page .menu-p2-send-copy strong {
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.pos-menu-page .menu-p2-send-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.pos-menu-page .menu-p2-send-action svg {
+    flex: 0 0 auto;
+}
+
+.pos-menu-page .menu-p2-new-ticket {
+    width: 100%;
+    min-height: 38px;
+    margin-top: 8px;
+}

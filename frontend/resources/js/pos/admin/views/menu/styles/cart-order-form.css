@@ -1,0 +1,98 @@
+.pos-menu-page .menu-cart-shell .receipt-panel,
+.pos-menu-page.menu-p2-cart-dialog .receipt-panel {
+    border-color: var(--menu-p2-line);
+    border-radius: 16px;
+    background: var(--menu-p2-bg);
+    box-shadow: 0 6px 24px rgba(17, 24, 39, 0.04);
+}
+
+.pos-menu-page .menu-order-details {
+    border: 1px solid var(--menu-p2-line);
+    background: var(--menu-p2-surface);
+    border-radius: 12px;
+    gap: 10px;
+    padding: 12px;
+}
+
+.pos-menu-page .menu-p2-void-button {
+    color: var(--color-text-error-primary, var(--danger));
+    white-space: nowrap;
+}
+
+.pos-menu-page .menu-p2-order-field {
+    min-width: 0;
+}
+
+.pos-menu-page .menu-p2-order-field input {
+    min-height: 0;
+    width: 100%;
+    padding: 0 4px;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    color: var(--menu-p2-text);
+    font-size: 13px;
+    box-shadow: none;
+}
+
+.pos-menu-page .menu-p2-order-field input:focus,
+.pos-menu-page .menu-p2-order-field input:focus-visible {
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+}
+
+.pos-menu-page .menu-p2-order-field [data-rac] {
+    min-width: 0;
+}
+
+.pos-menu-page .menu-p2-order-field .menu-p2-table-select,
+.pos-menu-page .menu-p2-order-field .menu-p2-guests-field {
+    width: 100%;
+}
+
+.pos-menu-page .menu-p2-table-trigger {
+    min-height: 36px;
+    background: var(--menu-p2-bg);
+    border-radius: 9px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.pos-menu-page .menu-p2-ticket-chips {
+    gap: 6px;
+}
+
+.pos-menu-page .menu-p2-ticket-chips > span {
+    border-radius: 7px;
+    min-height: 23px;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: 550;
+    text-transform: none;
+}
+
+.pos-menu-page .menu-p2-ticket-chips > span:first-child {
+    background: var(--color-status-blue-background, var(--mist));
+    color: var(--color-status-blue-text, var(--blue));
+}
+
+.pos-menu-page .menu-p2-ticket-chips > span:last-child {
+    background: var(--menu-p2-surface);
+    color: color-mix(
+        in srgb,
+        var(--menu-p2-muted) 80%,
+        var(--menu-p2-text) 20%
+    );
+}
+
+.pos-menu-page .menu-p2-post-send {
+    gap: 8px;
+}
+
+.pos-menu-page .menu-p2-post-send button {
+    min-height: 36px;
+    border-radius: 9px;
+    font-size: 12px;
+}

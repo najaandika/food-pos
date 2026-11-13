@@ -10,6 +10,11 @@ import type {
     UserRole,
 } from '../../lib/pos-types';
 import { formatRupiah } from '../lib/format';
+import {
+    displayOrderReference,
+    displayStaffName,
+    displayTableReference,
+} from './presentation-labels';
 import { dishes as fallbackDishes, orders as fallbackOrders } from './data';
 
 export type AdminDish = {
@@ -167,7 +172,7 @@ export function toAdminOrders(orders?: PosOrder[]): AdminOrder[] {
 
     return orders.map((order) => {
         const status = orderStatusLabel[order.status];
-        const table = order.tableCode ?? 'TA';
+        const table = displayTableReference(order.tableCode ?? 'TA');
 
         return {
             id: order.id,
@@ -176,7 +181,7 @@ export function toAdminOrders(orders?: PosOrder[]): AdminOrder[] {
             tableCode: order.tableCode,
             tone: order.type === 'takeaway' ? 'gold' : 'teal',
             name: order.customerName,
-            meta: `Order #${order.orderNumber} / ${order.type === 'takeaway' ? 'Takeaway' : 'Dine In'}`,
+            meta: `Order #${displayOrderReference(order.orderNumber)} / ${order.type === 'takeaway' ? 'Takeaway' : 'Dine In'}`,
             status: status.label,
             statusTone: status.tone,
             time: formatTime(order.createdAt),
@@ -222,7 +227,7 @@ export function toAdminStaff(staff?: PosStaff[]): AdminStaff[] {
 
     return staff.map((person) => ({
         id: person.id,
-        name: person.name,
+        name: displayStaffName(person.name, person.email),
         email: person.email,
         role: person.role,
         roleLabel: roleLabel[person.role],

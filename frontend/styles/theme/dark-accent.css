@@ -1,0 +1,10 @@
+/* Non-default accents (data-accent set by the accent engine) can land on a
+ * /950 that glows too loudly against the dark sidebar; halve the NEW badge
+ * fill there. Light mode keeps the solid /100 surface. */
+.dark[data-accent] {
+    --color-badge-new-background: color-mix(
+        in srgb,
+        var(--color-accent-950) 50%,
+        transparent
+    );
+}

@@ -1,0 +1,20 @@
+/* Native BoardUI primary Add CTA shared by Menu / Staff / Tables. */
+.page-shell.pos-shell-layout .pos-boardui-add-button {
+    min-height: 36px;
+    flex-shrink: 0;
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    white-space: nowrap;
+}
+
+.page-shell.pos-shell-layout .pos-boardui-add-button > span {
+    font-size: var(--text-body-medium, 0.875rem);
+    font-weight: var(--text-body-medium--font-weight, 500);
+    line-height: var(--text-body-medium--line-height, 1.25rem);
+    letter-spacing: var(--text-body-medium--letter-spacing, 0);
+}
+
+@container admin-main (max-width: 610px) {
+    .page-shell.pos-shell-layout .owner-menu-c2-page .pos-boardui-add-button {
+        width: 100%;
+    }
+}

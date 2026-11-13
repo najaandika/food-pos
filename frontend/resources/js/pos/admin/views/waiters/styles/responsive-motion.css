@@ -1,0 +1,80 @@
+/* At tighter BoardUI container widths, queue is first in reading order. */
+@container admin-main (max-width: 1150px) {
+    .waiters-workspace .waiters-work-grid {
+        grid-template-areas: 'queue' 'tables';
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .waiters-workspace .waiters-queue-list {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 265px), 1fr));
+    }
+}
+
+@container admin-main (max-width: 900px) {
+    .waiters-workspace .waiters-boardui-stats {
+        gap: 8px;
+    }
+}
+
+@container admin-main (max-width: 580px) {
+    .waiters-workspace .waiters-page-header {
+        margin-bottom: 14px;
+    }
+    .waiters-workspace .waiters-boardui-stats {
+        margin-bottom: 14px;
+    }
+    .waiters-workspace .waiters-boardui-panel {
+        padding: 15px;
+        border-radius: 16px;
+    }
+    .waiters-workspace .waiters-section-head {
+        gap: 9px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+    }
+    .waiters-workspace .waiters-work-grid {
+        gap: 14px;
+        margin-top: 14px;
+    }
+    .waiters-workspace .waiters-attention-list,
+    .waiters-workspace .waiters-queue-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .waiters-workspace .waiters-attention-row {
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 9px;
+    }
+    .waiters-workspace .waiters-attention-row > button {
+        grid-column: 2;
+        width: 100%;
+    }
+    .waiters-workspace .waiters-queue-card-actions > button,
+    .waiters-workspace .waiters-attention-row > button {
+        min-height: 44px;
+    }
+    .waiters-workspace .waiters-attention-row.is-mobile-collapsed {
+        display: none;
+    }
+    .waiters-workspace .waiters-attention-more {
+        display: inline-flex;
+    }
+    .waiters-workspace .waiters-table-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+    .waiters-workspace .waiters-table-tile {
+        min-height: 137px;
+        padding: 11px;
+    }
+}
+
+@container admin-main (max-width: 360px) {
+    .waiters-workspace .waiters-table-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .waiters-workspace .waiters-table-tile {
+        transition: none;
+    }
+}

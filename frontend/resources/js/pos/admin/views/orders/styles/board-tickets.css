@@ -1,0 +1,122 @@
+/* P4: operational ticket hierarchy inspired by BoardUI Project Board.
+   This stays scoped to Orders; status transitions and API behavior are unchanged. */
+.orders-workspace .orders-stage-column {
+    padding: 12px;
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--color-background-secondary-default, var(--orders-ground));
+}
+.orders-workspace .orders-stage-head {
+    align-items: center;
+    min-height: 56px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+}
+.orders-workspace .orders-stage-dot {
+    width: 8px;
+    height: 8px;
+}
+.orders-workspace .orders-stage-count {
+    flex-shrink: 0;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: color-mix(
+        in srgb,
+        var(--orders-status-color) 9%,
+        var(--orders-surface)
+    );
+    color: var(--orders-status-color);
+    border-color: color-mix(
+        in srgb,
+        var(--orders-status-color) 22%,
+        var(--orders-border)
+    );
+}
+.orders-workspace .orders-ticket {
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--radius-2xl, 16px);
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+.orders-workspace .orders-ticket::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--orders-status-color);
+    opacity: 0.8;
+    content: '';
+    pointer-events: none;
+}
+.orders-workspace .orders-ticket:hover {
+    border-color: color-mix(
+        in srgb,
+        var(--orders-accent) 34%,
+        var(--orders-border)
+    );
+    box-shadow: var(--shadow-card, none);
+}
+.orders-workspace .orders-ticket:focus-within {
+    border-color: var(--orders-focus);
+    box-shadow: 0 0 0 2px
+        color-mix(in srgb, var(--orders-focus) 18%, transparent);
+}
+.orders-workspace .orders-ticket-open {
+    padding: 12px 12px 14px 16px;
+}
+.orders-workspace .orders-ticket-top {
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+.orders-workspace .orders-ticket-number {
+    color: var(--orders-text);
+}
+.orders-workspace .orders-ticket-source {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 132px;
+    border-radius: var(--radius-md, 6px);
+}
+.orders-workspace .orders-ticket-person {
+    align-items: flex-start;
+}
+.orders-workspace .orders-ticket-subline {
+    margin-top: 0;
+    padding: 12px 0;
+}
+.orders-workspace .orders-ticket-items {
+    padding-top: 12px;
+    gap: 8px;
+}
+.orders-workspace .orders-ticket-note {
+    display: grid;
+    gap: 4px;
+    margin: 12px 0 0;
+    padding: 8px 12px;
+    border: 1px solid var(--orders-border);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--orders-ground);
+}
+.orders-workspace .orders-ticket-note-label {
+    display: block;
+    color: var(--orders-accent);
+}
+.orders-workspace .orders-ticket-note-copy {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    min-width: 0;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    color: var(--orders-secondary);
+    text-align: left;
+}
+.orders-workspace .orders-ticket-footer {
+    padding: 12px 12px 12px 16px;
+}
+.orders-workspace .orders-ticket-action {
+    min-height: 32px;
+    white-space: nowrap;
+}

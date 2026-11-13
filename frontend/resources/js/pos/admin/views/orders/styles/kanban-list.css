@@ -1,0 +1,47 @@
+.kanban-list {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.kanban-card {
+    display: grid;
+    gap: var(--space-fixed-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--card);
+    padding: 12px;
+    cursor: pointer;
+    transition:
+        border-color var(--transition-hover),
+        background var(--transition-hover),
+        box-shadow var(--transition-hover),
+        transform var(--transition-hover);
+}
+
+.kanban-card:hover {
+    border-color: rgba(48, 71, 255, 0.2);
+    box-shadow: 0 14px 30px rgba(31, 43, 89, 0.08);
+    transform: translateY(-1px);
+}
+
+.kanban-card.highlight {
+    border-color: rgba(48, 71, 255, 0.3);
+    background: var(--mist);
+    box-shadow: 0 8px 20px rgba(48, 71, 255, 0.09);
+}
+
+.kanban-card:focus-visible {
+    outline: 3px solid rgba(48, 71, 255, 0.25);
+    outline-offset: 2px;
+}
+
+.workflow-chip {
+    justify-self: start;
+    border-radius: var(--radius-pill);
+    background: var(--mist);
+    color: var(--blue);
+    padding: 6px 9px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.01em;
+}

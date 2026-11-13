@@ -1,0 +1,42 @@
+/* Mobile List becomes a two-column order card; the hidden table header cannot
+   act as a sort control. Use official BoardUI Segmented Control for that viewport. */
+.orders-workspace .orders-list-mobile-sort {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px;
+    border-bottom: 1px solid var(--orders-divider);
+    background: var(--orders-surface);
+    color: var(--orders-secondary);
+}
+.orders-workspace .orders-list-mobile-segments {
+    width: 100%;
+    min-width: 0;
+}
+.orders-workspace .orders-list-mobile-segments > button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 36px;
+    padding: 8px 4px;
+    font-size: var(--text-caption-1-medium, 0.75rem);
+    line-height: var(--text-caption-1-medium--line-height, 1rem);
+    font-weight: var(--text-caption-1-medium--font-weight, 500);
+}
+.orders-workspace .orders-list-mobile-segments > button[data-selected] {
+    background: var(
+        --color-segmented-control-selected-background,
+        var(--orders-surface)
+    );
+    color: var(--orders-text);
+}
+@container admin-main (max-width: 720px) {
+    .orders-workspace .orders-list-mobile-sort {
+        display: flex;
+    }
+}
+@media (max-width: 720px) {
+    .orders-workspace .orders-list-mobile-sort {
+        display: flex;
+    }
+}

@@ -1,0 +1,63 @@
+.page-shell.pos-shell-layout {
+    --pos-nav-surface: var(--color-background-primary-default, var(--card));
+    --pos-nav-canvas: var(--color-background-full, var(--surface));
+    --pos-nav-hover: var(--color-background-secondary-hover, var(--mist));
+    --pos-nav-selected: var(--color-accent-50, var(--mist));
+    --pos-nav-accent: var(--color-accent-600, var(--blue));
+    --pos-nav-accent-strong: var(--color-accent-700, var(--blue-dark));
+    --pos-nav-foreground: var(--color-text-primary, var(--ink));
+    --pos-nav-muted: var(--color-text-secondary, var(--muted));
+    --pos-nav-border: var(--color-border-button-default, var(--border-soft));
+    --pos-nav-divider: var(--color-separator-border, var(--line));
+    --pos-nav-icon: var(--color-foreground-icon-secondary, var(--muted));
+    --pos-nav-focus: var(--color-border-focus-ring, var(--blue));
+}
+
+.pos-shell-layout .pos-shell-sidebar,
+.pos-shell-layout .pos-shell-topbar,
+.pos-shell-layout .pos-shell-bottom-nav,
+.pos-shell-drawer-overlay,
+.pos-shell-account-popover {
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page-shell.pos-shell-layout .pos-shell-sidebar {
+    display: flex;
+    flex: 0 0 248px;
+    flex-direction: column;
+    min-width: 0;
+    width: 248px;
+    height: 100dvh;
+    padding: 20px 12px 16px;
+    background: var(--pos-nav-surface);
+    border-right: 1px solid var(--pos-nav-border);
+    box-shadow: none;
+    transition:
+        flex-basis 200ms ease,
+        width 200ms ease;
+}
+
+.pos-shell-sidebar-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    gap: 8px;
+    padding-inline: 10px 2px;
+    margin-bottom: 24px;
+}
+
+.pos-shell-brand {
+    min-width: 0;
+    color: var(--pos-nav-foreground);
+    white-space: nowrap;
+}
+
+.pos-shell-brand-dot {
+    color: var(--pos-nav-accent);
+}
+
+.pos-shell-brand-compact {
+    display: none;
+}

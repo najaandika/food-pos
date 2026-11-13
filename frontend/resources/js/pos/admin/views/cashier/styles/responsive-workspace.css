@@ -1,0 +1,164 @@
+@container admin-main (max-width: 1180px) {
+    .cashier-workspace .cashier-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+    .cashier-workspace .cashier-detail {
+        position: static;
+        max-height: none;
+        overflow: visible;
+    }
+    .cashier-workspace .cashier-order-list {
+        max-height: 420px;
+    }
+    .cashier-workspace .cashier-actions {
+        position: static;
+        padding: 13px 0 0;
+    }
+}
+@container admin-main (max-width: 800px) {
+    .cashier-workspace .cashier-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .cashier-workspace .cashier-summary article {
+        padding: 14px;
+        min-height: 114px;
+    }
+    .cashier-workspace .cashier-order-row {
+        grid-template-columns: 52px minmax(0, 1fr) auto auto;
+    }
+    .cashier-workspace .cashier-row-time {
+        display: none;
+    }
+}
+@container admin-main (max-width: 600px) {
+    .cashier-workspace .cashier-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .cashier-workspace .cashier-summary article {
+        min-height: 112px;
+        padding: 13px;
+        border-radius: 14px;
+    }
+    .cashier-workspace .cashier-summary article:last-child {
+        grid-column: 1 / -1;
+    }
+    .cashier-workspace .cashier-panel,
+    .cashier-workspace .cashier-detail {
+        padding: 14px;
+        border-radius: 16px;
+    }
+    .cashier-workspace .cashier-panel-head {
+        margin-bottom: 12px;
+    }
+    .cashier-workspace .cashier-panel-head h2 {
+        font-size: 17px;
+    }
+    .cashier-workspace .cashier-order-list {
+        max-height: none;
+    }
+    .cashier-workspace .cashier-order-row {
+        grid-template-columns: 46px minmax(0, 1fr) auto;
+        min-height: 78px;
+        gap: 8px;
+        padding: 10px;
+    }
+    .cashier-workspace .cashier-order-row > .table-pill {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+    .cashier-workspace .cashier-order-row > div {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .cashier-workspace .cashier-order-row em {
+        display: inline-flex;
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;
+    }
+    .cashier-workspace .cashier-order-row b {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        font-size: 12px;
+    }
+    .cashier-workspace .cashier-discount-box,
+    .cashier-workspace .cashier-quick-cash {
+        padding: 11px;
+    }
+    .cashier-workspace .cashier-actions {
+        grid-template-columns: 1fr;
+    }
+    .cashier-workspace .cashier-actions button {
+        min-height: 44px;
+    }
+    .cashier-workspace .payment-due-card {
+        padding: 18px;
+    }
+    .cashier-workspace .payment-due-card strong {
+        font-size: 27px;
+    }
+    .cashier-workspace .cashier-note-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+.cashier-workspace .cashier-demo-notice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--cashier-border);
+    border-radius: 12px;
+    background: var(--cashier-ground);
+    color: var(--cashier-muted);
+}
+.cashier-demo-tag {
+    flex-shrink: 0;
+    padding: 4px 8px;
+    border: 1px solid var(--cashier-border);
+    border-radius: 6px;
+    background: var(--cashier-surface);
+    color: var(--cashier-text);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 0.07em;
+}
+.cashier-demo-notice p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.cashier-workspace .cashier-unverified-method strong {
+    color: var(--cashier-muted);
+}
+.cashier-workspace .receipt-modal-content:focus {
+    outline: none;
+}
+.cashier-workspace .cashier-receipt-demo-stamp {
+    margin: 12px 0;
+    padding: 9px 8px;
+    border: 1px dashed var(--cashier-border);
+    border-radius: 5px;
+    color: var(--cashier-text);
+    font-size: 10px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+@container admin-main (max-width: 600px) {
+    .cashier-workspace .cashier-demo-notice {
+        align-items: flex-start;
+        padding: 10px 12px;
+        margin-bottom: 12px;
+    }
+    .cashier-workspace .cashier-demo-notice p {
+        font-size: 11px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cashier-workspace button,
+    .cashier-workspace .cashier-queue-segments > span,
+    .cashier-workspace .cashier-mobile-segments > span {
+        transition: none;
+    }
+}

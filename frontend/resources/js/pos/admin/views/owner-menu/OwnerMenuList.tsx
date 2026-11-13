@@ -6,10 +6,17 @@ import {
 } from '@remixicon/react';
 import Image from '@/pos/components/pos-image';
 import { SearchField } from '../../../../../../components/base/search-field/search-field';
+import { Chip } from '../../../../../../components/base/badges/chip';
 import { Button } from '../../../../../../components/base/buttons/button';
 import { IconButton } from '../../../../../../components/base/buttons/icon-button';
-import { PillTab, PillTabList } from '../../../../../../components/base/tabs/pill-tab';
-import { SegmentedControl, SegmentedControlItem } from '../../../../../../components/base/segmented-control/segmented-control';
+import {
+    PillTab,
+    PillTabList,
+} from '../../../../../../components/base/tabs/pill-tab';
+import {
+    SegmentedControl,
+    SegmentedControlItem,
+} from '../../../../../../components/base/segmented-control/segmented-control';
 import type { AdminDish } from '../../runtime-data';
 import { useLocale } from '../../i18n-context';
 
@@ -129,7 +136,11 @@ export function OwnerMenuList({
                             selectedKeys={new Set([statusFilter])}
                             onSelectionChange={(keys) => {
                                 const selected = Array.from(keys)[0];
-                                if (selected === 'all' || selected === 'active' || selected === 'archived') {
+                                if (
+                                    selected === 'all' ||
+                                    selected === 'active' ||
+                                    selected === 'archived'
+                                ) {
                                     onChangeStatus(selected);
                                 }
                             }}
@@ -156,17 +167,22 @@ export function OwnerMenuList({
                     )}
                 </div>
                 <div className="c2-filter-scroll">
-                    <PillTabList className="c2-filter-tabs" aria-label="Filter kategori menu">
-                    {filterTabs.map((category) => (
-                        <PillTab
-                            variant="gray"
-                            isSelected={activeCategory === category}
-                            key={category}
-                            onSelect={() => onChangeCategory(category)}
-                        >
-                            {category === 'All' ? t('common.all') : category}
-                        </PillTab>
-                    ))}
+                    <PillTabList
+                        className="c2-filter-tabs"
+                        aria-label="Filter kategori menu"
+                    >
+                        {filterTabs.map((category) => (
+                            <PillTab
+                                variant="gray"
+                                isSelected={activeCategory === category}
+                                key={category}
+                                onSelect={() => onChangeCategory(category)}
+                            >
+                                {category === 'All'
+                                    ? t('common.all')
+                                    : category}
+                            </PillTab>
+                        ))}
                     </PillTabList>
                 </div>
                 <span className="owner-result-count">
@@ -273,8 +289,9 @@ export function OwnerMenuList({
                                     {dish.price}
                                 </strong>
                                 <button
-                                    className={`availability-toggle ${isArchived ? 'off' : ''}`}
+                                    className={`availability-toggle menu-availability-action ${isArchived ? 'off' : ''}`}
                                     type="button"
+                                    aria-pressed={!isArchived}
                                     title={
                                         isArchived
                                             ? t('ownerMenu.restoreTooltip')
@@ -287,17 +304,27 @@ export function OwnerMenuList({
                                         )
                                     }
                                 >
-                                    <i />
-                                    {isArchived
-                                        ? t('ownerMenu.hidden')
-                                        : t('ownerMenu.available')}
+                                    <Chip
+                                        variant="caption"
+                                        color={isArchived ? 'rose' : 'lime'}
+                                        className="menu-availability-chip"
+                                    >
+                                        <span
+                                            className="menu-availability-dot"
+                                            aria-hidden="true"
+                                        />
+                                        {isArchived
+                                            ? t('ownerMenu.hidden')
+                                            : t('ownerMenu.available')}
+                                    </Chip>
                                 </button>
-                                <span
+                                <Chip
+                                    variant="caption"
+                                    color={dish.badge ? 'blue' : 'gray'}
                                     className={`owner-flag ${dish.badge ? 'active' : ''}`}
                                 >
-                                    <small>{t('ownerMenu.tableFlag')}</small>
                                     {dish.badge ?? t('ownerMenu.regular')}
-                                </span>
+                                </Chip>
                             </div>
                         </article>
                     );

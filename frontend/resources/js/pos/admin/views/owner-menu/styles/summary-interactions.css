@@ -1,0 +1,55 @@
+/* ── Interactive Summary Cards ── */
+.owner-menu-summary article.clickable {
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast);
+    border: 1px solid var(--border);
+}
+
+.owner-menu-summary article.clickable:hover {
+    border-color: rgba(48, 71, 255, 0.32);
+    box-shadow: var(--shadow-sm);
+}
+
+.owner-menu-summary article.active-filter {
+    border-color: var(--blue);
+    background: var(--mist);
+}
+
+.owner-menu-summary article.active-filter-danger {
+    border-color: var(--border-soft-strong);
+    background: var(--pale);
+}
+
+.owner-menu-summary article:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+.owner-menu-toolbar .owner-filter-tabs button.active {
+    background: var(--blue);
+    box-shadow: var(--shadow-blue);
+}
+
+.menu-editor-panel .editor-fields input,
+.menu-editor-panel .editor-fields textarea,
+.menu-editor-panel .custom-select summary {
+    border-color: var(--border);
+    background: var(--ice);
+    box-shadow: none;
+}
+
+.menu-editor-panel .editor-fields input:focus,
+.menu-editor-panel .editor-fields textarea:focus,
+.menu-editor-panel .custom-select summary:focus-visible {
+    border-color: rgba(48, 71, 255, 0.34);
+    background: var(--card-bg);
+}
+
+.menu-editor-panel .editor-switches button.active {
+    border-color: rgba(48, 71, 255, 0.28);
+    background: var(--mist);
+    color: var(--blue);
+}

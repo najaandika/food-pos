@@ -7,15 +7,15 @@ import {
     DrawerFooter,
 } from '../../../../../../components/base/drawer/drawer';
 import { StatusChip } from './StatusChip';
+import { OrderDetailWorkflow } from './OrderDetailWorkflow';
+import { OrderDetailTotals } from './OrderDetailTotals';
 import type { AdminOrder } from '../../runtime-data';
 import { useLocale } from '../../i18n-context';
 import {
-    ACTIVE_ORDER_STATUSES,
     nextOrderStatus,
     orderActionLabel,
     orderNumber,
     orderSourceLabel,
-    orderStatusLabel,
 } from './order-ui';
 
 type Props = {
@@ -39,9 +39,6 @@ export function OrderDetail({
     const next = nextOrderStatus(role, status);
     const canAdvance =
         canUpdate && order.id != null && next !== null && status != null;
-    const steps = [...ACTIVE_ORDER_STATUSES, 'paid' as const];
-    const currentIndex =
-        status && status !== 'cancelled' ? steps.indexOf(status) : -1;
 
     return (
         <>
@@ -74,69 +71,7 @@ export function OrderDetail({
                         </span>
                     </div>
 
-                    {status === 'cancelled' ? (
-                        <div className="orders-cancelled-banner" role="note">
-                            <RiInformationLine aria-hidden="true" />
-                            <p>
-                                {id
-                                    ? 'Pesanan ini dibatalkan. Tidak ada tindakan lanjutan.'
-                                    : 'This order was cancelled. No further action is available.'}
-                            </p>
-                        </div>
-                    ) : (
-                        <section
-                            className="orders-detail-flow"
-                            aria-label={
-                                id ? 'Progres pesanan' : 'Order progress'
-                            }
-                        >
-                            <div className="orders-detail-flow-head">
-                                <h3>
-                                    {id ? 'Alur layanan' : 'Service workflow'}
-                                </h3>
-                                <div className="orders-detail-flow-meta">
-                                    <span className="orders-detail-flow-current text-caption-1-medium">
-                                        {status
-                                            ? orderStatusLabel(status, t)
-                                            : '—'}
-                                    </span>
-                                    <span>
-                                        {currentIndex >= 0
-                                            ? currentIndex +
-                                              1 +
-                                              '/' +
-                                              steps.length
-                                            : '—'}
-                                    </span>
-                                </div>
-                            </div>
-                            <ol>
-                                {steps.map((step, index) => (
-                                    <li
-                                        key={step}
-                                        title={orderStatusLabel(step, t)}
-                                        aria-current={
-                                            index === currentIndex
-                                                ? 'step'
-                                                : undefined
-                                        }
-                                        data-state={
-                                            index < currentIndex
-                                                ? 'done'
-                                                : index === currentIndex
-                                                  ? 'current'
-                                                  : 'future'
-                                        }
-                                    >
-                                        <span className="orders-flow-index text-caption-2-semibold">
-                                            {index + 1}
-                                        </span>
-                                        <span>{orderStatusLabel(step, t)}</span>
-                                    </li>
-                                ))}
-                            </ol>
-                        </section>
-                    )}
+                    <OrderDetailWorkflow status={status} isId={id} t={t} />
 
                     <section className="orders-detail-block">
                         <h3>{id ? 'Pelanggan & meja' : 'Customer & table'}</h3>
@@ -226,52 +161,7 @@ export function OrderDetail({
                         )}
                     </section>
 
-                    <section
-                        className="orders-detail-totals"
-                        aria-label={id ? 'Ringkasan tagihan' : 'Bill summary'}
-                    >
-                        {order.rawSubtotal != null && (
-                            <div>
-                                <span>{t('cashier.subtotal')}</span>
-                                <strong>
-                                    {new Intl.NumberFormat('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR',
-                                        maximumFractionDigits: 2,
-                                    }).format(order.rawSubtotal)}
-                                </strong>
-                            </div>
-                        )}
-                        {order.rawTax != null && order.rawTax > 0 && (
-                            <div>
-                                <span>{t('cashier.tax')}</span>
-                                <strong>
-                                    {new Intl.NumberFormat('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR',
-                                        maximumFractionDigits: 2,
-                                    }).format(order.rawTax)}
-                                </strong>
-                            </div>
-                        )}
-                        {order.rawServiceCharge != null &&
-                            order.rawServiceCharge > 0 && (
-                                <div>
-                                    <span>{t('cashier.serviceCharge')}</span>
-                                    <strong>
-                                        {new Intl.NumberFormat('id-ID', {
-                                            style: 'currency',
-                                            currency: 'IDR',
-                                            maximumFractionDigits: 2,
-                                        }).format(order.rawServiceCharge)}
-                                    </strong>
-                                </div>
-                            )}
-                        <div className="orders-detail-grand-total">
-                            <span>{id ? 'Total pesanan' : 'Order total'}</span>
-                            <strong>{order.total}</strong>
-                        </div>
-                    </section>
+                    <OrderDetailTotals order={order} isId={id} t={t} />
                 </div>
             </DrawerBody>
             <DrawerFooter className="orders-detail-footer">

@@ -1,0 +1,72 @@
+/* The official Modal handles one scrolling body and accessible focus. */
+.cashier-receipt-dialog {
+    min-width: 0;
+}
+
+.cashier-receipt-body .receipt-paper {
+    flex: none;
+    max-height: none;
+    overflow: visible;
+    border: 1px solid var(--color-separator-border);
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+/* Screen preview only: preserve the thermal @media print contract unchanged.
+ * The paper uses a theme surface, so its ink and muted labels must also
+ * resolve against the current theme instead of fixed light-paper colors. */
+@media screen {
+    /* The payment detail is a list of rows, not a single three-column flex row.
+     * Override the generic .receipt-totals div rule only in screen preview. */
+    .cashier-receipt-body .receipt-paper .receipt-payment-info {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+    }
+
+    /* Modal is portaled outside the POS Inter font scope. Keep its chrome
+     * consistent with Operations while thermal paper remains Courier New. */
+    .cashier-receipt-dialog {
+        --font-sans:
+            'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+        font-family: var(--font-sans);
+    }
+
+    .cashier-receipt-body .receipt-paper {
+        --cashier-receipt-muted-ink: color-mix(
+            in srgb,
+            var(--color-text-primary) 70%,
+            var(--color-text-secondary)
+        );
+        color: var(--color-text-primary);
+    }
+
+    .cashier-receipt-body
+        .receipt-paper
+        :is(
+            .receipt-center-head p,
+            .receipt-meta-grid span,
+            .receipt-table th,
+            .receipt-footer,
+            .receipt-footer p,
+            .receipt-footer small
+        ) {
+        color: var(--cashier-receipt-muted-ink);
+    }
+
+    /* The legacy footer tile is almost white in both themes; give the dark
+     * preview its own semantic surface so its inherited ink stays readable. */
+    .dark .cashier-receipt-body .receipt-paper .receipt-footer {
+        background: var(--color-background-primary-default);
+    }
+
+    .cashier-receipt-body .receipt-paper .receipt-barcode-sim {
+        color: var(--color-text-primary);
+    }
+
+    .cashier-receipt-dialog .receipt-btn-secondary {
+        background: var(--color-background-primary-default);
+        color: var(--color-text-primary);
+        border-color: var(--color-border-button-default);
+    }
+}

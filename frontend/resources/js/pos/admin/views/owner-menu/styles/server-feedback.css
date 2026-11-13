@@ -1,0 +1,50 @@
+/* P6 — live Laravel catalog states. Preserve the existing BoardUI layout. */
+.owner-menu-server-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 240px;
+    padding: 32px;
+    border: 1px solid var(--color-border-primary-default, var(--border));
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--color-background-primary-default, var(--card-bg));
+    color: var(--color-text-secondary, var(--muted));
+    text-align: center;
+}
+.owner-menu-server-state p {
+    flex-basis: 100%;
+    margin: 0;
+}
+.owner-menu-server-feedback {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border-primary-default, var(--border));
+    border-radius: var(--radius-xl, 12px);
+    background: var(--color-background-secondary-default, var(--ice));
+    color: var(--color-text-primary, var(--navy));
+    font-size: var(--text-body-2-regular, 0.8125rem);
+}
+.owner-menu-server-feedback[role='alert'] {
+    border-color: var(--color-status-rose-border, var(--border));
+    color: var(--color-status-rose-text, var(--navy));
+}
+.owner-menu-server-feedback > button {
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border-button-default, var(--border));
+    border-radius: var(--radius-lg, 8px);
+    background: var(--color-background-primary-default, var(--card-bg));
+    color: var(--color-text-primary, var(--navy));
+    cursor: pointer;
+}
+.owner-menu-server-feedback > button:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring, var(--blue));
+    outline-offset: 2px;
+}

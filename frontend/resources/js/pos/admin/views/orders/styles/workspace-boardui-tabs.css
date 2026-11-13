@@ -1,0 +1,97 @@
+/* P2 official BoardUI Free controls: pill tabs, segmented selection, SearchField.
+   Selected states retain BoardUI's light-on-track treatment with token fallbacks. */
+.orders-workspace .orders-stage-filters > button {
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition:
+        color 150ms ease,
+        background-color 150ms ease;
+}
+.orders-workspace .orders-stage-filters > button[data-pill-selected] {
+    background: color-mix(
+        in srgb,
+        var(--orders-accent) 12%,
+        var(--orders-surface)
+    );
+    border-color: color-mix(in srgb, var(--orders-accent) 24%, transparent);
+    color: var(--color-status-blue-text);
+}
+.orders-workspace
+    .orders-stage-filters
+    > button[data-pill-selected]
+    > span:last-child {
+    color: var(--color-status-blue-text);
+}
+.orders-workspace
+    .orders-stage-filters
+    > button:not([data-pill-selected]):hover {
+    background: var(--color-background-primary-hover, var(--orders-ground));
+}
+.orders-workspace .orders-source-filters > button[data-pill-selected] {
+    background: var(--color-background-tertiary-default, var(--orders-ground));
+    color: var(--orders-text);
+}
+.orders-workspace
+    .orders-source-filters
+    > button[data-pill-selected]
+    > span:last-child {
+    color: var(--orders-text);
+}
+.orders-workspace
+    .orders-source-filters
+    > button:not([data-pill-selected]):hover {
+    background: var(--color-background-primary-hover, var(--orders-ground));
+}
+.orders-workspace .orders-view-switch > button[data-selected] {
+    color: var(--orders-text);
+    background: var(
+        --color-segmented-control-selected-background,
+        var(--orders-surface)
+    );
+}
+.orders-workspace .orders-view-switch > button[data-selected]:hover {
+    background: var(
+        --color-segmented-control-selected-background,
+        var(--orders-surface)
+    );
+}
+.orders-workspace .orders-view-switch > button:not([data-selected]):hover {
+    color: var(--orders-text);
+}
+.orders-workspace .orders-view-switch .orders-view-icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+}
+.orders-workspace .orders-view-switch > span[aria-hidden] {
+    background: var(
+        --color-segmented-control-selected-background,
+        var(--orders-surface)
+    );
+}
+.orders-workspace
+    :is(.orders-stage-filters, .orders-source-filters, .orders-view-switch)
+    button:focus-visible {
+    outline: 2px solid var(--orders-focus);
+    outline-offset: 2px;
+}
+.orders-filter-count {
+    display: inline-flex;
+    min-width: 20px;
+    height: 19px;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 4px;
+    border-radius: 6px;
+    background: var(--orders-ground);
+    color: var(--orders-secondary);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--text-caption-2-semibold, 0.6875rem);
+    line-height: var(--text-caption-2-semibold--line-height, 0.9375rem);
+    font-weight: var(--text-caption-2-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-2-semibold--letter-spacing, 0.2px);
+}
+.orders-stage-filter[data-pill-selected] .orders-filter-count {
+    color: var(--color-status-blue-text);
+    background: var(--orders-surface);
+}

@@ -22,12 +22,10 @@ import {
     RiKanbanView2,
     RiMegaphoneLine,
     RiSearchLine,
-    RiSettings4Line,
     RiSideBarFill,
     RiSideBarLine,
     RiUserSmileLine,
 } from '@remixicon/react';
-import { SettingsModal } from '../settings/settings-modal';
 import { ThemeToggle } from '../theme/theme-toggle';
 import { Badge } from '../../base/badges/badge';
 import { CloseButton } from '../../base/buttons/close-button';
@@ -341,7 +339,6 @@ export function DashboardSidebar({
 } = {}) {
     const localize = useTemplateCopy();
     const [collapsedState, setCollapsed] = useState(false);
-    const [settingsOpen, setSettingsOpen] = useState(false);
     const [suppressUserHover, setSuppressUserHover] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
     const [query, setQuery] = useState('');
@@ -739,14 +736,6 @@ export function DashboardSidebar({
                                     collapsed={collapsed}
                                 />
                             )}
-                            {matches('Settings') && (
-                                <NavItem
-                                    icon={RiSettings4Line}
-                                    label="Settings"
-                                    collapsed={collapsed}
-                                    onClick={() => setSettingsOpen(true)}
-                                />
-                            )}
                         </nav>
 
                         {/* Team card → opens the profile menu next to the sidebar */}
@@ -761,14 +750,6 @@ export function DashboardSidebar({
                     </>
                 )}
             </div>
-
-            {!posMode && (
-                <SettingsModal
-                    isOpen={settingsOpen}
-                    onClose={() => setSettingsOpen(false)}
-                    planArtSrc="/templates/settings-plan-art.png"
-                />
-            )}
         </aside>,
     );
 }

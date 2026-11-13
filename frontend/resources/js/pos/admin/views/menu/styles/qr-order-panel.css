@@ -1,0 +1,199 @@
+.qr-live-ticket .pos-table-chip {
+    background: var(--blue);
+}
+
+.qr-live-ticket strong {
+    color: var(--blue);
+}
+
+.qr-order-panel {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid rgba(229, 233, 243, 0.82);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 12px 28px rgba(31, 34, 48, 0.055);
+}
+
+.qr-order-panel-head {
+    margin-bottom: 18px;
+}
+
+.qr-order-panel-head span,
+.qr-order-panel-head p {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.qr-order-panel-head h2 {
+    margin: 5px 0 0;
+    color: var(--navy);
+    font-size: 24px;
+}
+
+.qr-order-panel-head p {
+    margin: 5px 0 0;
+}
+
+.qr-order-list {
+    display: grid;
+    gap: 10px;
+}
+
+.qr-order-card {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--ice);
+}
+
+.qr-order-card .qr-order-table-badge {
+    box-sizing: border-box;
+    display: flex;
+    width: 64px;
+    height: 64px;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 7px 5px;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    line-height: 1.1;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.qr-order-table-prefix {
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+}
+
+.qr-order-table-suffix {
+    font-size: 16px;
+    font-weight: var(--font-weight-bold);
+}
+
+.qr-order-info,
+.qr-order-meta {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+}
+
+.qr-order-info strong,
+.qr-order-info span,
+.qr-order-info small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qr-order-info span,
+.qr-order-info small {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.qr-order-meta {
+    justify-items: end;
+}
+
+.qr-order-meta b {
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .qr-order-card {
+        grid-template-columns: 56px minmax(0, 1fr);
+        align-items: start;
+        gap: 8px 12px;
+    }
+
+    .qr-order-card .qr-order-table-badge {
+        width: 56px;
+        height: 56px;
+    }
+
+    .qr-order-table-prefix {
+        font-size: 11px;
+    }
+
+    .qr-order-table-suffix {
+        font-size: 14px;
+    }
+
+    .qr-order-info :is(strong, span, small) {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .qr-order-meta {
+        grid-column: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+    }
+}
+
+/* R8.16H — Incoming QR orders: pair dark text with opaque BoardUI surfaces.
+ * The existing light rules, spacing, card geometry and QR flow stay intact. */
+.dark .qr-order-panel {
+    --qr-order-muted-readable: color-mix(
+        in srgb,
+        var(--color-text-primary) 78%,
+        var(--color-background-primary-default) 22%
+    );
+    background: var(--color-background-primary-default);
+    border-color: var(--color-border-button-default);
+}
+
+.dark .qr-order-panel .qr-order-panel-head :is(span, p),
+.dark .qr-order-panel .qr-order-info :is(span, small) {
+    color: var(--qr-order-muted-readable);
+}
+
+.dark .qr-order-panel .qr-order-panel-head h2,
+.dark .qr-order-panel .qr-order-info strong,
+.dark .qr-order-panel .qr-order-meta b {
+    color: var(--color-text-primary);
+}
+
+.dark .qr-order-panel .empty-state {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+    color: var(--color-text-primary);
+}
+
+.dark .qr-order-panel .qr-order-card {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+}
+
+.dark .qr-order-panel .qr-order-card .table-pill {
+    background: var(--color-background-quaternary-default);
+    color: var(--color-text-primary);
+}
+
+.dark .qr-order-panel .qr-order-card .table-pill.gold,
+.dark .qr-order-panel .qr-order-meta .mini-status.progress {
+    background: var(--color-status-yellow-background);
+    color: var(--color-status-yellow-text);
+}
+
+.dark .qr-order-panel .qr-order-meta .mini-status.ready,
+.dark .qr-order-panel .qr-order-meta .mini-status.done {
+    background: var(--color-status-lime-background);
+    color: var(--color-status-lime-text);
+}

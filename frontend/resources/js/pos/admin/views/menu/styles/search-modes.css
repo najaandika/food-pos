@@ -1,0 +1,66 @@
+/* Menu P2 — scoped adaptation around the project's official BoardUI components.
+   No edits to shared component source or other POS workspaces. */
+.pos-menu-page {
+    --menu-p2-bg: var(--color-background-primary-default, #fff);
+    --menu-p2-surface: var(--color-background-secondary-default, #f8f9fb);
+    --menu-p2-line: var(--color-border-button-default, #e4e7ec);
+    --menu-p2-text: var(--color-text-primary, #141a33);
+    --menu-p2-muted: var(--color-text-secondary, #667085);
+}
+
+.pos-menu-page .menu-p2-search {
+    display: flex;
+    width: min(380px, 100%);
+    max-width: 100%;
+    margin: 0 0 0 auto;
+}
+
+.pos-menu-page .menu-p2-search-field {
+    min-height: 42px;
+    background: var(--menu-p2-surface);
+    border-radius: 12px;
+}
+
+.pos-menu-page .menu-p2-mode-switch {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.pos-menu-page .menu-p2-order-types {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.pos-menu-page .menu-p2-order-types button {
+    min-height: 34px;
+    padding: 7px 13px;
+}
+
+.pos-menu-page .menu-p2-qr-toggle {
+    flex-shrink: 0;
+    min-height: 36px;
+    border-radius: 10px;
+}
+/* R8.16C: secondary labels must contrast with the dark P2 canvas/cards.
+   Keep light-mode BoardUI tokens and existing selected-pill styling. */
+.dark .pos-menu-page {
+    --menu-p2-muted: color-mix(
+        in srgb,
+        var(--color-text-primary) 78%,
+        var(--color-background-secondary-default)
+    );
+}
+
+.dark .pos-menu-page .menu-p2-order-types button:not([data-selected]) {
+    color: var(--menu-p2-muted);
+}
+
+.dark
+    .pos-menu-page
+    .menu-p2-category-pill:not([data-pill-selected])
+    .menu-p2-category-name {
+    color: var(--menu-p2-muted);
+}

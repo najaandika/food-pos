@@ -1,0 +1,26 @@
+/* Keep color feedback quick while the physical press motion remains soft.
+ * The transform uses a shorter duration on press and the slower duration only
+ * when returning to rest, so hover styles never inherit the 700ms timing. */
+@utility button-press-motion {
+    transition:
+        background-color var(--button-transition-ms) ease,
+        border-color var(--button-transition-ms) ease,
+        box-shadow var(--button-transition-ms) ease,
+        color var(--button-transition-ms) ease,
+        transform 420ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:active:not(:disabled):not([aria-disabled='true']) {
+        transform: scale(0.98);
+        transition-duration: 150ms, 150ms, 150ms, 150ms, 220ms;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+        transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        transform: none;
+    }
+}

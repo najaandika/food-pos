@@ -1,0 +1,55 @@
+.pos-shortcuts {
+    display: grid;
+    gap: var(--space-fixed-2);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+}
+
+.pos-shortcuts button {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    border: 0;
+    border-radius: 13px;
+    background: var(--ice);
+    color: var(--navy);
+    padding: 0 13px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.pos-shortcuts input {
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid rgba(132, 143, 168, 0.16);
+    border-radius: 13px;
+    background: var(--ice);
+    color: var(--navy);
+    padding: 0 13px;
+    font: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    outline: none;
+}
+
+.pos-shortcuts input:focus {
+    border-color: rgba(48, 71, 255, 0.28);
+    box-shadow: 0 0 0 4px rgba(48, 71, 255, 0.08);
+}
+
+.pos-shortcuts button:nth-of-type(1) {
+    background: var(--mist);
+    color: var(--blue);
+}
+
+.pos-shortcuts svg {
+    width: 17px;
+    height: 17px;
+}
+
+.pos-shortcuts button:disabled {
+    cursor: not-allowed;
+    opacity: 0.52;
+}

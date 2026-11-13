@@ -1,0 +1,42 @@
+@container admin-main (max-width: 1240px) {
+    .orders-kanban {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 232px), 1fr));
+        overflow: visible;
+        padding-bottom: 2px;
+    }
+
+    .kanban-column {
+        flex-basis: auto;
+        max-height: none;
+    }
+
+    .kanban-list {
+        max-height: none;
+    }
+}
+
+@container admin-main (max-width: 760px) {
+    .orders-toolbar .admin-tabs,
+    .owner-filter-tabs,
+    .category-list,
+    .category-rail .category-list {
+        overflow-x: hidden;
+        flex-wrap: wrap;
+    }
+
+    .orders-kanban {
+        display: grid;
+        grid-template-columns: 1fr;
+        overflow: visible;
+        padding: 0;
+    }
+
+    .orders-toolbar .admin-tabs button,
+    .owner-filter-tabs button {
+        flex: 1 1 auto;
+    }
+
+    .owner-menu-table {
+        overflow: visible;
+    }
+}

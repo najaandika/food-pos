@@ -1,0 +1,202 @@
+/* BoardUI Drawer renders in an overlay outside the POS shell. */
+.tables-p1-drawer-dialog {
+    min-height: 0;
+    max-height: 100%;
+    background: var(--color-background-full);
+    color: var(--color-text-primary);
+}
+
+.tables-p1-drawer-dialog .qr-editor-panel {
+    position: static;
+    top: auto;
+    width: 100%;
+    min-width: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.tables-p1-drawer-dialog .qr-large-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 16px;
+    margin-bottom: 18px;
+    border-radius: var(--radius-2xl, 20px);
+    background: var(--color-background-secondary-default);
+    text-align: center;
+}
+
+.tables-p1-drawer-dialog .tables-drawer-qr-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    color: var(--color-foreground-icon-secondary);
+    background: var(--color-background-inner-default);
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-xl, 16px);
+}
+
+.tables-p1-drawer-dialog .qr-large-preview strong {
+    margin-top: 10px;
+    font-size: 18px;
+    color: var(--color-text-primary);
+}
+
+.tables-p1-drawer-dialog .qr-large-preview p {
+    text-align: center;
+}
+
+.tables-p1-drawer-dialog .qr-link-box {
+    background: var(--color-background-inner-default);
+}
+
+.tables-p1-drawer-dialog .editor-fields input,
+.tables-p1-drawer-dialog .editor-fields button {
+    max-width: 100%;
+}
+
+.tables-p1-drawer-dialog .tables-p1-drawer-body {
+    padding-bottom: 16px;
+}
+
+.tables-p1-drawer-dialog .tables-p1-drawer-footer {
+    border-top: 1px solid var(--color-separator-border);
+    padding-top: 16px;
+}
+
+@media (max-width: 1100px) {
+    .owner-tables-p1 .table-tools {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .owner-tables-p1 .tables-boardui-search {
+        grid-column: 1 / -1;
+    }
+
+    .owner-tables-p1 .tables-result-count {
+        justify-self: end;
+    }
+}
+
+@media (max-width: 600px) {
+    .owner-tables-p1 .tables-main {
+        padding: 12px;
+    }
+
+    .owner-tables-p1 .tables-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .owner-tables-p1 .tables-summary article {
+        min-height: 84px;
+        padding: 12px 9px;
+        border-radius: var(--radius-xl, 16px);
+    }
+
+    .owner-tables-p1 .tables-summary span {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    .owner-tables-p1 .tables-summary strong {
+        margin-top: 8px;
+        font-size: 24px;
+    }
+
+    .owner-tables-p1 .tables-summary small {
+        display: none;
+    }
+
+    .owner-tables-p1 .table-tools {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .owner-tables-p1 .table-tools .owner-filter-tabs {
+        max-width: 100%;
+        justify-content: flex-start;
+    }
+
+    .owner-tables-p1 .tables-result-count {
+        justify-self: start;
+    }
+
+    .tables-p1-drawer-dialog .tables-p1-drawer-footer > button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .owner-tables-p1 .qr-table-card,
+    .owner-tables-p1 .tables-qr-preview-trigger {
+        transition: none;
+    }
+}
+
+/* Add Table uses the BoardUI Button label/typography, matching Add Staff.
+   Keep the translated label intact (Tambah Meja / Add Table). */
+.owner-tables-p1 .tables-p1-add-button {
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--text-body-medium, 0.875rem);
+    font-weight: var(--text-body-medium--font-weight, 500);
+    line-height: var(--text-body-medium--line-height, 1.25rem);
+    letter-spacing: var(--text-body-medium--letter-spacing, 0);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Keep the BoardUI drawer above the POS mobile navigation (which has its own layer). */
+.tables-p1-drawer-overlay {
+    z-index: 1200;
+}
+@media (min-width: 701px) {
+    .owner-tables-p1 .qr-table-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media (min-width: 701px) and (max-width: 1199px) {
+    .owner-tables-p1 .qr-table-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 700px) {
+    .owner-tables-p1 .qr-table-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* React Aria portals the BoardUI drawer outside the legacy POS shell.
+   Bridge only the old form's variables to BoardUI semantic tokens so
+   its labels, links and metadata never become invisible. */
+.tables-p1-drawer-dialog {
+    --ink: var(--color-text-primary);
+    --navy: var(--color-text-primary);
+    --muted: var(--color-text-secondary);
+    --text-primary: var(--color-text-primary);
+    --blue: var(--color-accent-600);
+    --line: var(--color-separator-border);
+    --border: var(--color-separator-border);
+    --border-soft: var(--color-separator-border);
+    --mist: var(--color-background-secondary-default);
+    --ice: var(--color-background-secondary-default);
+    --card: var(--color-background-inner-default);
+    --card-bg: var(--color-background-inner-default);
+}
+
+.tables-p1-drawer-dialog .qr-link-box span,
+.tables-p1-drawer-dialog .qr-large-preview p {
+    color: var(--color-text-secondary);
+}
+
+.tables-p1-drawer-dialog .qr-link-box strong {
+    color: var(--color-text-primary);
+}

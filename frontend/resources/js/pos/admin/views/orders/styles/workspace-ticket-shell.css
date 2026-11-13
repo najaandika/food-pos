@@ -1,0 +1,96 @@
+.orders-stage-stack {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    padding-right: 2px;
+    scrollbar-width: thin;
+}
+.orders-ticket {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--orders-border);
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--orders-surface);
+    box-shadow: var(--shadow-card, none);
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+.orders-ticket:hover {
+    border-color: var(--orders-accent);
+}
+.orders-ticket:focus-within {
+    border-color: var(--orders-focus);
+}
+.orders-ticket-open {
+    display: block;
+    width: 100%;
+    padding: 16px 12px 12px;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    min-width: 0;
+}
+.orders-ticket-open:hover {
+    background: var(--color-background-primary-hover, var(--orders-ground));
+}
+.orders-ticket-top,
+.orders-ticket-person,
+.orders-ticket-subline,
+.orders-ticket-items p,
+.orders-ticket-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+}
+.orders-ticket-top {
+    margin-bottom: 12px;
+}
+.orders-ticket-number {
+    color: var(--orders-accent);
+    overflow-wrap: anywhere;
+    font-size: var(--text-body-2-bold, 0.8125rem);
+    line-height: var(--text-body-2-bold--line-height, 1.125rem);
+    font-weight: var(--text-body-2-bold--font-weight, 700);
+    letter-spacing: var(--text-body-2-bold--letter-spacing, 0);
+}
+.orders-ticket-source,
+.orders-source-label {
+    color: var(--orders-secondary);
+    background: var(--orders-ground);
+    padding: 4px 8px;
+    border-radius: 6px;
+    max-width: 124px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: var(--text-caption-2-semibold, 0.6875rem);
+    line-height: var(--text-caption-2-semibold--line-height, 0.9375rem);
+    font-weight: var(--text-caption-2-semibold--font-weight, 600);
+    letter-spacing: var(--text-caption-2-semibold--letter-spacing, 0.2px);
+}
+.orders-ticket-source[data-source='qr'],
+.orders-source-label[data-source='qr'] {
+    color: var(--orders-accent);
+}
+.orders-workspace .orders-ticket-person strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--orders-text);
+    font-size: var(--text-body-semibold, 0.875rem);
+    line-height: var(--text-body-semibold--line-height, 1.25rem);
+    font-weight: var(--text-body-semibold--font-weight, 600);
+    letter-spacing: var(--text-body-semibold--letter-spacing, 0);
+}

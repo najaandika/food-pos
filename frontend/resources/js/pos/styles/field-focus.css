@@ -1,0 +1,52 @@
+/* R8.21 — Restore BoardUI Free's own focus indicator inside POS.
+   Text fields: React Aria InputBase/textarea shell owns the 2px inset ring.
+   Buttons and selects: Tailwind's 2px focus-visible ring owns the indicator.
+   Keep the legacy outline for controls that have no replacement ring. */
+
+/* React Aria's group renders role=presentation, not role=group. Limit the
+   suppression to known BoardUI field hosts and the actual focused shell. */
+.page-shell.pos-shell-layout
+    :is(
+        .staff-finance-toolbar .staff-finance-search,
+        .report-boardui .report-search,
+        .pos-menu-page .menu-p2-search,
+        .pos-boardui-account-panel,
+        .settings-layout,
+        .cashier-workspace .cashier-search-shell,
+        .cashier-workspace .cashier-cash-input,
+        .waiters-workspace .waiters-search,
+        .orders-workspace .orders-search-row,
+        .owner-menu-layout .c2-owner-search
+    )
+    [data-focus-within]
+    :is(input, textarea):focus-visible:not([aria-invalid='true']) {
+    outline: none;
+}
+
+/* The BoardUI component already owns a visible 2px focus ring. Never stack
+   a separate legacy 3px blue outline on top of it. This includes Select,
+   IconButton, Button, dropdown triggers, and segmented controls. */
+.page-shell.pos-shell-layout
+    :is(
+        button,
+        a,
+        summary,
+        [role='button']
+    )[class*='focus-visible:ring']:focus-visible:not(
+        .pos-shell-mobile-menu-trigger
+    ) {
+    outline: none;
+}
+
+/* The mobile hamburger has a dedicated 2px focus-outline contract preserved
+   by R8.13D keyboard regression. Remove its redundant Tailwind ring shadow. */
+@media (max-width: 1023px) {
+    .page-shell.pos-shell-layout
+        .main-panel
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger:focus-visible {
+        outline: 2px solid var(--color-border-focus-ring, var(--blue));
+        outline-offset: 2px;
+        box-shadow: none;
+    }
+}

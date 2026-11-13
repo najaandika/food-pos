@@ -1,0 +1,143 @@
+/* Tables & QR — P1: BoardUI page composition, genuine QR actions and responsive drawer. */
+.owner-tables-p1 .tables-p1-layout {
+    display: block;
+    min-width: 0;
+}
+
+.owner-tables-p1 .tables-main {
+    width: 100%;
+    padding: 20px;
+    border: 0;
+    border-radius: var(--radius-2xl, 24px);
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}
+
+.owner-tables-p1 .table-tools {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+}
+
+.owner-tables-p1 .tables-boardui-search {
+    min-width: 0;
+    width: 100%;
+}
+
+.owner-tables-p1 .tables-boardui-search input {
+    height: 100%;
+    min-width: 0;
+    width: 100%;
+}
+
+.owner-tables-p1 .table-tools .owner-filter-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-color: var(--color-separator-border);
+    background: var(--color-background-inner-default);
+    scrollbar-width: none;
+}
+
+.owner-tables-p1 .owner-filter-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.owner-tables-p1 .owner-filter-tabs button {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.owner-tables-p1 .tables-result-count {
+    margin: 0;
+    text-align: right;
+}
+
+.owner-tables-p1 .tables-summary article {
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-2xl, 20px);
+    background: var(--color-background-inner-default);
+    box-shadow: none;
+}
+
+.owner-tables-p1 .qr-table-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 12px;
+}
+
+.owner-tables-p1 .qr-table-card {
+    box-shadow: none;
+    border-color: var(--color-separator-border);
+    background: var(--color-background-inner-default);
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+
+.owner-tables-p1 .qr-table-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--color-border-button-hover, var(--line));
+}
+
+/* Hover stays neutral; focused card controls retain the BoardUI accent. */
+.owner-tables-p1 .qr-table-card:focus-within {
+    border-color: var(--color-border-focus-ring, var(--blue));
+}
+
+.owner-tables-p1 .qr-table-card.selected {
+    box-shadow: none;
+    background: var(--color-background-inner-default);
+}
+
+.owner-tables-p1 .tables-qr-preview-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-xl, 16px);
+    background: var(--color-background-secondary-default);
+    color: var(--color-foreground-icon-secondary);
+    cursor: pointer;
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.owner-tables-p1 .tables-qr-preview-trigger:hover:not(:disabled) {
+    background: var(--color-background-secondary-hover);
+    color: var(--color-foreground-icon-primary);
+}
+
+.owner-tables-p1 .tables-qr-preview-trigger:disabled {
+    cursor: not-allowed;
+}
+
+.owner-tables-p1 .tables-qr-preview-trigger:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+.owner-tables-p1 .qr-card-body {
+    grid-template-columns: 72px minmax(0, 1fr);
+}
+
+.owner-tables-p1 .tables-empty-state {
+    min-height: 240px;
+    align-content: center;
+    background: var(--color-background-inner-default);
+    border-color: var(--color-separator-border);
+    box-shadow: none;
+}
+
+.owner-tables-p1 .tables-api-feedback {
+    border-color: var(--color-separator-border);
+    background: var(--color-background-secondary-default);
+    box-shadow: none;
+}

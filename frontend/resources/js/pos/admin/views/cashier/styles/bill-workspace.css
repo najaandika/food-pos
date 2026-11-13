@@ -1,0 +1,288 @@
+.cashier-workspace .cashier-detail {
+    position: sticky;
+    top: 16px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100dvh - 34px);
+    overflow: auto;
+    gap: 15px;
+    padding: 24px;
+    border: 1px solid var(--cashier-border);
+    border-radius: 24px;
+    background: var(--cashier-surface);
+    box-shadow: var(--shadow-card);
+    min-width: 0;
+}
+.cashier-workspace .cashier-detail-top {
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--cashier-divider);
+}
+.cashier-workspace .cashier-customer-head {
+    min-width: 0;
+}
+.cashier-workspace .cashier-customer-head h2 {
+    font-size: 18px;
+    color: var(--cashier-text);
+    letter-spacing: -0.035em;
+    font-weight: 740;
+}
+.cashier-workspace .cashier-ticket-mark {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 1px solid var(--cashier-border);
+    background: var(--cashier-ground);
+    color: var(--cashier-accent);
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 760;
+}
+.cashier-workspace .cashier-detail-status {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: normal;
+    text-align: center;
+}
+
+.cashier-workspace .cashier-table-badge {
+    border: 1px solid var(--cashier-border);
+    border-radius: 11px;
+    background: var(--cashier-ground);
+}
+.cashier-workspace .cashier-table-badge strong {
+    color: var(--cashier-text);
+}
+.cashier-workspace .payment-due-card {
+    padding: 22px;
+    border: 0;
+    border-radius: 16px;
+    background: var(--color-background-inverse, var(--navy));
+    color: var(--color-text-white, var(--cashier-surface));
+    box-shadow: none;
+}
+.cashier-workspace .payment-due-card > span {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.065em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    font-weight: 720;
+    color: inherit;
+}
+.cashier-workspace .payment-due-card strong {
+    display: block;
+    color: inherit;
+    font-size: clamp(25px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+    font-weight: 790;
+    margin: 9px 0;
+}
+.cashier-workspace .payment-due-card small {
+    color: inherit;
+    opacity: 0.72;
+    line-height: 1.4;
+}
+.cashier-workspace .cashier-note-grid {
+    gap: 10px;
+}
+.cashier-workspace .cashier-note-grid article {
+    border: 1px solid var(--cashier-border);
+    border-radius: 12px;
+    background: var(--cashier-ground);
+    padding: 12px;
+}
+.cashier-workspace .cashier-note-grid strong {
+    color: var(--cashier-text);
+    font-size: 12px;
+}
+.cashier-workspace .cashier-section-title {
+    margin-top: 2px;
+}
+.cashier-workspace .cashier-section-title h3,
+.cashier-workspace .payment-methods h3 {
+    font-size: 13px;
+    font-weight: 760;
+    color: var(--cashier-text);
+}
+.cashier-workspace .cashier-items,
+.cashier-workspace .cashier-bill {
+    border-top: 1px solid var(--cashier-divider);
+}
+.cashier-workspace .cashier-items > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--cashier-divider);
+    font-size: 12px;
+}
+.cashier-workspace .cashier-bill {
+    padding-top: 8px;
+}
+.cashier-workspace .cashier-bill p {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--cashier-muted);
+}
+.cashier-workspace .cashier-bill strong {
+    color: var(--cashier-text);
+}
+.cashier-workspace .cashier-bill-total {
+    padding-top: 14px;
+    margin-top: 12px;
+    border-top: 1px solid var(--cashier-divider);
+}
+.cashier-workspace .cashier-bill-total strong {
+    font-size: 18px;
+    font-weight: 780;
+    color: var(--cashier-text);
+}
+.cashier-workspace .cashier-discount-box,
+.cashier-workspace .cashier-quick-cash {
+    border: 1px solid var(--cashier-border);
+    border-radius: 13px;
+    background: var(--cashier-ground);
+    padding: 13px;
+}
+.cashier-workspace .cashier-discount-title {
+    color: var(--cashier-text);
+    font-weight: 710;
+}
+.cashier-workspace .cashier-discount-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.cashier-workspace .discount-chip,
+.cashier-workspace .cash-preset-btn {
+    border: 1px solid var(--cashier-border);
+    border-radius: 9px;
+    background: var(--cashier-surface);
+    color: var(--cashier-muted);
+    min-height: 31px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 690;
+}
+.cashier-workspace .discount-chip.active,
+.cashier-workspace .cash-preset-btn.active {
+    border-color: var(--cashier-accent);
+    background: var(--color-accent-50, var(--cashier-ground));
+    color: var(--cashier-accent);
+}
+.cashier-workspace .payment-methods > div {
+    gap: 8px;
+}
+.cashier-workspace .payment-methods button {
+    flex: 1;
+    min-height: 46px;
+    border: 1px solid var(--cashier-border);
+    border-radius: 11px;
+    background: var(--cashier-surface);
+    color: var(--cashier-text);
+    font-size: 12px;
+    font-weight: 710;
+}
+.cashier-workspace .payment-methods button.active {
+    color: var(--cashier-accent);
+    border-color: var(--cashier-accent);
+    background: var(--color-accent-50, var(--cashier-ground));
+}
+.cashier-workspace .custom-cash-wrap input {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    min-height: 25px;
+}
+.cashier-workspace .cashier-tendered {
+    display: grid;
+    gap: 6px;
+    border: 1px solid var(--cashier-border);
+    border-radius: 12px;
+    background: var(--cashier-ground);
+    padding: 13px;
+}
+.cashier-workspace .cashier-tendered p {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+.cashier-workspace .cashier-tendered strong {
+    color: var(--cashier-text);
+}
+.cashier-workspace .cashier-safety-note {
+    padding: 11px 13px;
+    margin: 0;
+    border: 1px solid var(--color-warning-300, var(--cashier-border));
+    border-radius: 10px;
+    color: var(--color-warning-800, var(--cashier-text));
+    background: var(--color-warning-50, var(--cashier-ground));
+    font-size: 11px;
+    line-height: 1.5;
+}
+.cashier-workspace .cashier-actions {
+    position: sticky;
+    bottom: -21px;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 9px;
+    padding: 13px 0 21px;
+    margin: 0;
+    background: var(--cashier-surface);
+    border-top: 1px solid var(--cashier-divider);
+}
+.cashier-workspace .cashier-actions button {
+    min-height: 44px;
+    height: auto;
+    padding: 10px 12px;
+    border-radius: 11px;
+    border: 1px solid var(--cashier-border);
+    background: var(--cashier-surface);
+    color: var(--cashier-text);
+    font-size: 12px;
+    font-weight: 730;
+    white-space: normal;
+}
+.cashier-workspace .cashier-actions button:last-child {
+    background: var(--cashier-accent);
+    color: var(--color-text-white, var(--cashier-surface));
+    border-color: var(--cashier-accent);
+}
+.cashier-workspace .cashier-actions button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.cashier-workspace .cashier-mobile-tabs {
+    gap: 6px;
+}
+.cashier-workspace .cashier-tab-btn {
+    flex: 1;
+    border: 1px solid var(--cashier-border);
+    border-radius: 10px;
+    background: var(--cashier-surface);
+    color: var(--cashier-muted);
+    min-height: 44px;
+    padding: 9px 12px;
+    font-size: 12px;
+    font-weight: 710;
+}
+.cashier-workspace .cashier-tab-btn.active {
+    background: var(--cashier-accent);
+    color: var(--color-text-white, var(--cashier-surface));
+    border-color: var(--cashier-accent);
+}
+.cashier-workspace .qris-modal-content,
+.cashier-workspace .receipt-modal-content {
+    border-radius: 20px;
+}
+.cashier-workspace .qris-confirm-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}

@@ -1,0 +1,270 @@
+/*
+ * R8.23 — Screenshot-driven BoardUI surface and focus consistency.
+ * Keep legacy focus as fallback for native controls; native React Aria
+ * field shells own a single semantic inset ring.
+ */
+
+/* Manage Menu: put the search/status cluster and result count on one line,
+   then give the category tabs a FULL row. This avoids truncated category
+   names and the awkward 200px scroller beside "items found". */
+.page-shell.pos-shell-layout .app-view.owner-menu-c2-page .owner-menu-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    grid-template-areas:
+        'controls results'
+        'categories categories';
+    column-gap: 16px;
+    row-gap: 12px;
+    align-items: center;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .owner-toolbar-left {
+    grid-area: controls;
+    min-width: 0;
+    max-width: 100%;
+    flex: 1 1 auto;
+    gap: 10px;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-owner-search {
+    min-width: min(100%, 210px);
+    max-width: min(100%, 440px);
+    flex: 1 1 260px;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .owner-result-count {
+    grid-area: results;
+    justify-self: end;
+    align-self: center;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-filter-scroll {
+    grid-area: categories;
+    display: block;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 2px 0 5px;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-filter-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-filter-tabs {
+    width: max-content;
+    max-width: none;
+    min-width: max-content;
+    gap: 4px;
+    flex-wrap: nowrap;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-filter-tabs
+    button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+/* The original InputBase group is role=presentation in React Aria; target
+   the data-focus-within contract, NOT a guessed role=group attribute.
+   Only the field shell draws the 2px ring. */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    :is(.c2-owner-search, .c2-editor-fields)
+    [data-focus-within]:not([data-invalid]),
+.page-shell.pos-shell-layout
+    .staff-finance-search
+    [data-focus-within]:not([data-invalid]),
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    .menu-p2-order-field
+    [data-focus-within]:not([data-invalid]),
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .custom-cash-wrap
+    [data-focus-within]:not([data-invalid]) {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    :is(.c2-owner-search, .c2-editor-fields)
+    [data-focus-within]
+    input:focus-visible,
+.page-shell.pos-shell-layout
+    .staff-finance-search
+    [data-focus-within]
+    input:focus-visible,
+.page-shell.pos-shell-layout
+    .pos-menu-page
+    .menu-p2-order-field
+    [data-focus-within]
+    input:focus-visible,
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .custom-cash-wrap
+    [data-focus-within]
+    input:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Preserve a visible single ring for account/name entry in the menu
+   ticket. Select/NumberField retain their own BoardUI keyboard indicators. */
+.page-shell.pos-shell-layout .pos-menu-page .menu-p2-order-field {
+    min-width: 0;
+}
+
+/* The Cashier custom cash field previously received a local 3px blue
+   input glow AND a parent field ring. Keep only the parent ring. */
+.page-shell.pos-shell-layout .cashier-workspace .custom-cash-wrap input:focus,
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .custom-cash-wrap
+    input:focus-visible {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .custom-cash-wrap
+    .cashier-field-focus[data-focus-within] {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+/* Owner Tables: secondary Sync and primary Add Table should share the
+   official BoardUI medium control height and icon optical alignment. */
+.page-shell.pos-shell-layout .app-view.owner-tables-p1 > .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px 12px;
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-tables-p1
+    > .topbar
+    > .admin-title-wrap {
+    flex: 1 1 240px;
+    min-width: 0;
+    margin-inline-end: auto;
+}
+
+.page-shell.pos-shell-layout .app-view.owner-tables-p1 > .topbar > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.page-shell.pos-shell-layout .app-view.owner-tables-p1 > .topbar > button svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+}
+
+@container admin-main (max-width: 620px) {
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            'controls'
+            'categories'
+            'results';
+        gap: 12px;
+    }
+
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar
+        .owner-toolbar-left {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar
+        .c2-owner-search {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar
+        .c2-owner-status-tabs {
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar
+        .c2-owner-status-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar
+        .owner-result-count {
+        justify-self: start;
+    }
+
+    .page-shell.pos-shell-layout .app-view.owner-tables-p1 > .topbar {
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-shell.pos-shell-layout
+        .app-view.owner-menu-c2-page
+        .owner-menu-toolbar
+        .c2-filter-scroll {
+        scroll-behavior: auto;
+    }
+}

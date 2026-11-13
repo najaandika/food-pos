@@ -1,0 +1,133 @@
+/* ---------------------------------------------------------------------------
+ * BoardUI theme tokens
+ *
+ * Layered as Tailwind v4 expects:
+ *   @theme { ... }     primitives + ramp overrides → Tailwind utilities
+ *   :root { ... }      semantic tokens (light mode) — reference primitives
+ *   .dark { ... }      semantic overrides (dark mode) — landed when designed
+ *   @theme inline {..} re-export of semantic tokens so they become utilities
+ *
+ * See docs/FIGMA_WORKFLOW.md for how tokens get added (Figma is source of truth).
+ * --------------------------------------------------------------------------- */
+
+@theme {
+    /* ----- Color primitives ----------------------------------------------------
+   * Almost the entire palette matches Tailwind v4's OKLCH defaults. The four
+   * overrides below are the only intentional deviations (see Figma → variables
+   * → color/...).
+   * --------------------------------------------------------------------------*/
+    --color-slate-200: #ebeff5;
+    --color-neutral-100: #f7f7f7;
+    --color-neutral-200: #ebebeb;
+    --color-neutral-925: #121212;
+    --color-blue-400: #3392ff;
+
+    /* ----- Accent ramp ---------------------------------------------------------
+   * The CTA hue. Interactive/selection surfaces (primary button gradient,
+   * ghost + link buttons, checkbox, radio, switch, slider, tabs, sidebar
+   * selected, focus ring, date-range selection) reference accent-* instead of
+   * a raw hue, so the whole system re-tints by overriding these eleven
+   * variables at runtime (see components/application/theme/accent.ts) or in
+   * a customer project after importing this file. Defaults to the blue
+   * primitives above. Content/data blues (charts, status chips, calendar
+   * events, info notifications) deliberately keep referencing blue-*.
+   * --------------------------------------------------------------------------*/
+    --color-accent-50: var(--color-blue-50);
+    --color-accent-100: var(--color-blue-100);
+    --color-accent-200: var(--color-blue-200);
+    --color-accent-300: var(--color-blue-300);
+    --color-accent-400: var(--color-blue-400);
+    --color-accent-500: var(--color-blue-500);
+    --color-accent-600: var(--color-blue-600);
+    --color-accent-700: var(--color-blue-700);
+    --color-accent-800: var(--color-blue-800);
+    --color-accent-900: var(--color-blue-900);
+    --color-accent-950: var(--color-blue-950);
+
+    /* ----- Typography ----------------------------------------------------------
+   * Font sizes, weights, line-heights, and tracking all match Tailwind v4
+   * defaults. The only override is the family: Inter, loaded via next/font
+   * in app/layout.tsx, which exposes --font-inter to the document.
+   * --------------------------------------------------------------------------*/
+    --font-sans:
+        var(--font-inter), ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    /* Monospace ramp for code blocks. Loaded via next/font in app/layout.tsx
+   * (--font-mono-source → JetBrains Mono). Figma's spec uses IBM Plex Mono;
+   * JetBrains Mono is the closest already-bundled face. */
+    --font-mono:
+        var(--font-mono-source), ui-monospace, 'SFMono-Regular', Menlo,
+        Consolas, 'Liberation Mono', monospace;
+
+    /* ----- Radii ---------------------------------------------------------------
+   * Extra step between lg (8) and xl (12). Used by medium-size buttons.
+   * Figma name: radius/2lg.
+   * --------------------------------------------------------------------------*/
+    --radius-2lg: 10px;
+    /* Figma `radius/2,5xl`: kanban columns and other large inset panels. */
+    --radius-2-5xl: 20px;
+    --radius-notification-card: 10px;
+
+    /* ----- Shadows -------------------------------------------------------------
+   * 2xs, xs, 2xl and the inner shadows already match Tailwind v4. Sizes sm, md,
+   * lg, xl follow the Figma 6%/10% recipe (slightly softer than Tailwind v4's
+   * 10%/10% default).
+   * --------------------------------------------------------------------------*/
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md:
+        0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg:
+        0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl:
+        0 10px 10px -5px rgb(0 0 0 / 0.04), 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+    /* Figma effect style "Background/Sidebar Elevation" — copied 1:1:
+   *   DROP_SHADOW #00000005 offset(0,1) radius 0  spread 0  → 0 1px 0px  0 / 0.0196
+   *   DROP_SHADOW #0000000F offset(0,1) radius 12 spread 0  → 0 1px 12px 0 / 0.0588
+   *   DROP_SHADOW #00000052 offset(0,0) radius 1  spread 0  → 0 0   1px  0 / 0.3216
+   * (alpha = hex byte / 255: 05→0.0196, 0F→0.0588, 52→0.3216). */
+    --shadow-sidebar:
+        0 1px 0 0 rgb(0 0 0 / 0.0196), 0 1px 12px 0 rgb(0 0 0 / 0.0588),
+        0 0 1px 0 rgb(0 0 0 / 0.3216);
+
+    /* Figma effect style "Sidebar selected" — copied 1:1:
+   *   DROP_SHADOW  color/blue/500 offset(0,0) radius 0 spread 1 → 0 0 0 1px blue-500
+   *   INNER_SHADOW #FFFFFF40       offset(0,1) radius 0 spread 0 → inset 0 1px 0 0 / 0.251
+   * (#FFFFFF40 alpha = 0x40/255 = 0.251). */
+    --shadow-nav-selected:
+        0 0 0 1px var(--color-accent-500),
+        inset 0 1px 0 0 rgb(255 255 255 / 0.251);
+
+    /* Checkbox checked/indeterminate surface (from the Figma Checkbox component):
+   * inner top highlight + 1px inner blue edge over the primary gradient. */
+    --shadow-checkbox-selected:
+        inset 0 2px 0 0 rgb(255 255 255 / 0.25),
+        inset 0 0 0 1px var(--color-accent-500);
+
+    /* 1px contact shadow used on white cards/dropdown triggers sitting on the
+   * secondary background (Figma drop shadow 0 1 1 5%). */
+    --shadow-card: 0 1px 1px 0 rgb(0 0 0 / 0.05);
+
+    /* Floating menu/dropdown panel (Figma → sidebar profile menu node 3823:3699):
+   *   DROP_SHADOW #0000000A offset(0,1) radius 1 → 0 1px 1px 0 / 0.04
+   *   DROP_SHADOW #00000005 offset(0,4) radius 4 → 0 4px 4px 0 / 0.02 */
+    --shadow-dropdown:
+        0 1px 1px 0 rgb(0 0 0 / 0.04), 0 4px 4px 0 rgb(0 0 0 / 0.02);
+
+    /* Floating template waitlist (Figma node 4117:32737). This extends the
+   * sidebar elevation recipe with the two broad ambient layers used by the
+   * signup surface. */
+    --shadow-waitlist:
+        0 0 6px 0 rgb(0 0 0 / 0.06), 0 0 64px 0 rgb(0 0 0 / 0.16),
+        0 0 1px 0 rgb(0 0 0 / 0.32), 0 1px 12px 0 rgb(0 0 0 / 0.06),
+        0 1px 0 0 rgb(0 0 0 / 0.02);
+
+    /* Inner shadows (Figma names inner-shadow/*; Tailwind utility prefix is
+   * inset-shadow-*).
+   */
+    --inset-shadow-2xs: inset 0 1px 0 0 rgb(0 0 0 / 0.05);
+    --inset-shadow-xs: inset 0 1px 1px 0 rgb(0 0 0 / 0.05);
+    --inset-shadow-sm: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}

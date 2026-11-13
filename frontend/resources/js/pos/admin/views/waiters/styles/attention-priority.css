@@ -1,0 +1,78 @@
+/* Time-sensitive requests: one consistent header, detail block, and action per card. */
+.waiters-workspace .waiters-attention-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+    gap: 12px;
+}
+
+.waiters-workspace .waiters-attention-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    min-width: 0;
+    min-height: 184px;
+    padding: 14px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 12px;
+    background: var(--color-background-secondary-default);
+}
+
+.waiters-workspace .waiters-attention-row.tone-call {
+    border-color: color-mix(
+        in srgb,
+        var(--color-status-rose-text) 24%,
+        var(--waiters-line)
+    );
+}
+
+.waiters-workspace .waiters-attention-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-attention-table {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 46px;
+    min-height: 36px;
+    max-width: 100%;
+    padding: 0 9px;
+    border-radius: 8px;
+    background: var(--color-background-primary-default);
+    color: var(--waiters-text);
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+.waiters-workspace .waiters-attention-copy {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-attention-copy strong {
+    color: var(--waiters-text);
+    font-weight: var(--text-body-semibold--font-weight);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.waiters-workspace .waiters-attention-time {
+    color: var(--waiters-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.waiters-workspace .waiters-attention-row > button {
+    width: 100%;
+    min-height: 40px;
+    margin-top: auto;
+}

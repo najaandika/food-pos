@@ -1,0 +1,204 @@
+/* P6.1: BoardUI cashier composition. Keep the legacy payment behavior but
+   use the Free BoardUI KPI/segments/modal, semantic colors, and one page
+   scrollbar instead of independent order/detail scroll containers. */
+.cashier-workspace .cashier-kpi-section {
+    display: grid;
+    gap: 9px;
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.cashier-workspace .cashier-kpi-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.cashier-workspace .cashier-kpi-row > section {
+    height: auto;
+    min-height: 125px;
+    padding: 13px;
+    border: 1px solid var(--cashier-border);
+    border-radius: 16px;
+    background: var(--cashier-surface);
+    box-shadow: none;
+}
+
+.cashier-workspace .cashier-kpi-row .text-title-1-medium {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    font-size: clamp(1rem, 2.4vw, 1.5rem);
+    font-variant-numeric: tabular-nums;
+}
+
+.cashier-workspace .cashier-kpi-disclaimer {
+    margin: 0 2px;
+    color: var(--cashier-muted);
+}
+
+.cashier-workspace .cashier-panel,
+.cashier-workspace .cashier-detail {
+    min-width: 0;
+    border: 1px solid var(--cashier-divider);
+    border-radius: 18px;
+    background: var(--cashier-surface);
+    box-shadow: none;
+}
+
+.cashier-workspace .cashier-detail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    gap: 12px;
+    padding: 20px;
+}
+
+.cashier-workspace .cashier-order-list {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+}
+
+.cashier-workspace .cashier-actions {
+    position: static;
+    bottom: auto;
+    margin: 0;
+    padding: 13px 0 0;
+    background: var(--cashier-surface);
+}
+
+/* The official segmented track already draws a selected thumb. Avoid the
+   older solid-blue custom tabs and keep arrow-key navigation accessible. */
+.cashier-workspace .cashier-queue-segments {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.cashier-workspace .cashier-queue-segments::-webkit-scrollbar {
+    display: none;
+}
+
+.cashier-workspace .cashier-queue-segments > button {
+    flex: 1 0 auto;
+    min-height: 34px;
+}
+
+.cashier-workspace .cashier-mobile-segments {
+    display: none;
+    width: 100%;
+}
+
+.cashier-workspace .cashier-mobile-choice {
+    min-width: 0;
+    flex: 1;
+    min-height: 38px;
+}
+
+.cashier-workspace .cashier-queue-segments button:focus-visible,
+.cashier-workspace .cashier-mobile-segments button:focus-visible {
+    outline: none;
+}
+
+.cashier-workspace .cashier-field-focus[data-focus-within] {
+    --tw-ring-color: var(--color-border-focus-ring);
+}
+
+.cashier-workspace .cashier-search-shell {
+    min-width: 0;
+}
+
+.cashier-workspace .cashier-search-input {
+    font-family: inherit;
+}
+
+.cashier-workspace .payment-due-card {
+    border: 1px solid var(--cashier-divider);
+    border-radius: 16px;
+    background: var(--cashier-ground);
+    color: var(--cashier-text);
+    margin: 0;
+    gap: 6px;
+    padding: 16px 18px;
+}
+
+.cashier-workspace .payment-due-card :is(strong, span, small) {
+    color: var(--cashier-text);
+}
+
+.cashier-workspace .payment-due-card small {
+    color: var(--cashier-muted);
+}
+
+.cashier-workspace .payment-due-card strong {
+    margin: 2px 0;
+}
+
+.cashier-workspace .cashier-detail-top {
+    padding-bottom: 12px;
+}
+
+.cashier-workspace .cashier-note-grid {
+    margin-bottom: 0;
+}
+
+.cashier-workspace .cashier-items {
+    margin: 0;
+}
+
+.cashier-workspace .cashier-bill {
+    gap: 8px;
+}
+
+.cashier-workspace .payment-methods {
+    margin-top: 2px;
+}
+
+.cashier-workspace .payment-methods > div {
+    margin-top: 8px;
+}
+
+.cashier-workspace .cashier-detail-empty {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    text-align: center;
+    color: var(--cashier-muted);
+}
+
+.cashier-workspace .cashier-detail-empty > svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-foreground-icon-tertiary);
+}
+
+.cashier-workspace .cashier-detail-empty h2 {
+    margin: 0;
+    color: var(--cashier-text);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cashier-workspace .cashier-detail-empty p {
+    max-width: 35ch;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.cashier-workspace .cashier-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 14px;
+    margin-top: 12px;
+    border-top: 1px solid var(--cashier-divider);
+    color: var(--cashier-muted);
+    font-size: 12px;
+}

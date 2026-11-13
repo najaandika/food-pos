@@ -1,0 +1,161 @@
+@container admin-main (max-width: 920px) {
+    .pos-menu-page .menu-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .pos-menu-page .menu-cart-shell {
+        display: none;
+    }
+
+    .pos-menu-page .menu-cart-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 998;
+        border: 0;
+        border-radius: 0;
+        background: rgba(10, 19, 39, 0.5);
+        cursor: pointer;
+    }
+
+    .pos-menu-page .menu-cart-shell.is-open {
+        display: flex;
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(460px, 100vw);
+        height: 100dvh;
+        z-index: 999;
+        flex-direction: column;
+        align-self: auto;
+        padding: 14px;
+        background: #fff;
+        box-shadow: -22px 0 60px rgba(10, 19, 39, 0.18);
+        overflow: hidden;
+    }
+
+    .pos-menu-page .menu-cart-drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 0 0 auto;
+        padding: 1px 1px 12px;
+        font-size: 17px;
+        color: var(--navy);
+    }
+
+    .pos-menu-page .menu-cart-drawer-head button {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 12px;
+        background: var(--ice);
+        color: var(--navy);
+        cursor: pointer;
+    }
+
+    .pos-menu-page .menu-cart-drawer-head svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .pos-menu-page .menu-cart-shell .receipt-panel {
+        display: flex;
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+        padding: 0 2px 5px;
+    }
+
+    .pos-menu-page .receipt-footer {
+        position: relative;
+        padding-top: 10px;
+        background: #fff;
+    }
+
+    .pos-menu-page .menu-mobile-cart-bar {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        position: fixed;
+        bottom: max(16px, env(safe-area-inset-bottom));
+        right: 16px;
+        width: min(420px, calc(100vw - 32px));
+        min-height: 58px;
+        z-index: 100;
+        padding: 12px 16px;
+        border: 0;
+        border-radius: 16px;
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 15px 36px rgba(48, 71, 255, 0.28);
+        cursor: pointer;
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .pos-menu-page .menu-mobile-cart-bar svg {
+        flex: 0 0 auto;
+        width: 20px;
+        height: 20px;
+    }
+
+    .pos-menu-page .menu-mobile-cart-bar strong {
+        margin-left: auto;
+        white-space: nowrap;
+    }
+
+    .pos-menu-page .menu-mobile-cart-bar.is-hidden {
+        display: none;
+    }
+}
+
+@container admin-main (max-width: 560px) {
+    .pos-menu-page .menu-catalog {
+        gap: 14px;
+    }
+
+    .pos-menu-page .category-rail {
+        padding: 12px;
+    }
+
+    .pos-menu-page .category-list button {
+        min-width: 105px;
+        min-height: 47px;
+    }
+
+    .pos-menu-page .menu-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pos-menu-page .menu-mobile-cart-bar,
+    .pos-menu-page .menu-cart-shell {
+        transition: none;
+    }
+}
+
+/* R8.14C: safe-area clearance for official BoardUI cart entry. */
+@container admin-main (max-width: 920px) {
+    .pos-menu-page .menu-catalog {
+        padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    }
+    .pos-menu-page .menu-mobile-cart-bar {
+        bottom: max(12px, env(safe-area-inset-bottom, 0px));
+        min-height: 60px;
+        padding: 12px 14px;
+        border-radius: var(--radius-xl, 16px);
+        background-image: var(--gradient-button-primary-default);
+        color: var(--color-text-white);
+        box-shadow: var(--shadow-lg);
+    }
+}

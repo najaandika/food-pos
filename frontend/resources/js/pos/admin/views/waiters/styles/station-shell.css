@@ -1,0 +1,34 @@
+/*
+ * Food POS / Waiters Station
+ * Operational layout composed from native BoardUI StatCards, Button, Chip,
+ * StatusDot, SegmentedControl, Input and Drawer. No custom dialog/filter skin.
+ * Scoped to Waiters only; Owner, Orders and the shared sidebar are unaffected.
+ */
+.waiters-workspace {
+    --waiters-surface: var(--color-background-primary-default);
+    --waiters-line: var(--color-separator-border);
+    --waiters-muted: var(--color-text-secondary);
+    --waiters-text: var(--color-text-primary);
+    --waiters-accent: var(--color-accent-600);
+    min-width: 0;
+    color: var(--waiters-text);
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.waiters-workspace .waiters-page-header {
+    margin-bottom: 20px;
+}
+
+.waiters-workspace .waiters-boardui-stats {
+    margin-bottom: 20px;
+    gap: 12px;
+}
+
+/* Readable small labels on the effective BoardUI KPI card surface. */
+.waiters-workspace .waiters-boardui-stats .text-text-secondary {
+    color: var(--color-neutral-600, var(--color-text-primary));
+}
+
+.dark .waiters-workspace .waiters-boardui-stats .text-text-secondary {
+    color: var(--color-neutral-300, var(--color-text-primary));
+}

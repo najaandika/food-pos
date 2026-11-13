@@ -1,0 +1,65 @@
+/* Tailwind expands shadow utilities into `--tw-shadow` at build time. Point
+ * those generated utilities back to the live dark elevation tokens so the
+ * class-based theme can adjust opacity without component-level overrides.
+ *
+ * Each override is part of its utility (`@utility`), so Tailwind emits it in
+ * the utilities layer right after the base utilities and before every variant:
+ * a later variant such as `disabled:shadow-none` wins in dark as it does in
+ * light. (Written as plain rules outside the layers, they outranked every
+ * variant, and a disabled button kept its shadow in dark.) The `:where()`
+ * keeps the utility's own specificity and matches only an element that has
+ * the base class inside `.dark`, so a variant on its own (`hover:shadow-xs`)
+ * keeps its value as before. One change in dark: a shadow variant on an
+ * element that also has a base shadow class (`shadow-sm hover:shadow-md`) now
+ * takes effect, with its light value, where the base class's dark value used
+ * to win in every state. */
+@utility shadow-2xs {
+    &:where(.dark .shadow-2xs) {
+        --tw-shadow: var(--shadow-2xs);
+    }
+}
+@utility shadow-xs {
+    &:where(.dark .shadow-xs) {
+        --tw-shadow: var(--shadow-xs);
+    }
+}
+@utility shadow-sm {
+    &:where(.dark .shadow-sm) {
+        --tw-shadow: var(--shadow-sm);
+    }
+}
+@utility shadow-md {
+    &:where(.dark .shadow-md) {
+        --tw-shadow: var(--shadow-md);
+    }
+}
+@utility shadow-lg {
+    &:where(.dark .shadow-lg) {
+        --tw-shadow: var(--shadow-lg);
+    }
+}
+@utility shadow-xl {
+    &:where(.dark .shadow-xl) {
+        --tw-shadow: var(--shadow-xl);
+    }
+}
+@utility shadow-card {
+    &:where(.dark .shadow-card) {
+        --tw-shadow: var(--shadow-card);
+    }
+}
+@utility shadow-dropdown {
+    &:where(.dark .shadow-dropdown) {
+        --tw-shadow: var(--shadow-dropdown);
+    }
+}
+@utility shadow-sidebar {
+    &:where(.dark .shadow-sidebar) {
+        --tw-shadow: var(--shadow-sidebar);
+    }
+}
+@utility shadow-waitlist {
+    &:where(.dark .shadow-waitlist) {
+        --tw-shadow: var(--shadow-waitlist);
+    }
+}

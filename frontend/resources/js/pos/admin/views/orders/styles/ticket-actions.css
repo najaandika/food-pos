@@ -1,0 +1,63 @@
+.kanban-card-bottom button {
+    height: 36px;
+    border: 0;
+    border-radius: var(--radius-xs);
+    background: var(--blue);
+    color: white;
+    padding: 0 13px;
+    font-weight: var(--font-weight-semibold);
+}
+
+.kanban-card-bottom button:disabled,
+.order-detail-panel .cashier-actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.kanban-empty {
+    display: grid;
+    gap: 4px;
+    min-height: 118px;
+    place-content: center;
+    border: 1px dashed rgba(129, 139, 164, 0.28);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.62);
+    padding: 18px;
+    text-align: center;
+}
+
+.kanban-empty strong {
+    color: var(--navy);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.kanban-empty span {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+}
+
+.order-detail-panel {
+    align-self: start;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100dvh - 40px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 20px;
+    min-width: 0;
+    scrollbar-color: var(--border-soft-strong) transparent;
+    scrollbar-width: thin;
+}
+
+.order-detail-panel::-webkit-scrollbar {
+    width: 5px;
+}
+
+.order-detail-panel::-webkit-scrollbar-thumb {
+    border-radius: var(--radius-pill);
+    background: var(--border-soft-strong);
+}

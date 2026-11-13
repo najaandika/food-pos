@@ -1,0 +1,99 @@
+/* P5 — Finance + Marketing BoardUI composition for recorded Food POS reports.
+   Shared semantic tokens only; scoped to this view. */
+.report-boardui {
+    --rp-bg: var(--color-background-full, var(--background));
+    --rp-surface: var(--color-background-secondary-default, var(--card));
+    --rp-muted-surface: var(--color-background-tertiary-default, var(--muted));
+    --rp-primary: var(--color-text-primary, var(--foreground));
+    --rp-secondary: var(--color-text-secondary, var(--muted-foreground));
+    --rp-tertiary: var(--color-text-tertiary, var(--muted-foreground));
+    --rp-line: var(--color-separator-border, var(--border));
+    --rp-accent: var(--color-chart-2-active, var(--chart-2));
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+    padding-bottom: 32px;
+    color: var(--rp-primary);
+    font-family: 'Inter Variable', Inter, system-ui, sans-serif;
+}
+.report-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 20px;
+    min-width: 0;
+}
+
+.report-page-title {
+    display: grid;
+    flex: 1 1 290px;
+    gap: 6px;
+    min-width: 0;
+}
+.report-page-title h1 {
+    margin: 0;
+    color: var(--rp-primary);
+    overflow-wrap: break-word;
+}
+.app-view.report-boardui .report-page-title p {
+    margin: 0;
+    max-width: 65ch;
+    color: var(--rp-secondary);
+    font-size: var(--text-body-regular, 0.875rem);
+    line-height: var(--text-body-regular--line-height, 1.25rem);
+}
+.app-view.report-boardui .report-eyebrow {
+    font-size: var(--text-caption-1-semibold, 0.75rem);
+    font-weight: var(--text-caption-1-semibold--font-weight, 600);
+    line-height: var(--text-caption-1-semibold--line-height, 1rem);
+    color: var(--rp-tertiary);
+    letter-spacing: 0.06em;
+}
+
+/* BoardUI controls own their button size, radius, and focus states. */
+.report-page-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100%;
+    min-width: 0;
+    flex: 0 1 auto;
+}
+.report-date-trigger {
+    max-width: min(330px, 100%);
+    min-width: 0;
+}
+.report-date-trigger span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.report-date-popover {
+    max-width: calc(100vw - 16px);
+}
+
+/* R8.26B: neutral Report eyebrow, description and empty-state text were
+   measured below normal-text contrast on effective dark surfaces. Keep the
+   change view-local and leave orange error/status colors untouched. */
+.dark .app-view.report-boardui {
+    --rp-secondary: color-mix(
+        in oklch,
+        var(--color-text-primary) 55%,
+        var(--color-text-secondary)
+    );
+    --rp-tertiary: color-mix(
+        in oklch,
+        var(--color-text-primary) 65%,
+        var(--color-text-tertiary)
+    );
+}
+
+.dark .app-view.report-boardui .text-text-secondary {
+    color: var(--rp-secondary);
+}

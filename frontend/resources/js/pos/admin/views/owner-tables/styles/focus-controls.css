@@ -1,0 +1,100 @@
+/* P7 BoardUI Segmented Control: the selected state uses the same brand-blue
+   accent as Orders and Login, without replacing the native segmented thumb.
+   Keep Attention yellow on the table's status dot, not the filter selection. */
+.owner-tables-p1 .tables-boardui-filters {
+    --color-segmented-control-selected-background: var(--color-accent-50);
+}
+
+.owner-tables-p1 .tables-boardui-filters > button[data-selected] {
+    color: var(--color-accent-700);
+}
+
+.owner-tables-p1 .tables-p7-qr-security {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-xl, 12px);
+    background: var(--color-background-secondary-default);
+}
+
+.owner-tables-p1 .tables-p7-qr-security p {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+/* Focus consistency — stage one: the BoardUI SearchField already draws a
+ * 2px blue ring on its rounded input shell. Prevent the old dashboard-wide
+ * 3px square outline from appearing on the nested input as a second ring. */
+.page-shell.pos-shell-layout
+    .owner-tables-p1
+    .tables-boardui-search
+    input:focus-visible {
+    outline: none;
+}
+
+/* The main table-card action previously inherited a 3px square outline.
+ * Keep a clear keyboard ring and shape it to the clickable card header. */
+.page-shell.pos-shell-layout .owner-tables-p1 button.qr-card-top:focus-visible {
+    border-radius: var(--radius-2lg, 10px);
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+/* Keyboard focus consistency, stage two. The old POS :focus-visible rule
+ * adds a 3px outline on top of BoardUI's segmented control focus treatment.
+ * Keep one 2px inset accent indicator so horizontal filters do not clip it. */
+.page-shell.pos-shell-layout
+    .owner-tables-p1
+    .tables-boardui-filters
+    button:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+    border-radius: var(--radius-2lg, 10px);
+}
+
+/* The large QR preview has BoardUI's blue focus shadow already; the small
+ * Print/Copy/Edit buttons only have the legacy outline. Treat them separately
+ * so every keyboard target has exactly one visible blue indicator. */
+.page-shell.pos-shell-layout
+    .owner-tables-p1
+    .tables-qr-preview-trigger:focus-visible {
+    outline: none;
+}
+
+.page-shell.pos-shell-layout
+    .owner-tables-p1
+    .tables-p2-icon-action:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+/* BoardUI's icon-button shape is a 10px rounded square, including the
+ * larger QR-preview action. Don't inherit the POS 32px radius token. */
+.page-shell.pos-shell-layout .owner-tables-p1 .tables-qr-preview-trigger {
+    border-radius: var(--radius-2lg, 10px);
+}
+
+/* Focus consistency P1 — opt-in BoardUI controls, matching Login's accent ring.
+   Keep default/hover, invalid, disabled, and global BoardUI styles untouched. */
+:is(.owner-tables-p1, .tables-p1-drawer-dialog)
+    .tables-focus-field[data-focus-within]:not([data-invalid]):not(
+        :has(input[aria-invalid='true'])
+    ) {
+    --tw-ring-color: var(--color-border-focus-ring);
+}
+
+/* Select uses a button rather than InputBase. Match the same 2px inset ring
+   on mouse, keyboard and while its popover is open, respecting 10px corners. */
+.tables-p1-drawer-dialog
+    .tables-focus-select:is(
+        :focus,
+        [data-focused],
+        [data-focus-visible],
+        [aria-expanded='true']
+    ):not(:disabled, [data-disabled], [aria-invalid='true']) {
+    border-color: transparent;
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}

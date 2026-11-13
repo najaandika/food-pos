@@ -1,0 +1,140 @@
+.od-priority-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    flex: 1;
+    align-content: stretch;
+    min-height: 0;
+}
+
+.od-priority-tile {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    justify-items: start;
+    align-content: center;
+    gap: 5px 8px;
+    min-height: 101px;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: var(--od-ink);
+    background: var(--od-inner);
+    text-align: left;
+    cursor: pointer;
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+
+.od-priority-tile:hover {
+    border-color: var(--od-outline);
+    background: var(--od-bg);
+}
+
+.od-priority-tile:focus-visible,
+.od-filter-tab:focus-visible,
+.od-order-filter:focus-visible,
+.od-shortcut:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring, var(--od-brand));
+    outline-offset: 2px;
+}
+
+.od-priority-icon {
+    display: grid;
+    grid-row: 1 / span 2;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    color: var(--color-status-orange-text, var(--od-ink));
+    background: var(--color-status-orange-background, var(--od-panel));
+}
+
+.od-priority-icon--ready {
+    color: var(--color-status-lime-text, var(--od-ink));
+    background: var(--color-status-lime-background, var(--od-panel));
+}
+
+.od-priority-icon--waiting_payment {
+    color: var(--color-status-purple-text, var(--od-ink));
+    background: var(--color-status-purple-background, var(--od-panel));
+}
+
+.od-priority-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.od-priority-info {
+    display: grid;
+    align-content: center;
+    gap: 2px;
+    min-width: 0;
+}
+
+.od-priority-info strong,
+.od-priority-info small {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.od-priority-info small,
+.od-priority-time {
+    color: var(--od-muted);
+}
+
+.od-priority-tile .od-priority-status-chip {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.od-priority-time {
+    grid-column: 1 / -1;
+    align-self: end;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.od-priority-empty {
+    display: grid;
+    flex: 1;
+    justify-items: center;
+    align-content: center;
+    gap: 7px;
+    min-height: 145px;
+    text-align: center;
+    color: var(--od-muted);
+}
+
+.od-priority-empty svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-status-lime-text, var(--od-brand));
+}
+
+.od-priority-empty strong {
+    color: var(--od-ink);
+}
+
+.od-priority-footer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.od-priority-footer > button {
+    min-width: 0;
+    width: 100%;
+}

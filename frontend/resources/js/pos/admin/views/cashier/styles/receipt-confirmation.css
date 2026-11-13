@@ -1,0 +1,22 @@
+.cashier-last-receipt {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.cashier-receipt-paid-stamp {
+    padding: 8px 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-button-default);
+    color: var(--color-text-primary);
+    background: var(--color-background-secondary-default);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.cashier-workspace .cashier-note-grid article,
+.cashier-workspace .cashier-tendered {
+    background: var(--cashier-ground);
+}

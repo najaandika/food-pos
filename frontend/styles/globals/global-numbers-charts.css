@@ -1,0 +1,31 @@
+/* Soft fade applied to an animated number each time its target changes */
+@keyframes number-fade {
+    from {
+        opacity: 0.35;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.animate-number-fade {
+    animation: number-fade 220ms ease-out;
+}
+
+/* Recharts' accessibility layer makes the chart surface and its shapes
+ * (bars, sectors, dots) keyboard-focusable, and Chrome paints the UA focus
+ * outline around whichever one you click - a blue box around a ring segment
+ * or a bar. Every chart card drives its own focus feedback (hover darkening,
+ * headline swap), so the outline is noise: hide it across every Recharts
+ * chart. Keyboard users still get the cards' own active states. */
+.recharts-wrapper {
+    /* SVG axes use physical coordinates. Keep their data and numeric labels in
+   * order while card headers, legends and surrounding controls follow RTL. */
+    direction: ltr;
+}
+
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible,
+.recharts-wrapper :focus,
+.recharts-wrapper :focus-visible {
+    outline: none;
+}

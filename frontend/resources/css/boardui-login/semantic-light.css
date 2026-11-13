@@ -1,0 +1,332 @@
+/* ---------------------------------------------------------------------------
+ * Semantic tokens — light mode.
+ *
+ * All values reference primitives via var(--color-{family}-{shade}). Edit the
+ * primitives in @theme above and these update automatically.
+ *
+ * Figma name on the left, var name on the right:
+ *   foreground/full                  → --color-foreground-full
+ *   foreground/icon/primary          → --color-foreground-icon-primary
+ *   foreground/disabled              → --color-foreground-disabled
+ *   foreground/disabled-danger       → --color-foreground-disabled-danger
+ *   text/primary                     → --color-text-primary
+ *   text/tertiary                    → --color-text-tertiary
+ *   text/disabled-danger             → --color-text-disabled-danger
+ *   background/primary/default       → --color-background-primary-default
+ *   background/primary/hover         → --color-background-primary-hover
+ *   background/primary/active        → --color-background-primary-active
+ *   background/primary/disabled      → --color-background-primary-disabled
+ *   background/secondary/default     → --color-background-secondary-default
+ *   border/button/default            → --color-border-button-default
+ *   border/button/hover              → --color-border-button-hover
+ *   border/button/active             → --color-border-button-active
+ *
+ * Button gradients (linear, 180°, light stop → dark stop) sourced from the
+ * blue/red primitives that each Button/{type}/{state} style references in
+ * Figma. Direction inferred — confirm visually against Figma.
+ * --------------------------------------------------------------------------- */
+.pos-boardui-auth {
+    /* Foreground (icons + on-fill content) */
+    --color-foreground-full: var(--color-white);
+    --color-foreground-icon-primary: var(--color-neutral-950);
+    --color-foreground-icon-hover: var(--color-black);
+    --color-foreground-icon-secondary: var(--color-neutral-500);
+    --color-foreground-icon-tertiary: var(--color-neutral-400);
+    --color-foreground-icon-quaternary: var(--color-neutral-300);
+    --color-foreground-icon-error: var(--color-red-600);
+    --color-foreground-icon-disabled: var(--color-neutral-300);
+    --color-foreground-disabled: var(--color-neutral-400);
+    --color-foreground-disabled-danger: var(--color-red-300);
+    --color-input-disabled-foreground: var(--color-neutral-300);
+    --color-icon-button-disabled-foreground: var(--color-neutral-300);
+    --color-button-primary-disabled-foreground: var(--color-neutral-400);
+
+    /* Text */
+    --color-text-primary: var(--color-neutral-950);
+    --color-text-secondary: var(--color-neutral-500);
+    --color-text-tertiary: var(--color-neutral-400);
+    --color-text-disabled: var(--color-neutral-300);
+    --color-text-disabled-danger: var(--color-red-300);
+    --color-text-placeholder: var(--color-neutral-400);
+    --color-text-error-primary: var(--color-red-500);
+    --color-text-destructive: color-mix(
+        in srgb,
+        var(--color-red-700) 80%,
+        var(--color-neutral-600)
+    );
+    --color-input-disabled-text: var(--color-neutral-300);
+    --color-text-white: var(--color-white);
+
+    /* Background */
+    --color-background-full: var(--color-white);
+    /* Ticket detail, Figma 4509:12272. The raw #fafafa surface matches neutral/50. */
+    --color-ticket-detail-surface: var(--color-white);
+    --color-ticket-detail-low-background: var(--color-indigo-200);
+    --color-ticket-detail-low-hover: var(--color-indigo-300);
+    --color-ticket-detail-medium-hover: var(--color-yellow-300);
+    --color-ticket-detail-high-hover: var(--color-orange-300);
+    --color-ticket-detail-urgent-hover: var(--color-rose-300);
+    --color-ticket-detail-low-text: var(--color-indigo-800);
+    --color-ticket-detail-resource-background: var(--color-blue-100);
+    --color-ticket-detail-resource-text: var(--color-blue-600);
+    --color-ticket-detail-favorite: #ffb83c; /* raw Figma fill, no token yet */
+    /* Empty-state illustration: raw Figma fills from node 4488:11848. */
+    --color-project-board-empty-panel: rgb(242 242 242 / 0.8);
+    --color-project-board-empty-front: #d9d9d9;
+    --color-project-board-empty-middle: #e5e5e5;
+    --color-project-board-empty-back: #ededed;
+    --color-project-board-empty-detail: var(--color-white);
+    --color-background-primary-default: var(--color-white);
+    --color-background-inner-default: var(--color-white);
+    --color-background-primary-hover: var(--color-neutral-100);
+    --color-background-primary-active: var(--color-neutral-200);
+    --color-background-primary-disabled: var(--color-neutral-100);
+    --color-input-disabled-background: var(--color-neutral-100);
+    --color-background-secondary-default: var(--color-neutral-100);
+    --color-background-secondary-hover: var(--color-neutral-200);
+    --color-background-tertiary-default: var(--color-neutral-200);
+    --color-background-tertiary-hover: var(--color-neutral-300);
+    --color-background-tertiary-error: var(--color-red-100);
+    --color-background-recent-hire-role: var(--color-neutral-100);
+    --color-avatar-neutral-background: var(--color-neutral-300);
+    /* Figma background/quaternary/default — first used by the Storage
+   * dropzone's upload-icon disc (node 4106:26587). */
+    --color-background-quaternary-default: var(--color-neutral-300);
+    --color-background-quaternary-hover: var(--color-neutral-400);
+    --color-background-quaternary-error: var(--color-red-200);
+    --color-file-upload-icon-background: var(--color-neutral-300);
+    --color-file-upload-icon-foreground: var(--color-neutral-400);
+    --color-file-upload-icon-foreground-hover: var(--color-neutral-500);
+
+    /* Border */
+    --color-border-button-default: var(--color-neutral-200);
+    --color-border-button-hover: var(--color-neutral-300);
+    --color-border-button-active: var(--color-neutral-400);
+    --color-border-button-white: var(--color-white);
+    /* The system had no red border. Matches text/error/primary so an invalid
+     field's edge and its message are the same red. */
+    --color-border-error-default: var(--color-red-500);
+    --color-border-checkbox-default: var(--color-neutral-300);
+    --color-border-checkbox-hover: var(--color-neutral-400);
+    --color-border-checkbox-active: var(--color-neutral-400);
+    --color-border-checkbox-white: var(--color-white);
+    --color-border-component-detail-container: var(--color-neutral-200);
+    --color-border-ai-profile-card: var(--color-neutral-200);
+    --color-border-table: var(--color-neutral-200);
+    --color-border-button-group: var(--color-neutral-200);
+    --color-border-sidebar-profile-hover: var(--color-neutral-300);
+    --color-separator-border: var(--color-neutral-200);
+    --color-separator-border-strong: var(--color-neutral-200);
+    --color-border-focus-ring: var(--color-accent-500);
+
+    /* State */
+    --color-state-success-text: var(--color-lime-800);
+    --color-state-success-base: var(--color-lime-200);
+
+    /* Selected control interiors remain light on colored tracks in both themes. */
+    --color-control-indicator-background: var(--color-white);
+    --color-control-indicator-background-subtle: var(--color-neutral-100);
+    --color-switch-off-chip-start: var(--color-white);
+    --color-switch-off-chip-end: var(--color-neutral-100);
+    /* Selected switch chip: the Figma comps use hexes a touch deeper than the
+   * plain 500→600 ramp (#2473fe → #0450e2 for blue). Expressed as oklab mixes
+   * of neighbouring accent stops so the recipe survives a re-tint. */
+    --color-switch-on-chip-start: color-mix(
+        in oklab,
+        var(--color-accent-500) 63%,
+        var(--color-accent-600)
+    );
+    --color-switch-on-chip-end: color-mix(
+        in oklab,
+        var(--color-accent-600) 16%,
+        var(--color-accent-700)
+    );
+    --color-stat-card-icon-background: var(--color-white);
+    --color-segmented-control-background: var(--color-neutral-100);
+    --color-segmented-control-selected-background: var(--color-white);
+    --color-theme-toggle-sidebar-background: var(--color-neutral-200);
+    --color-theme-toggle-sidebar-selected-background: var(--color-white);
+    /* Stepped against the composer: the pill is white and the add button is the
+   * subtle grey sitting on it, so the control separates from the surface it
+   * shares an edge with. Dark mode keeps its own pair, where the pill is the
+   * lighter of the two and the button steps the other way. */
+    --color-ai-chat-composer-add-background: var(--color-neutral-100);
+    --color-ai-chat-composer-add-hover-background: var(--color-neutral-200);
+    /* Composer Panel (Figma node 4430:12203): the status tab hanging off the
+   * card's top edge and the card's plus button are both neutral-200 in light
+   * mode. Dark mode steps them up instead, so they still separate from the
+   * neutral-800 card they touch. */
+    --color-composer-panel-tab-background: var(--color-neutral-200);
+    --color-composer-panel-add-background: var(--color-neutral-200);
+    --color-composer-panel-add-hover-background: var(--color-neutral-300);
+    /* Attachment tile edge: the Figma neutral-200 in light mode; dark mode
+   * uses a translucent white so the ring reads on the neutral-800 card
+   * (border/button/default is one neutral step away there and vanishes). */
+    --color-composer-panel-tile-border: var(--color-neutral-200);
+    /* Model picker provider rail: background/secondary in light mode, at
+   * half opacity in dark so it recedes on the neutral-800 panel. */
+    --color-composer-panel-rail-background: var(--color-neutral-100);
+    /* Questionnaire (Figma nodes 4435:14749 / 4435:15042): the answer rows share
+   * the card's background/primary surface in both modes, separated by their
+   * border alone, and the "Other" row uses the stock Input untouched. The
+   * single-select number key is background/secondary in light mode and one
+   * tone lighter than the row in dark mode (never darker), stepping again
+   * while its row is hovered so it stays legible on the lifted fill. */
+    --color-questionnaire-key-background: var(--color-neutral-100);
+    --color-questionnaire-key-hover-background: var(--color-neutral-200);
+    --color-agent-progress-ring: var(--color-neutral-700);
+    --color-button-ghost-background: var(--color-accent-100);
+    --color-button-ghost-hover: var(--color-accent-200);
+    --color-button-ghost-active: var(--color-accent-300);
+    --color-button-ghost-disabled: var(--color-accent-50);
+    --color-button-ghost-foreground: var(--color-accent-700);
+    --color-button-ghost-disabled-foreground: var(--color-accent-300);
+    --color-dropdown-item-hover-background: var(--color-neutral-100);
+    --color-kbd-background: var(--color-neutral-300);
+    --color-kbd-foreground: var(--color-neutral-500);
+    --color-docs-file-chip-background: var(--color-purple-50);
+    --color-docs-file-chip-border: var(--color-purple-100);
+    --color-docs-file-chip-foreground: var(--color-purple-500);
+    --color-docs-command-accent: var(--color-purple-400);
+    --color-docs-code-background: var(--color-background-primary-default);
+    --color-docs-install-rail: var(--color-border-button-default);
+
+    /* Recently shipped component badge. Kept semantic so its compact blue
+   * surface can retain the same hierarchy in both themes. */
+    --color-badge-neutral-background: var(--color-neutral-200);
+    --color-team-menu-count-background: var(--color-neutral-200);
+    --color-team-menu-count-foreground: var(--color-neutral-500);
+    --color-badge-new-background: var(--color-accent-100);
+    --color-badge-new-text: var(--color-accent-600);
+    --color-tab-count-selected-background: var(--color-accent-100);
+    --color-pill-tab-blue-selected-background: var(--color-accent-50);
+    --color-pill-tab-blue-hover-background: var(--color-neutral-100);
+
+    /* Notification status-icon surfaces. */
+    --color-notification-information-background: var(--color-blue-100);
+    --color-notification-information-foreground: var(--color-blue-600);
+    --color-notification-success-background: var(--color-lime-100);
+    --color-notification-success-foreground: var(--color-lime-600);
+    --color-notification-error-background: var(--color-rose-100);
+    --color-notification-error-foreground: var(--color-rose-600);
+    --color-notification-center-background: var(--color-white);
+
+    /* Table status chips. Dark mappings come from the medical dashboard table
+   * in Figma (4139:7202, 4139:7240, 4139:7278, 4139:7315). */
+    --color-status-lime-background: var(--color-lime-200);
+    --color-status-lime-text: var(--color-lime-800);
+    --color-status-yellow-background: var(--color-yellow-200);
+    --color-status-yellow-text: var(--color-yellow-800);
+    --color-status-rose-background: var(--color-rose-200);
+    --color-status-rose-text: var(--color-rose-800);
+    --color-status-cyan-background: var(--color-cyan-200);
+    --color-status-cyan-text: var(--color-cyan-800);
+    --color-status-orange-background: var(--color-orange-200);
+    --color-status-orange-text: var(--color-orange-800);
+    --color-status-blue-background: var(--color-blue-200);
+    --color-status-blue-text: var(--color-blue-800);
+    --color-status-purple-background: var(--color-purple-100);
+    --color-status-purple-text: var(--color-purple-600);
+    --color-status-dot-green-halo: var(--color-green-100);
+    --color-status-dot-yellow-halo: var(--color-yellow-200);
+    --color-status-dot-indigo-halo: var(--color-indigo-100);
+
+    /* Date range selection: the connecting band and its start/end caps. */
+    --color-date-range-background: var(--color-accent-100);
+    --color-date-range-edge-background: var(--color-accent-300);
+
+    /* Calendar event chips. Title/time stay separate so the original light
+   * hierarchy remains intact while dark mode can normalize both to /300. */
+    --color-calendar-event-blue-background: var(--color-blue-100);
+    --color-calendar-event-blue-title: var(--color-blue-700);
+    --color-calendar-event-blue-time: var(--color-blue-700);
+    --color-calendar-event-pink-background: var(--color-pink-100);
+    --color-calendar-event-pink-title: var(--color-pink-700);
+    --color-calendar-event-pink-time: var(--color-pink-700);
+    --color-calendar-event-purple-background: var(--color-purple-100);
+    --color-calendar-event-purple-title: var(--color-purple-700);
+    --color-calendar-event-purple-time: var(--color-purple-700);
+    --color-calendar-event-lime-background: var(--color-lime-100);
+    --color-calendar-event-lime-title: var(--color-lime-800);
+    --color-calendar-event-lime-time: var(--color-lime-700);
+    --color-calendar-event-emerald-background: var(--color-emerald-100);
+    --color-calendar-event-emerald-title: var(--color-emerald-800);
+    --color-calendar-event-emerald-time: var(--color-emerald-700);
+
+    /* Placeholder colors that don't map cleanly to existing text tokens */
+    --color-text-error-placeholder: var(--color-red-400);
+
+    /* Charts (graphs) — shared neutrals + a categorical accent ramp.
+   * `track` is the background bar/ring behind a series; `cursor` the hover
+   * outline / dashed reference line; `neutral` a data color for "other"-style
+   * slices. Each numbered accent pairs a base fill with a one-tone-darker
+   * `-active` used for hover emphasis (the 400 → 500 recipe every chart
+   * follows). Numbered (not hue-named) so the palette can be retuned without
+   * renaming, mirroring the chart-1…n convention common to chart systems. */
+    --color-chart-track: var(--color-neutral-200);
+    --color-chart-cursor: var(--color-neutral-300);
+    --color-chart-neutral: var(--color-neutral-300);
+    --color-chart-1: var(--color-teal-400);
+    --color-chart-1-active: var(--color-teal-500);
+    --color-chart-2: var(--color-lime-400);
+    --color-chart-2-active: var(--color-lime-500);
+    --color-chart-3: var(--color-pink-400);
+    --color-chart-3-active: var(--color-pink-500);
+    --color-chart-4: var(--color-sky-400);
+    --color-chart-4-active: var(--color-sky-500);
+    --color-chart-5: var(--color-purple-400);
+    --color-chart-5-active: var(--color-purple-500);
+    --color-chart-6: var(--color-blue-400);
+    --color-chart-6-active: var(--color-blue-500);
+    --color-chart-7: var(--color-emerald-400);
+    --color-chart-7-active: var(--color-emerald-500);
+    --color-chart-8: var(--color-yellow-400);
+    --color-chart-8-active: var(--color-yellow-500);
+    --color-chart-9: var(--color-indigo-400);
+    --color-chart-9-active: var(--color-indigo-500);
+    --color-chart-agents-bar: var(--color-purple-300);
+    --color-chart-agents-bar-active: var(--color-purple-400);
+
+    /* Button gradients */
+    --gradient-button-primary-default: linear-gradient(
+        180deg,
+        var(--color-accent-500) 0%,
+        var(--color-accent-600) 100%
+    );
+    --gradient-button-primary-hover: linear-gradient(
+        180deg,
+        var(--color-accent-400) 0%,
+        var(--color-accent-500) 100%
+    );
+    --gradient-button-primary-active: linear-gradient(
+        180deg,
+        var(--color-accent-600) 0%,
+        var(--color-accent-700) 100%
+    );
+    --gradient-button-primary-disabled: linear-gradient(
+        180deg,
+        var(--color-neutral-200) 0%,
+        var(--color-neutral-300) 100%
+    );
+
+    --gradient-button-danger-default: linear-gradient(
+        180deg,
+        var(--color-red-500) 0%,
+        var(--color-red-600) 100%
+    );
+    --gradient-button-danger-hover: linear-gradient(
+        180deg,
+        var(--color-red-400) 0%,
+        var(--color-red-500) 100%
+    );
+    --gradient-button-danger-active: linear-gradient(
+        180deg,
+        var(--color-red-600) 0%,
+        var(--color-red-700) 100%
+    );
+    --gradient-button-danger-disabled: linear-gradient(
+        180deg,
+        var(--color-red-100) 0%,
+        var(--color-red-200) 100%
+    );
+}

@@ -1,0 +1,11 @@
+@import './boardui-controls/controls-search.css';
+@import './boardui-controls/controls-filter-tabs.css';
+@import './boardui-controls/controls-menu-status-tabs.css';
+@import './boardui-controls/controls-menu-actions.css';
+@import './boardui-controls/controls-editor-fields.css';
+@import './boardui-controls/controls-editor-switches.css';
+@import './boardui-controls/controls-staff-actions.css';
+@import './boardui-controls/controls-cashier-actions.css';
+@import './boardui-controls/controls-container-responsive.css';
+@import './boardui-controls/controls-add-cta.css';
+@import './boardui-controls/active-control-colors.css';

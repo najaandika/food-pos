@@ -252,3 +252,48 @@
     min-height: 100dvh;
     overflow: visible;
 }
+
+/*
+ * R8.20A — BoardUI Free AppShell desktop geometry. The native DashboardSidebar
+ * stays 260px / 60px; the parent frame contributes only its left 12px gutter.
+ * Keep document scrolling (not a second scrolling main) for POS workspaces.
+ */
+.page-shell.pos-shell-layout .pos-boardui-main-column {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    max-width: 1300px;
+    flex-direction: column;
+    margin-inline: auto;
+}
+
+@media (min-width: 1024px) {
+    .page-shell.pos-shell-layout {
+        column-gap: 16px;
+    }
+
+    .page-shell.pos-shell-layout .pos-boardui-sidebar-frame {
+        flex: 0 0 272px;
+        width: 272px;
+        padding: 12px 0 12px 12px;
+        transition:
+            flex-basis 300ms ease-in-out,
+            width 300ms ease-in-out;
+    }
+
+    .page-shell.pos-shell-layout.sidebar-collapsed .pos-boardui-sidebar-frame {
+        flex-basis: 72px;
+        width: 72px;
+    }
+
+    .page-shell.pos-shell-layout .main-panel {
+        min-width: 0;
+        max-width: none;
+        padding-inline: 12px;
+    }
+
+    .page-shell.pos-shell-layout .pos-boardui-main-column > .pos-shell-topbar {
+        width: 100%;
+    }
+}

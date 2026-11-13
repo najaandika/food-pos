@@ -1,0 +1,29 @@
+.qr-icon-action {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--mist);
+    color: var(--blue);
+    padding: 0;
+    box-shadow: inset 0 0 0 1px rgba(48, 71, 255, 0.08);
+    transition:
+        background var(--transition-hover),
+        color var(--transition-hover),
+        transform var(--transition-hover),
+        box-shadow var(--transition-hover);
+}
+
+.qr-icon-action:hover {
+    background: var(--blue);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(48, 71, 255, 0.18);
+}
+
+.qr-icon-action svg {
+    width: 18px;
+    height: 18px;
+}

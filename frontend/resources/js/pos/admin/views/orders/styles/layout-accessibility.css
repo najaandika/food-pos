@@ -1,0 +1,178 @@
+/* P1 measured QA polish: explicit geometry when the POS legacy layer
+   overrides BoardUI utility ordering. Does not change shared components. */
+.orders-workspace .orders-kpi-grid > section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.orders-workspace .orders-kpi-grid > section > span:first-child {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    width: auto;
+    height: auto;
+}
+
+.orders-workspace .orders-kpi-grid > section > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    min-width: 0;
+}
+
+.orders-workspace .orders-kpi-grid > section > div > div {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.orders-workspace .orders-more-statuses {
+    display: flex;
+    flex-direction: column;
+    width: 128px;
+}
+
+.orders-workspace .orders-more-statuses-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+    width: 100%;
+    min-width: 0;
+    padding: 7px 10px;
+    white-space: nowrap;
+    font-size: var(--text-body-2-medium, 0.8125rem);
+}
+
+.orders-workspace .orders-more-statuses-trigger > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.orders-workspace .orders-search-input {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.orders-workspace .orders-search-input [role='group'] {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    height: 40px;
+    min-height: 40px;
+}
+
+.orders-workspace .orders-search-input input {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+}
+
+.orders-workspace .orders-controls-heading {
+    min-width: 0;
+}
+
+@container admin-main (max-width: 620px) {
+    .orders-workspace .orders-primary-filters {
+        flex-wrap: nowrap;
+        gap: 7px;
+    }
+
+    .orders-workspace .orders-stage-filters {
+        flex: 1 1 auto;
+        flex-basis: auto;
+        min-width: 0;
+    }
+
+    .orders-workspace .orders-more-statuses {
+        flex: 0 0 100px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 720px) {
+    .orders-workspace .orders-primary-filters {
+        flex-wrap: nowrap;
+    }
+
+    .orders-workspace .orders-stage-filters {
+        flex-basis: auto;
+    }
+
+    .orders-workspace .orders-more-statuses {
+        flex: 0 0 100px;
+        width: 100px;
+    }
+}
+
+/* Keep dropdown/search glyphs at the BoardUI 16px icon scale even when the
+   older POS stylesheet is loaded after the utility layer. */
+.orders-workspace .orders-more-statuses-trigger svg,
+.orders-workspace .orders-search-input [role='group'] svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+}
+
+@container admin-main (max-width: 620px) {
+    .orders-workspace .orders-kpi-grid > section {
+        height: 108px;
+        min-height: 108px;
+    }
+}
+
+@media (max-width: 720px) {
+    .orders-workspace .orders-kpi-grid > section {
+        height: 108px;
+        min-height: 108px;
+    }
+}
+
+/* P2 mobile: show every status and source filter without hidden horizontal
+   scrolling. Keep the existing filter buttons and selected-state callbacks. */
+@media (max-width: 720px) {
+    .orders-workspace .orders-primary-filters,
+    .orders-workspace .orders-secondary-filters {
+        flex-wrap: wrap;
+    }
+
+    .orders-workspace .orders-stage-filters,
+    .orders-workspace .orders-source-filters {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        width: 100%;
+        min-width: 0;
+        overflow-x: visible;
+        gap: 6px;
+    }
+
+    .orders-workspace .orders-stage-filters > button,
+    .orders-workspace .orders-source-filters > button {
+        flex: 0 1 auto;
+        min-height: 40px;
+    }
+
+    .orders-workspace .orders-more-statuses {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    /* PillTab gives its label span a separate text-secondary utility.
+       Scope the readable foreground to that unselected label, not the
+       selected background or business status-chip palette. */
+    .orders-workspace
+        .orders-source-filters
+        > button:not([data-pill-selected])
+        > span:last-child {
+        color: var(--color-text-primary);
+    }
+}

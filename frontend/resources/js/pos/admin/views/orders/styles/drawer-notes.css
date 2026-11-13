@@ -1,0 +1,55 @@
+.orders-detail-item-list {
+    display: grid;
+    border-top: 1px solid var(--orders-divider);
+}
+.orders-detail-item-row {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--orders-divider);
+    font-size: var(--text-body-2-regular, 0.8125rem);
+    line-height: var(--text-body-2-regular--line-height, 1.125rem);
+    font-weight: var(--text-body-2-regular--font-weight, 400);
+    letter-spacing: var(--text-body-2-regular--letter-spacing, 0);
+}
+.orders-detail-item-row > strong {
+    color: var(--orders-text);
+    overflow-wrap: anywhere;
+    font-size: var(--text-body-2-semibold, 0.8125rem);
+    line-height: var(--text-body-2-semibold--line-height, 1.125rem);
+    font-weight: var(--text-body-2-semibold--font-weight, 600);
+    letter-spacing: var(--text-body-2-semibold--letter-spacing, 0);
+}
+.orders-detail-item-qty {
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-medium, 0.75rem);
+    line-height: var(--text-caption-1-medium--line-height, 1rem);
+    font-weight: var(--text-caption-1-medium--font-weight, 500);
+    letter-spacing: var(--text-caption-1-medium--letter-spacing, 0.15px);
+}
+.orders-detail-item-price {
+    color: var(--orders-text);
+    text-align: right;
+    white-space: nowrap;
+    font-size: var(--text-body-2-semibold, 0.8125rem);
+    line-height: var(--text-body-2-semibold--line-height, 1.125rem);
+    font-weight: var(--text-body-2-semibold--font-weight, 600);
+    letter-spacing: var(--text-body-2-semibold--letter-spacing, 0);
+}
+.orders-detail-no-items {
+    color: var(--orders-secondary);
+    font-size: var(--text-caption-1-regular, 0.75rem);
+    line-height: var(--text-caption-1-regular--line-height, 1rem);
+    font-weight: var(--text-caption-1-regular--font-weight, 400);
+    letter-spacing: var(--text-caption-1-regular--letter-spacing, 0.15px);
+}
+.orders-detail-notes {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    background: var(--orders-ground);
+    border-radius: var(--radius-xl, 12px);
+    color: var(--orders-secondary);
+}

@@ -1,0 +1,41 @@
+.pos-shell-layout .pos-shell-account-trigger {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 42px;
+    padding: 4px 6px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--pos-nav-foreground);
+    box-shadow: none;
+}
+
+.pos-shell-layout .pos-shell-account-trigger:hover {
+    background: var(--pos-nav-hover);
+}
+
+.pos-shell-topbar-account-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    gap: 2px;
+}
+
+.pos-shell-topbar-account-info strong {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pos-shell-topbar-account-info > span {
+    color: var(--pos-nav-muted);
+}
+
+.pos-shell-account-chevron {
+    width: 16px;
+    height: 16px;
+    color: var(--pos-nav-icon);
+}

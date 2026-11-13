@@ -1,0 +1,11 @@
+@import '@fontsource-variable/inter/index.css';
+
+@import './styles/dashboard-foundation.css';
+@import './styles/dashboard-overview.css';
+@import './styles/dashboard-order-workflow.css';
+@import './styles/dashboard-menu-chart.css';
+@import './styles/dashboard-activity.css';
+@import './styles/dashboard-kpi.css';
+@import './styles/dashboard-orders.css';
+@import './styles/dashboard-tables-footer.css';
+@import './styles/dashboard-responsive.css';

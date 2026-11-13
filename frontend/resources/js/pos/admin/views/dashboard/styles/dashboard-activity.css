@@ -1,0 +1,133 @@
+.od-activity-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.od-activity-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    min-height: 83px;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--od-inner);
+}
+
+.od-activity-tile svg {
+    width: 15px;
+    height: 15px;
+    color: var(--od-muted);
+}
+
+.od-activity-tile strong {
+    font-variant-numeric: tabular-nums;
+}
+
+.od-activity-tile > span {
+    color: var(--od-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.od-activity-overview {
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.od-activity-subheading {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.od-activity-subheading strong {
+    color: var(--od-ink);
+}
+
+.od-activity-subheading span {
+    color: var(--od-muted);
+    text-align: right;
+}
+
+.od-order-map {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: 15px;
+    gap: 4px;
+    min-width: 0;
+}
+
+.od-order-map-cell {
+    border-radius: 4px;
+    background: var(--od-panel-muted);
+}
+
+.od-order-map-cell--pending,
+.od-order-map-cell--accepted,
+.od-order-map-cell--preparing {
+    background: var(--color-status-orange-text, var(--od-brand));
+    opacity: 0.6;
+}
+
+.od-order-map-cell--ready,
+.od-order-map-cell--served,
+.od-order-map-cell--paid {
+    background: var(--od-lime);
+}
+
+.od-order-map-cell--waiting_payment {
+    background: var(--color-status-purple-text, var(--od-brand));
+    opacity: 0.65;
+}
+
+.od-order-map-cell--cancelled {
+    background: var(--color-status-rose-text, var(--od-brand));
+    opacity: 0.55;
+}
+
+.od-order-map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 12px;
+    align-items: center;
+    color: var(--od-muted);
+}
+
+.od-order-map-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.od-legend-swatch {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    flex: 0 0 auto;
+    border-radius: 3px;
+}
+
+.od-legend-swatch--progress {
+    background: var(--color-status-orange-text, var(--od-brand));
+}
+
+.od-legend-swatch--ready {
+    background: var(--od-lime);
+}
+
+.od-legend-swatch--payment {
+    background: var(--color-status-purple-text, var(--od-brand));
+}
+
+.od-legend-swatch--cancelled {
+    background: var(--color-status-rose-text, var(--od-brand));
+}
+
+.od-activity-map-empty {
+    color: var(--od-muted);
+}

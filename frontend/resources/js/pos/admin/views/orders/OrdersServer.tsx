@@ -1,6 +1,6 @@
 import type { PosOrderStatus, UserRole } from '@/lib/pos-types';
 import { Button } from '../../../../../../components/base/buttons/button';
-import { OrdersView } from '../OrdersView';
+import { OrdersView } from './OrdersView';
 import { advanceSavedOrder } from './server-orders';
 import { useSavedOrders } from './use-saved-orders';
 

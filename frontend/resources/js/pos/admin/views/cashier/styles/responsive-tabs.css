@@ -1,0 +1,36 @@
+/* Mobile Segmented Navigation Tabs */
+.cashier-mobile-tabs {
+    display: none;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 4px;
+    background: var(--ice);
+    border-radius: var(--radius-md);
+}
+
+.cashier-tab-btn {
+    flex: 1;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition:
+        background var(--transition-hover),
+        color var(--transition-hover);
+}
+
+.cashier-tab-btn.active {
+    background: #ffffff;
+    color: var(--navy);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* R8.16D: only legacy mobile tabs; official BoardUI segmented tabs retain
+   their own selected pill foreground/background and keyboard contract. */
+.dark .cashier-workspace .cashier-tab-btn:not(.active) {
+    color: var(--color-text-primary);
+}

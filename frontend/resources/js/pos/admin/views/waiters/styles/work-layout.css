@@ -1,0 +1,21 @@
+/* Table and queue share the available width without nested scrollbars.
+   DOM order is queue → tables, matching mobile service priority. */
+.waiters-workspace .waiters-work-grid {
+    display: grid;
+    grid-template-areas: 'tables queue';
+    grid-template-columns: minmax(0, 1.25fr) minmax(345px, 0.9fr);
+    gap: 18px;
+    align-items: start;
+    margin-top: 18px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-queue {
+    grid-area: queue;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-table-section {
+    grid-area: tables;
+    min-width: 0;
+}

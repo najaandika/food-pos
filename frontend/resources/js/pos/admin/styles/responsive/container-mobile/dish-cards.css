@@ -1,0 +1,86 @@
+/* Dish cards and quantity controls; original rule order preserved. */
+@container admin-main (max-width: 560px) {
+    .dish-card {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 86px minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr auto;
+        column-gap: var(--space-3);
+        padding: 12px;
+        border-radius: var(--pos-radius);
+    }
+
+    .dish-card img {
+        grid-row: 1 / 5;
+        width: 86px;
+        height: 112px;
+        aspect-ratio: auto;
+        border-radius: var(--radius-sm);
+    }
+
+    .dish-card .badge {
+        left: 18px;
+        right: auto;
+        top: 48px;
+        max-width: 78px;
+        padding: 6px 8px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .dish-card .prep-chip {
+        left: 18px;
+        top: 18px;
+        max-width: 78px;
+        padding: 6px 8px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .dish-card h3 {
+        min-width: 0;
+        margin-top: 2px;
+        font-size: 16px;
+        line-height: 1.18;
+        overflow-wrap: anywhere;
+    }
+
+    .dish-card p {
+        min-height: 0;
+        margin: 6px 0 10px;
+        font-size: var(--font-size-xs);
+        line-height: 1.35;
+        -webkit-line-clamp: 2;
+    }
+
+    .dish-meta-line {
+        margin-bottom: 10px;
+        font-size: var(--font-size-xs);
+    }
+
+    .dish-action-line {
+        min-width: 0;
+        align-self: end;
+        gap: var(--space-1);
+    }
+
+    .dish-action-line > strong {
+        font-size: 16px;
+    }
+
+    .old-price {
+        display: none;
+    }
+
+    .qty {
+        gap: var(--space-1);
+    }
+
+    .qty button,
+    .counter-box button {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        font-size: 16px;
+    }
+}

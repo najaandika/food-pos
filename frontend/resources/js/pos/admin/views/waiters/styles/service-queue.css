@@ -1,0 +1,67 @@
+/* Service queue is a proper content surface, not an 820px scroll cage. */
+.waiters-workspace .waiters-queue-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+}
+
+.waiters-workspace .waiters-queue-more,
+.waiters-workspace .waiters-attention-more {
+    min-height: 38px;
+    justify-self: stretch;
+}
+
+.waiters-workspace .waiters-attention-more {
+    display: none;
+}
+
+.waiters-workspace .waiters-queue-card {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 12px;
+    background: var(--waiters-surface);
+}
+
+.waiters-workspace .waiters-queue-card.is-priority {
+    border-color: var(--color-border-button-default);
+}
+
+.waiters-workspace .waiters-queue-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-queue-table {
+    color: var(--waiters-accent);
+}
+
+.waiters-workspace .waiters-queue-person {
+    margin: 10px 0 13px;
+}
+
+.waiters-workspace .waiters-queue-person strong {
+    display: block;
+    color: var(--waiters-text);
+    font-weight: var(--text-body-semibold--font-weight);
+}
+
+.waiters-workspace .waiters-queue-person p {
+    margin: 5px 0 0;
+    color: var(--waiters-muted);
+    overflow-wrap: anywhere;
+}
+
+.waiters-workspace .waiters-queue-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.waiters-workspace .waiters-queue-card-actions > button {
+    flex: 1 1 0;
+    min-width: 95px;
+}

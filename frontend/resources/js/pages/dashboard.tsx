@@ -11,28 +11,26 @@ import {
 } from '@/pos/admin/auth';
 import { LocaleProvider } from '@/pos/admin/i18n-context';
 import { getAdminRuntimeData, type AdminOrder } from '@/pos/admin/runtime-data';
+import { displayStaffName } from '@/pos/admin/presentation-labels';
 import { orderIdentity } from '@/pos/admin/views/orders/order-ui';
 import {
     clearSharedQueries,
     setSharedQuerySession,
-} from '@/pos/admin/views/shared-query-cache';
-import { OwnerLiveDashboard } from '@/pos/admin/views/OwnerLiveDashboard';
+} from '@/pos/admin/shared/data/shared-query-cache';
+import { OwnerLiveDashboard } from '@/pos/admin/views/dashboard/OwnerLiveDashboard';
+import { OwnerStaffServer } from '@/pos/admin/views/owner-staff/OwnerStaffServer';
+import { RestaurantSettingsServer } from '@/pos/admin/views/settings/RestaurantSettingsServer';
 import { OwnerMenuServer } from '@/pos/admin/views/owner-menu/OwnerMenuServer';
 import { MenuServer } from '@/pos/admin/views/menu/MenuServer';
-import { WaitersServer } from '@/pos/admin/views/WaitersServer';
+import { WaitersServer } from '@/pos/admin/views/waiters/WaitersServer';
 import { OrdersServer } from '@/pos/admin/views/orders/OrdersServer';
 import { CashierServer } from '@/pos/admin/views/orders/CashierServer';
-import {
-    DashboardView,
-    OwnerStaffView,
-    OwnerTablesView,
-    ReportView,
-    SettingsView,
-} from '@/pos/admin/views';
+import { DashboardView, OwnerTablesView, ReportView } from '@/pos/admin/views';
 import type { View } from '@/pos/admin/types';
-import { computeDashboard, createDemoSnapshot } from '@/pos/mock/demo-store';
+import { computeDashboard } from '@/pos/mock/demo-store';
 import type { PosSnapshot, UserRole } from '@/lib/pos-types';
 import '@/pos/styles/pos.css';
+import '@/pos/admin/shell/mobile-push-workspace.css';
 
 function isRole(value: unknown): value is UserRole {
     return value === 'owner' || value === 'kasir' || value === 'waiters';
@@ -57,6 +55,51 @@ function currentUrlView(role: UserRole): View {
 type PageUser = { id?: number; name?: string; email?: string; role?: unknown };
 type PageAuth = { auth?: { user?: PageUser } };
 
+/** A live page starts empty until server-backed data is available.
+ * Sample staff, orders, and tables belong to test fixtures, not an account.
+ */
+function createInitialSnapshot(): PosSnapshot {
+    return {
+        categories: [],
+        menuItems: [],
+        orders: [],
+        tables: [],
+        staff: [],
+        dashboard: computeDashboard([]),
+        settings: {
+            profile: { cafeName: 'Food POS', phone: '', address: '' },
+            tax: { taxRate: 0, serviceRate: 0, currency: 'IDR' },
+            payments: { cash: true, qris: false, transfer: false },
+            qrOptions: {
+                guestOrdering: false,
+                customerName: true,
+                callWaiter: false,
+                autoAcceptQr: false,
+            },
+            hours: [
+                {
+                    label: 'Monday - Thursday',
+                    open: '09:00',
+                    close: '17:00',
+                    isOpen: false,
+                },
+                {
+                    label: 'Friday',
+                    open: '09:00',
+                    close: '17:00',
+                    isOpen: false,
+                },
+                {
+                    label: 'Saturday - Sunday',
+                    open: '09:00',
+                    close: '17:00',
+                    isOpen: false,
+                },
+            ],
+        },
+    };
+}
+
 export default function Dashboard() {
     const { props, url } = usePage();
     const authUser = (props as PageAuth).auth?.user;
@@ -66,7 +109,7 @@ export default function Dashboard() {
     const role = realRole ?? (!authUser?.id ? 'owner' : 'waiters');
     const user: AuthUser = {
         id: authUser?.id ?? 0,
-        name: authUser?.name || 'Food POS',
+        name: displayStaffName(authUser?.name || 'Food POS', authUser?.email),
         email: authUser?.email || '',
         role,
     };
@@ -86,9 +129,10 @@ export default function Dashboard() {
     });
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [detailOrderKey, setDetailOrderKey] = useState<string | null>(null);
-    const [notice, setNotice] = useState('');
-    const [snapshot, setSnapshot] = useState<PosSnapshot>(createDemoSnapshot);
-    const adminData = useMemo(() => getAdminRuntimeData(snapshot), [snapshot]);
+    const adminData = useMemo(
+        () => getAdminRuntimeData(createInitialSnapshot()),
+        [],
+    );
 
     useEffect(() => {
         if (!canAccessView(role, view)) setView(getRoleHome(role));
@@ -136,7 +180,6 @@ export default function Dashboard() {
             );
             setView(next);
             setDrawerOpen(false);
-            setNotice('');
             if (next === view) return;
 
             // These workspaces share one Inertia page and already load their
@@ -150,64 +193,6 @@ export default function Dashboard() {
         },
         [role, view],
     );
-
-    const changeSnapshot = useCallback(
-        (change: (current: PosSnapshot) => PosSnapshot) => {
-            setSnapshot((current) => {
-                const next = change(current);
-                return { ...next, dashboard: computeDashboard(next.orders) };
-            });
-        },
-        [],
-    );
-
-    const onCreateStaff: NonNullable<
-        Parameters<typeof OwnerStaffView>[0]['onCreateStaff']
-    > = (payload) => {
-        changeSnapshot((old) => {
-            const id = Math.max(0, ...old.staff.map((staff) => staff.id)) + 1;
-            const now = new Date().toISOString();
-            return {
-                ...old,
-                staff: [
-                    ...old.staff,
-                    {
-                        id,
-                        name: payload.name,
-                        email: payload.email,
-                        role: payload.role,
-                        isActive: payload.isActive,
-                        createdAt: now,
-                        updatedAt: now,
-                    },
-                ],
-            };
-        });
-        setNotice(
-            'Staf ditambahkan untuk sesi ini; kata sandi tidak disimpan.',
-        );
-    };
-
-    const onUpdateStaff: NonNullable<
-        Parameters<typeof OwnerStaffView>[0]['onUpdateStaff']
-    > = (id, payload) => {
-        if (id === undefined) return;
-        changeSnapshot((old) => ({
-            ...old,
-            staff: old.staff.map((staff) =>
-                staff.id === id
-                    ? {
-                          ...staff,
-                          name: payload.name,
-                          email: payload.email,
-                          role: payload.role,
-                          isActive: payload.isActive,
-                      }
-                    : staff,
-            ),
-        }));
-        setNotice('Data staf diperbarui untuk sesi ini.');
-    };
 
     const onLogout = () => {
         clearSharedQueries();
@@ -241,89 +226,50 @@ export default function Dashboard() {
                     id="pos-main-content"
                     tabIndex={-1}
                 >
-                    <ShellTopbar
-                        activeView={view}
-                        mobileDrawerOpen={drawerOpen}
-                        onOpenMobileDrawer={() => setDrawerOpen(true)}
-                    />
-                    {view === 'dashboard' &&
-                        (role === 'owner' ? (
-                            <OwnerLiveDashboard onChangeView={navigate} />
-                        ) : (
-                            <DashboardView
-                                role={role}
-                                dashboard={adminData.dashboard}
-                                dishes={adminData.dishes}
-                                orders={adminData.orders}
-                                onChangeView={navigate}
-                                onOpenOrder={(order) =>
-                                    navigate('orders', order)
-                                }
+                    <div className="pos-boardui-main-column">
+                        <ShellTopbar
+                            activeView={view}
+                            mobileDrawerOpen={drawerOpen}
+                            onOpenMobileDrawer={() => setDrawerOpen(true)}
+                        />
+                        {view === 'dashboard' &&
+                            (role === 'owner' ? (
+                                <OwnerLiveDashboard onChangeView={navigate} />
+                            ) : (
+                                <DashboardView
+                                    role={role}
+                                    dashboard={adminData.dashboard}
+                                    dishes={adminData.dishes}
+                                    orders={adminData.orders}
+                                    onChangeView={navigate}
+                                    onOpenOrder={(order) =>
+                                        navigate('orders', order)
+                                    }
+                                />
+                            ))}
+                        {view === 'report' && <ReportView />}
+                        {view === 'menu' && (
+                            <MenuServer
+                                onGoToCashier={() => navigate('cashier')}
+                                onGoToOrders={() => navigate('orders')}
                             />
-                        ))}
-                    {view === 'report' && <ReportView />}
-                    {view === 'menu' && (
-                        <MenuServer
-                            onGoToCashier={() => navigate('cashier')}
-                            onGoToOrders={() => navigate('orders')}
-                        />
-                    )}
-                    {view === 'orders' && (
-                        <OrdersServer
-                            role={role}
-                            initialSelectedOrderKey={detailOrderKey}
-                        />
-                    )}
-                    {view === 'cashier' && <CashierServer user={user} />}
-                    {view === 'waiters' && <WaitersServer />}
-                    {view === 'owner-menu' && <OwnerMenuServer />}
-                    {view === 'owner-tables' && <OwnerTablesView serverMode />}
-                    {view === 'owner-staff' && (
-                        <OwnerStaffView
-                            staff={adminData.staff}
-                            onCreateStaff={onCreateStaff}
-                            onUpdateStaff={onUpdateStaff}
-                            onDisableStaff={(id) => {
-                                changeSnapshot((old) => ({
-                                    ...old,
-                                    staff: old.staff.map((staff) =>
-                                        staff.id === id
-                                            ? { ...staff, isActive: false }
-                                            : staff,
-                                    ),
-                                }));
-                                setNotice('Staf dinonaktifkan untuk sesi ini.');
-                            }}
-                        />
-                    )}
-                    {view === 'settings' && (
-                        <SettingsView
-                            initialSettings={adminData.settings}
-                            onSaved={(nextSettings) => {
-                                changeSnapshot((old) => ({
-                                    ...old,
-                                    settings: nextSettings,
-                                }));
-                                setNotice(
-                                    'Pengaturan diperbarui untuk sesi ini, belum tersimpan di server.',
-                                );
-                            }}
-                        />
-                    )}
-                </main>
-                {notice && (
-                    <div className="admin-action-toast success" role="status">
-                        {notice}
-                        <button
-                            type="button"
-                            aria-label="Tutup pemberitahuan"
-                            onClick={() => setNotice('')}
-                            style={{ marginLeft: 10, color: 'inherit' }}
-                        >
-                            ×
-                        </button>
+                        )}
+                        {view === 'orders' && (
+                            <OrdersServer
+                                role={role}
+                                initialSelectedOrderKey={detailOrderKey}
+                            />
+                        )}
+                        {view === 'cashier' && <CashierServer user={user} />}
+                        {view === 'waiters' && <WaitersServer />}
+                        {view === 'owner-menu' && <OwnerMenuServer />}
+                        {view === 'owner-tables' && (
+                            <OwnerTablesView serverMode />
+                        )}
+                        {view === 'owner-staff' && <OwnerStaffServer />}
+                        {view === 'settings' && <RestaurantSettingsServer />}
                     </div>
-                )}
+                </main>
             </div>
         </LocaleProvider>
     );

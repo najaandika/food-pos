@@ -1,0 +1,181 @@
+/* Mobile Bottom Navigation Bar & Drawer Enhancements */
+.mobile-bottom-nav {
+    display: none;
+}
+
+.mobile-drawer-close {
+    display: none;
+}
+
+@media (max-width: 860px) {
+    .mobile-bottom-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 170;
+        height: 64px;
+        padding: 6px 8px env(safe-area-inset-bottom);
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(229, 233, 243, 0.85);
+        box-shadow: 0 -8px 24px rgba(20, 26, 51, 0.08);
+    }
+
+    .mobile-bottom-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        color: #7d8498;
+        padding: 4px 0;
+        border-radius: 12px;
+        transition:
+            color 160ms ease,
+            transform 120ms ease;
+        cursor: pointer;
+    }
+
+    .mobile-bottom-item:active {
+        transform: scale(0.93);
+    }
+
+    .mobile-bottom-item.active {
+        color: var(--blue, #3047ff);
+        font-weight: var(--font-weight-bold);
+    }
+
+    .mobile-bottom-icon {
+        width: 22px;
+        height: 22px;
+        margin-bottom: 3px;
+        transition: transform 160ms ease;
+    }
+
+    .mobile-bottom-item.active .mobile-bottom-icon {
+        transform: translateY(-1px) scale(1.08);
+    }
+
+    .mobile-bottom-label {
+        font-size: 11px;
+        line-height: 1;
+        font-weight: var(--font-weight-bold);
+        letter-spacing: -0.01em;
+    }
+
+    .mobile-drawer-close {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: var(--mist, #eef2ff);
+        color: var(--navy, #141a33);
+        cursor: pointer;
+        transition: background 140ms ease;
+    }
+
+    .mobile-drawer-close:hover {
+        background: #e0e7ff;
+    }
+
+    .mobile-drawer-close svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav-group + .nav-group {
+        border-top: 1px dashed rgba(229, 233, 243, 0.9);
+        padding-top: var(--space-fixed-3);
+        margin-top: 4px;
+    }
+
+    .drawer-role-card {
+        background: rgba(48, 71, 255, 0.05);
+        border: 1px solid rgba(48, 71, 255, 0.12);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin: 8px 0 14px;
+    }
+
+    .role-card-badge {
+        display: inline-block;
+        background: var(--blue, #3047ff);
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: var(--font-weight-semibold);
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .drawer-role-card p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.45;
+        color: #4b5268;
+    }
+}
+
+/*
+ * R8.13D — Active BoardUI mobile drawer trigger.
+ * The production ShellTopbar comes from shell/topbar.tsx. The legacy
+ * .mobile-bottom-nav and native language-switch elements are not mounted.
+ * This rule affects only the existing active mobile menu button.
+ */
+@media (max-width: 860px) {
+    .page-shell.pos-shell-layout
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger {
+        flex: 0 0 44px;
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
+        min-height: 44px;
+        border-radius: var(--radius-2lg, 10px);
+        border-color: var(--color-border-button-default, var(--pos-nav-border));
+        background-color: var(
+            --color-background-primary-default,
+            var(--pos-nav-surface)
+        );
+        transition:
+            background-color 150ms ease,
+            border-color 150ms ease;
+    }
+
+    .page-shell.pos-shell-layout
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger:hover {
+        border-color: var(--color-border-button-hover, var(--pos-nav-border));
+        background-color: var(
+            --color-background-secondary-hover,
+            var(--pos-nav-hover)
+        );
+    }
+
+    .page-shell.pos-shell-layout
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger:focus-visible {
+        outline: 2px solid var(--color-border-focus-ring, var(--pos-nav-focus));
+        outline-offset: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-shell.pos-shell-layout
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger {
+        transition-duration: 0.01ms;
+    }
+}

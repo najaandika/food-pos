@@ -1,37 +1,30 @@
-import {
-    Chip,
-    type ChipColor,
-} from '../../../../../../components/base/badges/chip';
+import { Chip } from '../../../../../../components/base/badges/chip';
 import type { PosOrderStatus } from '@/lib/pos-types';
 import { useLocale } from '../../i18n-context';
 import { orderStatusLabel } from './order-ui';
-
-const colorByStatus: Record<PosOrderStatus, ChipColor> = {
-    pending: 'yellow',
-    accepted: 'blue',
-    preparing: 'orange',
-    ready: 'lime',
-    served: 'cyan',
-    waiting_payment: 'yellow',
-    paid: 'lime',
-    cancelled: 'rose',
-};
+import { orderStatusChipColor } from './order-status-colors';
 
 /** The installed official BoardUI Free Chip, with POS-specific status mapping. */
 export function StatusChip({
     status,
     fallbackLabel,
+    variant = 'bold',
+    className,
 }: {
     status?: PosOrderStatus;
     fallbackLabel?: string;
+    variant?: 'bold' | 'caption';
+    className?: string;
 }) {
     const { t } = useLocale();
     return (
         <Chip
-            variant="bold"
-            color={status ? colorByStatus[status] : 'neutral'}
+            variant={variant}
+            color={orderStatusChipColor(status)}
             data-status={status ?? 'unknown'}
-            className="orders-boardui-status"
+            className={['orders-boardui-status', className]
+                .filter(Boolean)
+                .join(' ')}
         >
             {status ? orderStatusLabel(status, t) : (fallbackLabel ?? '—')}
         </Chip>

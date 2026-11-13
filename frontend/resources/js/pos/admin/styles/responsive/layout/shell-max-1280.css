@@ -1,0 +1,8 @@
+@media (max-width: 1280px) {
+    .page-shell {
+        min-height: 100vh;
+    }
+    .receipt-panel {
+        border-left: 0;
+    }
+}

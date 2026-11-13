@@ -1,0 +1,7 @@
+/* Source: admin-responsive-layout.css */
+/* admin-responsive part 1/4 - lines 1-443 depth 0 */
+/* Breakpoint system: xs 360, sm 640, md 768, lg 1024, xl 1280 - see tokens.css --bp-* */
+@import './layout/shell-max-1280.css';
+@import './layout/mobile-shell-max-860.css';
+@import './layout/waiters-container-max-1080.css';
+@import './layout/waiters-container-max-760.css';

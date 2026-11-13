@@ -1,0 +1,11 @@
+/* R8.20E-C — Mobile BoardUI sidebar footer alignment.
+ * Preserve the inherited desktop and collapsed rail styling: the drawer is
+ * portaled outside the POS page shell and should align its theme control to
+ * the same left edge as the footer navigation, above Settings and account. */
+@media (max-width: 1023px) {
+    .pos-boardui-drawer-sidebar
+        .pos-boardui-footer
+        > .pos-boardui-theme-switch {
+        align-self: flex-start;
+    }
+}

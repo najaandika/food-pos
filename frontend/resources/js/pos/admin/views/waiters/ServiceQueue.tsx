@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RiCheckboxCircleLine } from '@remixicon/react';
 import { Chip } from '../../../../../../components/base/badges/chip';
+import { StatusChip } from '../orders/StatusChip';
 import { Button } from '../../../../../../components/base/buttons/button';
 import {
     SegmentedControl,
@@ -9,10 +10,10 @@ import {
 import { cx } from '../../../../../../utils/cx';
 import { useLocale } from '../../i18n-context';
 import type { AdminOrder } from '../../runtime-data';
+import { displayOrderReference } from '../../presentation-labels';
 import {
     filterQueueOrders,
     nextWaiterAction,
-    orderColor,
     orderKey,
     waiterActionLabels,
     type QueueFilter,
@@ -114,20 +115,23 @@ export function ServiceQueue({
                                 <span className="waiters-queue-table text-body-semibold">
                                     {order.table}
                                 </span>
-                                <Chip
-                                    color={orderColor(order.rawStatus)}
+                                <StatusChip
+                                    status={order.rawStatus}
+                                    fallbackLabel={order.status}
                                     variant="caption"
-                                >
-                                    {order.status}
-                                </Chip>
+                                />
                             </div>
                             <div className="waiters-queue-person text-body-2-regular">
                                 <strong className="text-body-semibold">
                                     {order.name}
                                 </strong>
                                 <p>
-                                    {order.orderNumber ?? order.meta} ·{' '}
-                                    {order.time}
+                                    {order.orderNumber
+                                        ? displayOrderReference(
+                                              order.orderNumber,
+                                          )
+                                        : order.meta}{' '}
+                                    · {order.time}
                                 </p>
                             </div>
                             <div className="waiters-queue-card-actions">

@@ -1,0 +1,35 @@
+/* Lightweight semantic status tokens used consistently in board, list and detail. */
+.orders-status-badge {
+    --orders-status-fg: var(--orders-secondary);
+    --orders-status-bg: var(--orders-ground);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 27px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: var(--orders-status-bg);
+    color: var(--orders-status-fg);
+    font-size: 11px;
+    font-weight: 740;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.orders-status-badge[data-status='pending'] {
+    --orders-status-fg: var(--orders-warning);
+    --orders-status-bg: var(--color-warning-50, var(--orders-ground));
+}
+.orders-status-badge[data-status='accepted'],
+.orders-status-badge[data-status='preparing'] {
+    --orders-status-fg: var(--orders-accent);
+    --orders-status-bg: var(--color-accent-50, var(--orders-ground));
+}
+.orders-status-badge[data-status='ready'],
+.orders-status-badge[data-status='paid'] {
+    --orders-status-fg: var(--orders-success);
+    --orders-status-bg: var(--color-success-50, var(--orders-ground));
+}
+.orders-status-badge[data-status='cancelled'] {
+    --orders-status-fg: var(--orders-danger);
+    --orders-status-bg: var(--color-danger-50, var(--orders-ground));
+}

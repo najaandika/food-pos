@@ -1,0 +1,32 @@
+/* Cashier's payment/preset buttons are already BoardUI Buttons. Override only
+ * leftover legacy dark or 11px rules, without changing payment behavior. */
+.page-shell.pos-shell-layout .cashier-workspace .payment-methods button,
+.page-shell.pos-shell-layout .cashier-workspace .cash-preset-btn {
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-primary-default, #fff);
+    color: var(--color-text-secondary, #667085);
+    font-size: var(--text-body-2-medium, 13px);
+    font-weight: var(--text-body-2-medium--font-weight, 500);
+    box-shadow: var(--shadow-xs, 0 1px 2px rgb(0 0 0 / 0.06));
+    transform: none;
+}
+.page-shell.pos-shell-layout .cashier-workspace .payment-methods button.active,
+.page-shell.pos-shell-layout .cashier-workspace .cash-preset-btn.active {
+    border-color: var(--color-accent-500, #3b82f6);
+    background: var(--color-accent-50, #eff6ff);
+    /* The underlying Button variant=primary carries a blue gradient. Remove
+       that image when using the pale selected surface so text contrast stays
+       correct instead of blue text on a saturated blue gradient. */
+    background-image: none;
+    color: var(--color-accent-700, #1d4ed8);
+    box-shadow: none;
+}
+.page-shell.pos-shell-layout
+    .cashier-workspace
+    .payment-methods
+    button:focus-visible,
+.page-shell.pos-shell-layout .cashier-workspace .cash-preset-btn:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring, var(--color-accent-600));
+    outline-offset: 2px;
+}

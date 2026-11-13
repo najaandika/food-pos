@@ -64,7 +64,7 @@ export function TableGrid({ tables, orders, onOpenTable }: TableGridProps) {
                     </h2>
                     <p>{t('waiters.monitorTables')}</p>
                 </div>
-                <Chip variant="caption" color="neutral">
+                <Chip variant="caption" color="blue">
                     {visibleTables.length} {isId ? 'meja' : 'tables'}
                 </Chip>
             </div>

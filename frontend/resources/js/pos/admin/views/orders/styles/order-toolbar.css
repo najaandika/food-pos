@@ -1,0 +1,70 @@
+.card-actions button {
+    flex: 1;
+    height: 46px;
+    border: 0;
+    border-radius: 16px;
+    background: var(--mist);
+    color: var(--blue-dark);
+    font-weight: var(--font-weight-semibold);
+}
+
+.card-actions button:last-child {
+    color: #ffffff;
+    background: var(--blue);
+}
+
+.orders-topbar {
+    margin-bottom: 16px;
+}
+
+.orders-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pos-gap);
+    margin-bottom: 18px;
+}
+
+.orders-toolbar .admin-tabs {
+    display: flex;
+    gap: 4px;
+    min-width: 0;
+    margin-top: 0;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--ice);
+    padding: 4px;
+    flex-wrap: wrap;
+}
+
+.orders-toolbar .admin-tabs button {
+    height: 38px;
+    border-radius: var(--radius-xs);
+    background: transparent;
+    color: var(--muted);
+    padding: 0 13px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.orders-toolbar .admin-tabs button.active {
+    background: var(--navy);
+    color: #ffffff;
+}
+
+.orders-toolbar .tools-line {
+    flex: 0 0 auto;
+}
+
+.orders-toolbar .admin-search-wrap.wide {
+    width: min(330px, 100%);
+}
+
+.orders-board-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(304px, 336px);
+    gap: var(--space-fixed-4);
+    align-items: start;
+    min-width: 0;
+}

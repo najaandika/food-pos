@@ -1,0 +1,55 @@
+.report-breakdown {
+    display: grid;
+    gap: 17px;
+    min-width: 0;
+}
+.report-breakdown-row {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}
+.report-breakdown-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+.report-breakdown-meta span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.report-breakdown-meta strong {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+.report-breakdown-track {
+    width: 100%;
+    height: 9px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: var(--rp-muted-surface);
+}
+.report-breakdown-fill {
+    display: block;
+    height: 100%;
+    background: var(--rp-accent);
+    border-radius: inherit;
+    transition: width 200ms ease;
+}
+.report-empty-small {
+    color: var(--rp-secondary);
+    margin: 0;
+}
+.report-channel-group {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    min-width: 0;
+}
+.report-channel-group h3 {
+    margin: 0;
+    color: var(--rp-primary);
+}

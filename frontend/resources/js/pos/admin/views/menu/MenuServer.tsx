@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../../../../../../components/base/buttons/button';
 import { Spinner } from '../../../../../../components/base/spinner/spinner';
 import type { AdminDish, AdminOrder, AdminTable } from '../../runtime-data';
-import { MenuView } from '../MenuView';
+import { MenuView } from './MenuView';
 import {
     getServiceCatalog,
     getServiceTables,
@@ -10,7 +10,7 @@ import {
     peekServiceTables,
     postManualOrder,
     type ManualOrderDraft,
-} from '../service-workspace';
+} from '../../shared/data/service-workspace';
 import { getSavedOrders, peekSavedOrders } from '../orders/server-orders';
 
 export function MenuServer({
@@ -56,18 +56,23 @@ export function MenuServer({
         setError('');
     }, []);
 
-    const retry = useCallback(async (force = false) => {
-        if (!peekServiceCatalog()) setLoading(true);
-        try {
-            await reload(force);
-        } catch (reason) {
-            setError(
-                reason instanceof Error ? reason.message : 'Gagal memuat Menu.',
-            );
-        } finally {
-            setLoading(false);
-        }
-    }, [reload]);
+    const retry = useCallback(
+        async (force = false) => {
+            if (!peekServiceCatalog()) setLoading(true);
+            try {
+                await reload(force);
+            } catch (reason) {
+                setError(
+                    reason instanceof Error
+                        ? reason.message
+                        : 'Gagal memuat Menu.',
+                );
+            } finally {
+                setLoading(false);
+            }
+        },
+        [reload],
+    );
 
     useEffect(() => {
         void retry();

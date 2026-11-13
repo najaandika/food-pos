@@ -1,0 +1,44 @@
+.page-shell {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.mobile-nav-toggle,
+.mobile-sidebar-overlay {
+    display: none;
+}
+
+.admin-action-toast {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: var(--z-toast);
+    max-width: var(--toast-max-width);
+    border-radius: var(--radius-md);
+    background: var(--navy);
+    color: #ffffff;
+    padding: var(--toast-padding);
+    box-shadow: var(--shadow-toast);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.admin-action-toast.success {
+    background: var(--navy);
+}
+
+.admin-action-toast.error {
+    background: var(--danger);
+}
+
+@container admin-shell (max-width: 560px) {
+    .admin-action-toast {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        max-width: none;
+    }
+}

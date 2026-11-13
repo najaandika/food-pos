@@ -1,0 +1,60 @@
+.sidebar {
+    width: var(--sidebar-width);
+    flex: 0 0 var(--sidebar-width);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--sidebar-padding);
+    background: rgba(255, 255, 255, 0.88);
+    border-right: 1px solid rgba(214, 219, 234, 0.72);
+    box-shadow: 8px 0 30px rgba(20, 26, 51, 0.035);
+    transition:
+        width var(--transition-sidebar),
+        flex-basis var(--transition-sidebar),
+        padding var(--transition-sidebar);
+    scrollbar-width: thin;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    border-radius: var(--radius-pill);
+    background: #c9cfdf;
+}
+
+/* Flex utilities: prefer .u-flex-start / .u-flex-between in markup, keep split groups for legacy */
+.brand-wrap,
+.nav-item,
+.profile-box,
+.logout-btn {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-footer {
+    display: grid;
+    flex: 0 0 auto;
+    gap: var(--space-fixed-2);
+    margin-top: auto;
+}
+
+.stat-head,
+.admin-section-head,
+.side-head,
+.feed-row {
+    display: flex;
+    align-items: center;
+}
+
+.receipt-top,
+.receipt-total,
+.proceed-btn {
+    display: flex;
+    align-items: center;
+}

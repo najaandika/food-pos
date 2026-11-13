@@ -22,6 +22,7 @@ import {
 } from '../../../../../../components/base/segmented-control/segmented-control';
 import { useLocale } from '../../i18n-context';
 import type { AdminTable } from '../../runtime-data';
+import { displayTableReference } from '../../presentation-labels';
 import { getTableStatusDotColor, getTableStatusLabel } from './table-status';
 
 type TableFilter = 'all' | 'available' | 'attention' | 'inactive';
@@ -145,7 +146,12 @@ export function OwnerTablesList({
                                 type="button"
                                 onClick={() => onStartEdit(table)}
                             >
-                                <span className="table-pill">{table.code}</span>
+                                <span
+                                    className="table-pill"
+                                    data-table-code={table.code}
+                                >
+                                    {displayTableReference(table.code)}
+                                </span>
                                 <span className="tables-p2-card-identity">
                                     <strong className="text-body-medium">
                                         {table.name}
@@ -197,7 +203,7 @@ export function OwnerTablesList({
                             <div className="qr-card-bottom">
                                 <span className="text-caption-1-medium">
                                     {locale === 'id' ? 'QR Meja' : 'Table QR'}{' '}
-                                    {table.code}
+                                    {displayTableReference(table.code)}
                                 </span>
                                 <div className="qr-card-actions">
                                     <IconButton

@@ -1,0 +1,20 @@
+/* The BoardUI Drawer is portaled to body, outside the admin-main container. */
+@media (max-width: 610px) {
+    .staff-finance-drawer-footer > button {
+        width: 100%;
+    }
+
+    .staff-finance-drawer-profile {
+        flex-wrap: wrap;
+    }
+
+    .staff-finance-access-control {
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .staff-finance-name {
+        transition: none;
+    }
+}

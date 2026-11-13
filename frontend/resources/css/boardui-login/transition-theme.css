@@ -1,0 +1,25 @@
+/* ---------------------------------------------------------------------------
+ * Component utilities — Buttons
+ *
+ * Each variant collapses the four interactive states (default / hover / active
+ * / disabled) into a single class. Use them on the component:
+ *
+ *   <button class="bg-button-primary">…</button>
+ *   <button class="bg-button-danger">…</button>
+ *
+ * Smooth default→hover transition trick:
+ *   CSS can't interpolate `background-image`, so swapping gradients on :hover
+ *   would snap. Instead we keep the *default* gradient on the element and
+ *   layer the *hover* gradient on a `::before` pseudo-element whose opacity
+ *   fades 0→1 over `--button-transition-ms`. Active/disabled gradients still
+ *   swap instantly (we hide the pseudo to reveal them).
+ *
+ * Stacking: `isolation: isolate` keeps the pseudo behind the button's text
+ * and icons (z-index -1) while staying above the element's own background.
+ * `border-radius: inherit` + `overflow: hidden` keeps it within the rounded
+ * corners.
+ * --------------------------------------------------------------------------- */
+@theme {
+    --button-transition-ms: 150ms;
+    --input-transition-ms: 150ms;
+}

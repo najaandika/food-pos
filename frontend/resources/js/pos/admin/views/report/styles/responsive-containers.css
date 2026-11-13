@@ -1,0 +1,66 @@
+@container admin-main (max-width: 1120px) {
+    .report-page-header {
+        align-items: flex-start;
+    }
+    .report-page-actions {
+        justify-content: flex-start;
+    }
+    .report-charts-grid,
+    .report-breakdown-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .report-table-controls {
+        width: 100%;
+    }
+}
+
+@container admin-main (max-width: 680px) {
+    .report-stat-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .report-channel-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .report-table-controls .report-filter-select {
+        flex: 1 1 125px;
+        max-width: none;
+    }
+    .report-table-controls .report-search {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+    .report-pagination {
+        flex: 1 1 100%;
+    }
+}
+
+@container admin-main (max-width: 420px) {
+    .report-page-actions {
+        width: 100%;
+    }
+    .report-date-trigger {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: none;
+        justify-content: center;
+    }
+    .report-page-actions > button {
+        flex: 1 1 auto;
+    }
+    .report-panel {
+        padding: 12px;
+    }
+    .report-transactions {
+        padding: 0;
+    }
+    .report-transactions-header {
+        padding: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .report-breakdown-fill,
+    .report-stat-cards > section {
+        transition: none;
+    }
+}

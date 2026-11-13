@@ -1,0 +1,332 @@
+.owner-menu-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--ice);
+}
+
+.owner-toolbar-left {
+    min-width: 0;
+}
+
+.owner-menu-toolbar .admin-search-wrap {
+    flex: 1 1 220px;
+    max-width: 320px;
+}
+
+.owner-result-count {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+}
+
+.owner-menu-table {
+    display: grid;
+    gap: 10px;
+    overflow: visible;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+}
+
+.owner-menu-table::-webkit-scrollbar {
+    display: none;
+}
+
+.owner-menu-table::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.owner-menu-table-head,
+.owner-menu-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 16px;
+    align-items: center;
+    min-width: 0;
+}
+
+.owner-menu-table-head {
+    display: none;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+}
+
+.owner-menu-row {
+    min-height: 98px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--card-bg);
+    padding: 14px 16px;
+    box-shadow: none;
+    transition:
+        border-color var(--transition-hover),
+        background-color var(--transition-hover),
+        box-shadow var(--transition-hover),
+        transform var(--transition-hover);
+}
+
+.owner-menu-row:hover {
+    border-color: rgba(48, 71, 255, 0.26);
+    background: var(--ice);
+    box-shadow: var(--shadow-sm);
+}
+
+.owner-menu-row.selected {
+    border-color: rgba(48, 71, 255, 0.26);
+    background: var(--mist);
+    box-shadow: none;
+}
+
+.owner-menu-product {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.owner-menu-meta {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.owner-menu-meta > span,
+.owner-menu-meta > strong {
+    min-width: 0;
+    display: grid;
+    gap: 3px;
+    color: var(--navy);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.owner-menu-meta > span:first-child {
+    min-width: 76px;
+}
+
+.owner-menu-meta > strong {
+    min-width: 92px;
+}
+
+.owner-menu-meta small {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+button.owner-menu-product {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+.owner-menu-product > div {
+    min-width: 0;
+}
+
+.owner-menu-product img {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+}
+
+.owner-menu-product strong,
+.owner-menu-product small,
+.owner-menu-product em {
+    display: block;
+}
+
+.owner-menu-product strong {
+    overflow: hidden;
+    color: var(--navy);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+}
+
+.owner-menu-product small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.owner-menu-product em {
+    overflow: hidden;
+    margin-top: 4px;
+    color: var(--blue);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.owner-menu-actions {
+    display: flex;
+    min-width: 0;
+    justify-self: end;
+    justify-content: flex-end;
+    gap: var(--space-1);
+}
+
+.owner-menu-actions button {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 11px;
+    background: var(--ice);
+    color: var(--blue);
+    transition:
+        background-color var(--transition-hover),
+        color var(--transition-hover),
+        transform var(--transition-hover);
+}
+
+.owner-menu-actions button:hover {
+    background: var(--mist);
+    color: var(--blue-dark);
+    transform: translateY(-1px);
+}
+
+.owner-menu-actions svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* R8.16B: Pair readable BoardUI text with the Owner Menu list's dark surfaces.
+   Keep bright KPI cards, image badges, and archived Restore styling untouched. */
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-row {
+    background: var(--color-background-secondary-default);
+    border-color: var(--color-border-button-default);
+}
+
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-row:hover,
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-row.selected {
+    background: var(--color-background-secondary-hover);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-row.is-archived {
+    background: var(--color-background-primary-default);
+}
+
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-meta {
+    border-color: var(--color-border-button-default);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-product
+    strong,
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-meta > span,
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-meta
+    > strong {
+    color: var(--color-text-primary);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-product
+    small,
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-product em,
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-meta small {
+    color: var(--color-text-primary);
+    opacity: 0.88;
+}
+
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-result-count {
+    color: var(--color-text-primary);
+}
+
+/* Selected light rows were 4.41:1 for their small descriptions/captions.
+   Blend only semantic text roles; keep the lighter visual hierarchy. */
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-row.selected
+    .owner-menu-product
+    small,
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-row.selected
+    .owner-menu-meta
+    small {
+    color: color-mix(
+        in srgb,
+        var(--color-text-primary) 45%,
+        var(--color-text-secondary)
+    );
+}
+
+/* A pale legacy flag cannot inherit white text on the dark item card. */
+.dark .page-shell.pos-shell-layout .owner-menu-c2-page .owner-flag {
+    background: var(--color-background-primary-default);
+    color: var(--color-text-primary);
+}
+
+/* The archived Restore is only 3.42:1 on its light green surface.
+   A darker semantic foreground corrects it without changing its hit target. */
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    button.menu-restore-action:not(:hover) {
+    color: var(--color-text-primary) !important;
+}
+
+/* The archive-management stylesheet contains !important background/foreground.
+   Override only this dark Restore presentation, not its 44px target sizing. */
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    button.menu-restore-action {
+    background: var(--color-background-primary-default) !important;
+    color: var(--color-text-primary) !important;
+    border-color: var(--color-border-button-default);
+}
+
+.dark
+    .page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    button.menu-restore-action:hover {
+    background: var(--color-background-secondary-hover) !important;
+    color: var(--color-text-primary) !important;
+}

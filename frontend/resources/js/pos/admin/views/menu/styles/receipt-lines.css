@@ -1,0 +1,97 @@
+.pos-menu-page .receipt-item .menu-p2-note-toggle {
+    display: inline-flex;
+    min-height: 25px;
+    margin: 5px 0 0;
+    padding: 3px 6px;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--color-accent-600, var(--blue));
+}
+
+.pos-menu-page .receipt-item .menu-p2-note-toggle > span {
+    display: inline-flex;
+    margin: 0;
+    color: var(--color-accent-600, var(--blue));
+    font-size: 12px;
+    opacity: 1;
+}
+
+.pos-menu-page .receipt-item {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 10px;
+    align-items: start;
+}
+
+.pos-menu-page .receipt-item > div:first-child > strong {
+    display: block;
+    color: var(--menu-p2-text);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.35;
+}
+
+.pos-menu-page .receipt-item .menu-p2-item-meta {
+    min-width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.pos-menu-page .receipt-item .menu-p2-item-meta span {
+    margin: 0;
+    color: var(--menu-p2-muted);
+    font-size: 11px;
+}
+
+.pos-menu-page .receipt-item .menu-p2-item-meta strong {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--menu-p2-text);
+    white-space: nowrap;
+}
+
+.pos-menu-page .receipt-item .menu-p2-line-note {
+    margin-top: 7px;
+    max-width: 100%;
+}
+
+.pos-menu-page .receipt-item .menu-p2-line-note textarea {
+    width: 100%;
+    min-height: 0;
+    padding: 0 4px;
+    border: none;
+    border-radius: 0;
+    resize: none;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    color: var(--menu-p2-text);
+}
+
+.pos-menu-page .receipt-item .menu-p2-line-note textarea:focus {
+    border: 0;
+    box-shadow: none;
+}
+
+.pos-menu-page .receipt-order-scroll {
+    min-height: 0;
+    overflow-x: hidden;
+}
+
+/* The legacy sticky title can cover item note controls when the official
+   drawer's nested scroll region is short. Keep it in the document flow. */
+.pos-menu-page .receipt-order-scroll h3 {
+    position: static;
+    z-index: auto;
+    background: transparent;
+    color: var(--menu-p2-text);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.pos-menu-page .receipt-footer {
+    padding-top: 10px;
+    margin-top: 8px;
+    border-color: var(--menu-p2-line);
+}

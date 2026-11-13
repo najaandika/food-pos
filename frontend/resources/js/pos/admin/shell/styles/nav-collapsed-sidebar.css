@@ -1,0 +1,59 @@
+.page-shell.pos-shell-layout.sidebar-collapsed .pos-shell-sidebar {
+    flex-basis: 72px;
+    width: 72px;
+    padding-inline: 8px;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-sidebar-brand-row {
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-inline: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-brand-expanded,
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-text,
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-heading,
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-sidebar-user-copy {
+    display: none;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-brand-compact {
+    display: inline;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu {
+    gap: 16px;
+    overflow-x: visible;
+    padding-inline: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-group {
+    gap: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-links {
+    align-items: center;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-link {
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-menu-link-active::before {
+    top: 12px;
+    bottom: 12px;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-sidebar-user {
+    justify-content: center;
+    padding-inline: 0;
+}
+
+.pos-shell-sidebar[data-collapsed='true'] .pos-shell-language-switch {
+    flex-direction: column;
+}

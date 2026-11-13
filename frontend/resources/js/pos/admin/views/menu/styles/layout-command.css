@@ -1,0 +1,37 @@
+/* colocated menu - pos-command + category-rail + dish-card */
+.menu-layout {
+    display: grid;
+    grid-template-columns: 200px minmax(420px, 1fr) 320px;
+    align-items: start;
+    gap: 18px;
+    height: 100%;
+    min-width: 0;
+}
+
+.pos-menu-topbar {
+    margin-bottom: 16px;
+}
+
+.pos-command-bar {
+    display: grid;
+    grid-template-columns: minmax(230px, 1fr) auto minmax(240px, 0.74fr);
+    align-items: center;
+    gap: var(--space-fixed-3);
+    margin-bottom: 16px;
+    border: 1px solid rgba(229, 233, 243, 0.82);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--shadow);
+    padding: 10px;
+}
+
+.pos-command-bar.qr-mode {
+    grid-template-columns: minmax(230px, 1fr) auto;
+}
+
+/* R8.16E: match the dark ticket foreground with an opaque BoardUI surface.
+ * Light retains its existing command-bar background and border unchanged. */
+.dark .pos-command-bar {
+    background: var(--color-background-primary-default);
+    border-color: var(--color-border-button-default);
+}

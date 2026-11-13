@@ -1,0 +1,369 @@
+.dark {
+    /* Foreground */
+    --color-foreground-full: var(--color-neutral-700);
+    --color-foreground-icon-primary: var(--color-neutral-50);
+    --color-foreground-icon-hover: var(--color-white);
+    --color-foreground-icon-error: var(--color-red-400);
+    --color-foreground-icon-tertiary: var(--color-neutral-600);
+    --color-foreground-icon-quaternary: var(--color-neutral-700);
+    --color-foreground-icon-disabled: var(--color-neutral-800);
+    --color-foreground-disabled: var(--color-neutral-700);
+    --color-foreground-disabled-danger: var(--color-red-400);
+    --color-input-disabled-foreground: var(--color-neutral-600);
+    --color-icon-button-disabled-foreground: var(--color-neutral-500);
+    --color-button-primary-disabled-foreground: var(--color-neutral-500);
+
+    /* Text */
+    --color-text-primary: var(--color-neutral-50);
+    --color-text-tertiary: var(--color-neutral-600);
+    --color-text-disabled: var(--color-neutral-800);
+    --color-text-error-primary: var(--color-red-400);
+    --color-text-destructive: color-mix(
+        in srgb,
+        var(--color-red-500) 80%,
+        var(--color-neutral-500)
+    );
+    --color-input-disabled-text: color-mix(
+        in srgb,
+        var(--color-neutral-500) 40%,
+        transparent
+    );
+
+    /* Background */
+    --color-background-full: var(--color-neutral-925);
+    --color-ticket-detail-surface: var(--color-neutral-925);
+    --color-ticket-detail-low-background: color-mix(
+        in srgb,
+        var(--color-indigo-950) 60%,
+        transparent
+    );
+    --color-ticket-detail-low-hover: color-mix(
+        in srgb,
+        var(--color-indigo-950) 80%,
+        transparent
+    );
+    --color-ticket-detail-medium-hover: color-mix(
+        in srgb,
+        var(--color-yellow-950) 80%,
+        transparent
+    );
+    --color-ticket-detail-high-hover: color-mix(
+        in srgb,
+        var(--color-orange-950) 80%,
+        transparent
+    );
+    --color-ticket-detail-urgent-hover: color-mix(
+        in srgb,
+        var(--color-rose-950) 80%,
+        transparent
+    );
+    --color-ticket-detail-low-text: var(--color-indigo-300);
+    --color-ticket-detail-resource-background: color-mix(
+        in srgb,
+        var(--color-blue-950) 60%,
+        transparent
+    );
+    --color-ticket-detail-resource-text: var(--color-blue-300);
+    --color-project-board-empty-panel: color-mix(
+        in srgb,
+        var(--color-neutral-800) 60%,
+        transparent
+    );
+    --color-project-board-empty-front: color-mix(
+        in srgb,
+        var(--color-neutral-800) 75%,
+        var(--color-neutral-700)
+    );
+    --color-project-board-empty-middle: var(--color-neutral-700);
+    --color-project-board-empty-back: color-mix(
+        in srgb,
+        var(--color-neutral-600) 35%,
+        var(--color-neutral-700)
+    );
+    --color-project-board-empty-detail: var(--color-neutral-500);
+    --color-background-primary-default: var(--color-neutral-800);
+    --color-background-inner-default: color-mix(
+        in srgb,
+        var(--color-neutral-800) 60%,
+        transparent
+    );
+    --color-background-primary-hover: color-mix(
+        in srgb,
+        var(--color-neutral-700) 60%,
+        transparent
+    );
+    --color-background-primary-active: var(--color-neutral-800);
+    --color-background-primary-disabled: var(--color-neutral-800);
+    --color-input-disabled-background: color-mix(
+        in srgb,
+        var(--color-neutral-800) 30%,
+        transparent
+    );
+    --color-switch-off-chip-start: var(--color-background-tertiary-default);
+    --color-switch-off-chip-end: var(--color-background-tertiary-default);
+    --color-background-secondary-default: var(--color-neutral-900);
+    --color-background-secondary-hover: var(--color-neutral-800);
+    --color-background-tertiary-default: var(--color-neutral-800);
+    --color-background-tertiary-hover: var(--color-neutral-700);
+    --color-background-tertiary-error: color-mix(
+        in srgb,
+        var(--color-red-950) 60%,
+        transparent
+    );
+    --color-background-quaternary-default: var(--color-neutral-700);
+    --color-background-quaternary-hover: var(--color-neutral-600);
+    --color-background-recent-hire-role: color-mix(
+        in srgb,
+        var(--color-neutral-900) 60%,
+        transparent
+    );
+    --color-avatar-neutral-background: var(--color-background-primary-default);
+    --color-file-upload-icon-background: var(--color-neutral-600);
+    --color-file-upload-icon-foreground: var(--color-neutral-400);
+    --color-file-upload-icon-foreground-hover: var(--color-neutral-300);
+    --color-stat-card-icon-background: var(--color-neutral-800);
+    --color-segmented-control-background: var(--color-neutral-925);
+    --color-segmented-control-selected-background: var(--color-neutral-800);
+    --color-theme-toggle-sidebar-background: var(--color-neutral-800);
+    --color-theme-toggle-sidebar-selected-background: var(--color-neutral-700);
+    --color-ai-chat-composer-add-background: var(--color-neutral-700);
+    --color-ai-chat-composer-add-hover-background: var(--color-neutral-600);
+    --color-composer-panel-tab-background: color-mix(
+        in srgb,
+        var(--color-neutral-700) 50%,
+        transparent
+    );
+    --color-composer-panel-add-background: var(--color-neutral-700);
+    --color-composer-panel-add-hover-background: var(--color-neutral-600);
+    --color-composer-panel-tile-border: color-mix(
+        in srgb,
+        var(--color-white) 14%,
+        transparent
+    );
+    --color-composer-panel-rail-background: color-mix(
+        in srgb,
+        var(--color-neutral-900) 50%,
+        transparent
+    );
+    --color-questionnaire-key-background: var(--color-neutral-700);
+    --color-questionnaire-key-hover-background: var(--color-neutral-600);
+    --color-agent-progress-ring: color-mix(
+        in srgb,
+        var(--color-white) 50%,
+        transparent
+    );
+    --color-button-ghost-background: var(--color-accent-900);
+    --color-button-ghost-hover: var(--color-accent-800);
+    --color-button-ghost-active: var(--color-accent-700);
+    --color-button-ghost-disabled: var(--color-neutral-800);
+    --color-button-ghost-foreground: var(--color-accent-300);
+    --color-button-ghost-disabled-foreground: var(--color-neutral-600);
+    --color-dropdown-item-hover-background: color-mix(
+        in srgb,
+        var(--color-neutral-700) 60%,
+        transparent
+    );
+    --color-kbd-background: var(--color-neutral-700);
+    --color-kbd-foreground: var(--color-neutral-400);
+    --color-docs-file-chip-background: color-mix(
+        in srgb,
+        var(--color-purple-950) 50%,
+        transparent
+    );
+    --color-docs-file-chip-border: var(--color-purple-800);
+    --color-docs-file-chip-foreground: var(--color-purple-400);
+    --color-docs-code-background: var(--color-background-full);
+    --color-docs-install-rail: color-mix(
+        in srgb,
+        var(--color-neutral-800) 60%,
+        transparent
+    );
+
+    /* Dark surfaces absorb low-alpha shadows more readily than white ones.
+   * Preserve the light-mode geometry and raise only the black alpha: tighter
+   * contact shadows stay crisp, while higher elevations receive a restrained
+   * ambient layer without introducing a grey glow. */
+    --shadow-2xs: 0 1px rgb(0 0 0 / 0.16);
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.18);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.12), 0 1px 3px 0 rgb(0 0 0 / 0.16);
+    --shadow-md:
+        0 2px 4px -1px rgb(0 0 0 / 0.12), 0 4px 6px -1px rgb(0 0 0 / 0.18);
+    --shadow-lg:
+        0 4px 6px -2px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(0 0 0 / 0.18);
+    --shadow-xl:
+        0 10px 10px -5px rgb(0 0 0 / 0.08), 0 20px 25px -5px rgb(0 0 0 / 0.2);
+    --shadow-card: 0 1px 1px 0 rgb(0 0 0 / 0.14);
+    --shadow-dropdown:
+        0 1px 1px 0 rgb(0 0 0 / 0.14), 0 4px 4px 0 rgb(0 0 0 / 0.1);
+    --shadow-sidebar:
+        0 1px 0 0 rgb(0 0 0 / 0.1), 0 1px 12px 0 rgb(0 0 0 / 0.16),
+        0 0 1px 0 rgb(0 0 0 / 0.42);
+    --shadow-waitlist:
+        0 0 6px 0 rgb(0 0 0 / 0.12), 0 0 64px 0 rgb(0 0 0 / 0.22),
+        0 0 1px 0 rgb(0 0 0 / 0.42), 0 1px 12px 0 rgb(0 0 0 / 0.14),
+        0 1px 0 0 rgb(0 0 0 / 0.08);
+
+    /* Badges */
+    --color-badge-neutral-background: var(--color-neutral-800);
+    --color-team-menu-count-background: var(--color-neutral-700);
+    --color-team-menu-count-foreground: var(--color-neutral-400);
+    --color-badge-new-background: var(--color-accent-950);
+    --color-badge-new-text: var(--color-accent-400);
+    --color-tab-count-selected-background: color-mix(
+        in srgb,
+        var(--color-accent-800) 60%,
+        transparent
+    );
+
+    /* Dark status discs use /800 surfaces with /300 foregrounds so the icon
+   * remains crisp without reverting to a bright pastel circle. */
+    --color-notification-information-background: color-mix(
+        in srgb,
+        var(--color-blue-800) 50%,
+        transparent
+    );
+    --color-notification-information-foreground: var(--color-blue-300);
+    --color-notification-success-background: color-mix(
+        in srgb,
+        var(--color-lime-800) 50%,
+        transparent
+    );
+    --color-notification-success-foreground: var(--color-lime-300);
+    --color-notification-error-background: color-mix(
+        in srgb,
+        var(--color-rose-800) 50%,
+        transparent
+    );
+    --color-notification-error-foreground: var(--color-rose-300);
+    --color-notification-center-background: var(--color-neutral-900);
+
+    /* Borders and separators */
+    --color-border-button-default: var(--color-neutral-700);
+    --color-border-button-hover: var(--color-neutral-500);
+    --color-border-button-active: var(--color-neutral-600);
+    --color-border-button-white: var(--color-zinc-800);
+    --color-border-error-default: var(--color-red-400);
+    --color-border-checkbox-default: var(--color-neutral-700);
+    --color-border-checkbox-hover: var(--color-neutral-500);
+    --color-border-checkbox-active: var(--color-neutral-500);
+    --color-border-component-detail-container: var(--color-neutral-800);
+    --color-border-ai-profile-card: var(--color-neutral-800);
+    --color-border-table: var(--color-neutral-800);
+    --color-border-button-group: color-mix(
+        in srgb,
+        var(--color-neutral-600) 60%,
+        transparent
+    );
+    --color-border-sidebar-profile-hover: var(--color-neutral-600);
+    --color-separator-border: var(--color-neutral-800);
+    --color-separator-border-strong: color-mix(
+        in srgb,
+        var(--color-neutral-700) 60%,
+        transparent
+    );
+
+    /* Figma's dark table status pairs. */
+    --color-status-lime-background: color-mix(
+        in srgb,
+        var(--color-lime-950) 60%,
+        transparent
+    );
+    --color-status-lime-text: var(--color-lime-500);
+    --color-status-yellow-background: color-mix(
+        in srgb,
+        var(--color-yellow-950) 60%,
+        transparent
+    );
+    --color-status-yellow-text: var(--color-yellow-500);
+    --color-status-rose-background: color-mix(
+        in srgb,
+        var(--color-rose-950) 60%,
+        transparent
+    );
+    --color-status-rose-text: var(--color-rose-500);
+    --color-status-cyan-background: color-mix(
+        in srgb,
+        var(--color-cyan-950) 60%,
+        transparent
+    );
+    --color-status-cyan-text: var(--color-cyan-400);
+    --color-status-orange-background: color-mix(
+        in srgb,
+        var(--color-orange-950) 60%,
+        transparent
+    );
+    --color-status-orange-text: var(--color-orange-500);
+    --color-status-blue-background: color-mix(
+        in srgb,
+        var(--color-blue-950) 60%,
+        transparent
+    );
+    --color-status-blue-text: var(--color-blue-300);
+    --color-status-purple-background: color-mix(
+        in srgb,
+        var(--color-purple-900) 50%,
+        transparent
+    );
+    --color-status-purple-text: var(--color-purple-300);
+    --color-status-dot-green-halo: color-mix(
+        in srgb,
+        var(--color-green-800) 40%,
+        transparent
+    );
+    --color-status-dot-yellow-halo: color-mix(
+        in srgb,
+        var(--color-yellow-800) 40%,
+        transparent
+    );
+    --color-status-dot-indigo-halo: color-mix(
+        in srgb,
+        var(--color-indigo-800) 40%,
+        transparent
+    );
+
+    --color-date-range-background: var(--color-accent-950);
+    --color-date-range-edge-background: var(--color-accent-800);
+
+    --color-pill-tab-blue-selected-background: color-mix(
+        in srgb,
+        var(--color-accent-950) 60%,
+        transparent
+    );
+    --color-pill-tab-blue-hover-background: var(--color-neutral-800);
+
+    /* Calendar event families share the same dark-mode depth/contrast recipe. */
+    --color-calendar-event-blue-background: var(--color-blue-950);
+    --color-calendar-event-blue-title: var(--color-blue-300);
+    --color-calendar-event-blue-time: var(--color-blue-300);
+    --color-calendar-event-pink-background: var(--color-pink-950);
+    --color-calendar-event-pink-title: var(--color-pink-300);
+    --color-calendar-event-pink-time: var(--color-pink-300);
+    --color-calendar-event-purple-background: var(--color-purple-950);
+    --color-calendar-event-purple-title: var(--color-purple-300);
+    --color-calendar-event-purple-time: var(--color-purple-300);
+    --color-calendar-event-lime-background: var(--color-lime-950);
+    --color-calendar-event-lime-title: var(--color-lime-300);
+    --color-calendar-event-lime-time: var(--color-lime-300);
+    --color-calendar-event-emerald-background: var(--color-emerald-950);
+    --color-calendar-event-emerald-title: var(--color-emerald-300);
+    --color-calendar-event-emerald-time: var(--color-emerald-300);
+
+    /* Disabled primary CTA: dark, low-emphasis fill with readable muted text. */
+    --gradient-button-primary-disabled: linear-gradient(
+        180deg,
+        var(--color-neutral-700) 0%,
+        var(--color-neutral-800) 100%
+    );
+    --gradient-button-danger-disabled: linear-gradient(
+        180deg,
+        var(--color-red-900) 0%,
+        var(--color-red-950) 100%
+    );
+
+    /* Neutral graph structure; categorical and status colors stay unchanged. */
+    --color-chart-track: var(--color-neutral-800);
+    --color-chart-cursor: var(--color-neutral-700);
+    --color-chart-neutral: var(--color-neutral-800);
+    --color-chart-agents-bar: var(--color-purple-500);
+    --color-chart-agents-bar-active: var(--color-purple-600);
+}

@@ -1,0 +1,72 @@
+.main-panel {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 32px clamp(20px, 3vw, 44px) 44px;
+    background:
+        radial-gradient(
+            circle at 96% 0%,
+            rgba(91, 75, 255, 0.06),
+            transparent 24%
+        ),
+        transparent;
+    container: admin-main / inline-size;
+}
+.app-view {
+    display: none;
+}
+.app-view.active {
+    display: block;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--main-panel-gap);
+    margin-bottom: var(--main-panel-gap);
+}
+
+.admin-title {
+    min-width: 0;
+    display: grid;
+    gap: var(--space-1);
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: clamp(28px, 2.2vw, 36px);
+    line-height: 1.08;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.035em;
+}
+
+.admin-title-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.admin-title p {
+    max-width: 620px;
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+}
+.topbar.compact {
+    align-items: flex-start;
+}
+.date-label {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.78);
+    color: var(--muted);
+    padding: 9px 14px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+}

@@ -1,7 +1,7 @@
-import { RiRestaurant2Line } from '@remixicon/react';
 import { Input } from '../../../../components/base/input/input';
 import { NumberField } from '../../../../components/base/number-field/number-field';
 import type { CustomerCartItem } from './types';
+import { CustomerItemImage } from './CustomerItemImage';
 
 type CartItemRowProps = {
     item: CustomerCartItem;
@@ -20,21 +20,11 @@ export function CartItemRow({
 }: CartItemRowProps) {
     return (
         <article className="border-border-button-default bg-background-primary-default grid grid-cols-[72px_minmax(0,1fr)] gap-4 rounded-2xl border p-4 sm:grid-cols-[88px_minmax(0,1fr)_128px] sm:items-center">
-            {item.image ? (
-                <img
-                    className="size-[72px] rounded-xl object-cover sm:size-[88px]"
-                    src={item.image}
-                    alt={item.name}
-                    width={160}
-                    height={160}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                />
-            ) : (
-                <div className="bg-background-secondary-default text-foreground-icon-tertiary flex size-[72px] items-center justify-center rounded-xl sm:size-[88px]">
-                    <RiRestaurant2Line className="size-6" aria-hidden />
-                </div>
-            )}
+            <CustomerItemImage
+                src={item.image}
+                alt={item.name}
+                placement="cart"
+            />
             <div className="flex min-w-0 flex-col gap-2">
                 <div>
                     <h3 className="text-headline-semibold text-text-primary truncate">

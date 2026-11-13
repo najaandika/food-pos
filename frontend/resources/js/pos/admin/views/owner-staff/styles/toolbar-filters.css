@@ -1,0 +1,38 @@
+.staff-finance-toolbar {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.staff-finance-search {
+    flex: 1 1 260px;
+    min-width: min(100%, 220px);
+    max-width: 380px;
+}
+
+.staff-finance-toolbar-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.staff-finance-toolbar-filters > div {
+    min-width: 122px;
+}
+
+.staff-finance-results {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.staff-finance-table-scroll {
+    max-width: 100%;
+    min-width: 0;
+}

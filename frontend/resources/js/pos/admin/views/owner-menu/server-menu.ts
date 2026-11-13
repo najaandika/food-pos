@@ -6,7 +6,7 @@ import {
     type HttpMethod,
 } from '../../../shared/api/http-client';
 import type { AdminDish } from '../../runtime-data';
-import { invalidateSharedQueries } from '../shared-query-cache';
+import { invalidateSharedQueries } from '../../shared/data/shared-query-cache';
 
 export type ServerMenuDraft = {
     name: string;

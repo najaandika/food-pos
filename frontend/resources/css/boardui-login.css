@@ -23,10 +23,90 @@
     --font-sans: var(--font-inter);
     min-height: 100dvh;
     color-scheme: light;
+    /* Normal-size placeholder, helper and validation text remains readable. */
+    --color-text-tertiary: var(--color-neutral-600);
+    --color-text-placeholder: var(--color-neutral-600);
+    --color-text-error-primary: var(--color-red-700);
+    --color-text-error-placeholder: var(--color-red-700);
+    /* White auth CTA text must meet 4.5:1 at both gradient endpoints. */
+    --gradient-button-primary-default: linear-gradient(
+        180deg,
+        var(--color-accent-600) 0%,
+        var(--color-accent-700) 100%
+    );
+    --gradient-button-primary-hover: linear-gradient(
+        180deg,
+        var(--color-accent-700) 0%,
+        var(--color-accent-800) 100%
+    );
     background: var(--color-background-full);
     color: var(--color-text-primary);
     font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
+}
+
+/* R8.30B: Scoped semantic Dark Mode for the three POS Auth Shell pages.
+ * BoardUI Free dark surfaces; no shared theme or shadcn changes. */
+.dark .pos-boardui-auth {
+    color-scheme: dark;
+    --color-text-primary: var(--color-neutral-50);
+    --color-text-secondary: var(--color-neutral-300);
+    --color-text-tertiary: var(--color-neutral-400);
+    --color-text-placeholder: var(--color-neutral-400);
+    --color-text-error-primary: var(--color-red-300);
+    --color-text-error-placeholder: var(--color-red-300);
+    --color-foreground-icon-primary: var(--color-neutral-50);
+    --color-foreground-icon-hover: var(--color-white);
+    --color-foreground-icon-secondary: var(--color-neutral-300);
+    --color-foreground-icon-tertiary: var(--color-neutral-400);
+    --color-foreground-icon-error: var(--color-red-300);
+    --color-foreground-disabled: var(--color-neutral-400);
+    --color-input-disabled-foreground: var(--color-neutral-400);
+    --color-icon-button-disabled-foreground: var(--color-neutral-400);
+    --color-button-primary-disabled-foreground: var(--color-neutral-300);
+    --color-input-disabled-text: var(--color-neutral-400);
+    --color-background-full: var(--color-neutral-925);
+    --color-background-primary-default: var(--color-neutral-800);
+    --color-background-primary-hover: var(--color-neutral-700);
+    --color-background-primary-active: var(--color-neutral-800);
+    --color-background-primary-disabled: var(--color-neutral-800);
+    --color-background-secondary-default: var(--color-neutral-900);
+    --color-background-secondary-hover: var(--color-neutral-800);
+    --color-background-tertiary-default: var(--color-neutral-800);
+    --color-background-tertiary-hover: var(--color-neutral-700);
+    --color-background-tertiary-error: color-mix(
+        in srgb,
+        var(--color-red-950) 60%,
+        transparent
+    );
+    --color-input-disabled-background: var(--color-neutral-800);
+    --color-border-button-default: var(--color-neutral-700);
+    --color-border-button-hover: var(--color-neutral-500);
+    --color-border-button-active: var(--color-neutral-600);
+    --color-border-error-default: var(--color-red-300);
+    --color-border-checkbox-default: var(--color-neutral-500);
+    --color-separator-border: var(--color-neutral-700);
+    --color-button-ghost-background: var(--color-accent-900);
+    --color-button-ghost-hover: var(--color-accent-800);
+    --color-button-ghost-active: var(--color-accent-700);
+    --color-button-ghost-foreground: var(--color-accent-300);
+    --color-state-success-text: var(--color-lime-300);
+    --gradient-button-primary-disabled: linear-gradient(
+        180deg,
+        var(--color-neutral-700) 0%,
+        var(--color-neutral-800) 100%
+    );
+}
+
+/* Primary link/600 is too dim on the dark auth surface; keep its CTA gradient intact. */
+.dark .pos-boardui-auth a[href] {
+    color: var(--color-accent-300);
+}
+
+/* The visual eye icon is the only content of these controls: keep it readable
+ * on normal and invalid input surfaces without altering shared Button. */
+.pos-boardui-auth button[aria-controls] {
+    color: var(--color-text-primary);
 }
 
 /* Edge's native password reveal icon would duplicate our BoardUI eye toggle. */
@@ -70,10 +150,10 @@
     content: '';
     background: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--color-text-primary) 43%, transparent) 0%,
+        color-mix(in srgb, var(--color-neutral-950) 43%, transparent) 0%,
         transparent 28%,
         transparent 43%,
-        color-mix(in srgb, var(--color-text-primary) 88%, transparent) 100%
+        color-mix(in srgb, var(--color-neutral-950) 88%, transparent) 100%
     );
 }
 
@@ -102,7 +182,7 @@
 .pos-auth-story--full .pos-auth-slide-copy h2,
 .pos-auth-story--full .pos-auth-hero-nav p,
 .pos-auth-story--full .pos-auth-hero-nav p span {
-    color: var(--color-background-full);
+    color: var(--color-white);
 }
 
 .pos-auth-story--full .pos-auth-story-content {
@@ -116,7 +196,7 @@
 }
 
 .pos-auth-story--full .pos-auth-slide-copy p {
-    color: var(--color-background-full);
+    color: var(--color-white);
     opacity: 0.9;
 }
 
@@ -125,11 +205,11 @@
 }
 
 .pos-auth-story--full .pos-auth-hero-nav button {
-    color: var(--color-background-full);
+    color: var(--color-white);
 }
 
 .pos-auth-story--full .pos-auth-hero-nav button span {
-    background: var(--color-background-full);
+    background: var(--color-white);
 }
 
 .pos-auth-story--full .pos-auth-hero-nav button[aria-pressed='false'] span {

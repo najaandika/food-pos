@@ -1,0 +1,41 @@
+/*
+ * Staff Management — Finance BoardUI composition.
+ * Component visuals come from BoardUI Table, StatCards, Input, Select, Avatar,
+ * Chip, Button, Pagination, Drawer and Modal. This stylesheet only handles
+ * page geometry and responsive arrangement, using semantic design tokens.
+ */
+
+.staff-finance-page {
+    display: grid;
+    gap: 18px;
+    min-width: 0;
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+/* R8.18D: the standalone POS staff view must pair dark semantic text
+   with an actual dark page ground, not the outer light fallback canvas. */
+.dark .staff-finance-page {
+    background: var(--color-background-full);
+    color: var(--color-text-primary);
+}
+
+.staff-finance-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 0;
+}
+
+.staff-finance-header > div {
+    min-width: 0;
+}
+
+.staff-finance-header .admin-title p {
+    color: var(--color-text-secondary);
+}
+
+.staff-finance-summary {
+    min-width: 0;
+}

@@ -1,0 +1,127 @@
+@container admin-main (max-width: 930px) {
+    .staff-finance-desktop-table {
+        display: none;
+    }
+
+    .staff-finance-mobile-list {
+        display: grid;
+        gap: 10px;
+    }
+
+    .staff-finance-mobile-card {
+        display: grid;
+        gap: 12px;
+        padding: 14px;
+        border: 1px solid var(--color-separator-border);
+        border-radius: 14px;
+        background: var(--color-background-primary-default);
+    }
+
+    /* Preserve BoardUI small icons; enlarge only mobile staff card hit areas. */
+    .staff-finance-mobile-card .staff-finance-actions > button {
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
+        min-height: 44px;
+    }
+
+    .staff-finance-mobile-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .staff-finance-mobile-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .staff-finance-mobile-card > p {
+        margin: 0;
+    }
+}
+
+@container admin-main (max-width: 610px) {
+    .staff-finance-page {
+        gap: 14px;
+    }
+
+    .staff-finance-header > button {
+        width: 100%;
+    }
+
+    .staff-finance-table-panel {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .staff-finance-panel-heading {
+        flex-wrap: wrap;
+    }
+
+    .staff-finance-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .staff-finance-search {
+        flex: none;
+        max-width: none;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .staff-finance-toolbar-filters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .staff-finance-toolbar-filters > div {
+        min-width: 0;
+    }
+
+    .staff-finance-toolbar-filters > button {
+        grid-column: 1 / -1;
+    }
+
+    .staff-finance-pagination {
+        align-items: stretch;
+    }
+
+    .staff-finance-pagination > nav {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+
+    .staff-finance-drawer-profile {
+        flex-wrap: wrap;
+    }
+
+    .staff-finance-access-control {
+        flex-wrap: wrap;
+    }
+
+    /* Keep customer identity fully legible and reserve the same action row
+       for active (Edit/Disable) and inactive (Edit-only) staff cards. */
+    .staff-finance-mobile-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .staff-finance-mobile-head > .staff-finance-identity {
+        min-width: 0;
+    }
+
+    .staff-finance-mobile-head > .staff-finance-actions {
+        justify-self: end;
+        justify-content: flex-start;
+        width: 94px;
+        min-height: 44px;
+        gap: 6px;
+    }
+}

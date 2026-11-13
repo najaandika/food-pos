@@ -1,0 +1,103 @@
+@media (max-width: 768px) {
+    .sidebar,
+    .sidebar-collapsed .sidebar {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto auto;
+        align-content: stretch;
+        gap: 0;
+        width: min(318px, 82vw);
+        max-width: 318px;
+        padding: 24px 14px max(18px, env(safe-area-inset-bottom));
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 26px 0 72px rgba(20, 26, 51, 0.2);
+    }
+
+    .brand-wrap,
+    .sidebar-collapsed .brand-wrap {
+        margin: 0 0 18px;
+        padding: 0 2px;
+    }
+
+    .nav,
+    .sidebar-collapsed .nav {
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        gap: var(--space-fixed-3);
+        padding: 0 2px 12px;
+        scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar,
+    .sidebar-collapsed .nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-group,
+    .nav-group-owner,
+    .nav-group-system,
+    .sidebar-collapsed .nav-group {
+        display: grid;
+        gap: var(--space-1);
+    }
+
+    .nav-item,
+    .sidebar-collapsed .nav-item {
+        min-height: 48px;
+        padding: 0 16px;
+    }
+
+    .profile-box,
+    .sidebar-collapsed .profile-box {
+        width: 100%;
+        min-width: 0;
+        margin: 14px 0 0;
+        padding: 10px;
+        border-radius: var(--radius-md);
+    }
+
+    .profile-avatar img {
+        width: 40px;
+        height: 40px;
+        border-radius: 13px;
+    }
+
+    .profile-meta {
+        min-width: 0;
+    }
+
+    .profile-meta strong,
+    .profile-meta span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .logout-btn,
+    .sidebar-collapsed .logout-btn {
+        min-height: 44px;
+        margin: 8px 0 0;
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .sidebar,
+    .sidebar-collapsed .sidebar {
+        width: min(300px, 84vw);
+    }
+
+    .nav-item,
+    .sidebar-collapsed .nav-item {
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 560px) {
+    .main-panel {
+        width: 100%;
+        max-width: 100%;
+    }
+}

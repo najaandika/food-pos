@@ -1,5 +1,5 @@
 import { RiBankCardLine, RiQrCodeLine, RiReceiptLine } from '@remixicon/react';
-import { Switch } from '../../../../../../components/base/switch/switch';
+import { SwitchCard } from '../../../../../../components/base/switch/switch-card';
 import type { PosSettings } from '@/lib/pos-types';
 import { useLocale } from '../../i18n-context';
 
@@ -14,15 +14,12 @@ type Props = {
 
 const card =
     'rounded-3xl border border-border-button-default bg-background-primary-default p-5 shadow-xs sm:p-6';
-const item =
-    'border-separator-border flex flex-wrap items-center justify-between gap-3 border-b py-3 last:border-b-0';
-
 export function SettingsSide({
     settings,
     onTogglePayment,
     onToggleQrOption,
 }: Props) {
-    const { t } = useLocale();
+    const { t, locale } = useLocale();
     const payments: { key: PaymentKey; name: string }[] = [
         { key: 'cash', name: t('settings.cash') },
         { key: 'qris', name: 'QRIS' },
@@ -52,19 +49,16 @@ export function SettingsSide({
                         </p>
                     </div>
                 </div>
-                <div>
+                <div className="flex flex-col gap-3">
                     {payments.map(({ key, name }) => (
-                        <div key={key} className={item}>
-                            <span className="text-body-medium text-text-primary">
-                                {name}
-                            </span>
-                            <Switch
-                                aria-label={name}
-                                size="md"
-                                isSelected={settings.payments[key]}
-                                onChange={() => onTogglePayment(key)}
-                            />
-                        </div>
+                        <SwitchCard
+                            key={key}
+                            title={name}
+                            size="md"
+                            className="[&_.truncate]:overflow-visible [&_.truncate]:text-clip [&_.truncate]:whitespace-normal"
+                            isSelected={settings.payments[key]}
+                            onChange={() => onTogglePayment(key)}
+                        />
                     ))}
                 </div>
                 <p className="text-caption-1-regular text-text-secondary mt-4">
@@ -87,19 +81,16 @@ export function SettingsSide({
                         </p>
                     </div>
                 </div>
-                <div>
+                <div className="flex flex-col gap-3">
                     {qr.map(({ key, name }) => (
-                        <div key={key} className={item}>
-                            <span className="text-body-medium text-text-primary max-w-[210px]">
-                                {name}
-                            </span>
-                            <Switch
-                                aria-label={name}
-                                size="md"
-                                isSelected={settings.qrOptions[key]}
-                                onChange={() => onToggleQrOption(key)}
-                            />
-                        </div>
+                        <SwitchCard
+                            key={key}
+                            title={name}
+                            size="md"
+                            className="[&_.truncate]:overflow-visible [&_.truncate]:text-clip [&_.truncate]:whitespace-normal"
+                            isSelected={settings.qrOptions[key]}
+                            onChange={() => onToggleQrOption(key)}
+                        />
                     ))}
                 </div>
                 <p className="text-caption-1-regular text-text-secondary mt-4">
@@ -132,7 +123,9 @@ export function SettingsSide({
                         {settings.profile.address}
                     </span>
                     <div className="border-separator-border text-caption-1-regular text-text-secondary mt-4 border-t pt-4">
-                        {t('settings.sampleOrder')}
+                        {locale === 'id'
+                            ? 'Ringkasan pesanan'
+                            : 'Order summary'}
                     </div>
                     <p className="text-body-medium text-text-primary mt-3">
                         {t('settings.thankYou')}

@@ -1,0 +1,57 @@
+@container admin-main (max-width: 760px) {
+    .waiters-layout,
+    .waiters-main {
+        gap: var(--space-fixed-3);
+    }
+
+    .waiters-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .waiters-stat {
+        min-height: 86px;
+        padding: 14px;
+        border-radius: var(--radius-md);
+    }
+
+    .waiters-stat strong {
+        margin-top: 6px;
+        font-size: 26px;
+    }
+
+    .waiters-panel,
+    .service-queue {
+        padding: 14px;
+        border-radius: var(--pos-radius);
+    }
+
+    .waiters-zone-tabs {
+        margin-inline: -2px;
+    }
+
+    .table-status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-status-card {
+        min-height: 132px;
+        gap: var(--space-fixed-3);
+        border-radius: var(--radius-md);
+    }
+
+    .waiter-request {
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        gap: var(--space-3);
+        padding: 12px;
+        border-radius: var(--radius-md);
+    }
+
+    .waiter-request button {
+        grid-column: 2 / -1;
+        width: 100%;
+    }
+
+    .service-queue-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}

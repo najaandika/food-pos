@@ -1,0 +1,146 @@
+/* P5 quality pass — retain BoardUI primitives while improving narrow tickets,
+   touch targets and search focus. All declarations are feature-scoped. */
+.orders-workspace .orders-ticket-top,
+.orders-workspace .orders-ticket-person,
+.orders-workspace .orders-ticket-footer {
+    flex-wrap: wrap;
+}
+.orders-workspace .orders-ticket-number {
+    flex: 1 1 80px;
+    min-width: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+}
+.orders-workspace .orders-ticket-source {
+    max-width: 100%;
+}
+.orders-workspace .orders-ticket-person strong {
+    flex: 1 1 128px;
+    min-width: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+.orders-workspace .orders-ticket-table {
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.orders-workspace .orders-ticket-action {
+    min-width: 72px;
+    min-height: 40px;
+    padding-inline: 10px;
+}
+.orders-workspace .orders-table-actions button {
+    min-height: 40px;
+}
+.orders-workspace .orders-search-row [role='group'] {
+    min-height: 40px;
+}
+.orders-workspace .orders-search-row [role='group'][data-focus-within] {
+    --tw-ring-color: var(--orders-focus);
+    border-color: var(--orders-focus);
+}
+.orders-workspace .orders-search-row input:focus-visible {
+    outline: none;
+}
+.orders-workspace .orders-search-input button {
+    min-width: 36px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md, 6px);
+}
+/* Seven full labels do not fit in a 304–400px drawer. Keep labels in the DOM
+   for screen readers and in native title tooltips for pointer users. */
+.orders-boardui-drawer .orders-detail-flow-head {
+    flex-wrap: wrap;
+}
+.orders-boardui-drawer .orders-detail-flow-meta {
+    display: inline-flex;
+    flex: 0 1 auto;
+    min-width: 0;
+    align-items: center;
+    gap: 8px;
+    color: var(--orders-secondary);
+}
+.orders-boardui-drawer .orders-detail-flow-current {
+    min-width: 0;
+    max-width: 138px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--orders-text);
+}
+.orders-boardui-drawer .orders-detail-flow ol {
+    position: relative;
+    min-height: 28px;
+}
+.orders-boardui-drawer .orders-detail-flow ol::before {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background: var(--orders-divider);
+    content: '';
+    pointer-events: none;
+}
+.orders-boardui-drawer .orders-detail-flow li {
+    position: relative;
+    z-index: 1;
+    gap: 0;
+    justify-items: center;
+}
+.orders-boardui-drawer .orders-detail-flow li > span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
+}
+.orders-boardui-drawer .orders-detail-title {
+    font-size: var(--text-title-2-semibold, 1.25rem);
+    line-height: var(--text-title-2-semibold--line-height, 1.625rem);
+    font-weight: var(--text-title-2-semibold--font-weight, 600);
+}
+@container admin-main (max-width: 720px) {
+    .orders-workspace .orders-stage-filters > button,
+    .orders-workspace .orders-source-filters > button,
+    .orders-workspace .orders-view-switch > button,
+    .orders-workspace .orders-list-mobile-segments > button {
+        min-height: 40px;
+    }
+    .orders-workspace .orders-system-state > button,
+    .orders-workspace .orders-feedback button {
+        min-height: 40px;
+    }
+}
+@media (max-width: 720px) {
+    .orders-workspace .orders-stage-filters > button,
+    .orders-workspace .orders-source-filters > button,
+    .orders-workspace .orders-view-switch > button,
+    .orders-workspace .orders-list-mobile-segments > button {
+        min-height: 40px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .orders-workspace .orders-ticket,
+    .orders-workspace .orders-stage-filters > button {
+        transition: none;
+    }
+}

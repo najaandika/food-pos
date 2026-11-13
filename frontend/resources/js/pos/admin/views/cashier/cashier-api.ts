@@ -10,7 +10,7 @@ import {
     invalidateSharedQueries,
     loadSharedQuery,
     peekSharedQuery,
-} from '../shared-query-cache';
+} from '../../shared/data/shared-query-cache';
 
 export type CashierFilter = 'all' | 'ready' | 'qr' | 'takeaway';
 export type CashierStats = {

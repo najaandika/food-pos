@@ -159,7 +159,9 @@ export default function ResetPassword({ token, email }: Props) {
             </form>
 
             <div className="text-body-regular text-text-secondary mt-8 flex flex-wrap items-center justify-center gap-1">
-                <PosAuthLink href={login().url}>Kembali ke login</PosAuthLink>
+                <PosAuthLink href={login().url}>
+                    Kembali ke halaman masuk
+                </PosAuthLink>
             </div>
         </>
     );

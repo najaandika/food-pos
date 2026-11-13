@@ -3,6 +3,9 @@
 @import './tokens.css';
 @import './utilities.css';
 @import '../admin/styles/admin.css';
+@import './field-focus.css';
+@import './surface-consistency.css';
+@import './boardui-component-compatibility.css';
 
 .page-shell {
     font-family: var(--font-family);
@@ -16,8 +19,15 @@
     cursor: pointer;
 }
 
+/* BoardUI keyboard actions use a 2px semantic indicator. The scoped
+   Field-focus stylesheet avoids a duplicate outline where a real ring exists. */
 .page-shell button:focus-visible,
-.page-shell a:focus-visible,
+.page-shell a:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring, var(--blue));
+    outline-offset: 2px;
+}
+
+/* Legacy POS fields without a BoardUI group retain a visible fallback. */
 .page-shell input:focus-visible,
 .page-shell select:focus-visible,
 .page-shell textarea:focus-visible {

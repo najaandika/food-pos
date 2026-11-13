@@ -1,0 +1,190 @@
+.menu-board {
+    min-width: 0;
+    overflow: visible;
+}
+.menu-search {
+    display: block;
+    margin: 0 0 0 auto;
+    width: min(430px, 100%);
+}
+
+.menu-board-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pos-gap);
+    margin: 2px 2px 14px;
+    padding: 0;
+}
+
+.menu-board-head span,
+.menu-board-head strong {
+    display: block;
+}
+
+.menu-board-head span {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.menu-board-head strong {
+    margin-top: 3px;
+    color: var(--navy);
+    font-size: 16px;
+}
+
+.kitchen-status-pill,
+.pos-lane-pills span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-fixed-2);
+    border-radius: var(--radius-pill);
+    background: rgba(25, 184, 133, 0.12);
+    color: #087856;
+    padding: 9px 12px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+}
+
+.pos-lane-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-fixed-2);
+}
+
+.pos-lane-pills span:last-child {
+    background: var(--mist);
+    color: var(--blue);
+}
+
+.kitchen-status-pill svg,
+.pos-lane-pills svg {
+    width: 16px;
+    height: 16px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: var(--space-fixed-3);
+}
+.dish-card {
+    position: relative;
+    min-height: 248px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid rgba(229, 233, 243, 0.76);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition:
+        transform var(--transition-hover),
+        border-color var(--transition-hover),
+        box-shadow var(--transition-hover);
+}
+
+.dish-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(48, 71, 255, 0.18);
+    box-shadow: 0 24px 52px rgba(31, 43, 89, 0.13);
+}
+.dish-card img {
+    width: 100%;
+    height: 132px;
+    aspect-ratio: auto;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+.dish-card h3 {
+    margin-top: 11px;
+    font-size: var(--font-size-base);
+    line-height: 1.22;
+}
+.dish-card p {
+    min-height: 34px;
+    margin: 5px 0 12px;
+    color: var(--muted);
+    line-height: 1.45;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: var(--font-size-xs);
+}
+.dish-action-line {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-2);
+    margin-top: auto;
+    justify-content: flex-start;
+}
+.dish-action-line > strong {
+    color: var(--blue);
+    font-size: 17px;
+    white-space: nowrap;
+}
+.old-price {
+    color: #92979b;
+    text-decoration: line-through;
+}
+.badge {
+    position: absolute;
+    left: auto;
+    right: 22px;
+    top: 18px;
+    border-radius: var(--radius-pill);
+    padding: 7px 11px;
+    color: white;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+.badge.popular {
+    background: var(--violet);
+}
+.badge.discount {
+    background: var(--danger);
+}
+.qty {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+.qty button,
+.counter-box button {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 13px;
+    background: #f0f1f0;
+    color: #707478;
+    font-size: 19px;
+    font-weight: var(--font-weight-bold);
+}
+.qty button:last-child,
+.counter-box button:last-child {
+    color: white;
+    background: var(--blue);
+}
+
+.receipt-panel {
+    align-self: start;
+    position: sticky;
+    top: 18px;
+    max-height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--pos-radius);
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--shadow-card);
+}

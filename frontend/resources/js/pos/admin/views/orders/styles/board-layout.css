@@ -1,0 +1,204 @@
+/* At full width use four fitted columns — no hidden stage lanes or
+   horizontal scroll. Below laptop size: two, then one. */
+.orders-workspace .orders-kanban-track {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    overflow-x: visible;
+    scroll-snap-type: none;
+}
+
+.orders-workspace .orders-stage-column {
+    min-height: 220px;
+    max-height: none;
+    padding: 12px;
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--color-background-secondary-default);
+    scroll-snap-align: none;
+}
+
+.orders-workspace .orders-stage-head {
+    min-height: 46px;
+    margin: 0 0 12px;
+    padding: 0;
+    border-bottom: 0;
+    align-items: center;
+}
+
+.orders-workspace .orders-stage-copy {
+    gap: 9px;
+    align-items: center;
+}
+
+.orders-workspace .orders-stage-head p {
+    margin-top: 2px;
+}
+
+.orders-workspace .orders-stage-count {
+    min-width: 26px;
+    height: 26px;
+    padding: 0 7px;
+    color: var(--color-text-primary);
+    border-color: var(--color-separator-border);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--color-background-inner-default);
+}
+
+.orders-workspace .orders-stage-stack {
+    flex: 0 1 auto;
+    gap: 10px;
+    min-height: 0;
+    overflow: visible;
+    padding: 0;
+}
+
+.orders-workspace .orders-ticket {
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-xl, 12px);
+    background: var(--color-background-inner-default);
+    box-shadow: none;
+}
+
+.orders-workspace .orders-ticket::before {
+    display: none;
+    content: none;
+}
+
+.orders-workspace .orders-ticket:hover {
+    border-color: var(--color-border-button-hover);
+    box-shadow: none;
+}
+
+.orders-workspace .orders-ticket:focus-within {
+    border-color: var(--color-border-focus-ring);
+    box-shadow: none;
+}
+
+.orders-workspace .orders-ticket-open {
+    padding: 14px 13px 8px;
+}
+
+.orders-workspace .orders-ticket-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: nowrap;
+    margin-bottom: 12px;
+}
+
+.orders-workspace .orders-ticket-top .orders-boardui-status {
+    flex-shrink: 0;
+    min-width: 0;
+    max-width: 65%;
+    white-space: nowrap;
+}
+
+.orders-workspace .orders-ticket-number {
+    flex: 0 1 auto;
+    min-width: 0;
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.orders-workspace .orders-ticket-person {
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.orders-workspace .orders-ticket-person strong {
+    flex: 1 1 auto;
+    font-weight: 500;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.orders-workspace .orders-ticket-table {
+    flex: 0 0 auto;
+    max-width: 82px;
+    border-color: var(--color-separator-border);
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-secondary);
+}
+
+.orders-workspace .orders-ticket-subline {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    column-gap: 10px;
+    row-gap: 4px;
+    margin-top: 8px;
+    padding: 0;
+    color: var(--color-text-secondary);
+}
+
+.orders-workspace .orders-ticket-subline .orders-ticket-source {
+    max-width: none;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-secondary);
+    box-shadow: none;
+}
+
+.orders-workspace .orders-ticket-items {
+    gap: 5px;
+    margin-top: 11px;
+    padding: 0;
+    border-top: 0;
+}
+
+.orders-workspace .orders-ticket-items p {
+    display: flex;
+    gap: 6px;
+    justify-content: space-between;
+    color: var(--color-text-secondary);
+}
+
+.orders-workspace .orders-ticket-items small {
+    margin-top: 2px;
+}
+
+.orders-workspace .orders-ticket-note {
+    margin-top: 9px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: var(--radius-lg, 8px);
+    background: var(--color-background-secondary-default);
+}
+
+.orders-workspace .orders-ticket-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding: 8px 13px 13px;
+    border-top: 0;
+}
+
+.orders-workspace .orders-ticket-footer > strong {
+    color: var(--color-text-primary);
+}
+
+.orders-workspace .orders-ticket-action {
+    min-height: 34px;
+    min-width: 0;
+    padding-inline: 10px;
+}
+
+.orders-workspace .orders-stage-empty {
+    min-height: 116px;
+    background: var(--color-background-inner-default);
+}

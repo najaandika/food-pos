@@ -1,0 +1,42 @@
+/* ── Archived Dish Row Styling ── */
+.owner-menu-row.is-archived {
+    background: var(--pale);
+    border-left: 3px solid var(--border-soft-strong);
+}
+
+.owner-menu-row.is-archived .owner-menu-product img {
+    filter: grayscale(0.5);
+    opacity: 0.8;
+}
+
+.archived-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: var(--card-bg);
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.menu-restore-action {
+    height: 32px !important;
+    width: auto !important;
+    padding: 0 10px !important;
+    background: rgba(25, 184, 133, 0.12) !important;
+    color: #0f8d66 !important;
+    font-size: 11px !important;
+    font-weight: var(--font-weight-bold) !important;
+    border-radius: 9px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.menu-restore-action:hover {
+    background: #0f8d66 !important;
+    color: #ffffff !important;
+}

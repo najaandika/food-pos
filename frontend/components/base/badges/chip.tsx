@@ -48,7 +48,7 @@ export const CHIP_COLORS: Record<ChipColor, string> = {
     cyan: 'bg-status-cyan-background text-status-cyan-text',
     blue: 'bg-status-blue-background text-status-blue-text',
     purple: 'bg-status-purple-background text-status-purple-text',
-    neutral: 'bg-background-tertiary-default text-text-secondary',
+    neutral: 'bg-background-tertiary-default text-text-primary',
     gray: 'bg-background-secondary-default text-text-primary',
     soft: 'bg-background-secondary-default text-text-secondary',
 };

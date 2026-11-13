@@ -1,0 +1,35 @@
+.od-kpi-section {
+    min-width: 0;
+}
+
+.od-kpi-section .owner-dashboard-boardui-stats {
+    min-width: 0;
+    gap: 12px;
+}
+
+.od-kpi-section .owner-dashboard-boardui-stats > section {
+    min-width: 0;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+
+.od-kpi-section .owner-dashboard-boardui-stats > section:hover {
+    border-color: var(--od-line);
+}
+
+.od-kpi-section .owner-dashboard-boardui-stats > section > span:first-child {
+    border-radius: 8px;
+}
+
+.od-kpi-section .owner-dashboard-boardui-stats > section p {
+    font-variant-numeric: tabular-nums;
+}
+
+.od-kpi-section .owner-dashboard-boardui-stats p.text-title-1-medium {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}

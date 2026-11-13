@@ -1,0 +1,152 @@
+/* Source: admin-container-layout.css */
+/* admin-container layout - 1120 + 920 - lines 1-123 */
+.cashier-summary,
+.waiters-summary,
+.owner-menu-summary,
+.tables-summary,
+.staff-summary,
+.settings-summary {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+}
+
+.menu-editor-meta,
+.cashier-note-grid,
+.payment-methods div,
+.editor-switches {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+}
+
+.menu-grid,
+.qr-table-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+.settings-grid,
+.settings-grid.compact {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+}
+
+@container admin-main (max-width: 1120px) {
+    .dashboard-layout,
+    .report-layout,
+    .cashier-layout,
+    .waiters-layout,
+    .owner-menu-layout,
+    .tables-layout,
+    .staff-layout,
+    .settings-layout,
+    .orders-board-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .order-detail-panel,
+    .cashier-detail,
+    .service-queue,
+    .qr-editor-panel,
+    .menu-editor-panel,
+    .staff-editor-panel,
+    .settings-side {
+        position: static;
+        max-height: none;
+    }
+
+    .cashier-toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .staff-editor-panel {
+        position: static;
+        max-width: none;
+    }
+}
+
+@container admin-main (max-width: 920px) {
+    .pos-command-bar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .order-type-tabs {
+        grid-column: 1 / -1;
+        flex-wrap: wrap;
+        overflow-x: hidden;
+    }
+
+    .pos-counter-stats {
+        grid-column: 1 / -1;
+        min-width: 0;
+    }
+
+    .menu-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .category-rail {
+        display: grid;
+        position: static;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .category-rail h2 {
+        display: none;
+    }
+
+    .category-list {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 2px;
+        scrollbar-width: thin;
+    }
+
+    .category-list::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    .category-list button {
+        flex: 0 0 136px;
+        min-height: 54px;
+        padding: 11px 38px 11px 13px;
+        border-radius: var(--radius-sm);
+    }
+
+    .category-list strong {
+        font-size: var(--font-size-base);
+    }
+
+    .category-list span {
+        margin-top: 4px;
+        font-size: var(--font-size-xs);
+    }
+
+    .category-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 0;
+    }
+
+    .category-head strong {
+        font-size: var(--font-size-base);
+    }
+
+    .receipt-panel {
+        position: static;
+        max-height: none;
+    }
+
+    .receipt-panel {
+        max-height: none;
+    }
+
+    .orders-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    }
+}

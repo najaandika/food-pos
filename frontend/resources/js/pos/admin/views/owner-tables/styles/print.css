@@ -1,0 +1,31 @@
+/* Standee Printer CSS */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #printable-table-standee,
+    #printable-table-standee * {
+        visibility: visible;
+    }
+
+    #printable-table-standee {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 100mm;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        border: none;
+        box-shadow: none;
+    }
+
+    .standee-card {
+        border: 2px solid #000000;
+        box-shadow: none;
+        padding: 20mm 15mm;
+    }
+}

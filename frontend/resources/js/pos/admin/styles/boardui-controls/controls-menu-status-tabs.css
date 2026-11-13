@@ -1,0 +1,45 @@
+.page-shell.pos-shell-layout .owner-menu-c2-page .c2-owner-status-tabs {
+    min-width: 0;
+    max-width: 100%;
+}
+.page-shell.pos-shell-layout .owner-menu-c2-page .c2-owner-status-tabs button {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: var(--text-body-2-medium, 13px);
+    white-space: nowrap;
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-owner-status-tabs
+    .count-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    min-width: 21px;
+    min-height: 19px;
+    padding: 1px 5px;
+    border-radius: 999px;
+    background: var(--color-background-secondary-default, #f7f7f7);
+    color: var(--color-text-secondary, #667085);
+    font-size: var(--text-caption-1-medium, 12px);
+}
+.page-shell.pos-shell-layout .owner-menu-c2-page .owner-menu-toolbar {
+    background: var(--color-background-primary-default, #fff);
+    border-color: var(--color-separator-border, #ebeff5);
+    border-radius: var(--radius-xl, 12px);
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-toolbar
+    .owner-toolbar-left {
+    min-width: 0;
+    flex: 1 1 330px;
+    gap: 10px;
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-toolbar
+    .c2-filter-scroll {
+    flex: 1 1 210px;
+}

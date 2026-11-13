@@ -3,11 +3,11 @@
  * The BoardUI source supplies the rail, selected gradient, quick search,
  * collapse motion, and keyboard behavior. POS CSS only sizes its container.
  */
-@import "@fontsource-variable/inter/index.css";
-@import "tailwindcss/theme.css" layer(theme);
-@import "../../../../../styles/theme.css";
-@import "../../../../../styles/typography.css";
-@import "tailwindcss/utilities.css" layer(utilities);
+@import '@fontsource-variable/inter/index.css';
+@import 'tailwindcss/theme.css' layer(theme);
+@import '../../../../../styles/theme.css';
+@import '../../../../../styles/typography.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
 
 @source '../../../../../components/application/dashboard/dashboard-sidebar.tsx';
 @source '../../../../../components/base/avatar/avatar.tsx';
@@ -15,6 +15,12 @@
 @source '../../../../../components/base/dropdown/*.tsx';
 @source './official-sidebar.tsx';
 @source './topbar.tsx';
+
+/* R8.20E-B: shared with the independent mobile workspace motion (Agent A).
+   React Aria portals the overlay to <body>, so this token must be on :root. */
+:root {
+    --pos-boardui-mobile-drawer-width: min(280px, calc(100vw - 32px));
+}
 
 .page-shell.pos-shell-layout .pos-boardui-sidebar-frame {
     position: sticky;
@@ -38,7 +44,7 @@
 
 .page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar {
     height: 100%;
-    font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
 .page-shell.pos-shell-layout .main-panel {
@@ -56,19 +62,21 @@
     z-index: 210;
     display: flex;
     justify-content: flex-start;
-    background: color-mix(in srgb, var(--color-text-primary) 32%, transparent);
+    /* Original BoardUI Free uses a dimmed overlay, not a Pro push layout. */
+    background: rgb(0 0 0 / 40%);
     opacity: 1;
     transition: opacity 260ms ease-out;
+    will-change: opacity;
 }
 
 .pos-boardui-drawer-modal {
-    width: min(320px, 88vw);
+    width: var(--pos-boardui-mobile-drawer-width);
     height: 100dvh;
     background: var(--color-background-secondary-default);
     box-shadow: var(--shadow-sidebar);
     outline: none;
     transform: translate3d(0, 0, 0);
-    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 300ms cubic-bezier(0.32, 0.72, 0, 1);
     will-change: transform;
 }
 
@@ -83,7 +91,7 @@
     width: 100% !important;
     height: 100%;
     border-radius: 14px;
-    font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
 .pos-boardui-drawer-overlay[data-entering],
@@ -91,20 +99,34 @@
     opacity: 0;
 }
 
+/* React Aria keeps ModalOverlay mounted during data-exiting until the
+ * backdrop's transition ends. The panel exits faster (200ms) than the
+ * 260ms fade, so no abrupt disappearing sidebar or orphan overlay. */
+.pos-boardui-drawer-modal[data-entering],
+.pos-boardui-drawer-modal[data-exiting],
 .pos-boardui-drawer-overlay[data-entering] .pos-boardui-drawer-modal,
 .pos-boardui-drawer-overlay[data-exiting] .pos-boardui-drawer-modal {
     transform: translate3d(calc(-100% - 24px), 0, 0);
 }
 
 .pos-boardui-drawer-overlay[data-exiting] {
-    transition-duration: 180ms;
+    transition-duration: 260ms;
 }
 
+.pos-boardui-drawer-modal[data-exiting],
 .pos-boardui-drawer-overlay[data-exiting] .pos-boardui-drawer-modal {
     transition-duration: 200ms;
 }
 
-@media (max-width: 860px) {
+@media (min-width: 1024px) {
+    /* A viewport resize closes the Modal via React; hide the overlay from
+     * the desktop frame immediately while its exit state finishes. */
+    .pos-boardui-drawer-overlay {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
     .page-shell.pos-shell-layout .pos-boardui-sidebar-frame {
         display: none;
     }
@@ -119,19 +141,19 @@
  * The input is nested inside a BoardUI ring container, so remove only its
  * competing native/dashboard outline. Applies inside the mobile portal too. */
 :is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
-    div:has(> input[aria-label="Cari menu Food POS"]):focus-within {
+    div:has(> input[aria-label='Cari menu Food POS']):focus-within {
     --tw-ring-color: var(--color-border-focus-ring);
 }
 
 :is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
-    input[aria-label="Cari menu Food POS"]:focus-visible {
+    input[aria-label='Cari menu Food POS']:focus-visible {
     outline: none;
 }
 
 /* Before expansion Quick Search remains keyboard-discoverable, including
  * when the rail is collapsed and when the mobile menu is portaled. */
 :is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
-    button[aria-label="Quick Search"]:focus-visible {
+    button[aria-label='Quick Search']:focus-visible {
     outline: 2px solid var(--color-border-focus-ring);
     outline-offset: 2px;
 }
@@ -139,7 +161,10 @@
 /* Keyboard focus consistency, stage two. Keep the selected nav gradient
  * unchanged and match the 2px semantic BoardUI focus ring on both the desktop
  * rail and the mobile drawer (which is portaled outside .page-shell). */
-:is(.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+:is(
+        .page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar,
+        .pos-boardui-drawer-sidebar
+    )
     nav
     a:focus-visible {
     outline: 2px solid var(--color-border-focus-ring);
@@ -149,7 +174,7 @@
 /* A 36px collapsed rail leaves no exterior gutter for a 2px focus outline.
  * Draw it inside the item so the sidebar's overflow clip cannot cut it off. */
 .page-shell.pos-shell-layout
-    .pos-boardui-sidebar-frame[data-collapsed="true"]
+    .pos-boardui-sidebar-frame[data-collapsed='true']
     .pos-boardui-dashboard-sidebar
     nav
     a:focus-visible {
@@ -158,11 +183,14 @@
 
 /* Give the collapse/expand and mobile-close icons a real rounded hit area.
  * The controls previously had 0px radius and could show a square/native ring. */
-:is(.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+:is(
+        .page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar,
+        .pos-boardui-drawer-sidebar
+    )
     :is(
-        button[aria-label="Collapse sidebar"],
-        button[aria-label="Expand sidebar"],
-        button[aria-label="Close sidebar"]
+        button[aria-label='Collapse sidebar'],
+        button[aria-label='Expand sidebar'],
+        button[aria-label='Close sidebar']
     ) {
     display: inline-flex;
     width: 32px;
@@ -174,11 +202,14 @@
     border-radius: var(--radius-2lg, 10px);
 }
 
-:is(.page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+:is(
+        .page-shell.pos-shell-layout .pos-boardui-dashboard-sidebar,
+        .pos-boardui-drawer-sidebar
+    )
     :is(
-        button[aria-label="Collapse sidebar"],
-        button[aria-label="Expand sidebar"],
-        button[aria-label="Close sidebar"]
+        button[aria-label='Collapse sidebar'],
+        button[aria-label='Expand sidebar'],
+        button[aria-label='Close sidebar']
     ):focus-visible {
     outline: 2px solid var(--color-border-focus-ring);
     outline-offset: 2px;
@@ -188,7 +219,14 @@
     .page-shell.pos-shell-layout .pos-boardui-sidebar-frame,
     .pos-boardui-drawer-overlay,
     .pos-boardui-drawer-modal {
-        transition-duration: 0.01ms;
+        transition-duration: 0.01ms !important;
+    }
+
+    .pos-boardui-drawer-modal[data-entering],
+    .pos-boardui-drawer-modal[data-exiting],
+    .pos-boardui-drawer-overlay[data-entering] .pos-boardui-drawer-modal,
+    .pos-boardui-drawer-overlay[data-exiting] .pos-boardui-drawer-modal {
+        transform: none;
     }
 }
 
@@ -204,7 +242,7 @@
     display: none;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1023px) {
     .page-shell.pos-shell-layout .pos-shell-topbar {
         justify-content: flex-start;
         gap: 12px;
@@ -240,22 +278,43 @@
     }
 
     .pos-boardui-drawer-modal {
-        width: min(310px, calc(100vw - 40px));
+        width: var(--pos-boardui-mobile-drawer-width);
         height: 100%;
-        border: 1px solid var(--color-border-button-default);
+        border: 0;
         border-radius: var(--radius-3xl, 24px);
         background: var(--color-background-secondary-default);
+        box-shadow:
+            inset 0 0 0 1px var(--color-border-button-default),
+            var(--shadow-sidebar);
         overflow: hidden;
     }
 
     .pos-boardui-drawer-dialog {
-        padding: 0;
+        padding: 0 10px;
     }
 
     .pos-boardui-drawer-sidebar {
+        width: 100%;
         height: 100%;
         border: 0;
         border-radius: var(--radius-3xl, 24px);
+    }
+
+    /* BoardUI Free nav geometry: 20px icon + 8px vertical padding =
+       a 36px row. Retain the original item text, roles and group headings. */
+    .pos-boardui-drawer-sidebar nav {
+        gap: 4px;
+    }
+
+    .pos-boardui-drawer-sidebar nav a {
+        height: 36px;
+        min-height: 36px;
+        padding: 8px;
+    }
+
+    .pos-boardui-drawer-sidebar nav a svg {
+        width: 20px;
+        height: 20px;
     }
 
     .pos-shell-bottom-nav,
@@ -267,5 +326,131 @@
 @media (prefers-reduced-motion: reduce) {
     .pos-boardui-drawer-modal {
         transition-duration: 0.01ms;
+    }
+}
+
+/* Personal language selection now belongs to Account Profile; never render
+ * a second language control inside the active POS sidebar or Drawer. */
+.pos-boardui-utility-spacer {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.pos-boardui-footer
+    :is(.pos-boardui-theme-switch, .pos-boardui-theme-collapsed-button) {
+    margin-bottom: 0;
+}
+
+.pos-boardui-footer-utilities {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.pos-boardui-footer-settings:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+}
+
+.pos-boardui-sidebar-frame[data-collapsed='true'] .pos-boardui-footer-settings {
+    width: 36px;
+    height: 36px;
+}
+
+/* R8.16A revision — Marketing-style two-icon theme pill.
+ * System remains a stored hook preference; the visible buttons represent the
+ * resolved mode. Registry's forced-light toggle stays disabled. */
+.pos-boardui-theme-switch {
+    display: inline-flex;
+    /* Keep the expanded desktop control on the same leading edge as the
+       mobile drawer, Settings navigation and account card. */
+    align-self: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    width: max-content;
+    max-width: 100%;
+    padding: 3px;
+    margin-bottom: 8px;
+    gap: 3px;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-pill, 9999px);
+    background: var(--color-background-tertiary-default);
+}
+
+.pos-boardui-theme-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill, 9999px);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.pos-boardui-theme-option[aria-pressed='true'] {
+    border-color: var(--color-border-button-default);
+    background: var(--color-background-primary-default);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-xs);
+}
+
+.pos-boardui-theme-option:hover:not([aria-pressed='true']) {
+    color: var(--color-text-primary);
+    background: var(--color-background-tertiary-hover);
+}
+
+:is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    .pos-boardui-theme-option:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+}
+
+/* Collapsed BoardUI rail: one accessible action showing the destination theme. */
+.pos-boardui-theme-collapsed-button {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    padding: 0;
+    border: 1px solid var(--color-border-button-default);
+    border-radius: var(--radius-pill, 9999px);
+    background: var(--color-background-tertiary-default);
+    color: var(--color-foreground-icon-primary);
+    cursor: pointer;
+    transition:
+        background-color 150ms ease,
+        color 150ms ease;
+}
+
+.pos-boardui-theme-collapsed-button:hover {
+    background: var(--color-background-tertiary-hover);
+    color: var(--color-text-primary);
+}
+
+:is(.pos-boardui-dashboard-sidebar, .pos-boardui-drawer-sidebar)
+    .pos-boardui-theme-collapsed-button:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pos-boardui-theme-option,
+    .pos-boardui-theme-collapsed-button {
+        transition: none;
     }
 }

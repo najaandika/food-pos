@@ -1,0 +1,98 @@
+.payment-methods {
+    margin-top: 20px;
+}
+
+.payment-methods h3 {
+    font-size: 18px;
+}
+
+.payment-methods div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-fixed-2);
+    margin-top: 12px;
+}
+
+.payment-methods button,
+.cashier-actions button {
+    height: 46px;
+    border: 0;
+    border-radius: 15px;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+}
+
+.payment-methods button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-fixed-2);
+    background: var(--ice);
+    color: var(--muted);
+}
+
+.payment-methods button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.payment-methods button.active {
+    background: var(--navy);
+    color: white;
+}
+
+.cashier-tendered {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+}
+
+.cashier-tendered p {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--pos-gap);
+    margin: 0;
+}
+
+.cashier-tendered span {
+    color: var(--muted);
+    font-weight: var(--font-weight-semibold);
+}
+
+.cashier-tendered strong {
+    color: var(--navy);
+}
+
+.cashier-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-fixed-3);
+    margin-top: 18px;
+}
+
+.cashier-actions button:first-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--mist);
+    color: var(--blue);
+}
+
+.cashier-actions button:last-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--blue);
+    color: white;
+}
+
+.payment-methods button:disabled,
+.cashier-actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

@@ -1,0 +1,80 @@
+/* BoardUI IconButton instead of legacy filled-square actions. */
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    .c2-icon-action,
+.page-shell.pos-shell-layout .staff-finance-page .staff-actions .c2-icon-action,
+.page-shell.pos-shell-layout .app-view .staff-actions .c2-icon-action {
+    display: inline-flex;
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-primary-default, #fff);
+    color: var(--color-foreground-icon-primary, #344054);
+    box-shadow: var(--shadow-xs, 0 1px 2px rgb(0 0 0 / 0.05));
+    transform: none;
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    .c2-icon-action:hover,
+.page-shell.pos-shell-layout .app-view .staff-actions .c2-icon-action:hover {
+    border-color: var(--color-border-button-hover, #d0d5dd);
+    background: var(--color-background-primary-hover, #f9fafb);
+    color: var(--color-foreground-icon-primary, #344054);
+    transform: none;
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    .c2-danger-action,
+.page-shell.pos-shell-layout .app-view .staff-actions .c2-danger-action,
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .menu-editor-head
+    .c2-editor-delete {
+    color: var(--color-status-rose-text, #b42318);
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    .c2-danger-action:hover,
+.page-shell.pos-shell-layout .app-view .staff-actions .c2-danger-action:hover,
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .menu-editor-head
+    .c2-editor-delete:hover {
+    background: var(--color-status-rose-background, #fff1f3);
+    color: var(--color-status-rose-text, #b42318);
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .menu-editor-head
+    .c2-editor-delete {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-primary-default, #fff);
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-actions
+    .menu-restore-action,
+.page-shell.pos-shell-layout .owner-menu-c2-page .c2-reset-filter {
+    width: auto;
+    min-width: 0;
+    height: 32px;
+    flex: 0 0 auto;
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    border-radius: var(--radius-lg, 8px);
+    background: var(--color-background-primary-default, #fff);
+    color: var(--color-text-primary, #141a33);
+    box-shadow: var(--shadow-xs, 0 1px 2px rgb(0 0 0 / 0.06));
+    font-size: var(--text-body-2-medium, 13px);
+}

@@ -1,0 +1,8 @@
+/* Source: admin-container-mobile.css */
+/* admin-container mobile - 560 - lines 124-592 */
+@import './container-mobile/shell-topbar.css';
+@import './container-mobile/dashboard.css';
+@import './container-mobile/reports.css';
+@import './container-mobile/pos-controls.css';
+@import './container-mobile/dish-cards.css';
+@import './container-mobile/receipt.css';

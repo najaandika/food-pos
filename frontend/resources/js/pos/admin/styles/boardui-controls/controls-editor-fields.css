@@ -1,0 +1,80 @@
+/* Restore official Input/Select/Textarea field ownership. */
+.page-shell.pos-shell-layout .app-view .c2-editor-fields {
+    gap: 13px;
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-fields > * {
+    min-width: 0;
+    grid-column: 1 / -1;
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-editor-fields
+    > :nth-child(3),
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .c2-editor-fields
+    > :nth-child(4) {
+    grid-column: auto;
+}
+.page-shell.pos-shell-layout
+    .app-view
+    .c2-editor-fields
+    :is(label, [slot='label']) {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 1px;
+    color: var(--color-text-secondary, #667085);
+    font-size: var(--text-body-2-medium, 13px);
+    line-height: var(--text-body-2-medium--line-height, 18px);
+    font-weight: var(--text-body-2-medium--font-weight, 500);
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-fields :is(input, textarea) {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    padding: 0 4px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    color: var(--color-text-primary, #141a33);
+    font-size: var(--text-body-regular, 14px);
+    font-weight: var(--text-body-regular--font-weight, 400);
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-fields textarea {
+    min-height: 78px;
+    padding: 7px 4px;
+    resize: vertical;
+}
+.page-shell.pos-shell-layout
+    .app-view
+    .c2-editor-fields
+    :is(input, textarea):focus,
+.page-shell.pos-shell-layout
+    .app-view
+    .c2-editor-fields
+    :is(input, textarea):focus-visible {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.page-shell.pos-shell-layout
+    .app-view
+    .c2-editor-fields
+    [role='group']:focus-within {
+    border-color: var(--color-border-focus-ring, var(--color-accent-600));
+    box-shadow: 0 0 0 2px
+        var(--color-border-focus-ring, var(--color-accent-600));
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-fields button[data-rac] {
+    min-height: 36px;
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-primary-default, #fff);
+    color: var(--color-text-primary, #141a33);
+    box-shadow: var(--shadow-xs, 0 1px 2px rgb(0 0 0 / 0.06));
+}

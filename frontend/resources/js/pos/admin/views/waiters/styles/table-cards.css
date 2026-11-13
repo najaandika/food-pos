@@ -1,0 +1,104 @@
+.waiters-workspace .waiters-table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+    gap: 10px;
+}
+
+.waiters-workspace .waiters-table-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 139px;
+    padding: 13px;
+    gap: 9px;
+    border: 1px solid var(--waiters-line);
+    border-radius: 12px;
+    background: var(--waiters-surface);
+    text-align: left;
+    color: var(--waiters-text);
+    cursor: pointer;
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.waiters-workspace .waiters-table-tile:hover {
+    border-color: var(--color-border-button-default);
+    box-shadow: var(--shadow-xs);
+}
+
+.waiters-workspace .waiters-table-tile:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: 2px;
+}
+
+.waiters-workspace .waiters-table-tile.needs-attention {
+    border-color: color-mix(
+        in srgb,
+        var(--color-status-rose-text) 24%,
+        var(--waiters-line)
+    );
+}
+
+.waiters-workspace .waiters-table-tile-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.waiters-workspace .waiters-table-code {
+    font-weight: var(--text-headline-semibold--font-weight);
+}
+
+.waiters-workspace .waiters-table-name {
+    margin: 0;
+    color: var(--waiters-text);
+    overflow-wrap: anywhere;
+}
+
+.waiters-workspace .waiters-table-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 9px;
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-table-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.waiters-workspace .waiters-table-meta svg {
+    width: 13px;
+    height: 13px;
+}
+
+.waiters-workspace .waiters-table-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--waiters-line);
+    margin-top: auto;
+    color: var(--waiters-muted);
+}
+
+.waiters-workspace .waiters-table-bottom span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.waiters-workspace .waiters-table-bottom svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--waiters-accent);
+}

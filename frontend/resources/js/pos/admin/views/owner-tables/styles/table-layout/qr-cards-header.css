@@ -1,0 +1,77 @@
+.qr-table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 248px), 1fr));
+    gap: var(--pos-gap);
+}
+
+.qr-table-card {
+    display: grid;
+    gap: var(--pos-gap);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card-bg);
+    padding: 14px;
+    box-shadow: var(--shadow-card);
+    transition:
+        border-color var(--transition-hover),
+        box-shadow var(--transition-hover),
+        transform var(--transition-hover);
+}
+
+.qr-table-card:hover {
+    border-color: rgba(48, 71, 255, 0.22);
+    box-shadow: 0 18px 40px rgba(31, 43, 89, 0.09);
+    transform: translateY(-1px);
+}
+
+.qr-table-card.selected {
+    border-color: rgba(48, 71, 255, 0.34);
+    background: var(--mist);
+    box-shadow: 0 10px 26px rgba(48, 71, 255, 0.1);
+}
+
+.qr-table-card.occupied,
+.qr-table-card.preparing,
+.qr-table-card.payment,
+.qr-table-card.call {
+    background: var(--card-bg);
+}
+
+.qr-table-card.inactive {
+    opacity: 0.74;
+}
+
+.qr-card-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-3);
+    min-width: 0;
+}
+
+button.qr-card-top {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+.qr-card-top > div {
+    min-width: 0;
+}
+
+.qr-card-top strong,
+.qr-card-top small {
+    margin-top: 3px;
+    color: var(--muted);
+    font-weight: var(--font-weight-medium);
+    display: block;
+}
+
+.qr-card-top small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

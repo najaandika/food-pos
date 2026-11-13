@@ -5,6 +5,7 @@ import {
 } from '@remixicon/react';
 import { Button } from '../../../../../../../components/base/buttons/button';
 import { Badge } from '../../../../../../../components/base/badges/badge';
+import { StatusChip } from '../../orders/StatusChip';
 import { Input } from '../../../../../../../components/base/input/input';
 import {
     SegmentedControl,
@@ -164,7 +165,14 @@ export function CashierQueuePanel({
                                         order.orderNumber?.startsWith(
                                             'DEMO-',
                                         ) && (
-                                            <Badge color="neutral">Demo</Badge>
+                                            <Badge
+                                                color="neutral"
+                                                className="bg-status-yellow-background text-status-yellow-text"
+                                            >
+                                                {locale === 'id'
+                                                    ? 'Latihan'
+                                                    : 'Training'}
+                                            </Badge>
                                         )}
                                     {order.id === selectedOrder?.id && (
                                         <RiCheckboxCircleLine
@@ -176,7 +184,15 @@ export function CashierQueuePanel({
                                 <small>{order.meta}</small>
                                 <i>{formatSource(order.source)}</i>
                             </div>
-                            <em className={order.statusTone}>{order.status}</em>
+                            <StatusChip
+                                variant="caption"
+                                status={order.rawStatus}
+                                fallbackLabel={order.status}
+                                className={cx(
+                                    'cashier-boardui-status',
+                                    order.statusTone,
+                                )}
+                            />
                             <span className="cashier-row-time">
                                 {order.time}
                             </span>

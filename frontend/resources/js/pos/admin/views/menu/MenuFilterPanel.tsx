@@ -28,7 +28,10 @@ export function MenuFilterPanel({
     const { t } = useLocale();
 
     return (
-        <nav className="category-rail menu-p2-filter-panel" aria-label="Kategori menu">
+        <nav
+            className="category-rail menu-p2-filter-panel"
+            aria-label="Kategori menu"
+        >
             <div className="category-head">
                 <span>{t('menu.menuMode')}</span>
                 <strong>{t('menu.manualOrder')}</strong>
@@ -42,12 +45,17 @@ export function MenuFilterPanel({
                         const isAll = category === 'All Menu';
                         const categoryCount = isAll
                             ? dishes.length
-                            : dishes.filter((dish) => dish.category === category).length;
+                            : dishes.filter(
+                                  (dish) => dish.category === category,
+                              ).length;
                         const selectedCount = isAll
                             ? itemCount
                             : cartLines
                                   .filter((line) => line.category === category)
-                                  .reduce((count, line) => count + line.cartQty, 0);
+                                  .reduce(
+                                      (count, line) => count + line.cartQty,
+                                      0,
+                                  );
 
                         return (
                             <PillTab
@@ -60,9 +68,15 @@ export function MenuFilterPanel({
                                 <span className="menu-p2-category-name">
                                     {isAll ? t('menu.allMenu') : category}
                                 </span>
-                                <span className="menu-p2-category-count">{categoryCount}</span>
+                                <span className="menu-p2-category-count">
+                                    {categoryCount}
+                                </span>
                                 {selectedCount > 0 && (
-                                    <Chip color="blue" variant="caption" className="menu-p2-category-selected">
+                                    <Chip
+                                        color="blue"
+                                        variant="caption"
+                                        className="menu-p2-category-selected"
+                                    >
                                         {selectedCount}
                                     </Chip>
                                 )}

@@ -149,7 +149,7 @@ export default function Login({ status, canResetPassword }: Props) {
                             <Spinner
                                 size="sm"
                                 aria-hidden
-                                className="text-background-full"
+                                className="text-text-white"
                             />
                         )}
                         {form.processing ? 'Memverifikasi akun...' : 'Masuk'}

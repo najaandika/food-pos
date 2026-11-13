@@ -1,0 +1,30 @@
+.page-shell.pos-shell-layout .app-view .c2-filter-scroll {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    padding: 2px 1px 5px;
+    scrollbar-width: thin;
+}
+.page-shell.pos-shell-layout .app-view .c2-filter-tabs {
+    width: max-content;
+    min-width: max-content;
+    max-width: none;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+.page-shell.pos-shell-layout .app-view .c2-filter-tabs button {
+    flex: 0 0 auto;
+    min-height: 35px;
+    border-radius: var(--radius-2lg, 10px);
+    color: var(--color-text-secondary, #667085);
+    font-size: var(--text-body-2-medium, 13px);
+    font-weight: var(--text-body-2-medium--font-weight, 500);
+}
+.page-shell.pos-shell-layout
+    .app-view
+    .c2-filter-tabs
+    button[data-pill-selected] {
+    color: var(--color-text-primary, #141a33);
+}

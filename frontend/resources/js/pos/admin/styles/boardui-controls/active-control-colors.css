@@ -1,0 +1,73 @@
+/* R8.22C — normal active-selection color parity for POS Menu and Kelola Menu.
+ * BoardUI's blue accent is the interactive selection color; preserve
+ * semantic danger/warning and the separate keyboard focus ring. This module
+ * intentionally does not affect the sidebar, other pages, or business state.
+ */
+.page-shell.pos-shell-layout :is(.pos-menu-page, .owner-menu-c2-page) {
+    --pos-active-background: var(--color-accent-50, #eef4ff);
+    --pos-active-color: var(--color-accent-700, #175cd3);
+    --pos-active-border: var(--color-accent-300, #84caff);
+}
+
+/* The original BoardUI controls animate a separate selection thumb.
+ * Apply the accent to that element rather than to each button, preserving
+ * the thumb's geometry, transitions and unselected hover overlay. */
+.page-shell.pos-shell-layout
+    :is(.pos-menu-page, .owner-menu-c2-page)
+    :is(
+        .menu-p2-category-tabs,
+        .c2-filter-tabs,
+        .menu-p2-order-types,
+        .c2-owner-status-tabs
+    )
+    > span[aria-hidden] {
+    background-color: var(--pos-active-background);
+}
+
+/* Selected category pills retain text contrast against the tinted thumb. */
+.page-shell.pos-shell-layout
+    :is(.pos-menu-page, .owner-menu-c2-page)
+    :is(.menu-p2-category-tabs, .c2-filter-tabs)
+    > button[data-pill-selected]
+    > span:last-child,
+.page-shell.pos-shell-layout
+    :is(.pos-menu-page, .owner-menu-c2-page)
+    :is(.menu-p2-category-tabs, .c2-filter-tabs)
+    > button[data-pill-selected]:hover
+    > span:last-child {
+    color: var(--pos-active-color);
+}
+
+/* ToggleButtonGroup's data-selected is the official single active state.
+ * No mutation of aria-pressed, disabled, hover or focus-visible semantics. */
+.page-shell.pos-shell-layout
+    :is(.pos-menu-page, .owner-menu-c2-page)
+    :is(.menu-p2-order-types, .c2-owner-status-tabs)
+    > button[data-selected],
+.page-shell.pos-shell-layout
+    :is(.pos-menu-page, .owner-menu-c2-page)
+    :is(.menu-p2-order-types, .c2-owner-status-tabs)
+    > button[data-selected]:hover {
+    color: var(--pos-active-color);
+}
+
+/* Only normal active summary cards. Out-of-stock/danger semantics remain. */
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .owner-menu-summary
+    article.active-filter:not(.active-filter-danger) {
+    border-color: var(--pos-active-border);
+    background-color: var(--pos-active-background);
+}
+
+/* The dark palette uses an explicitly dark blue-tinted surface instead of
+ * mixing a light accent-50 background into the dark BoardUI canvas. */
+.dark .page-shell.pos-shell-layout :is(.pos-menu-page, .owner-menu-c2-page) {
+    --pos-active-background: color-mix(
+        in srgb,
+        var(--color-accent-500, #2970ff) 24%,
+        var(--color-background-tertiary-default, #202329)
+    );
+    --pos-active-color: var(--color-accent-300, #84caff);
+    --pos-active-border: var(--color-accent-500, #2970ff);
+}

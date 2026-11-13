@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { Button } from '../../../../../../components/base/buttons/button';
 import type { PosSettings } from '@/lib/pos-types';
 import type { AuthUser } from '../../auth';
-import { CashierView } from '../CashierView';
+import { CashierView } from '../cashier/CashierView';
 import { ConfirmedReceiptModal } from '../cashier/ConfirmedReceiptModal';
 import type { ConfirmedCashierReceipt } from '../cashier/cashier-api';
 import { useCashierData } from '../cashier/use-cashier-data';

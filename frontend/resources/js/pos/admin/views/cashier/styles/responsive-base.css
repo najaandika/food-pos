@@ -1,0 +1,18 @@
+/* Responsiveness for Mobile Devices (<= 860px) */
+@media (max-width: 860px) {
+    .cashier-mobile-tabs {
+        display: flex;
+    }
+
+    .cashier-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-hidden {
+        display: none !important;
+    }
+
+    .cashier-detail {
+        position: static;
+    }
+}

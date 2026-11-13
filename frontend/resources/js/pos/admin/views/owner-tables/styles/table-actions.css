@@ -1,0 +1,88 @@
+/* Copy Action Button Feedback */
+.qr-icon-action.copied {
+    background: #10b981 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+}
+
+.qr-link-box button.copied {
+    background: #10b981 !important;
+    color: #ffffff !important;
+}
+
+/* Form Print Button */
+.qr-form-print-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 42px;
+    margin-top: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+    color: var(--navy);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-hover);
+}
+
+.qr-form-print-btn:hover {
+    border-color: var(--blue);
+    background: var(--ice);
+    color: var(--blue);
+}
+
+.tables-result-count {
+    margin: 0 0 0 auto;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+.tables-empty-state {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-fixed-2);
+    border: 1px dashed var(--border-soft-strong);
+    border-radius: var(--radius-lg);
+    background: var(--ice);
+    padding: 44px 24px;
+    text-align: center;
+}
+
+.tables-empty-state strong {
+    color: var(--navy);
+}
+
+.tables-empty-state p {
+    max-width: 320px;
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+}
+
+.tables-empty-state button {
+    height: 38px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--mist);
+    color: var(--blue);
+    padding: 0 14px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+@container admin-main (max-width: 1120px) {
+    .tables-layout .qr-editor-panel {
+        position: static;
+        top: auto;
+        max-height: none;
+        overflow: visible;
+    }
+}

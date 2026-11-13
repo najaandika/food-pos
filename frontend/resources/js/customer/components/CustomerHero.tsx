@@ -50,7 +50,7 @@ export function CustomerHero({
                         </Chip>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <p className="text-caption-1-semibold text-text-tertiary">
+                        <p className="text-caption-1-semibold text-text-primary/75">
                             {locale === 'id'
                                 ? 'PESAN LANGSUNG DARI MEJA'
                                 : 'ORDER FROM YOUR TABLE'}
@@ -102,6 +102,7 @@ export function CustomerHero({
                         className="w-full"
                         leadingIcon={RiShoppingBag3Line}
                         onClick={onOpenOrder}
+                        disabled={!isOrderingOpen}
                     >
                         {itemCount > 0 ? t('reviewButton') : t('orderFab')}
                     </Button>

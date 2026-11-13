@@ -1,0 +1,77 @@
+/* POS intentionally does not load styles/globals.css (used by the original
+   BoardUI Table). Scope the same BoardUI table skin here instead of importing
+   a second global reset and changing every other POS view. */
+.staff-finance-desktop-table .bui-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.staff-finance-desktop-table .bui-table th {
+    padding: 12px 14px;
+    background: var(--color-background-secondary-default);
+    border-top: 1px solid var(--color-separator-border);
+    border-bottom: 1px solid var(--color-separator-border);
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+    text-align: left;
+}
+
+.staff-finance-desktop-table .bui-table td {
+    padding: 13px 14px;
+    color: var(--color-text-primary);
+    vertical-align: middle;
+}
+
+.staff-finance-desktop-table .bui-table th:first-child,
+.staff-finance-desktop-table .bui-table td:first-child {
+    min-width: 230px;
+}
+
+.staff-finance-desktop-table .bui-table th:last-child,
+.staff-finance-desktop-table .bui-table td:last-child {
+    text-align: right;
+}
+
+.staff-finance-desktop-table .bui-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid var(--color-separator-border);
+}
+
+.staff-finance-desktop-table .bui-table tbody tr {
+    transition: background-color 150ms ease;
+}
+
+.staff-finance-desktop-table .bui-table tbody tr:hover {
+    background: var(--color-background-secondary-hover);
+}
+
+.staff-finance-desktop-table .bui-table tbody tr[data-focus-visible] {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+}
+
+/* R8.18D: official BoardUI Data Table sortable header affordances.
+   React Aria owns keyboard activation and aria-sort; these are visual only. */
+.staff-finance-sort-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.staff-finance-sort-icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    color: var(--color-foreground-icon-secondary);
+}
+
+.staff-finance-desktop-table .bui-table th[aria-sort] {
+    cursor: pointer;
+    color: var(--color-text-primary);
+}
+
+.staff-finance-desktop-table .bui-table th[data-focus-visible] {
+    outline: 2px solid var(--color-border-focus-ring);
+    outline-offset: -2px;
+}

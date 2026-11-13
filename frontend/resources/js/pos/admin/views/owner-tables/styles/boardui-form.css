@@ -1,0 +1,262 @@
+/* P2 — BoardUI real primitives and typography. Scoped to Tables & QR. */
+.owner-tables-p1,
+.tables-p1-drawer-dialog {
+    font-family: 'Inter Variable', Inter, system-ui, sans-serif;
+}
+
+.owner-tables-p1 .tables-boardui-stats {
+    margin-bottom: 18px;
+    gap: 12px;
+}
+
+.owner-tables-p1 .tables-boardui-stats > section {
+    min-height: 120px;
+    height: 120px;
+    padding: 14px;
+    border: 1px solid var(--color-separator-border);
+    border-radius: var(--radius-2xl, 20px);
+    background: var(--color-background-inner-default);
+    box-shadow: none;
+}
+
+.owner-tables-p1 .tables-boardui-stats > section > div p {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.owner-tables-p1 .tables-p2-filter-scroller {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.owner-tables-p1 .tables-p2-filter-scroller::-webkit-scrollbar {
+    display: none;
+}
+
+.owner-tables-p1 .tables-boardui-filters {
+    width: max-content;
+    min-width: max-content;
+    flex-shrink: 0;
+}
+
+.owner-tables-p1 .tables-boardui-filters > button {
+    flex-shrink: 0;
+    min-height: 40px;
+    padding-inline: 12px;
+}
+
+/* P2: four statuses remain visible in a two-row SegmentedControl on narrow
+   screens, with the original selected-thumb and keyboard semantics intact. */
+@media (max-width: 600px) {
+    .owner-tables-p1 .tables-p2-filter-scroller {
+        width: 100%;
+        overflow: visible;
+    }
+
+    .owner-tables-p1 .tables-boardui-filters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        min-width: 0;
+        gap: 4px;
+    }
+
+    .owner-tables-p1 .tables-boardui-filters > button {
+        min-width: 0;
+        min-height: 44px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .owner-tables-p1 .tables-boardui-filters > button:not([data-selected]) {
+        color: var(--color-text-primary);
+    }
+}
+
+.owner-tables-p1 .qr-card-top .tables-p2-card-identity {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    text-align: left;
+}
+
+.owner-tables-p1 .qr-card-top .tables-p2-card-identity strong {
+    max-width: 100%;
+    overflow: hidden;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.owner-tables-p1 .qr-card-top .tables-p2-card-identity small {
+    color: var(--color-text-secondary);
+}
+
+.owner-tables-p1 .qr-card-top .table-pill {
+    border: 1px solid var(--color-separator-border);
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-primary);
+}
+
+.owner-tables-p1 .tables-p2-card-meta {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.owner-tables-p1 .tables-p2-status-chip {
+    display: inline-flex;
+    max-width: 100%;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--color-background-secondary-default);
+    color: var(--color-text-primary);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.owner-tables-p1 .tables-p2-card-meta p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.35;
+}
+
+.owner-tables-p1 .tables-p2-card-meta small,
+.owner-tables-p1 .qr-card-bottom > span {
+    color: var(--color-text-secondary);
+}
+
+.owner-tables-p1 .tables-p2-icon-action {
+    border-color: var(--color-separator-border);
+    background: var(--color-background-inner-default);
+    color: var(--color-foreground-icon-secondary);
+    box-shadow: none;
+}
+
+.owner-tables-p1 .tables-p2-icon-action:hover:not(:disabled) {
+    background: var(--color-background-secondary-hover);
+    color: var(--color-foreground-icon-primary);
+    border-color: var(--color-border-button-hover, var(--line));
+    box-shadow: none;
+}
+
+.owner-tables-p1 .tables-p2-icon-action.tables-p2-copied {
+    color: var(--color-status-lime-text);
+}
+
+.owner-tables-p1 .tables-p2-empty-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 8px;
+    color: var(--color-foreground-icon-tertiary);
+}
+
+.tables-p1-drawer-dialog .tables-p2-editor .qr-panel-head {
+    margin-bottom: 14px;
+}
+
+.tables-p1-drawer-dialog .tables-p2-delete {
+    color: var(--color-notification-error-foreground);
+}
+
+.tables-p1-drawer-dialog .tables-p2-form-fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.tables-p1-drawer-dialog .tables-p2-form-fields [data-rac],
+.tables-p1-drawer-dialog .tables-p2-form-fields button {
+    max-width: 100%;
+}
+
+.tables-p1-drawer-dialog .tables-p2-select {
+    min-width: 0;
+    width: 100%;
+}
+
+.tables-p1-drawer-dialog .tables-p2-select button {
+    min-height: 38px;
+}
+
+.tables-p1-drawer-dialog .tables-p2-status-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    color: var(--color-text-primary);
+}
+
+.tables-p1-drawer-dialog .tables-p2-print-button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.tables-p1-drawer-dialog .tables-p2-editor .qr-link-box {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    background: var(--color-background-secondary-default);
+}
+
+.tables-p1-drawer-dialog .tables-p2-editor .qr-link-box strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tables-p1-drawer-dialog .tables-p2-editor .qr-link-box button {
+    min-height: 34px;
+    border: 1px solid var(--color-separator-border);
+    background: var(--color-background-inner-default);
+    color: var(--color-text-primary);
+}
+
+.tables-p1-drawer-dialog .tables-p2-health {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+    border-radius: var(--radius-xl, 16px);
+    background: var(--color-background-secondary-default);
+    padding: 14px;
+}
+
+.tables-p1-drawer-dialog .tables-p2-health-title {
+    color: var(--color-text-primary);
+}
+
+.tables-p1-drawer-dialog .tables-p2-health-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-text-secondary);
+}
+
+.tables-p1-drawer-dialog .tables-p2-health-row strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-primary);
+}
+
+/* R8.15D: current BoardUI table labels use dark semantic foregrounds.
+   Keep the mounted feature canvas dark too, or headings disappear on white. */
+.dark .owner-tables-p1.app-view {
+    background-color: var(--color-background-full);
+    color: var(--color-text-primary);
+}

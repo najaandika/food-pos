@@ -186,8 +186,8 @@ export function CashierTenderForm({
             {serverMode && selectedOrder?.orderNumber?.startsWith('DEMO-') && (
                 <output className="cashier-safety-note">
                     {locale === 'id'
-                        ? 'Mode demo development: pembayaran tunai tersimpan di database lokal sebagai transaksi uji, bukan penjualan operasional.'
-                        : 'Development demo: cash payments are saved locally as tests, not operational sales.'}
+                        ? 'Pesanan latihan: pembayaran tunai ini bukan penjualan operasional.'
+                        : 'Training order: this cash payment is not an operational sale.'}
                 </output>
             )}
             {discountAmount > 0 && (

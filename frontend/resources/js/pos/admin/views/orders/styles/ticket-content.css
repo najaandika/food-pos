@@ -1,0 +1,64 @@
+.kanban-card-top small {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.kanban-card-top small,
+.kanban-items span {
+    overflow-wrap: anywhere;
+}
+
+.kanban-meta,
+.kanban-card-bottom,
+.kanban-items p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-fixed-3);
+}
+
+.kanban-meta span {
+    color: var(--muted);
+    padding: 0;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.kanban-meta b {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+}
+
+.kanban-items {
+    display: grid;
+    gap: 7px;
+}
+
+.kanban-items p,
+.kanban-items em {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
+}
+
+.kanban-items b {
+    color: var(--navy);
+    font-weight: var(--font-weight-semibold);
+}
+
+.kanban-card-bottom {
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+}
+
+.kanban-card-bottom > strong {
+    color: var(--navy);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.015em;
+}

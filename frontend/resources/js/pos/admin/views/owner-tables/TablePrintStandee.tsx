@@ -1,4 +1,5 @@
 import { RiPrinterLine as Printer, RiCloseLine as X } from '@remixicon/react';
+import type { Ref } from 'react';
 import type { AdminTable } from '../../runtime-data';
 
 export type TablePrintStandeeProps = {
@@ -8,6 +9,7 @@ export type TablePrintStandeeProps = {
     t: (key: string) => string;
     onClose: () => void;
     onPrint: () => void;
+    dialogRef?: Ref<HTMLDivElement>;
 };
 
 export function TablePrintStandee({
@@ -17,21 +19,38 @@ export function TablePrintStandee({
     t,
     onClose,
     onPrint,
+    dialogRef,
 }: TablePrintStandeeProps) {
     return (
-        <div className="admin-modal-overlay" onClick={() => onClose()}>
+        <div
+            className="admin-modal-overlay"
+            onClick={(event) => {
+                if (!event || event.target === event.currentTarget) onClose();
+            }}
+        >
             <div
                 className="standee-modal-content"
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="tables-standee-dialog-title"
+                aria-describedby="tables-standee-dialog-description"
+                tabIndex={-1}
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="standee-modal-header">
                     <div>
-                        <h3>{t('ownerTables.standeeTitle')}</h3>
-                        <p>{t('ownerTables.standeeDesc')}</p>
+                        <h3 id="tables-standee-dialog-title">
+                            {t('ownerTables.standeeTitle')}
+                        </h3>
+                        <p id="tables-standee-dialog-description">
+                            {t('ownerTables.standeeDesc')}
+                        </p>
                     </div>
                     <button
                         type="button"
                         className="standee-modal-close"
+                        aria-label={t('common.close')}
                         onClick={() => onClose()}
                     >
                         <X size={20} />

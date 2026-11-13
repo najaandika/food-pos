@@ -5,6 +5,7 @@ import {
     Button as AriaButton,
     Dialog,
     DialogTrigger,
+    I18nProvider,
     Popover,
     RangeCalendar,
     useLocale,
@@ -84,7 +85,20 @@ export interface DateRangePickerProps {
     'aria-label'?: string;
     /** Trigger text shown when no range is committed yet. Default "Select date range". */
     placeholder?: string;
+    /** App language also drives month and weekday labels in the calendar. */
+    language?: 'id' | 'en';
 }
+
+const presetLabelsId: Record<string, string> = {
+    Today: 'Hari ini',
+    Yesterday: 'Kemarin',
+    'Last week': '7 hari terakhir',
+    'This month': 'Bulan ini',
+    'Last month': 'Bulan lalu',
+    'This year': 'Tahun ini',
+    'Last year': 'Tahun lalu',
+    'Last 12 months': '12 bulan terakhir',
+};
 
 function daysInRange(value: DateRangeValue) {
     const tz = getLocalTimeZone();
@@ -155,9 +169,11 @@ function isPresetActive(value: DateRangeValue | null, range: DateRangeValue) {
 function QuickSelect({
     value,
     onSelect,
+    language,
 }: {
     value: DateRangeValue | null;
     onSelect: (range: DateRangeValue) => void;
+    language: 'id' | 'en';
 }) {
     const localize = useTemplateCopy();
     const presets = useQuickSelectPresets();
@@ -169,6 +185,7 @@ function QuickSelect({
                     key={preset.label}
                     type="button"
                     onClick={() => onSelect(preset.range)}
+                    aria-pressed={isPresetActive(value, preset.range)}
                     className={cx(
                         'w-full cursor-pointer rounded-2lg px-2 py-1.5 text-start text-body-medium text-text-primary transition-colors duration-150 ease',
                         'outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-border-focus-ring',
@@ -177,7 +194,9 @@ function QuickSelect({
                             : 'hover:bg-background-secondary-hover',
                     )}
                 >
-                    {preset.label}
+                    {language === 'id'
+                        ? (presetLabelsId[preset.label] ?? preset.label)
+                        : preset.label}
                 </button>
             ))}
         </div>,
@@ -189,11 +208,13 @@ function Footer({
     onChange,
     onCancel,
     onApply,
+    language,
 }: {
     value: DateRangeValue | null;
     onChange: (value: DateRangeValue) => void;
     onCancel: () => void;
     onApply: () => void;
+    language: 'id' | 'en';
 }) {
     const localize = useTemplateCopy();
     return localize(
@@ -215,7 +236,11 @@ function Footer({
                             <div className="flex items-center gap-[5px]">
                                 <DateChipInput
                                     date={value.start}
-                                    label="Start date"
+                                    label={
+                                        language === 'id'
+                                            ? 'Tanggal mulai'
+                                            : 'Start date'
+                                    }
                                     onCommit={(start) =>
                                         onChange({
                                             start,
@@ -231,7 +256,11 @@ function Footer({
                                 </span>
                                 <DateChipInput
                                     date={value.end}
-                                    label="End date"
+                                    label={
+                                        language === 'id'
+                                            ? 'Tanggal akhir'
+                                            : 'End date'
+                                    }
                                     onCommit={(end) =>
                                         onChange({
                                             start:
@@ -244,7 +273,9 @@ function Footer({
                                 />
                             </div>
                             <span className="bg-background-tertiary-default text-body-medium text-text-secondary rounded-xl px-2 py-2">
-                                {`${daysInRange(value)} day${daysInRange(value) === 1 ? '' : 's'} selected`}
+                                {language === 'id'
+                                    ? `${daysInRange(value)} hari dipilih`
+                                    : `${daysInRange(value)} day${daysInRange(value) === 1 ? '' : 's'} selected`}
                             </span>
                         </motion.div>
                     )}
@@ -252,10 +283,10 @@ function Footer({
             </div>
             <div className="flex items-center gap-2.5">
                 <Button variant="secondary" onClick={onCancel}>
-                    Cancel
+                    {language === 'id' ? 'Batal' : 'Cancel'}
                 </Button>
                 <Button onClick={onApply} disabled={!value}>
-                    Apply
+                    {language === 'id' ? 'Terapkan' : 'Apply'}
                 </Button>
             </div>
         </div>,
@@ -270,10 +301,14 @@ export function DateRangePicker({
     className,
     popoverClassName: calendarClassName,
     'aria-label': ariaLabel = 'Date range',
-    placeholder = 'Select date range',
+    placeholder,
+    language,
 }: DateRangePickerProps) {
     const localize = useTemplateCopy();
     const { locale } = useLocale();
+    const effectiveLanguage =
+        language ?? (locale.startsWith('id') ? 'id' : 'en');
+    const calendarLocale = effectiveLanguage === 'id' ? 'id-ID' : 'en-US';
     const isControlled = value !== undefined;
     const [internalValue, setInternalValue] = useState<DateRangeValue | null>(
         defaultValue,
@@ -308,83 +343,93 @@ export function DateRangePicker({
     const allowOpenChange = useTriggerToggle(isOpen, triggerRef);
 
     return localize(
-        <DialogTrigger
-            isOpen={isOpen}
-            onOpenChange={(open) => {
-                if (!allowOpenChange(open)) return;
-                if (open) setPendingValue(committedValue);
-                setIsOpen(open);
-            }}
-        >
-            <AriaButton
-                ref={triggerRef}
-                isDisabled={isDisabled}
-                className={cx(triggerButtonClassName, className)}
+        <I18nProvider locale={calendarLocale}>
+            <DialogTrigger
+                isOpen={isOpen}
+                onOpenChange={(open) => {
+                    if (!allowOpenChange(open)) return;
+                    if (open) setPendingValue(committedValue);
+                    setIsOpen(open);
+                }}
             >
-                <RiCalendarLine
-                    className="text-foreground-icon-primary size-5 shrink-0"
-                    aria-hidden
-                />
-                <span className="text-body-medium text-text-primary flex items-center justify-center px-1 whitespace-nowrap">
-                    {committedValue
-                        ? `${formatTriggerDate(committedValue.start, locale)} - ${formatTriggerDate(committedValue.end, locale)}`
-                        : placeholder}
-                </span>
-            </AriaButton>
-            <Popover
-                ref={popoverRef}
-                offset={4}
-                placement="bottom end"
-                isNonModal
-                className={cx(popoverClassName, calendarClassName)}
-            >
-                <Dialog aria-label={ariaLabel} className="outline-none">
-                    {({ close }) => (
-                        <RangeCalendar
-                            aria-label={ariaLabel}
-                            visibleDuration={{ months: compact ? 1 : 2 }}
-                            value={pendingValue}
-                            onChange={setPendingValue}
-                        >
-                            <div className="flex flex-col gap-2 md:flex-row md:gap-3">
-                                <div className="px-3 pt-3 md:ps-4 md:pe-0 md:pt-4">
-                                    <QuickSelect
-                                        value={pendingValue}
-                                        onSelect={(range) =>
-                                            setPendingValue(range)
-                                        }
-                                    />
-                                </div>
-                                <div className="flex flex-col px-2 pt-2 pb-3 md:pe-2">
-                                    <div className="flex gap-2">
-                                        <MonthPanel
-                                            offset={0}
-                                            showPrev
-                                            showNext={compact}
-                                            compact={compact}
+                <AriaButton
+                    ref={triggerRef}
+                    isDisabled={isDisabled}
+                    className={cx(triggerButtonClassName, className)}
+                >
+                    <RiCalendarLine
+                        className="text-foreground-icon-primary size-5 shrink-0"
+                        aria-hidden
+                    />
+                    <span className="text-body-medium text-text-primary flex items-center justify-center px-1 whitespace-nowrap">
+                        {committedValue
+                            ? `${formatTriggerDate(committedValue.start, calendarLocale)} - ${formatTriggerDate(committedValue.end, calendarLocale)}`
+                            : (placeholder ??
+                              (effectiveLanguage === 'id'
+                                  ? 'Pilih rentang tanggal'
+                                  : 'Select date range'))}
+                    </span>
+                </AriaButton>
+                <Popover
+                    ref={popoverRef}
+                    offset={4}
+                    placement="bottom end"
+                    isNonModal
+                    className={cx(popoverClassName, calendarClassName)}
+                >
+                    <Dialog aria-label={ariaLabel} className="outline-none">
+                        {({ close }) => (
+                            <RangeCalendar
+                                aria-label={ariaLabel}
+                                visibleDuration={{ months: compact ? 1 : 2 }}
+                                value={pendingValue}
+                                onChange={setPendingValue}
+                            >
+                                <div className="flex flex-col gap-2 md:flex-row md:gap-3">
+                                    <div className="px-3 pt-3 md:ps-4 md:pe-0 md:pt-4">
+                                        <QuickSelect
+                                            value={pendingValue}
+                                            language={effectiveLanguage}
+                                            onSelect={(range) =>
+                                                setPendingValue(range)
+                                            }
                                         />
-                                        {!compact && (
-                                            <MonthPanel offset={1} showNext />
-                                        )}
                                     </div>
-                                    <Footer
-                                        value={pendingValue}
-                                        onChange={setPendingValue}
-                                        onCancel={() => {
-                                            setPendingValue(committedValue);
-                                            close();
-                                        }}
-                                        onApply={() => {
-                                            commit(pendingValue);
-                                            close();
-                                        }}
-                                    />
+                                    <div className="flex flex-col px-2 pt-2 pb-3 md:pe-2">
+                                        <div className="flex gap-2">
+                                            <MonthPanel
+                                                offset={0}
+                                                showPrev
+                                                showNext={compact}
+                                                compact={compact}
+                                            />
+                                            {!compact && (
+                                                <MonthPanel
+                                                    offset={1}
+                                                    showNext
+                                                />
+                                            )}
+                                        </div>
+                                        <Footer
+                                            value={pendingValue}
+                                            language={effectiveLanguage}
+                                            onChange={setPendingValue}
+                                            onCancel={() => {
+                                                setPendingValue(committedValue);
+                                                close();
+                                            }}
+                                            onApply={() => {
+                                                commit(pendingValue);
+                                                close();
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        </RangeCalendar>
-                    )}
-                </Dialog>
-            </Popover>
-        </DialogTrigger>,
+                            </RangeCalendar>
+                        )}
+                    </Dialog>
+                </Popover>
+            </DialogTrigger>
+        </I18nProvider>,
     );
 }

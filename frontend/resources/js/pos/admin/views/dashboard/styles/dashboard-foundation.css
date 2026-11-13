@@ -1,0 +1,180 @@
+/*
+ * Food POS Owner: BoardUI Home dashboard-inspired composition.
+ * Semantic surfaces and Remix icon rhythm follow installed BoardUI Free
+ * tokens; content, charts, and actions remain snapshot-driven POS UI.
+ * This file is scoped to Owner only; it does not change Agent B's shell.
+ */
+.app-view.active.owner-dashboard-home {
+    --od-bg: var(--color-background-primary-default, var(--card));
+    --od-panel: var(--color-background-secondary-default, var(--ice));
+    --od-panel-muted: var(--color-background-tertiary-default, var(--mist));
+    --od-inner: var(--color-background-inner-default, var(--card));
+    --od-line: var(--color-separator-border, var(--line));
+    --od-outline: var(--color-border-button-default, var(--border));
+    --od-ink: var(--color-text-primary, var(--ink));
+    --od-muted: var(--color-text-secondary, var(--muted));
+    --od-faded: var(--color-text-tertiary, var(--muted));
+    --od-brand: var(--color-accent-600, var(--blue));
+    --od-lime: var(--color-chart-2, var(--success));
+    --od-lime-active: var(--color-chart-2-active, var(--success));
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    padding-bottom: 36px;
+    gap: 12px;
+    color: var(--od-ink);
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.owner-dashboard-home :is(h1, h2, h3, p) {
+    margin: 0;
+}
+
+.owner-dashboard-home :is(h1, h2, h3, strong) {
+    font-family: inherit;
+}
+
+.od-home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px 20px;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.od-home-heading {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    min-width: 0;
+}
+
+.od-orders-controls .od-orders-select {
+    flex: 0 0 auto;
+    min-width: 113px;
+    max-width: 172px;
+}
+
+.od-order-sort {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    white-space: nowrap;
+    text-align: left;
+    cursor: pointer;
+}
+
+.od-order-sort svg {
+    width: 15px;
+    height: 15px;
+    color: var(--od-faded);
+}
+
+.od-order-sort--active svg {
+    color: var(--od-ink);
+}
+
+.od-order-sort:focus-visible {
+    outline: 2px solid var(--color-border-focus-ring, var(--od-brand));
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.od-order-status-chip {
+    white-space: nowrap;
+}
+
+.od-overline {
+    display: block;
+    color: var(--od-muted);
+}
+
+.od-orders-pagination {
+    flex: 0 1 440px;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.app-view.owner-dashboard-home .od-home-heading h1 {
+    color: var(--od-ink);
+    font-size: var(--text-display-4-semibold, 2rem);
+    font-weight: var(--text-display-4-semibold--font-weight, 600);
+    line-height: var(--text-display-4-semibold--line-height, 2.75rem);
+    letter-spacing: var(--text-display-4-semibold--letter-spacing, 0);
+    overflow-wrap: break-word;
+}
+
+.app-view.owner-dashboard-home .od-home-heading > p {
+    color: var(--od-muted);
+    font-size: var(--text-body-regular, 0.875rem);
+    font-weight: var(--text-body-regular--font-weight, 400);
+    line-height: var(--text-body-regular--line-height, 1.25rem);
+}
+
+.od-home-header-actions {
+    display: flex;
+    flex: 0 1 auto;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.od-home-header-actions > button {
+    flex: 0 0 auto;
+}
+
+.owner-dashboard-home .od-home-header-actions .bg-button-primary {
+    color: var(--color-text-white, white);
+}
+
+.app-view.owner-dashboard-home .od-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--od-muted);
+    white-space: nowrap;
+    margin-right: 6px;
+    font-size: var(--text-caption-1-medium, 0.75rem);
+    font-weight: var(--text-caption-1-medium--font-weight, 500);
+    line-height: var(--text-caption-1-medium--line-height, 1rem);
+}
+
+.od-date svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Match the mobile AdminTitle / report heading ramp, without changing cards. */
+@container admin-main (max-width: 560px) {
+    .app-view.owner-dashboard-home .od-home-heading h1 {
+        font-size: clamp(1.5rem, 6.8cqw, 1.75rem);
+        line-height: 1.25;
+    }
+}
+
+/* R8.26B: Dashboard-only neutral captions measured below 4.5:1 on dark
+   cards. Mix existing BoardUI text tokens; do not change shared tokens or
+   semantic status colors used by Orders/Cashier/Waiters. */
+.dark .app-view.owner-dashboard-home {
+    --od-muted: color-mix(
+        in oklch,
+        var(--color-text-primary) 55%,
+        var(--color-text-secondary)
+    );
+    --od-faded: color-mix(
+        in oklch,
+        var(--color-text-primary) 60%,
+        var(--color-text-tertiary)
+    );
+}
+
+.dark .app-view.owner-dashboard-home .text-text-secondary {
+    color: var(--od-muted);
+}

@@ -1,0 +1,46 @@
+/* Make selected editor flags a quiet, readable BoardUI state, not navy fill. */
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .editor-switches
+    .c2-editor-switch {
+    width: 100%;
+    height: auto;
+    min-height: 37px;
+    padding: 7px 8px;
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    border-radius: var(--radius-2lg, 10px);
+    background: var(--color-background-primary-default, #fff);
+    color: var(--color-text-secondary, #667085);
+    font-size: var(--text-body-2-medium, 13px);
+    font-weight: var(--text-body-2-medium--font-weight, 500);
+    box-shadow: none;
+}
+.page-shell.pos-shell-layout
+    .owner-menu-c2-page
+    .editor-switches
+    .c2-editor-switch[aria-pressed='true'] {
+    border-color: var(--color-accent-500, #3b82f6);
+    background: var(--color-accent-50, #eff6ff);
+    color: var(--color-accent-700, #1d4ed8);
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-actions button {
+    width: 100%;
+    height: 38px;
+    min-height: 38px;
+    padding: 8px 12px;
+    border-radius: var(--radius-2lg, 10px);
+    font-size: var(--text-body-medium, 14px);
+    font-weight: var(--text-body-medium--font-weight, 500);
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-actions button:first-child {
+    border: 1px solid var(--color-border-button-default, #ebeff5);
+    background: var(--color-background-primary-default, #fff);
+    color: var(--color-text-primary, #141a33);
+    box-shadow: var(--shadow-xs, 0 1px 2px rgb(0 0 0 / 0.06));
+}
+.page-shell.pos-shell-layout .app-view .c2-editor-actions button:last-child {
+    border: 1px solid transparent;
+    color: var(--color-text-on-brand, white);
+    background: var(--color-accent-600, #2563eb);
+    box-shadow: none;
+}

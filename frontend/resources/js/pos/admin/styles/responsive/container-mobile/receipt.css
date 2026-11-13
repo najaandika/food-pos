@@ -1,0 +1,47 @@
+/* Receipt and checkout panel; original rule order preserved. */
+@container admin-main (max-width: 560px) {
+    .receipt-panel {
+        padding: 16px;
+        border-radius: var(--pos-radius);
+    }
+
+    .receipt-top h3 {
+        font-size: 18px;
+    }
+
+    .receipt-date {
+        margin: 16px 0;
+        padding-bottom: 16px;
+        font-size: var(--font-size-xs);
+    }
+
+    .receipt-item {
+        grid-template-columns: minmax(0, 1fr) 26px max-content;
+        gap: var(--space-fixed-2);
+        padding: 13px 0;
+        font-size: var(--font-size-xs);
+    }
+
+    .receipt-item button {
+        margin-top: 8px;
+        padding: 5px 8px;
+        font-size: var(--font-size-xs);
+    }
+
+    .receipt-total {
+        margin-top: 14px;
+        font-size: var(--font-size-base);
+    }
+
+    .proceed-btn {
+        height: 54px;
+        margin-top: 18px;
+        padding: 0 16px;
+        border-radius: 17px;
+        font-size: var(--font-size-sm);
+    }
+
+    .proceed-btn strong {
+        font-size: 19px;
+    }
+}

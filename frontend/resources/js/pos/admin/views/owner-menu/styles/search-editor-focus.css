@@ -1,0 +1,34 @@
+/*
+ * R8.22A — Owner Menu focus parity. The installed SearchField/InputBase group
+ * owns the inset ring; child inputs must not draw an additional POS outline.
+ */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    :is(.c2-owner-search, .c2-editor-fields)
+    [role='group'][data-focus-within]:not([data-invalid]) {
+    box-shadow: inset 0 0 0 2px var(--color-border-focus-ring);
+}
+
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page
+    :is(.c2-owner-search, .c2-editor-fields)
+    [role='group']
+    input:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+/*
+ * Higher specificity than legacy Stage 3's broad :focus-visible outline.
+ * The actual BoardUI focus state remains one 2px semantic ring, including
+ * segmented filters, category pills, action icons and clickable stats.
+ */
+.page-shell.pos-shell-layout
+    .app-view.owner-menu-c2-page.active
+    :is(button, [role='button']):focus-visible:not(:disabled, [data-disabled]) {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-border-focus-ring);
+}
+
+/* The Add Menu drawer is portaled outside the POS shell; leave its existing
+ * BoardUI Input/Select focus logic intact, with no page-level overrides. */

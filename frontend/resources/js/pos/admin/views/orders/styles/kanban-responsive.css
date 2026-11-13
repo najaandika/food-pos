@@ -1,0 +1,26 @@
+@container admin-main (max-width: 1120px) {
+    .orders-board-layout .order-detail-panel {
+        position: static;
+        top: auto;
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+@media (max-width: 860px) {
+    .orders-board-layout .order-detail-panel {
+        position: static;
+        top: auto;
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+.order-source-box {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: 16px;
+    border-radius: var(--radius-md);
+    background: var(--ice);
+    padding: 14px;
+}

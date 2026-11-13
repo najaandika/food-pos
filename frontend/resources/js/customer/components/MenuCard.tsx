@@ -1,8 +1,9 @@
-import { RiAddLine, RiRestaurant2Line } from '@remixicon/react';
+import { RiAddLine } from '@remixicon/react';
 import { Chip } from '../../../../components/base/badges/chip';
 import { Button } from '../../../../components/base/buttons/button';
 import { NumberField } from '../../../../components/base/number-field/number-field';
 import type { CustomerMenuItem } from './types';
+import { CustomerItemImage } from './CustomerItemImage';
 
 type MenuCardProps = {
     item: CustomerMenuItem;
@@ -24,31 +25,19 @@ export function MenuCard({
     return (
         <article className="group border-border-button-default bg-background-primary-default hover:border-border-button-hover flex h-full flex-col overflow-hidden rounded-3xl border shadow-xs transition-[border-color,box-shadow] duration-150 hover:shadow-md">
             <div className="bg-background-secondary-default relative aspect-[16/10] overflow-hidden">
-                {item.image ? (
-                    <img
-                        className="size-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                        src={item.image}
-                        alt={item.name}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                    />
-                ) : (
-                    <div className="text-foreground-icon-tertiary flex size-full flex-col items-center justify-center gap-2">
-                        <RiRestaurant2Line className="size-8" aria-hidden />
-                        <span className="text-caption-1-medium text-text-tertiary">
-                            Foto belum tersedia
-                        </span>
-                    </div>
-                )}
+                <CustomerItemImage
+                    src={item.image}
+                    alt={item.name}
+                    placement="catalog"
+                />
                 {item.badge ? (
                     <Chip
-                        className="absolute top-3 left-3 shadow-xs"
+                        className="absolute top-3 left-3 max-w-[calc(100%-1.5rem)] min-w-0 overflow-hidden text-ellipsis whitespace-nowrap shadow-xs"
                         color="yellow"
+                        title={item.badge}
                         variant="caption"
                     >
-                        {item.badge}
+                        <span className="min-w-0 truncate">{item.badge}</span>
                     </Chip>
                 ) : null}
             </div>
@@ -57,7 +46,7 @@ export function MenuCard({
                     <span className="text-caption-1-medium text-text-tertiary">
                         {item.category}
                     </span>
-                    <h2 className="text-title-3-semibold text-text-primary">
+                    <h2 className="text-title-3-semibold text-text-primary min-w-0 [overflow-wrap:anywhere]">
                         {item.name}
                     </h2>
                     <p className="text-body-regular text-text-secondary line-clamp-2 min-h-10">

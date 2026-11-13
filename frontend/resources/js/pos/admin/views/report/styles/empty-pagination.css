@@ -1,0 +1,31 @@
+.report-table-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 120px;
+    color: var(--rp-secondary);
+}
+.report-table-empty svg {
+    width: 20px;
+    height: 20px;
+}
+.report-table-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--rp-line);
+    color: var(--rp-secondary);
+}
+.report-pagination {
+    flex: 0 1 470px;
+    min-width: 0;
+}
+.report-disclaimer {
+    margin: 0;
+    padding: 0 4px;
+    color: var(--rp-tertiary);
+}

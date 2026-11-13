@@ -66,10 +66,10 @@ export function AttentionRequests({
                             )}
                             key={item.key}
                         >
-                            <span className="waiters-attention-table text-body-semibold">
-                                {item.code}
-                            </span>
-                            <div className="waiters-attention-copy">
+                            <div className="waiters-attention-topline">
+                                <span className="waiters-attention-table text-body-semibold">
+                                    {item.code}
+                                </span>
                                 <Chip
                                     color={
                                         item.kind === 'call'
@@ -86,10 +86,12 @@ export function AttentionRequests({
                                           ? t('dashboard.ready')
                                           : t('orders.billing')}
                                 </Chip>
+                            </div>
+                            <div className="waiters-attention-copy">
                                 <strong className="text-body-semibold">
                                     {item.title}
                                 </strong>
-                                <span className="text-caption-1-regular">
+                                <span className="waiters-attention-time text-caption-1-regular">
                                     {item.time}
                                 </span>
                             </div>

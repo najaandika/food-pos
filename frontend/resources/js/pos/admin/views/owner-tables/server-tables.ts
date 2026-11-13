@@ -8,7 +8,7 @@ import {
     invalidateSharedQueries,
     loadSharedQuery,
     peekSharedQuery,
-} from '../shared-query-cache';
+} from '../../shared/data/shared-query-cache';
 
 export type ServerTableDraft = {
     code: string;

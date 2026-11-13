@@ -1,0 +1,17 @@
+.report-stat-cards {
+    gap: 12px;
+    min-width: 0;
+}
+.report-stat-cards > section {
+    min-width: 0;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transition: border-color 150ms ease;
+}
+.report-stat-cards > section:hover {
+    border-color: var(--rp-line);
+}
+.report-stat-cards > section p {
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}

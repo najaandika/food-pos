@@ -1,0 +1,138 @@
+/* P3: BoardUI Free StatCards plain row, styled only inside Orders. */
+.orders-workspace .orders-kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.orders-workspace .orders-kpi-grid > section {
+    height: auto;
+    min-height: 128px;
+    min-width: 0;
+    border: 1px solid var(--orders-border);
+    border-radius: var(--radius-2xl, 16px);
+    background: var(--orders-surface);
+    color: var(--orders-text);
+    box-shadow: var(--shadow-card, none);
+}
+.orders-workspace .orders-kpi-grid > section > span:first-child {
+    background: var(--color-stat-card-icon-background, var(--orders-ground));
+    color: var(--orders-accent);
+}
+.orders-workspace .orders-kpi-grid > section p {
+    margin: 0;
+}
+.orders-workspace .orders-kpi-grid > section p:first-child {
+    overflow-wrap: anywhere;
+}
+.orders-workspace .orders-kpi-grid > section > div p:last-child {
+    font-variant-numeric: tabular-nums;
+}
+
+/* P3: sorting + BoardUI Pagination for the existing operational Table. */
+.orders-workspace .orders-sort-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+.orders-workspace .orders-sort-icon {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+    color: var(--orders-secondary);
+    opacity: 0.65;
+}
+.orders-workspace .orders-data-table th[aria-sort] {
+    cursor: pointer;
+}
+.orders-workspace .orders-data-table th[aria-sort]:hover {
+    color: var(--orders-text);
+    background: var(--color-background-secondary-hover, var(--orders-ground));
+}
+.orders-workspace .orders-data-table th[aria-sort='ascending'],
+.orders-workspace .orders-data-table th[aria-sort='descending'] {
+    color: var(--orders-accent);
+}
+.orders-workspace
+    .orders-data-table
+    th[aria-sort='ascending']
+    .orders-sort-icon,
+.orders-workspace
+    .orders-data-table
+    th[aria-sort='descending']
+    .orders-sort-icon {
+    color: var(--orders-accent);
+    opacity: 1;
+}
+.orders-workspace .orders-list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 60px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--orders-divider);
+    background: var(--orders-surface);
+}
+.orders-workspace .orders-list-summary {
+    margin: 0;
+    color: var(--orders-secondary);
+    flex: 1 0 auto;
+}
+.orders-workspace .orders-pagination {
+    flex: 0 1 460px;
+    min-width: min(310px, 100%);
+    max-width: 100%;
+}
+.orders-workspace .orders-pagination button[aria-current='page'] {
+    color: var(--orders-accent);
+    border-color: color-mix(in srgb, var(--orders-accent) 25%, transparent);
+    background: color-mix(
+        in srgb,
+        var(--orders-accent) 9%,
+        var(--orders-surface)
+    );
+}
+@container admin-main (max-width: 1080px) {
+    .orders-workspace .orders-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+/* Standalone and full-screen layouts may not have the admin-main container.
+   Keep the KPI row readable when the viewport itself is narrow. */
+@media (max-width: 1080px) {
+    .orders-workspace .orders-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@container admin-main (max-width: 720px) {
+    .orders-workspace .orders-list-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .orders-workspace .orders-pagination {
+        flex: 0 1 auto;
+        width: 100%;
+        min-width: 0;
+    }
+}
+@container admin-main (max-width: 480px) {
+    .orders-workspace .orders-kpi-grid {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    .orders-workspace .orders-kpi-grid > section {
+        min-height: 105px;
+        padding: 12px;
+        border-radius: var(--radius-xl, 12px);
+    }
+    .orders-workspace .orders-list-footer {
+        gap: 12px;
+        padding: 12px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .orders-workspace .orders-pagination button {
+        transition: none;
+    }
+}

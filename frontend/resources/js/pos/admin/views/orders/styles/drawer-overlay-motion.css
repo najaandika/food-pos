@@ -1,0 +1,68 @@
+/* Scoped, accessible details overlay using the installed Radix dialog primitive. */
+.orders-dialog-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    background: var(--color-background-overlay, var(--navy));
+    opacity: 0.55;
+    animation: orders-overlay-in 160ms ease-out;
+}
+.orders-dialog-panel {
+    --orders-surface: var(--color-background-primary-default, var(--card-bg));
+    --orders-ground: var(--color-background-secondary-default, var(--ice));
+    --orders-border: var(--color-border-button-default, var(--border));
+    --orders-divider: var(--color-separator-border, var(--line));
+    --orders-text: var(--color-text-primary, var(--navy));
+    --orders-secondary: var(--color-text-secondary, var(--muted));
+    --orders-accent: var(--color-accent-600, var(--blue));
+    --orders-focus: var(--color-border-focus-ring, var(--blue));
+    --orders-success: var(--color-success-700, var(--success));
+    --orders-warning: var(--color-warning-700, var(--warning));
+    --orders-danger: var(--color-danger-700, var(--danger));
+    position: fixed;
+    z-index: 1201;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(480px, 100vw);
+    max-height: 100dvh;
+    overflow-y: auto;
+    background: var(--orders-surface);
+    color: var(--orders-text);
+    font-family: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
+    box-shadow: var(--shadow-lg, 0 18px 55px var(--orders-border));
+    scrollbar-width: thin;
+    animation: orders-panel-in 190ms ease-out;
+}
+.orders-dialog-panel:focus {
+    outline: none;
+}
+.orders-dialog-panel button:focus-visible {
+    outline: 2px solid var(--orders-focus);
+    outline-offset: 2px;
+}
+@keyframes orders-overlay-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.55;
+    }
+}
+@keyframes orders-panel-in {
+    from {
+        opacity: 0.96;
+        transform: translateX(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.orders-detail-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 100%;
+    padding: 28px;
+}

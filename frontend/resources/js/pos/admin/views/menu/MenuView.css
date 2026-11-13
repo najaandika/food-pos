@@ -1,0 +1,12 @@
+@import './styles/layout-command.css';
+@import './styles/qr-order-panel.css';
+@import './styles/live-ticket.css';
+@import './styles/order-types-stats.css';
+@import './styles/category-rail.css';
+@import './styles/shortcuts.css';
+@import './styles/catalog-dishes.css';
+@import './styles/responsive-catalog.css';
+@import './styles/receipt-shell.css';
+@import './styles/order-sent-state.css';
+@import './styles/receipt-items.css';
+@import './styles/send-button.css';

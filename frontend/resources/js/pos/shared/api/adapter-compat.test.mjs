@@ -83,7 +83,7 @@ before(async () => {
     });
     [service, tables, menu, orders, cashier] = await Promise.all([
         vite.ssrLoadModule(
-            '/resources/js/pos/admin/views/service-workspace.ts',
+            '/resources/js/pos/admin/shared/data/service-workspace.ts',
         ),
         vite.ssrLoadModule(
             '/resources/js/pos/admin/views/owner-tables/server-tables.ts',

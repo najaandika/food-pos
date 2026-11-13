@@ -1,0 +1,9 @@
+@container admin-main (max-width: 1080px) {
+    .waiters-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .service-queue {
+        position: static;
+    }
+}

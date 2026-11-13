@@ -1,0 +1,95 @@
+/* POS controls, tabs, menus and navigation; original rule order preserved. */
+@container admin-main (max-width: 560px) {
+    .menu-search {
+        width: 100%;
+    }
+
+    .pos-command-bar {
+        gap: var(--space-3);
+        margin-bottom: 12px;
+        padding: 10px;
+        border-radius: var(--pos-radius);
+    }
+
+    .pos-live-ticket .pos-table-chip {
+        min-height: 34px;
+        border-radius: var(--radius-pill);
+        font-size: var(--font-size-xs);
+    }
+
+    .pos-live-ticket strong {
+        font-size: var(--font-size-base);
+    }
+
+    .pos-live-ticket em {
+        font-size: var(--font-size-xs);
+        white-space: normal;
+    }
+
+    .order-type-tabs {
+        padding: 5px;
+    }
+
+    .order-type-tabs button {
+        flex: 1;
+        height: 36px;
+        padding: 0 10px;
+        font-size: var(--font-size-xs);
+    }
+
+    .pos-counter-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pos-counter-stats article {
+        min-height: 48px;
+        padding: 9px 10px;
+        border-radius: 15px;
+    }
+
+    .pos-counter-stats strong {
+        font-size: var(--font-size-xs);
+    }
+
+    .menu-layout {
+        gap: var(--space-fixed-3);
+    }
+
+    .category-rail {
+        border-radius: var(--pos-radius);
+    }
+
+    .category-list button {
+        min-width: 120px;
+        min-height: 56px;
+        padding: 12px 14px;
+    }
+
+    .menu-grid {
+        gap: var(--space-fixed-3);
+    }
+
+    .menu-board-head {
+        align-items: flex-start;
+        display: grid;
+        padding: 12px;
+        border-radius: var(--radius-md);
+    }
+
+    .menu-board-head strong {
+        font-size: var(--font-size-sm);
+    }
+
+    .kitchen-status-pill {
+        padding: 8px 10px;
+        font-size: var(--font-size-xs);
+    }
+
+    .pos-lane-pills {
+        justify-content: flex-start;
+    }
+
+    .pos-shortcuts {
+        display: none;
+    }
+}

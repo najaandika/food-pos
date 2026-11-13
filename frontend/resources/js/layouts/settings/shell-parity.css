@@ -1,0 +1,124 @@
+/*
+ * R8.20D — Account-only BoardUI Free shell parity.
+ *
+ * The shared dashboard still owns its existing 860px breakpoints. Profile and
+ * Security use its exact AdminSidebar, with a locally scoped 1024px mobile
+ * threshold. Do not change global shell or other agents' accepted screens.
+ */
+@media (max-width: 1023px) {
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-boardui-sidebar-frame {
+        display: none;
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell .main-panel {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger {
+        display: inline-flex;
+        flex: 0 0 44px;
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--color-border-button-default);
+        border-radius: var(--radius-2lg, 10px);
+        color: var(--color-foreground-icon-primary);
+        background: var(--color-background-primary-default);
+        transition:
+            background-color 150ms ease,
+            border-color 150ms ease;
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger:hover {
+        border-color: var(--color-border-button-hover);
+        background: var(--color-background-secondary-hover);
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger:focus-visible {
+        outline: 2px solid var(--color-border-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+/* React Aria portals the existing AdminSidebar drawer outside the page root.
+ * Scope the BoardUI Free floating mobile overlay to the account page only,
+ * including at 861–1023px where the shared dashboard remains desktop. */
+@media (min-width: 861px) and (max-width: 1023px) {
+    body:has(.pos-boardui-account-shell) .pos-boardui-drawer-overlay {
+        align-items: stretch;
+        padding: 8px;
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+
+    body:has(.pos-boardui-account-shell) .pos-boardui-drawer-modal {
+        /* Match the shared POS drawer contract even above the 860px shell breakpoint. */
+        width: var(
+            --pos-boardui-mobile-drawer-width,
+            min(280px, calc(100vw - 32px))
+        );
+        height: 100%;
+        overflow: hidden;
+        border: 1px solid var(--color-border-button-default);
+        border-radius: var(--radius-3xl, 24px);
+        background: var(--color-background-secondary-default);
+    }
+
+    body:has(.pos-boardui-account-shell) .pos-boardui-drawer-dialog {
+        padding: 0;
+    }
+
+    body:has(.pos-boardui-account-shell) .pos-boardui-drawer-sidebar {
+        height: 100%;
+        border: 0;
+        border-radius: var(--radius-3xl, 24px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        .pos-shell-mobile-menu-trigger {
+        transition-duration: 0.01ms;
+    }
+}
+
+/* Keep the account breadcrumb intact on narrow phones instead of shrinking
+ * both the current page name and the Back to POS action into unreadable text. */
+@media (max-width: 390px) {
+    .page-shell.pos-shell-layout.pos-boardui-account-shell .pos-shell-topbar {
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        > div:first-child {
+        flex: 1 0 100%;
+        min-width: 0;
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        > div:first-child
+        > span:nth-child(2) {
+        white-space: nowrap;
+    }
+
+    .page-shell.pos-shell-layout.pos-boardui-account-shell
+        .pos-shell-topbar
+        > a {
+        margin-inline-start: auto;
+    }
+}
